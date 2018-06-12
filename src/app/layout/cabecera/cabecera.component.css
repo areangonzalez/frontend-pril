@@ -1,0 +1,90 @@
+.navbar-pril {
+  background: #8cc63f;
+  border: 0 !important;
+  box-shadow: 2px 0 5px 2px #aaa;
+  border-radius: 0;
+}
+.navbar-header > a {
+  padding-left: 15px;
+  padding-top: 5px;
+}
+.navbar-header > a > img{
+  float: left;
+  margin-right: 10px;
+}
+.navbar-header > a > span {
+  display: block;
+  color: #fff;
+}
+.navbar-brand {
+  color: #fff;
+}
+.navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-nav > li > a:hover {
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.navbar-nav > .active > a {
+  color: #aaa;
+  background: #bbe11f;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.navbar-nav > .active > a:hover {
+  color: #fff;
+  background: #aad11f;
+}
+.navbar-text{
+  color: white;
+  margin-top:0px;
+}
+
+.btn-outline-primary-dp {
+    color: #fff;
+    background-color: transparent;
+    background-image: none;
+    border: 0px;
+}
+
+.btn-margin-dropdown {
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
+.btn-outline-white {
+    color: #fff;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+}
+.btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.dropdown-menu {
+  background: #8cc63f;
+}
+.dropdown-item:hover {
+  background: #aad11f;
+  color: #aaa;
+}
+.dropdown-item {
+  color: #fff;
+}
+
+/* .dropdown {
+  position: relative;
+}
+.button-dropdown{
+  margin-top: 8px;
+  margin-bottom: -8px;
+}
+.dropdown-toggle:focus{
+  outline-color: #8cc63f;
+} */

@@ -1,0 +1,80 @@
+<div class="col-md-12">
+    <form>
+        <div class="row">
+            <div class="col-md-3">
+                <select class="form-control">
+                    <option>Seleccionar estado</option>
+                </select>
+            </div>
+            <div class="col-md-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Input group example" aria-describedby="btnGroupAddon2">
+                    <div class="input-group-append">
+                        <div class="input-group-text" id="btnGroupAddon2">
+                            <span class="oi oi-magnifying-glass" title="magnifying-glass" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" >
+                <p>
+                    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                        aria-controls="collapseExample">
+                        Busqueda avanzada
+                    </button>
+                </p>
+                <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select class="form-control">
+                                        <option>Seleccionar profesión</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control">
+                                        <option>Seleccionar oficio</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control">
+                                        <option>Seleccionar nivel educativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Desde)" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                                                    <img src="../../../../assets/open-iconic/svg/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" name="dp" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                                                    <img src="../../../../assets/open-iconic/svg/calendar.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </form>
+</div>
