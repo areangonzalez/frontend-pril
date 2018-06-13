@@ -1,0 +1,40 @@
+<div class="col-md-12">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Apellido y nombre</th>
+                <th scope="col"></th>
+                <th scope="col">Profesión</th>
+                <th scope="col">Oficio</th>
+                <th scope="col">nivel educativo</th>
+                <th scope="col">Presentación</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let destinatario of destinatarios">
+                <th>{{destinatario.apellido}}, {{destinatario.nombre}}</th>
+                <td>
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.direccion}}">
+                        <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.telefono}}, {{destinatario.celular}}">
+                        <span class="oi oi-phone" title="Teléfonos" aria-hidden="true"></span>
+                    </button>
+                </td>
+                <td>{{destinatario.profesion}}</td>
+                <td>{{destinatario.oficio}}</td>
+                <td>{{destinatario.nivel_educativo}}</td>
+                <td>{{destinatario.presentacion}}</td>
+                <td>
+                    <button type="button" class="btn btn-info btn-sm">
+                        <span class="oi oi-eye" title="Ver destinatario" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-light btn-sm">
+                        <span class="oi oi-pencil" title="Editar destinatario" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

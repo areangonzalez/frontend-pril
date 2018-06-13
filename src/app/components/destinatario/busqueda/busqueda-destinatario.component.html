@@ -8,11 +8,14 @@
             </div>
             <div class="col-md-9">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Input group example" aria-describedby="btnGroupAddon2">
+                    <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <div class="input-group-text" id="btnGroupAddon2">
-                            <span class="oi oi-magnifying-glass" title="magnifying-glass" aria-hidden="true"></span>
-                        </div>
+                        <button class="btn btn-outline-secondary" type="button">
+                            <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-outline-success" type="button" (click)="agregarDestinatario()">
+                            <span class="oi oi-plus" title="Agregar" aria-hidden="true"></span>
+                        </button>
                     </div>
                 </div>
             </div>

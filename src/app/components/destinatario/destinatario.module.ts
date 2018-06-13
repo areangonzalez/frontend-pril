@@ -7,16 +7,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Importo los componentes
 import { DestinatarioComponent } from './destinatario.component';
-import { FormComponent } from './form/form.component';
-import { ListaComponent } from './lista/lista.component';
-import { VistaComponent } from './vista/vista.component';
-import { BusquedaComponent } from "./busqueda/busqueda.component";
+import { FormDestinatarioComponent } from './form/form-destinatario.component';
+import { ListaDestinatarioComponent } from './lista/lista-destinatario.component';
+import { VistaDestinatarioComponent } from './vista/vista-destinatario.component';
+import { BusquedaDestinatarioComponent } from "./busqueda/busqueda-destinatario.component";
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [DestinatarioComponent, FormComponent, ListaComponent, VistaComponent, BusquedaComponent],
+    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent],
     imports: [CommonModule, FormsModule, NgbModule.forRoot()],
-    exports: [DestinatarioComponent, FormComponent, ListaComponent, VistaComponent, BusquedaComponent]
+    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent]
     //entryComponents: [NgbdModalContentGrafica]
 })
 export class DestinatarioModule { }

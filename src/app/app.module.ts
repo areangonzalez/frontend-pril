@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
 /* layout */
@@ -25,7 +26,10 @@ import { InicioComponent } from './components/inicio/incio.component';
     DestinatarioModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [{
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

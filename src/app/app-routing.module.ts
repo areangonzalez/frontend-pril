@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/incio.component';
-import { FormComponent } from './components/destinatario/form/form.component';
+import { FormDestinatarioComponent } from './components/destinatario/form/form-destinatario.component';
 import { DestinatarioComponent } from './components/destinatario/destinatario.component';
 //import {  } from '';
 
@@ -12,10 +12,8 @@ import { DestinatarioComponent } from './components/destinatario/destinatario.co
         RouterModule.forRoot([
             { path: '', /* component: LoginComponent */ redirectTo: '/inicio', pathMatch: 'full' },
             { path: 'inicio', component: InicioComponent },
-            {
-                path: 'destinatario', component: DestinatarioComponent, children: [
-                { path: 'agregar', component: FormComponent }
-            ]},
+            { path: 'destinatario', component: DestinatarioComponent},
+            { path: 'destinatario/agregar', component: FormDestinatarioComponent },
             
             /*{ path: 'inicio/vista-agente/:id', component: VistaAgenteComponent, data: { title: 'Ver Agente', breadcrumb: 'Ver agente' }, canActivate: [AuthGuard] }, */
 
