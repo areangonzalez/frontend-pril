@@ -12,13 +12,17 @@ import { DestinatarioModule } from './components/destinatario/destinatario.modul
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/incio.component';
+import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.component';
+/* Services */
+import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     CabeceraComponent,
     LoginComponent,
-    InicioComponent
+    InicioComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -26,10 +30,13 @@ import { InicioComponent } from './components/inicio/incio.component';
     DestinatarioModule,
     NgbModule.forRoot()
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
+    BreadcrumbsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

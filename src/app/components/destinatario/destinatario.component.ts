@@ -1,13 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
 
 @Component({
     selector: 'app-destinatario',
     templateUrl: './destinatario.component.html',
     // styleUrls: ['./lista.component.css']
 })
-export class DestinatarioComponent {
-    //title = 'app';
+export class DestinatarioComponent implements OnInit {
+
+    constructor(private breadcrumbsService: BreadcrumbsService) {
+    }
+
+    ngOnInit(){
+        this.breadcrumbsService.store([
+            { label: 'Inicio', url: 'inicio', params: [] },
+            { label: 'Destinatario', url: 'destinatario', params: [] }]);
+    }
 
     private destinatarios = [
         { apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000', celular: '2920635572', profesion: '', oficio: '', nivel_educativo: '', presentacion: '19/06/2018', id: 1 },

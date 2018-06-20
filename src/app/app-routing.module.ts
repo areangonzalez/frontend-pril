@@ -11,9 +11,9 @@ import { DestinatarioComponent } from './components/destinatario/destinatario.co
     imports: [
         RouterModule.forRoot([
             { path: '', /* component: LoginComponent */ redirectTo: '/inicio', pathMatch: 'full' },
-            { path: 'inicio', component: InicioComponent },
-            { path: 'destinatario', component: DestinatarioComponent},
-            { path: 'destinatario/agregar', component: FormDestinatarioComponent },
+            { path: 'inicio', component: InicioComponent, data: { title: 'Inicio', breadcrumb: 'Inicio' } },
+            { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', breadcrumb: 'Destinatario' } },
+            { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', breadcrumb: 'Agregar' }  },
             
             /*{ path: 'inicio/vista-agente/:id', component: VistaAgenteComponent, data: { title: 'Ver Agente', breadcrumb: 'Ver agente' }, canActivate: [AuthGuard] }, */
 
