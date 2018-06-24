@@ -6,6 +6,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 /* layout */
 import { CabeceraComponent } from "./layout/cabecera/cabecera.component";
+import { PieComponent } from "./layout/pie/pie.component";
 /* Modulos */
 import { DestinatarioModule } from './components/destinatario/destinatario.module'
 /* Componentes */
@@ -20,6 +21,7 @@ import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service
   declarations: [
     AppComponent,
     CabeceraComponent,
+    PieComponent,
     LoginComponent,
     InicioComponent,
     BreadcrumbComponent

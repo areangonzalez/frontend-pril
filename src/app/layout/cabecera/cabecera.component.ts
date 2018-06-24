@@ -17,13 +17,4 @@ export class CabeceraComponent implements OnInit {
     ngOnInit(){
 
     }
-
-    /* listarDestinatario(){
-        this._router.navigate(['destinatario']);
-    }
-
-    agregarDestinatario(){
-        console.log('click');
-        this._router.navigate(['./destinatario','agregar']);
-    } */
 }

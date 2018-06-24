@@ -1,6 +1,6 @@
 <div class="row">
     <div class="form-group col-md-6">
-        <label for="actividad_desea_formacion">Actividad en la que se desea dormación y entrenamiento:</label>
+        <label for="actividad_desea_formacion">Actividad en la que se desea formación y entrenamiento:</label>
         <input type="text" id="actividad_desea_formacion" placeholder="actividad_desea_formacion" class="form-control">
     </div>
     <div class="form-group col-md-6">
@@ -9,11 +9,19 @@
     </div>
     <div class="form-group col-md-4">
         <label for="profesion">Profesión (<span>*</span>):</label>
-        <input type="text" id="profesion" placeholder="profesion" class="form-control">
+        <select class="form-control" id="profesion">
+            <option value="0">Seleccione Profesión</option>
+            <option value="1">Abogado/a</option>
+            <option value="2">Profesor/a</option>
+        </select>
     </div>
     <div class="form-group col-md-4">
         <label for="oficio">Oficio (<span>*</span>):</label>
-        <input type="text" id="oficio" placeholder="oficio" class="form-control">
+        <select class="form-control" id="oficio">
+            <option value="0">Seleccione Oficio</option>
+            <option value="1">Barbero</option>
+            <option value="2">Panadero/a</option>
+        </select>
     </div>
     <div class="form-group form-check col-md-4">
         <input type="checkbox" id="experiencia_laboral" class="form-check-input">
