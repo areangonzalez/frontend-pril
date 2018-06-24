@@ -11,12 +11,14 @@ import { FormDestinatarioComponent } from './form/form-destinatario.component';
 import { ListaDestinatarioComponent } from './lista/lista-destinatario.component';
 import { VistaDestinatarioComponent } from './vista/vista-destinatario.component';
 import { BusquedaDestinatarioComponent } from "./busqueda/busqueda-destinatario.component";
+import { DatosPersonaComponent } from "./form/persona/datos-persona.component";
+import { DatosDestinatarioComponent } from "./form/destinatario/datos-destinatario.component";
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent],
+    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent],
     imports: [CommonModule, FormsModule, NgbModule.forRoot()],
-    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent]
+    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent]
     //entryComponents: [NgbdModalContentGrafica]
 })
 export class DestinatarioModule { }
