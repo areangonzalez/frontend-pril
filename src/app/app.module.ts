@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 /* Routing */
@@ -30,6 +31,8 @@ import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service
     BrowserModule,
     AppRoutingModule,
     DestinatarioModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgbModule.forRoot()
   ],
   providers: [

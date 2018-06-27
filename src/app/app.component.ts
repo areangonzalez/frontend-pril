@@ -7,12 +7,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Observable } from "rxjs";
+import { NgbDatepickerConfig, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
+import { NgbDateARParserFormatter } from "./shareds/ngb-date-ar-parser-formatter";
 import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [{ provide: NgbDateParserFormatter, useClass: NgbDateARParserFormatter }]
 })
 export class AppComponent implements OnInit {
 

@@ -1,7 +1,7 @@
 // Imports necesarios para crear módulos
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { ChartsModule } from 'ng2-charts';
 
@@ -17,8 +17,8 @@ import { DatosDestinatarioComponent } from "./form/destinatario/datos-destinatar
 // Metadatos del módulo
 @NgModule({
     declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent],
-    imports: [CommonModule, FormsModule, NgbModule.forRoot()],
-    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent]
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule.forRoot()],
+    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, ReactiveFormsModule]
     //entryComponents: [NgbdModalContentGrafica]
 })
 export class DestinatarioModule { }

@@ -1,118 +1,134 @@
-<div class="row">
-    <div class="form-group col-md-4">
-        <label for="nro_documento">Nro. documento (<span>*</span>):</label>
-        <input type="text" id="nro_documento" class="form-control">
-    </div>
-    <div class="form-group col-md-4">
-        <label for="form-agente-cuil">Cuil (<span>*</span>):</label>
-        <div class="input-group">
-            <input class="form-control input-cuil-number" type="text" placeholder="##">
-            <div class="input-group-addon div-cuil-num-center">numero</div>
-            <input class="form-control input-cuil-number" type="text" placeholder="#">
+<fieldset [formGroup]="datosPersona" >
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="nro_documento">Nro. documento (<span>*</span>):</label>
+            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" >
+            <div *ngIf="datosPersona.controls.nro_documento.invalid && (datosPersona.controls.nro_documento.dirty || datosPersona.controls.nro_documento.touched)" class="text-danger">
+                <div *ngIf="datosPersona.controls.nro_documento.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosPersona.controls.nro_documento.errors.minlength">El número de documento debe tener al menos 7 digitos.</div>
+                <div *ngIf="datosPersona.controls.nro_documento.errors.maxlength">El número de documento no puede tener mas de 8 digitos.</div>
+                <!--<div *ngIf="datosPersona.controls.nro_documento.errors.required"></div> -->
+            </div>
+            <!-- <small *ngIf="!datosPersona.controls.nro_documento.valid" class="text-danger">El documento no es valido!!</small>  -->
+        </div>
+        <div class="form-group col-md-4">
+            <label for="form-agente-cuil">Cuil (<span>*</span>):</label>
+            <div class="input-group">
+                <input class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2">
+                <div class="input-group-addon div-cuil-num-center">{{datosPersona.value.nro_documento}}</div>
+                <input class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_ult" maxlength="1">
+            </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="form-group col-md-4">
-        <label for="apellido">Apellido (<span>*</span>):</label>
-        <input type="text" id="apellido" placeholder="Apellido" class="form-control">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="apellido">Apellido (<span>*</span>):</label>
+            <input type="text" id="apellido" placeholder="Apellido" class="form-control" formControlName="apellido">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="nombre">Nombre (<span>*</span>):</label>
+            <input type="text" id="nombre" placeholder="Nombre" class="form-control" formControlName="nombre">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="fecha_nacimiento">Fecha nacimiento (<span>*</span>):</label>
+            <div class="input-group">
+                <input class="form-control" placeholder="dd/mm/yyyy" ngbDatepicker #fpd="ngbDatepicker" id="fecha_nacimiento" formControlName="fecha_nacimiento">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-info" (click)="fpd.toggle()" type="button">
+                        <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="sexo">Sexo (<span>*</span>):</label>
+            <select class="form-control" id="sexo" formControlName="sexoid">
+                <option value="0">Seleccione Sexo</option>
+                <option value="1">Hombre</option>
+                <option value="2">Mujer</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="genero">Género (<span>*</span>):</label>
+            <select class="form-control" id="genero" formControlName="generoid">
+                <option value="0">Seleccione Género</option>
+                <option value="1">Femenino</option>
+                <option value="2">Masculino</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="estado_civil">Estado civil (<span>*</span>):</label>
+            <select class="form-control" id="estado_civil" formControlName="estado_civilid">
+                <option value="0">Seleccione Estado civil</option>
+                <option value="1">Soltero</option>
+                <option value="2">Casado/a</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" placeholder="Ej.: (2920) 43 2423" class="form-control" formControlName="telefono">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="celular">Celular:</label>
+            <input type="text" id="celular" placeholder="Ej.: (2920) 43 2423" class="form-control" formControlName="celular">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="email">Email (<span>*</span>):</label>
+            <input type="text" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email">
+        </div>
     </div>
-    <div class="form-group col-md-4">
-        <label for="nombre">Nombre (<span>*</span>):</label>
-        <input type="text" id="nombre" placeholder="Nombre" class="form-control">
+    <hr class="my-4">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="localidad">Localidad (<span>*</span>):</label>
+            <select class="form-control" id="localidad" formControlName="localidadid">
+                <option value="0">Seleccione Localidad</option>
+                <option value="1">Gral. Roca</option>
+                <option value="2">Viedma/option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="calle">Calle (<span>*</span>):</label>
+            <input type="text" id="calle" placeholder="calle" class="form-control" formControlName="calle">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="altura">Altura (<span>*</span>):</label>
+            <input type="text" id="altura" placeholder="altura" class="form-control" formControlName="altura">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="barrio">Barrio (<span>*</span>):</label>
+            <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="piso">Piso:</label>
+            <input type="text" id="piso" placeholder="piso" class="form-control" formControlName="piso">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="departamento">Departamento:</label>
+            <input type="text" id="departamento" placeholder="departamento" class="form-control" formControlName="departamento">
+        </div>
     </div>
-    <div class="form-group col-md-4">
-        <label for="fecha_nacimiento">Fecha de nacimiento (<span>*</span>):</label>
-        <input type="text" id="fecha_nacimiento" placeholder="dd/mm/yyyy" class="form-control">
+    <hr class="my-4">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="nivel_educativo">Nivel educativo (<span>*</span>):</label>
+            <select class="form-control" id="nivel_educativo" formControlName="nivel_educativoid">
+                <option value="0">Seleccione Nivel educativo</option>
+                <option value="1">Primario</option>
+                <option value="2">Secundaria</option>
+            </select>
+        </div>
+        <div class="form-group form-check col-md-3">
+            <input type="checkbox" id="estudio_completo" class="form-check-input" formControlName="completo">
+            <label class="form-check-label" for="estudio_completo">Completo</label>
+        </div>
+        <div class="form-group form-check col-md-3">
+            <input type="checkbox" id="estudio_en_curso" class="form-check-input" formControlName="en_curso">
+            <label class="form-check-label" for="estudio_en_curso">En curso</label>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="titulo">Título (<span>*</span>):</label>
+            <input type="text" id="titulo" placeholder="titulo" class="form-control" formControlName="titulo">
+        </div>
     </div>
-    <div class="form-group col-md-4">
-        <label for="sexo">Sexo (<span>*</span>):</label>
-        <select class="form-control" id="sexo">
-            <option value="0">Seleccione Sexo</option>
-            <option value="1">Hombre</option>
-            <option value="2">Mujer</option>
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="genero">Género (<span>*</span>):</label>
-        <select class="form-control" id="genero">
-            <option value="0">Seleccione Género</option>
-            <option value="1">Femenino</option>
-            <option value="2">Masculino</option>
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="estado_civil">Estado civil (<span>*</span>):</label>
-        <select class="form-control" id="estado_civil">
-            <option value="0">Seleccione Estado civil</option>
-            <option value="1">Soltero</option>
-            <option value="2">Casado/a</option>
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" placeholder="Ej.: (2920) 43 2423" class="form-control">
-    </div>
-    <div class="form-group col-md-4">
-        <label for="celular">Celular:</label>
-        <input type="text" id="celular" placeholder="Ej.: (2920) 43 2423" class="form-control">
-    </div>
-    <div class="form-group col-md-4">
-        <label for="email">Email (<span>*</span>):</label>
-        <input type="text" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control">
-    </div>
-</div>
-<hr class="my-4">
-<div class="row">
-    <div class="form-group col-md-4">
-        <label for="localidad">Localidad (<span>*</span>):</label>
-        <select class="form-control" id="localidad">
-            <option value="0">Seleccione Localidad</option>
-            <option value="1">Gral. Roca</option>
-            <option value="2">Viedma/option>
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="calle">Calle (<span>*</span>):</label>
-        <input type="text" id="calle" placeholder="calle" class="form-control">
-    </div>
-    <div class="form-group col-md-4">
-        <label for="altura">Altura (<span>*</span>):</label>
-        <input type="text" id="altura" placeholder="altura" class="form-control">
-    </div>
-    <div class="form-group col-md-4">
-        <label for="barrio">Barrio (<span>*</span>):</label>
-        <input type="text" id="barrio" placeholder="barrio" class="form-control">
-    </div>
-    <div class="form-group col-md-4">
-        <label for="piso">Piso (<span>*</span>):</label>
-        <input type="text" id="piso" placeholder="piso" class="form-control">
-    </div>
-    <div class="form-group col-md-4">
-        <label for="departamento">Departamento (<span>*</span>):</label>
-        <input type="text" id="departamento" placeholder="departamento" class="form-control">
-    </div>
-</div>
-<hr class="my-4">
-<div class="row">
-    <div class="form-group col-md-6">
-        <label for="nivel_educativo">Nivel educativo (<span>*</span>):</label>
-        <select class="form-control" id="nivel_educativo">
-            <option value="0">Seleccione Nivel educativo</option>
-            <option value="1">Primario</option>
-            <option value="2">Secundaria</option>
-        </select>
-    </div>
-    <div class="form-group form-check col-md-3">
-        <input type="checkbox" id="estudio_completo" class="form-check-input">
-        <label class="form-check-label" for="estudio_completo">Completo</label>
-    </div>
-    <div class="form-group form-check col-md-3">
-        <input type="checkbox" id="estudio_en_curso" class="form-check-input">
-        <label class="form-check-label" for="estudio_en_curso">En curso</label>
-    </div>
-    <div class="form-group col-md-12">
-        <label for="titulo">Título (<span>*</span>):</label>
-        <input type="text" id="titulo" placeholder="titulo" class="form-control">
-    </div>
-</div>
+</fieldset>
