@@ -27,6 +27,6 @@ Iniciando proyecto con la imagen de docker [Trion/ng-cli](https://hub.docker.com
 
 - Para conseguir más ayuda sobre Angular CLI usa:
 
-    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:6.0.7 ng build`
+    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:6.0.7 ng help`
     
 O dirigite a [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
