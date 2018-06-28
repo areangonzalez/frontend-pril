@@ -23,7 +23,7 @@ Iniciando proyecto con la imagen de docker [Trion/ng-cli](https://hub.docker.com
 
    `docker run -u $(id -u) --rm -p 4200:4200 -v "$PWD":/app trion/ng-cli:6.0.7 ng serve --host 0.0.0.0`
 
-## Further help
+## Ayuda
 
 - Para conseguir más ayuda sobre Angular CLI usa:
 
