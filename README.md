@@ -1,27 +1,32 @@
 # DesarrolloPRILFront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
+Este proyecto esta generado con: 
+Imagen docker [Trion/ng-cli](https://github.com/trion-development/docker-ng-cli/tree/6.0.7) version 6.0.7
+[Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
+[Ng Bootstrap](https://github.com/ng-bootstrap/ng-bootstrap) version 2.0.0
 
-## Development server
+## Instalación del proyecto via docker
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Nos dirigimos al directorio donde tenemos el proyecto y seguimos los siguientes pasos:
 
-## Code scaffolding
+- Utilizamos el siguiente comando a instalar, que nos proporcionara la instalación de las dependencias del proyecto:
+    
+    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:6.0.7 npm install`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ - Compilamos el codigo con el siguiente comando:
+    
+    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:6.0.7 ng build`
 
-## Build
+Una vez completado los pasos anteriores iniciamos el docker que contiene nuestro sistema:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Iniciando proyecto con la imagen de docker [Trion/ng-cli](https://hub.docker.com/r/trion/ng-cli/):
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+   `docker run -u $(id -u) --rm -p 4200:4200 -v "$PWD":/app trion/ng-cli:6.0.7 ng serve --host 0.0.0.0`
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Para conseguir más ayuda sobre Angular CLI usa:
+
+    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:6.0.7 ng build`
+    
+O dirigite a [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
