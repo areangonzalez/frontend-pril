@@ -1,9 +1,9 @@
 # DesarrolloPRILFront
 
 Este proyecto esta generado con: 
-Imagen docker [Trion/ng-cli](https://github.com/trion-development/docker-ng-cli/tree/6.0.7) version 6.0.7
-[Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
-[Ng Bootstrap](https://github.com/ng-bootstrap/ng-bootstrap) version 2.0.0
+- Imagen docker [Trion/ng-cli](https://github.com/trion-development/docker-ng-cli/tree/6.0.7) version 6.0.7
+- [Angular CLI](https://github.com/angular/angular-cli) version 6.0.7.
+- [Ng Bootstrap](https://github.com/ng-bootstrap/ng-bootstrap) version 2.0.0
 
 ## Instalación del proyecto via docker
 
