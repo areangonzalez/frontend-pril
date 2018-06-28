@@ -1,9 +1,9 @@
 .div-cuil-num-center {
   width: 70% !important;
   height: 40px !important;
-  padding: 3% !important;
   text-align: center !important;
   background: #eee;
+  font-size: 28px;
 }
 .input-cuil-number {
   max-width: 30% !important;
@@ -18,4 +18,10 @@ label > span {
 .form-check {
     margin-top: 3.1%;
     text-align: center;
+}
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+input.ng-invalid.ng-touched.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.31);
 }

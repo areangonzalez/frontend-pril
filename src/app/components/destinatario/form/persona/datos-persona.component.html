@@ -2,14 +2,12 @@
     <div class="row">
         <div class="form-group col-md-4">
             <label for="nro_documento">Nro. documento (<span>*</span>):</label>
-            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" >
+            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" required (keyup)="esNumeroDocumento($event.target.value)" >
             <div *ngIf="datosPersona.controls.nro_documento.invalid && (datosPersona.controls.nro_documento.dirty || datosPersona.controls.nro_documento.touched)" class="text-danger">
                 <div *ngIf="datosPersona.controls.nro_documento.errors.required">Este campo es requerido. </div>
                 <div *ngIf="datosPersona.controls.nro_documento.errors.minlength">El número de documento debe tener al menos 7 digitos.</div>
                 <div *ngIf="datosPersona.controls.nro_documento.errors.maxlength">El número de documento no puede tener mas de 8 digitos.</div>
-                <!--<div *ngIf="datosPersona.controls.nro_documento.errors.required"></div> -->
             </div>
-            <!-- <small *ngIf="!datosPersona.controls.nro_documento.valid" class="text-danger">El documento no es valido!!</small>  -->
         </div>
         <div class="form-group col-md-4">
             <label for="form-agente-cuil">Cuil (<span>*</span>):</label>
@@ -17,6 +15,14 @@
                 <input class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2">
                 <div class="input-group-addon div-cuil-num-center">{{datosPersona.value.nro_documento}}</div>
                 <input class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_ult" maxlength="1">
+                <div *ngIf="datosPersona.controls.cuil_prin.invalid && (datosPersona.controls.cuil_prin.dirty || datosPersona.controls.cuil_prin.touched)"
+                    class="text-danger">
+                    <div *ngIf="datosPersona.controls.cuil_prin.errors.required">Este campo es requerido. </div>
+                </div>
+                <div *ngIf="!datosPersona.controls.cuil_prin.invalid && datosPersona.controls.cuil_ult.invalid && (datosPersona.controls.cuil_ult.dirty || datosPersona.controls.cuil_ult.touched)"
+                    class="text-danger">
+                    <div *ngIf="datosPersona.controls.cuil_ult.errors.required">Este campo es requerido. </div>
+                </div>
             </div>
         </div>
     </div>
@@ -24,45 +30,73 @@
         <div class="form-group col-md-4">
             <label for="apellido">Apellido (<span>*</span>):</label>
             <input type="text" id="apellido" placeholder="Apellido" class="form-control" formControlName="apellido">
+            <div *ngIf="datosPersona.controls.apellido.invalid && (datosPersona.controls.apellido.dirty || datosPersona.controls.apellido.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.apellido.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosPersona.controls.apellido.errors.minlength">El apellido es muy corto.</div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="nombre">Nombre (<span>*</span>):</label>
             <input type="text" id="nombre" placeholder="Nombre" class="form-control" formControlName="nombre">
+            <div *ngIf="datosPersona.controls.nombre.invalid && (datosPersona.controls.nombre.dirty || datosPersona.controls.nombre.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.nombre.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosPersona.controls.nombre.errors.minlength">El nombre es muy corto.</div>
+            </div>
+
         </div>
         <div class="form-group col-md-4">
             <label for="fecha_nacimiento">Fecha nacimiento (<span>*</span>):</label>
             <div class="input-group">
-                <input class="form-control" placeholder="dd/mm/yyyy" ngbDatepicker #fpd="ngbDatepicker" id="fecha_nacimiento" formControlName="fecha_nacimiento">
+                <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fpd="ngbDatepicker" id="fecha_nacimiento" formControlName="fechaNacimiento" (ngModelChange)="formatFechaNacimiento($event)">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info" (click)="fpd.toggle()" type="button">
+                    <button class="btn btn-outline-info" (click)="fpd.toggle()" type="button" 
+                        [ngClass]="{'btn-outline-danger': (datosPersona.controls.fechaNacimiento.invalid && (!datosPersona.controls.fechaNacimiento.pristine || datosPersona.controls.fechaNacimiento.touched))}">
                         <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
                     </button>
                 </div>
+            </div>
+            <div *ngIf="datosPersona.controls.fechaNacimiento.invalid && (!datosPersona.controls.fechaNacimiento.pristine || datosPersona.controls.fechaNacimiento.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.fechaNacimiento.errors.required">Este campo es requerido. </div>
             </div>
         </div>
         <div class="form-group col-md-4">
             <label for="sexo">Sexo (<span>*</span>):</label>
             <select class="form-control" id="sexo" formControlName="sexoid">
-                <option value="0">Seleccione Sexo</option>
+                <option value="">Seleccione Sexo</option>
                 <option value="1">Hombre</option>
                 <option value="2">Mujer</option>
             </select>
+            <div *ngIf="datosPersona.controls.sexoid.invalid && (!datosPersona.controls.sexoid.pristine || datosPersona.controls.sexoid.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.sexoid.errors.required">Por favor Seleccione sexo. </div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="genero">Género (<span>*</span>):</label>
             <select class="form-control" id="genero" formControlName="generoid">
-                <option value="0">Seleccione Género</option>
+                <option value="">Seleccione Género</option>
                 <option value="1">Femenino</option>
                 <option value="2">Masculino</option>
             </select>
+            <div *ngIf="datosPersona.controls.generoid.invalid && (!datosPersona.controls.generoid.pristine || datosPersona.controls.generoid.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.generoid.errors.required">Por favor Seleccione género. </div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="estado_civil">Estado civil (<span>*</span>):</label>
             <select class="form-control" id="estado_civil" formControlName="estado_civilid">
-                <option value="0">Seleccione Estado civil</option>
+                <option value="">Seleccione Estado civil</option>
                 <option value="1">Soltero</option>
                 <option value="2">Casado/a</option>
             </select>
+            <div *ngIf="datosPersona.controls.estado_civilid.invalid && (!datosPersona.controls.estado_civilid.pristine || datosPersona.controls.estado_civilid.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.estado_civilid.errors.required">Por favor Seleccione estado civil. </div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="telefono">Teléfono:</label>
@@ -74,7 +108,12 @@
         </div>
         <div class="form-group col-md-4">
             <label for="email">Email (<span>*</span>):</label>
-            <input type="text" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email">
+            <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" required>
+            <div *ngIf="datosPersona.controls.email.invalid && (!datosPersona.controls.email.pristine || datosPersona.controls.email.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.email.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosPersona.controls.email.errors.pattern">El email es invalido.</div>
+            </div>
         </div>
     </div>
     <hr class="my-4">
@@ -82,22 +121,38 @@
         <div class="form-group col-md-4">
             <label for="localidad">Localidad (<span>*</span>):</label>
             <select class="form-control" id="localidad" formControlName="localidadid">
-                <option value="0">Seleccione Localidad</option>
+                <option value="">Seleccione Localidad</option>
                 <option value="1">Gral. Roca</option>
                 <option value="2">Viedma/option>
             </select>
+                <div *ngIf="datosPersona.controls.localidadid.invalid && (!datosPersona.controls.localidadid.pristine || datosPersona.controls.localidadid.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.localidadid.errors.required">Por favor Seleccione localidad. </div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="calle">Calle (<span>*</span>):</label>
             <input type="text" id="calle" placeholder="calle" class="form-control" formControlName="calle">
+            <div *ngIf="datosPersona.controls.calle.invalid && (datosPersona.controls.calle.dirty || datosPersona.controls.calle.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.calle.errors.required">Este campo es requerido. </div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="altura">Altura (<span>*</span>):</label>
             <input type="text" id="altura" placeholder="altura" class="form-control" formControlName="altura">
+            <div *ngIf="datosPersona.controls.altura.invalid && (datosPersona.controls.altura.dirty || datosPersona.controls.altura.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.altura.errors.required">Este campo es requerido. </div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="barrio">Barrio (<span>*</span>):</label>
             <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio">
+            <div *ngIf="datosPersona.controls.barrio.invalid && (datosPersona.controls.barrio.dirty || datosPersona.controls.barrio.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.barrio.errors.required">Este campo es requerido. </div>
+            </div>
         </div>
         <div class="form-group col-md-4">
             <label for="piso">Piso:</label>
@@ -113,10 +168,14 @@
         <div class="form-group col-md-6">
             <label for="nivel_educativo">Nivel educativo (<span>*</span>):</label>
             <select class="form-control" id="nivel_educativo" formControlName="nivel_educativoid">
-                <option value="0">Seleccione Nivel educativo</option>
+                <option value="">Seleccione Nivel educativo</option>
                 <option value="1">Primario</option>
                 <option value="2">Secundaria</option>
             </select>
+            <div *ngIf="datosPersona.controls.nivel_educativoid.invalid && (!datosPersona.controls.nivel_educativoid.pristine || datosPersona.controls.nivel_educativoid.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.nivel_educativoid.errors.required">Por favor Seleccione nivel educativo. </div>
+            </div>
         </div>
         <div class="form-group form-check col-md-3">
             <input type="checkbox" id="estudio_completo" class="form-check-input" formControlName="completo">
@@ -129,6 +188,11 @@
         <div class="form-group col-md-12">
             <label for="titulo">Título (<span>*</span>):</label>
             <input type="text" id="titulo" placeholder="titulo" class="form-control" formControlName="titulo">
+            <div *ngIf="datosPersona.controls.titulo.invalid && (datosPersona.controls.titulo.dirty || datosPersona.controls.titulo.touched)"
+                class="text-danger">
+                <div *ngIf="datosPersona.controls.titulo.errors.required">Este campo es requerido. </div>
+            </div>
+
         </div>
     </div>
 </fieldset>

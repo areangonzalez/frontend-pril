@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 @Component({
     selector: 'destinatario-form',
     templateUrl: './form-destinatario.component.html',
-    styleUrls: ['./form-destinatario.component.css'] 
+    styleUrls: ['./form-destinatario.component.css'],
 })
 export class FormDestinatarioComponent implements OnInit {
     /**
@@ -18,36 +18,45 @@ export class FormDestinatarioComponent implements OnInit {
     constructor(
         private _router:Router,
         private _breadcrumbsService: BreadcrumbsService,
-        private _fb: FormBuilder
+        private _fb: FormBuilder,
     ){
         this.destinatarioForm = _fb.group({
             persona: _fb.group({
-                nro_documento: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(8)]],
+                nro_documento: ['', [Validators.required, Validators.minLength(7)]],
                 cuil: '',
-                cuil_prin: ['', Validators.required],
-                cuil_ult: ['', Validators.required],
-                apellido: ['', Validators.required],
-                nombre: ['', Validators.required],
-                fecha_nacimiento: ['', Validators.required],
-                sexoid: [0, Validators.required],
-                generoid: [0, Validators.required],
-                estado_civilid: [0, Validators.required],
+                cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
+                cuil_ult: ['', [Validators.required, Validators.minLength(1)]],
+                apellido: ['', [Validators.required, Validators.minLength(3)]],
+                nombre: ['', [Validators.required, Validators.minLength(3)]],
+                fechaNacimiento: ['', Validators.required],
+                fecha_nacimiento: '',
+                sexoid: ['', Validators.required],
+                generoid: ['', Validators.required],
+                estado_civilid: ['', Validators.required],
                 telefono: '',
                 celular: '',
-                email: ['', Validators.required],
-                localidadid: [0, Validators.required],
-                calle: ['', Validators.required],
+                email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+                localidadid: ['', Validators.required],
+                calle: ['', [Validators.required, Validators.minLength(3)]],
                 altura: ['', Validators.required],
-                barrio: ['', Validators.required],
+                barrio: ['', [Validators.required, Validators.minLength(3)]],
                 piso: '',
                 departamento: '',
-                nivel_educativoid: [0, Validators.required],
-                completo: 0,
-                en_curso: 0,
-                titulo: ['', Validators.required]
+                nivel_educativoid: ['', Validators.required],
+                completo: '',
+                en_curso: '',
+                titulo: ['', [Validators.required, Validators.minLength(3)]]
             }),
             destinatario: _fb.group({
-
+                origen: ['', [Validators.required, Validators.minLength(3)]],
+                fechaPresentacion: ['', Validators.required],
+                fecha_presentacion: '',
+                deseo_actividad: ['', [Validators.required, Validators.minLength(3)]],
+                deseo_lugar_entrenamiento: '',
+                profesion: ['', Validators.required],
+                oficio: ['', Validators.required],
+                experiencia_laboral: [false, Validators.required],
+                conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]]
             })
         });
     }
