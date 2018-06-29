@@ -1,16 +1,22 @@
 <nav class="navbar navbar-expand-md navbar-pril fixed-top">
-    <a class="navbar-brand" href="#">PRIL</a>
+    <a class="navbar-brand" [routerLink]="['inicio']">
+        <img src="../../../assets/img/logomarcarn.png" width="60" height="40" alt="Ministerio desarrollo social">
+    </a>
+    <!-- <a class="navbar-brand" href="#">PRIL</a> -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" *ngIf="estoyLogueado()">
             <li class="nav-item" [routerLinkActive]="['active']">
                 <a class="nav-link" [routerLink]="['inicio']">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']">
                 <a class="nav-link" [routerLink]="['destinatario']">destinatario <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['login']" (click)="cerrarSesion()">Cerrar sesión <span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>

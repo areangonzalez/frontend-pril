@@ -78,6 +78,11 @@
   color: #fff;
 }
 
+.navbar-header > a > span {
+  display: block;
+  color: #fff;
+}
+
 /* .dropdown {
   position: relative;
 }

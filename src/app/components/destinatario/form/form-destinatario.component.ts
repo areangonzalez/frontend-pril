@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
     templateUrl: './form-destinatario.component.html',
     styleUrls: ['./form-destinatario.component.css'],
 })
+@Injectable()
 export class FormDestinatarioComponent implements OnInit {
     /**
      * @param breadcrumbs Array que contiene el camino de las paginas accedidas.

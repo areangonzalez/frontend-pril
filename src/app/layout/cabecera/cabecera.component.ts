@@ -17,4 +17,12 @@ export class CabeceraComponent implements OnInit {
     ngOnInit(){
 
     }
+
+    cerrarSesion(){
+        localStorage.removeItem('currentUser');
+    }
+
+    estoyLogueado(){
+        return (localStorage.getItem('currentUser')) ? true : false;
+    }
 }

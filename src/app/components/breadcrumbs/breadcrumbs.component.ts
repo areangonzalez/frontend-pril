@@ -120,5 +120,12 @@ export class BreadcrumbComponent implements OnInit {
         this.breadcrumbService.store(this.currentBreadcrumbs);
       }
     });
+
+    // verifico el logueo
+    this.estoyLogueado();
+  }// fin ngOnInit
+
+  estoyLogueado(){
+    return (localStorage.getItem('currentUser')) ? true : false;
   }
 }

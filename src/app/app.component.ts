@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private _router: Router,
-    private _title: Title
+    private _title: Title,
   ){
     this.title = _router.events
       .filter((event) => event instanceof NavigationEnd)
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.estoyLogueado();
   }
 
   title: Observable<string>;
@@ -40,5 +41,9 @@ export class AppComponent implements OnInit {
       this._title.setTitle(title);
     }
     return title;
+  }
+
+  estoyLogueado(){
+    return (localStorage.getItem('currentUser')) ? true : false;
   }
 }
