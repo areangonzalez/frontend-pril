@@ -5,8 +5,8 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 
 @Component({
     selector: 'datos-destinatario-form',
-    templateUrl: './datos-destinatario.component.html',
-    styleUrls: ['./datos-destinatario.component.css'],
+    templateUrl: './datos-destinatario.html',
+    styleUrls: ['./datos-destinatario.css'],
     providers: [FormatObjetoAFecha]
 })
 export class DatosDestinatarioComponent implements OnInit {

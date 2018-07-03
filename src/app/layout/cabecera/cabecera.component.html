@@ -13,7 +13,13 @@
                 <a class="nav-link" [routerLink]="['inicio']">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" [routerLinkActive]="['active']">
-                <a class="nav-link" [routerLink]="['destinatario']">destinatario <span class="sr-only">(current)</span></a>
+                <a class="nav-link" [routerLink]="['destinatario']">Destinatario<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['ambiente']">Ambiente de trabajo<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['active']">
+                <a class="nav-link" [routerLink]="['area']">Área de entrenamiento<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['login']" (click)="cerrarSesion()">Cerrar sesión <span class="sr-only">(current)</span></a>

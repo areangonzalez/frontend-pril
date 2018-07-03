@@ -1,0 +1,12 @@
+.botton-separate{
+    margin-bottom: 10px;
+}
+
+dt{
+    align-content: flex-end;
+    text-align: right;
+}
+dd {
+    align-content: flex-start;
+    text-align: left;
+} 

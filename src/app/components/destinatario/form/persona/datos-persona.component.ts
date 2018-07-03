@@ -7,8 +7,8 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 
 @Component({
     selector: 'datos-persona-form',
-    templateUrl: './datos-persona.component.html',
-    styleUrls: ['./datos-persona.component.css'],
+    templateUrl: './datos-persona.html',
+    styleUrls: ['./datos-persona.css'],
     providers: [ValidarNumero, FormatObjetoAFecha]
 })
 export class DatosPersonaComponent implements OnInit {

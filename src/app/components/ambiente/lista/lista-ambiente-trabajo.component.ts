@@ -3,25 +3,24 @@ import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'destinatario-lista',
-    templateUrl: './lista-destinatario.html',
-    styleUrls: ['./lista-destinatario.css'],
+    selector: 'ambiente-trabajo-lista',
+    templateUrl: './lista-ambiente-trabajo.html',
+    styleUrls: ['./lista-ambiente-trabajo.css'],
     providers: [NgbTooltipConfig]
 })
-export class ListaDestinatarioComponent {
-    @Input('destinatarios') destinatarios:Object;
+export class ListaAmbienteTrabajoComponent {
+    @Input('ambientes') ambientes: Object;
     //title = 'app';
 
     constructor(
         private _router: Router,
         config: NgbTooltipConfig
-    ){
+    ) {
         config.placement = 'top';
         config.triggers = 'click';
     }
 
-    verDestinatario(id){
-        console.log(id);
-        this._router.navigate(['destinatario', 'vista']);
+    verAmbienteTrabajo(id) {
+        this._router.navigate(['ambiente', 'vista']);
     }
 }

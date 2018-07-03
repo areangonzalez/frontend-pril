@@ -19,6 +19,9 @@
 .navbar-brand {
   color: #fff;
 }
+.navbar-nav > li {
+  margin: 0 2px 0 2px;
+}
 .navbar-nav > li > a {
   color: #fff;
 }
@@ -27,6 +30,8 @@
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  color: #aaa;
+  background: #bbe11f;
 }
 .navbar-nav > .active > a {
   color: #aaa;

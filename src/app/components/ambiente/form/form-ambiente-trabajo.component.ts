@@ -5,29 +5,29 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 
 @Component({
     selector: 'destinatario-form',
-    templateUrl: './form-destinatario.html',
-    styleUrls: ['./form-destinatario.css'],
+    templateUrl: './form-ambiente-trabajo.html',
+    styleUrls: ['./form-ambiente-trabajo.css'],
 })
 @Injectable()
-export class FormDestinatarioComponent implements OnInit {
+export class FormAmbienteTrabajoComponent implements OnInit {
     /**
      * @param breadcrumbs Array que contiene el camino de las paginas accedidas.
      */
     //breadcrumbs = ;
-    destinatarioForm: FormGroup;
+    ambienteForm: FormGroup;
 
     constructor(
-        private _router:Router,
+        private _router: Router,
         private _breadcrumbsService: BreadcrumbsService,
         private _fb: FormBuilder,
-    ){
-        this.destinatarioForm = _fb.group({
+    ) {
+       this.ambienteForm = _fb.group({
             persona: _fb.group({
                 nro_documento: ['', [Validators.required, Validators.minLength(7)]],
                 cuil: '',
                 cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
                 cuil_ult: ['', [Validators.required, Validators.minLength(1)]],
-                apellido: ['', [Validators.required, Validators.minLength(3)]],
+        /*          apellido: ['', [Validators.required, Validators.minLength(3)]],
                 nombre: ['', [Validators.required, Validators.minLength(3)]],
                 fechaNacimiento: ['', Validators.required],
                 fecha_nacimiento: '',
@@ -57,18 +57,18 @@ export class FormDestinatarioComponent implements OnInit {
                 profesion: ['', Validators.required],
                 oficio: ['', Validators.required],
                 experiencia_laboral: [false, Validators.required],
-                conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]]
+                conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]]*/
             })
-        });
+        }); 
     }
 
     ngOnInit() {
         // breadcrumbs Dinamico
-        this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Destinatario', url: 'destinatario', params: [] }, { label: 'Agregar', url: 'destinatario/agregar', params: [] }]);
+        this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Ambiente de trabajo', url: 'ambiente', params: [] }, { label: 'Agregar', url: 'ambiente/agregar', params: [] }]);
     }
 
     volver() {
-        this._router.navigate(['destinatario']);
+        this._router.navigate(['ambiente']);
     }
 
 }

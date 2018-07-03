@@ -1,0 +1,41 @@
+<div class="row botton-separate">
+    <div class="col-md-12">
+        <button class="btn btn-danger btn-md" (click)="volver()">
+            <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
+        <button class="btn btn-success btn-md">
+            <span class="oi oi-pencil"></span> Editar</button>  &nbsp;
+        <button class="btn btn-success btn-md">
+            <span class="oi oi-plus"></span> Agregar oferta</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <ngb-accordion #acc="ngbAccordion" activeIds="toggle-1">
+            <ngb-panel id="toggle-1" title="Ambiente de trabajo: Panadería san Fernando">
+                <ng-template ngbPanelContent>
+                    <dl class="row">
+                        <dt class="col-sm-2">Nombre:</dt>
+                        <dd class="col-sm-2">Panadería San Fernando</dd>
+                        <dt class="col-sm-2">Actividad:</dt>
+                        <dd class="col-sm-2">Panadería y pasteleria</dd>
+                        <dt class="col-sm-2">Representante:</dt>
+                        <dd class="col-sm-2">Rodriguez, Raul</dd>
+                        <dt class="col-sm-2">Tipo:</dt>
+                        <dd class="col-sm-2">Empleador privado</dd>
+                        <dt class="col-sm-2">cuil:</dt>
+                        <dd class="col-sm-2">2033476724</dd>
+                        <dt class="col-sm-2">Legajo:</dt>
+                        <dd class="col-sm-2">078965/8</dd>
+                        <dt class="col-sm-2">Direccion:</dt>
+                        <dd class="col-sm-2">Rivadavia 123</dd>
+                        <dt class="col-sm-2">Calificación:</dt>
+                        <dd class="col-sm-2">4.0</dd>
+                    </dl>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+    </div>
+</div>
+<hr class="mb-4">
+<h4>Ofertas</h4>
+<vista-oferta [ofertas]="ofertas"></vista-oferta>

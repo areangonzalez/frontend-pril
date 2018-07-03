@@ -1,0 +1,87 @@
+<div class="row botton-separate">
+    <div class="col-md-12">
+        <button class="btn btn-danger btn-md" (click)="volver()">
+            <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
+        <button class="btn btn-success btn-md">
+            <span class="oi oi-pencil"></span> Editar</button>
+    </div>
+</div>
+<div class="row" >
+    <div class="col-md-12">
+        <ngb-accordion #acc="ngbAccordion" activeIds="toggle-2">
+            <ngb-panel id="toggle-1" title="Datos personales">
+                <ng-template ngbPanelContent>
+                    <dl class="row">
+                        <dt class="col-sm-2">Nro. Documento:</dt>
+                        <dd class="col-sm-2">1234567</dd>
+                        <dt class="col-sm-2">Cuil:</dt>
+                        <dd class="col-sm-2">2012345673</dd>
+                        <dt class="col-sm-2">Apellido y nombre:</dt>
+                        <dd class="col-sm-2">Díaz, Alejandro.</dd>
+                        <dt class="col-sm-2">Fecha nacimiento:</dt>
+                        <dd class="col-sm-2">12/08/1986</dd>
+                        <dt class="col-sm-2">Sexo:</dt>
+                        <dd class="col-sm-2">Hombre</dd>
+                        <dt class="col-sm-2">Género:</dt>
+                        <dd class="col-sm-2">Masculino</dd>
+                        <dt class="col-sm-2">Estado civil:</dt>
+                        <dd class="col-sm-2">Casado/a</dd>
+                        <dt class="col-sm-2">Teléfono:</dt>
+                        <dd class="col-sm-2">2920434434</dd>
+                        <dt class="col-sm-2">celular:</dt>
+                        <dd class="col-sm-2">2920655443</dd>
+                        <dt class="col-sm-2">Email:</dt>
+                        <dd class="col-sm-2">alejandrodiaz@gmail.com</dd>
+                    </dl>
+                    <hr class="mb-4">
+                    <dl class="row">
+                        <dt class="col-sm-2">Localidad:</dt>
+                        <dd class="col-sm-2">Viedma</dd>
+                        <dt class="col-sm-2">dirección:</dt>
+                        <dd class="col-sm-2">Alem 123</dd>
+                        <dt class="col-sm-2">Barrio:</dt>
+                        <dd class="col-sm-2">Zatti.</dd>
+                    </dl>
+                    <hr class="mb-4">
+                    <dl class="row">
+                        <dt class="col-sm-2">Nivel educativo:</dt>
+                        <dd class="col-sm-2">Secundario (completo)</dd>
+                        <dt class="col-sm-2">Título:</dt>
+                        <dd class="col-sm-2">Bachiller empresarial</dd>
+                    </dl>
+                </ng-template>
+            </ngb-panel>
+            <ngb-panel id="toggle-2" title="Datos destinatario">
+                <ng-template ngbPanelContent>
+                    <dl class="row">
+                        <dt class="col-sm-2">Fecha presentación:</dt>
+                        <dd class="col-sm-4">12/07/2018</dd>
+                        <dt class="col-sm-2">Experiencia laboral:</dt>
+                        <dd class="col-sm-4">Si</dd>
+                    </dl>
+                    <hr class="mb-4">
+                    <dl class="row">
+                        <dt class="col-sm-6">Actividad en la que se desea formación:</dt>
+                        <dd class="col-sm-6">Carpinteria</dd>
+                        <dt class="col-sm-6">Lugar donde se pretende adquirir entrenamiento:</dt>
+                        <dd class="col-sm-6">viedma</dd>
+                        <dt class="col-sm-7">Conocimientos basicos sobre la actividad que desea recibir formación y entrenamiento:</dt>
+                        <dd class="col-sm-5">Cortar madera</dd>
+                    </dl>
+                    <hr class="mb-4">
+                    <dl class="row">
+                        <dt class="col-sm-2">profesión:</dt>
+                        <dd class="col-sm-4">Abogado</dd>
+                        <dt class="col-sm-2">Oficio:</dt>
+                        <dd class="col-sm-4">Albañil</dd>
+                    </dl>
+                    <hr class="mb-4">
+                    <dl class="row">
+                        <dt class="col-sm-6">Organismo donde se presento documentación de inscripción al PRIL:</dt>
+                        <dd class="col-sm-6">Ministerio de desarrollo social</dd>
+                    </dl>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+    </div>
+</div>

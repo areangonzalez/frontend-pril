@@ -5,8 +5,8 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'destinatario-busqueda',
-    templateUrl: './busqueda-destinatario.component.html',
-    styleUrls: ['./busqueda-destinatario.component.css']
+    templateUrl: './busqueda-destinatario.html',
+    styleUrls: ['./busqueda-destinatario.css']
 })
 export class BusquedaDestinatarioComponent {
     //title = 'app';

@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+  prilphp:
+    image:  pril_php:0.1
+    ports:
+      - 80:80
+    volumes:
+      - /var/www/html:/var/www/html
+    networks:
+       default:
+           aliases:
+             - api.pril.local
+
+  registralphp:
+    image:  registral_php:0.1
+    ports:
+      - 81:80
+    volumes:
+      - /var/www/html:/var/www/html
+    networks:
+       default:
+           aliases:
+              - api.registral.local
+  mimysql:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+     MYSQL_ROOT_PASSWORD: root
+    volumes:
+     - /dbdata:/var/lib/mysql
+  prilfrontend:
+    image:  trion-ng-cli:6.0.7
+    ports:
+     - 4200:4200
+    volumes:
+     - /var/www/html/desarrolloPRILFront:/app
+    command: ["ng", "serve", "--host", "0.0.0.0"]

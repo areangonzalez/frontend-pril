@@ -15,6 +15,9 @@ import { PieComponent } from "./layout/pie/pie.component";
 import { CustomDatepickerI18n } from "./shareds/i18n-values";
 /* Modulos */
 import { DestinatarioModule } from './components/destinatario/destinatario.module'
+import { AmbienteTrabajoModule } from './components/ambiente/ambiente-trabajo.module';
+import { AreaEntrenamientoModule } from './components/area/area-entrenamiento.module';
+
 /* Componentes */
 import { JwtInterceptor } from "./helpers/jwt.interceptor";
 import { ErrorInterceptor } from './helpers/error.interceptor';
@@ -37,10 +40,12 @@ import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DestinatarioModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DestinatarioModule,
+    AmbienteTrabajoModule,
+    AreaEntrenamientoModule,
     NgbModule.forRoot()
   ],
   providers: [

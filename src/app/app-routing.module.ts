@@ -5,6 +5,12 @@ import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/incio.component';
 import { FormDestinatarioComponent } from './components/destinatario/form/form-destinatario.component';
 import { DestinatarioComponent } from './components/destinatario/destinatario.component';
+import { VistaDestinatarioComponent } from "./components/destinatario/vista/vista-destinatario.component";
+import { AmbienteTrabajoComponent } from './components/ambiente/ambiente-trabajo.component';
+import { VistaAmbienteTrabajoComponent } from './components/ambiente/vista/vista-ambiente-trabajo.component';
+import { AreaEntrenamientoComponent } from './components/area/area-entrenamiento.component';
+import { FormAmbienteTrabajoComponent } from "./components/ambiente/form/form-ambiente-trabajo.component";
+
 
 import { AuthGuard } from './guards/auth.guard'
 
@@ -12,9 +18,18 @@ import { AuthGuard } from './guards/auth.guard'
     imports: [
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
-            { path: 'inicio', component: InicioComponent, data: { title: 'Bienvenido a PRIL', breadcrumb: 'Inicio' }, canActivate: [AuthGuard] },
-            { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', breadcrumb: 'Destinatario' }, canActivate: [AuthGuard] },
-            { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', breadcrumb: 'Agregar' }, canActivate: [AuthGuard]  },
+            { path: 'inicio', component: InicioComponent, data: { title: 'Bienvenido a PRIL', }, canActivate: [AuthGuard] },
+            
+            { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', }, canActivate: [AuthGuard] },
+            { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', }, canActivate: [AuthGuard]  },
+            { path: 'destinatario/vista', component: VistaDestinatarioComponent, data: { title: 'Ver destinatario', }, canActivate: [AuthGuard] },
+            
+            { path: 'ambiente', component: AmbienteTrabajoComponent, data: { title: 'Lista ambiente de Trabajo' }, canActivate: [AuthGuard] },
+            { path: 'ambiente/vista', component: VistaAmbienteTrabajoComponent, data: { title: 'Ver ambiente de Trabajo' }, canActivate: [AuthGuard] },
+            { path: 'ambiente/agregar', component: FormAmbienteTrabajoComponent, data: { title: 'Agregar ambiente de Trabajo' }, canActivate: [AuthGuard] },
+
+            { path: 'area', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },
+            
             
             /*{ path: 'inicio/vista-agente/:id', component: VistaAgenteComponent, data: { title: 'Ver Agente', breadcrumb: 'Ver agente' }, canActivate: [AuthGuard] }, */
 

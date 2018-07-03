@@ -1,0 +1,31 @@
+<div class="col-md-12">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">nombre</th>
+                <th scope="col">Cuit</th>
+                <th scope="col">Representante</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ambiente of ambientes">
+                <th>{{ambiente.nombre}}</th>
+                <td>{{ambiente.cuit}}</td>
+                <td>{{ambiente.representante}}</td>
+                <td>{{ambiente.tipo}}</td>
+                <td>{{ambiente.estado}}</td>
+                <td>
+                    <button type="button" class="btn btn-info btn-sm">
+                        <span class="oi oi-eye" title="Ver ambiente" aria-hidden="true" (click)="verAmbienteTrabajo(ambiente.id)"></span>
+                    </button>
+                    <button type="button" class="btn btn-light btn-sm">
+                        <span class="oi oi-pencil" title="Editar ambiente" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
