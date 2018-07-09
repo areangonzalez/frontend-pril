@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
-    selector: 'vista-oferta',
-    templateUrl: './oferta.html',
-    styleUrls: ['./oferta.css']
+    selector: 'lista-oferta',
+    templateUrl: './lista-oferta.html',
+    //styleUrls: ['./lista-oferta.css']
 })
-export class OfertaComponent implements OnInit {
+export class ListaOfertaComponent implements OnInit {
     @Input('ofertas') ofertas: Object;
 
     constructor(

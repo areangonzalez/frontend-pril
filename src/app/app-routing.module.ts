@@ -10,6 +10,7 @@ import { AmbienteTrabajoComponent } from './components/ambiente/ambiente-trabajo
 import { VistaAmbienteTrabajoComponent } from './components/ambiente/vista/vista-ambiente-trabajo.component';
 import { AreaEntrenamientoComponent } from './components/area/area-entrenamiento.component';
 import { FormAmbienteTrabajoComponent } from "./components/ambiente/form/form-ambiente-trabajo.component";
+import { OfertaComponent } from "./components/ambiente/oferta/oferta.component";
 
 
 import { AuthGuard } from './guards/auth.guard'
@@ -27,6 +28,7 @@ import { AuthGuard } from './guards/auth.guard'
             { path: 'ambiente', component: AmbienteTrabajoComponent, data: { title: 'Lista ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/vista', component: VistaAmbienteTrabajoComponent, data: { title: 'Ver ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/agregar', component: FormAmbienteTrabajoComponent, data: { title: 'Agregar ambiente de Trabajo' }, canActivate: [AuthGuard] },
+            { path: 'ambiente/oferta/agregar', component: OfertaComponent, data: { title: 'Agregar oferta' }, canActivate: [AuthGuard] },
 
             { path: 'area', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },
             
@@ -34,7 +36,7 @@ import { AuthGuard } from './guards/auth.guard'
             /*{ path: 'inicio/vista-agente/:id', component: VistaAgenteComponent, data: { title: 'Ver Agente', breadcrumb: 'Ver agente' }, canActivate: [AuthGuard] }, */
 
             // otherside
-            { path: '**', redirectTo: '', pathMatch: 'full' }
+            { path: '**', redirectTo: 'login', pathMatch: 'full' }
         ]/* , { preloadingStrategy: AppCustomPreloader } */)
     ],
     exports: [

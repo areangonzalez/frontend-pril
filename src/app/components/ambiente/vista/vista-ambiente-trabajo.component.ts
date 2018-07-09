@@ -28,4 +28,8 @@ export class VistaAmbienteTrabajoComponent {
         this._router.navigate(['ambiente']);
     }
 
+    agregarOferta() {
+        this._router.navigate(['ambiente', 'oferta', 'agregar']);
+    }
+
 }

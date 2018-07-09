@@ -24,40 +24,28 @@ export class FormAmbienteTrabajoComponent implements OnInit {
        this.ambienteForm = _fb.group({
             persona: _fb.group({
                 nro_documento: ['', [Validators.required, Validators.minLength(7)]],
-                cuil: '',
-                cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
-                cuil_ult: ['', [Validators.required, Validators.minLength(1)]],
-        /*          apellido: ['', [Validators.required, Validators.minLength(3)]],
+                apellido: ['', [Validators.required, Validators.minLength(3)]],
                 nombre: ['', [Validators.required, Validators.minLength(3)]],
-                fechaNacimiento: ['', Validators.required],
-                fecha_nacimiento: '',
-                sexoid: ['', Validators.required],
-                generoid: ['', Validators.required],
-                estado_civilid: ['', Validators.required],
                 telefono: '',
                 celular: '',
+                fax: '',
                 email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
                 localidadid: ['', Validators.required],
                 calle: ['', [Validators.required, Validators.minLength(3)]],
                 altura: ['', Validators.required],
-                barrio: ['', [Validators.required, Validators.minLength(3)]],
-                piso: '',
-                departamento: '',
-                nivel_educativoid: ['', Validators.required],
-                completo: '',
-                en_curso: '',
-                titulo: ['', [Validators.required, Validators.minLength(3)]]
+                personaid: '',
+                depto: '',
+                piso: ''
             }),
-            destinatario: _fb.group({
-                origen: ['', [Validators.required, Validators.minLength(3)]],
-                fechaPresentacion: ['', Validators.required],
-                fecha_presentacion: '',
-                deseo_actividad: ['', [Validators.required, Validators.minLength(3)]],
-                deseo_lugar_entrenamiento: '',
-                profesion: ['', Validators.required],
-                oficio: ['', Validators.required],
-                experiencia_laboral: [false, Validators.required],
-                conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]]*/
+            ambienteTrabajo: _fb.group({
+                nombre: ['', [Validators.required, Validators.minLength(3)]],
+                legajo: ['', Validators.required],
+                observacion: '',
+                cuit: ['', [Validators.required, Validators.minLength(3)]],
+                actividad: ['', [Validators.required, Validators.minLength(5)]],
+                tipo_ambiente_trabajoid: ['', Validators.required],
+                lugarid: '',
+                personaid: ''
             })
         }); 
     }

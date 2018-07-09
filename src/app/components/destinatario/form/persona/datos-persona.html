@@ -2,7 +2,7 @@
     <div class="row">
         <div class="form-group col-md-4">
             <label for="nro_documento">Nro. documento (<span>*</span>):</label>
-            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" required (keyup)="esNumeroDocumento($event.target.value)" >
+            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" required (keyup)="esNumero($event.target)" (change)="validarCuil($event.target.value)">
             <div *ngIf="datosPersona.controls.nro_documento.invalid && (datosPersona.controls.nro_documento.dirty || datosPersona.controls.nro_documento.touched)" class="text-danger">
                 <div *ngIf="datosPersona.controls.nro_documento.errors.required">Este campo es requerido. </div>
                 <div *ngIf="datosPersona.controls.nro_documento.errors.minlength">El número de documento debe tener al menos 7 digitos.</div>
@@ -12,9 +12,9 @@
         <div class="form-group col-md-4">
             <label for="form-agente-cuil">Cuil (<span>*</span>):</label>
             <div class="input-group">
-                <input class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2">
-                <div class="input-group-addon div-cuil-num-center">{{datosPersona.value.nro_documento}}</div>
-                <input class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_ult" maxlength="1">
+                <input class="form-control input-cuil-number" type="text" placeholder="##" formControlName="cuil_prin" maxlength="2" (change)="armarCuil()" (keyup)="esNumero($event.target)">
+                <div class="input-group-addon div-cuil-num-center">{{cuil_medio}}</div>
+                <input class="form-control input-cuil-number" type="text" placeholder="#" formControlName="cuil_ult" maxlength="1" (change)="armarCuil()" (keyup)="esNumero($event.target)">
                 <div *ngIf="datosPersona.controls.cuil_prin.invalid && (datosPersona.controls.cuil_prin.dirty || datosPersona.controls.cuil_prin.touched)"
                     class="text-danger">
                     <div *ngIf="datosPersona.controls.cuil_prin.errors.required">Este campo es requerido. </div>

@@ -14,6 +14,7 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 export class DatosPersonaComponent implements OnInit {
     @Input("group") public datosPersona: FormGroup;
     
+    private cuil_medio = '';
     constructor(
         private _validarNumero: ValidarNumero,
         private _formatFecha: FormatObjetoAFecha
@@ -21,18 +22,36 @@ export class DatosPersonaComponent implements OnInit {
 
     ngOnInit(){
     }
-    /**
-     * @function esNumeroDocuemnto funcion que sirve para escribir solo números
-     * @param event evento que toma el objeto de el input
-     */
-    esNumeroDocumento(event: any) {
-        let nro_docuemnto = this.datosPersona.controls.nro_documento.value;
-        if (!this._validarNumero.onKey(event)) {
-            this.datosPersona.controls.nro_documento.setValue(nro_docuemnto.substring(0, nro_docuemnto.length - 1));
-        }
-    }
 
     formatFechaNacimiento(obj:any){
         this.datosPersona.controls.fecha_nacimiento.setValue(this._formatFecha.onChange(obj));
+    }
+
+    esNumero(obj:any) {
+        if (!this._validarNumero.onKey(obj.value)) {
+            obj.value = obj.value.substring(0,obj.value.length - 1);
+        } 
+    }
+
+    validarCuil(nroDocumento){
+        /* if (nroDocumento.length == 7) {
+            this.cuil_medio = '0' + nroDocumento;
+        }else{ */
+            this.cuil_medio = nroDocumento;
+        //}
+        return this.cuil_medio;
+    }
+
+    armarCuil(){
+        let cuil_primero = this.datosPersona.value.cuil_prin;
+        let cuil_ult = this.datosPersona.value.cuil_ult;
+        let cuil = '';
+
+        if (cuil_primero != '' && cuil_ult != '') {
+            cuil = cuil_primero + this.cuil_medio + cuil_ult;
+            return this.datosPersona.controls.cuil.setValue(cuil);
+        }else{
+            return this.datosPersona.controls.cuil.setValue('');
+        }
     }
 }

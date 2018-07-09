@@ -1,0 +1,61 @@
+<h3><small class="text-muted">Datos del ambiente de trabajo</small></h3>
+<fieldset [formGroup]="datosAmbienteTrabajo">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="tipo_ambiente_trabajo">Tipo ambiente de trabajo (<span>*</span>):</label>
+            <select class="form-control" id="tipo_ambiente_trabajo" formControlName="tipo_ambiente_trabajoid" (change)="selTipo($event)">
+                <option value="">Seleccione tipo ambiente de trabajo</option>
+                <option value="5">Comisión de fomento</option>
+                <option value="4">Empleador privado</option>
+                <option value="2">Empresa</option>
+                <option value="6">Institución gubernamental</option>
+                <option value="3">Institución sin fines de lucro</option>
+                <option value="1">Municipio</option>
+            </select>
+            <div *ngIf="datosAmbienteTrabajo.controls.tipo_ambiente_trabajoid.invalid && (!datosAmbienteTrabajo.controls.tipo_ambiente_trabajoid.pristine || datosAmbienteTrabajo.controls.tipo_ambiente_trabajoid.touched)"
+                class="text-danger">
+                <div *ngIf="datosAmbienteTrabajo.controls.tipo_ambiente_trabajoid.errors.required">Este campo es requerido. </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="nombre_ambiente">Nombre <small>{{tipoAt}}</small> (<span>*</span>):</label>
+            <input type="text" id="nombre_ambiente" class="form-control" formControlName="nombre">
+            <div *ngIf="datosAmbienteTrabajo.controls.nombre.invalid && (datosAmbienteTrabajo.controls.nombre.dirty || datosAmbienteTrabajo.controls.nombre.touched)"
+                class="text-danger">
+                <div *ngIf="datosAmbienteTrabajo.controls.nombre.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosAmbienteTrabajo.controls.nombre.errors.minlength">Escriba un nombre valido.</div>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="cuit">Cuit (<span>*</span>):</label>
+            <input type="text" id="cuit" class="form-control" formControlName="cuit" (keyup)="esCuit($event.target.value)">
+            <div *ngIf="datosAmbienteTrabajo.controls.cuit.invalid && (datosAmbienteTrabajo.controls.cuit.dirty || datosAmbienteTrabajo.controls.cuit.touched)"
+                class="text-danger">
+                <div *ngIf="datosAmbienteTrabajo.controls.cuit.errors.required">Este campo es requerido. </div>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="legajo">Legajo (<span>*</span>):</label>
+            <input type="text" id="legajo" class="form-control" formControlName="legajo">
+            <div *ngIf="datosAmbienteTrabajo.controls.legajo.invalid && (datosAmbienteTrabajo.controls.legajo.dirty || datosAmbienteTrabajo.controls.legajo.touched)"
+                class="text-danger">
+                <div *ngIf="datosAmbienteTrabajo.controls.legajo.errors.required">Este campo es requerido. </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="actividad">Actividad que desarrolla (<span>*</span>):</label>
+            <textarea class="form-control" id="actividad" rows="2" formControlName="actividad"></textarea>
+            <div *ngIf="datosAmbienteTrabajo.controls.actividad.invalid && (datosAmbienteTrabajo.controls.actividad.dirty || datosAmbienteTrabajo.controls.actividad.touched)"
+                class="text-danger">
+                <div *ngIf="datosAmbienteTrabajo.controls.actividad.errors.required">Este campo es requerido. </div>
+                <div *ngIf="datosAmbienteTrabajo.controls.nombre.errors.minlength">Por favor, describa la actividad.</div>                
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="observacion">Observación:</label>
+            <textarea class="form-control" id="observacion" rows="2" formControlName="observacion"></textarea>
+        </div>
+    </div>
+</fieldset>

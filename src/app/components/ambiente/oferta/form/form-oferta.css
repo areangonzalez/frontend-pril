@@ -1,0 +1,11 @@
+label > span {
+    font-size: 18px;
+    color:red;
+    font-weight: 700;
+}
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+input.ng-invalid.ng-touched.form-control:focus, select.ng-invalid.ng-touched.form-control:focus, textarea.ng-invalid.ng-touched.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.31);
+}
