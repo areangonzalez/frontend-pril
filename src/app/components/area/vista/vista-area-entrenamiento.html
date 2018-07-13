@@ -1,0 +1,43 @@
+<div class="row mb-4">
+    <div class="col-md-12">
+        <button class="btn btn-danger btn-md" (click)="volver()">
+            <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
+        <button class="btn btn-success btn-md">
+            <span class="oi oi-pencil"></span> Editar</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <ngb-accordion #acc="ngbAccordion" activeIds="info-1, info-2, info-3">
+            <ngb-panel id="info-0" title="Ambiente de trabajo">
+                <ng-template ngbPanelContent>
+                    <area-entrenamiento-vista-ambiente-trabajo></area-entrenamiento-vista-ambiente-trabajo>
+                </ng-template>
+            </ngb-panel>
+            <ngb-panel id="info-1" title="Oferta">
+                <ng-template ngbPanelContent>
+                    <area-entrenamiento-vista-oferta></area-entrenamiento-vista-oferta>
+                </ng-template>
+            </ngb-panel>
+            <ngb-panel id="info-2" title="Destinatario">
+                <ng-template ngbPanelContent>
+                     <area-entrenamiento-vista-destinatario></area-entrenamiento-vista-destinatario>
+                </ng-template>
+            </ngb-panel>
+            <ngb-panel id="info-3" title="Plan">
+                <ng-template ngbPanelContent>
+                    <dl class="row">
+                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Fecha de inicio:</dt>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">12/07/2018</dd>
+                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Plan:</dt>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">$1000 / 10 hs</dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Tarea:</dt>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-10">limpiar el local.</dd>
+                    </dl>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
+    </div>
+</div>

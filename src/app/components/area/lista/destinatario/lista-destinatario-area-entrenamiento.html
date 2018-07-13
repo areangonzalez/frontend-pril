@@ -1,0 +1,52 @@
+<div class="col-md-12 mb-4">
+    <form>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar: nombre, apellido, documento, oficio, puesto ..." aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-outline-danger" type="button" (click)="limpiar()">
+                            <span class="oi oi-trash" title="Limpiar campos" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-12">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Apellido y nombre</th>
+                <th scope="col"></th>
+                <th scope="col">Nro. Documento</th>
+                <th scope="col">Oficio</th>
+                <th scope="col">Calificación</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let destinatario of destinatarios">
+                <th>{{destinatario.apellido}}, {{destinatario.nombre}}</th>
+                <td>
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.direccion}}">
+                        <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.telefono}}">
+                        <span class="fas fa-phone" title="Teléfono" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.celular}}">
+                        <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
+                    </button>
+                </td>
+                <td>{{destinatario.nro_documento}}</td>
+                <td>{{destinatario.oficio}}</td>
+                <td>{{destinatario.calificacion}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

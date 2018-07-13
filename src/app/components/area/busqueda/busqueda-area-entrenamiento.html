@@ -1,0 +1,73 @@
+<div class="col-md-12">
+    <form>
+        <div class="row">
+            <div class="col-md-3">
+                <select class="form-control">
+                    <option>Seleccionar estado</option>
+                </select>
+            </div>
+            <div class="col-md-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-outline-success" type="button" (click)="agregarArea()">
+                            <span class="oi oi-plus" title="Agregar" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                        aria-controls="collapseExample">
+                        Busqueda avanzada
+                    </button>
+                </p>
+                <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- <div class="row">
+                                <div class="col-md-4">
+                                    <select class="form-control">
+                                        <option>Seleccionar tipo</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Desde)" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
+                                                    <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" name="dp" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-info" (click)="d2.toggle()" type="button">
+                                                    <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

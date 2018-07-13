@@ -21,6 +21,6 @@ export class ListaAreaEntrenamientoComponent {
     }
 
     verAreaEntrenamiento(id) {
-        //this._router.navigate(['destinatario', 'vista']);
+        this._router.navigate(['area', 'vista']);
     }
 }

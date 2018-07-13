@@ -11,11 +11,15 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 @Injectable()
 export class FormDestinatarioComponent implements OnInit {
     /**
-     * @param breadcrumbs Array que contiene el camino de las paginas accedidas.
+     * @var variable que obtiene el formulario.
      */
-    //breadcrumbs = ;
     destinatarioForm: FormGroup;
 
+    /**
+     * @param _breadcrumbsService Servicio que maneja el camino de las paginas accedidas.
+     * @param _router Servicio para la navegacion dentro del sistema
+     * @param _fb servicio para la construccion de un formulario customizado
+     */
     constructor(
         private _router:Router,
         private _breadcrumbsService: BreadcrumbsService,

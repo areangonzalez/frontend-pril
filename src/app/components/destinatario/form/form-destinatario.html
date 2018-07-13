@@ -1,11 +1,10 @@
-{{ destinatarioForm.value | json }}
 <form [formGroup]="destinatarioForm" >
     <datos-persona-form [group]="destinatarioForm.controls.persona" ></datos-persona-form>
     <hr class="my-4">
     <datos-destinatario-form [group]="destinatarioForm.controls.destinatario"></datos-destinatario-form>
     <hr class="my-4">
     <div class="float-right">
-        <button class="btn btn-danger" (click)="volver()">cancelar</button> &nbsp;
-        <button class="btn btn-success">Agregar</button>
+        <button class="btn btn-danger" (click)="volver()"><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Cancelar</button> &nbsp;
+        <button class="btn btn-success"><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
     </div>
 </form>

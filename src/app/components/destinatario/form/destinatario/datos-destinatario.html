@@ -1,7 +1,7 @@
 <fieldset [formGroup]="destinatario">
     <div class="row">
         <div class="form-group col-md-6">
-            <label for="deseo_actividad">Actividad en la que se desea formación y entrenamiento:</label>
+            <label for="deseo_actividad">Actividad en la que se desea formación y entrenamiento (<span>*</span>):</label>
             <input type="text" id="deseo_actividad" placeholder="deseo_actividad" class="form-control" formControlName="deseo_actividad">
             <div *ngIf="destinatario.controls.deseo_actividad.invalid && (destinatario.controls.deseo_actividad.dirty || destinatario.controls.deseo_actividad.touched)"
                 class="text-danger">

@@ -11,6 +11,9 @@ import { VistaAmbienteTrabajoComponent } from './components/ambiente/vista/vista
 import { AreaEntrenamientoComponent } from './components/area/area-entrenamiento.component';
 import { FormAmbienteTrabajoComponent } from "./components/ambiente/form/form-ambiente-trabajo.component";
 import { OfertaComponent } from "./components/ambiente/oferta/oferta.component";
+import { SeleccionFormAreaEntrenamientoComponent } from "./components/area/form/seleccion/seleccion-form-area-entrenamiento.component";
+import { PlanFormAreaEntrenamientoComponent } from "./components/area/form/plan/plan-form-area-entrenamiento.component";
+import { VistaAreaEntrenamientoComponent } from "./components/area/vista/vista-area-entrenamiento.component";
 
 
 import { AuthGuard } from './guards/auth.guard'
@@ -31,6 +34,10 @@ import { AuthGuard } from './guards/auth.guard'
             { path: 'ambiente/oferta/agregar', component: OfertaComponent, data: { title: 'Agregar oferta' }, canActivate: [AuthGuard] },
 
             { path: 'area', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area/crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area/crear-plan', component: PlanFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area/vista', component: VistaAreaEntrenamientoComponent, data: { title: 'Ver área de entrenamiento' }, canActivate: [AuthGuard] },
+            
             
             
             /*{ path: 'inicio/vista-agente/:id', component: VistaAgenteComponent, data: { title: 'Ver Agente', breadcrumb: 'Ver agente' }, canActivate: [AuthGuard] }, */

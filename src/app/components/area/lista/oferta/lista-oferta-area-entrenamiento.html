@@ -1,0 +1,55 @@
+<div class="col-md-12 mb-4">
+    <form>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <div class="input-group">
+                    <input class="form-control" placeholder="fecha de inicio: dd/mm/yyyy" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
+                            <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-3">
+                <select class="form-control">
+                    <option>Fecha</option>
+                </select>
+            </div> -->
+            <div class="col-md-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar: ambiente de trabajo, puesto, días y horarios" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
+                        </button>
+                        <button class="btn btn-outline-danger" type="button" (click)="limpiar()">
+                            <span class="oi oi-trash" title="Limpiar campos" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-12">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Fecha de inicio</th>
+                <th scope="col">Ambiente trabajo</th>
+                <th scope="col">Puesto</th>
+                <th scope="col">Días y horarios</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let oferta of ofertas">
+                <td>{{oferta.fecha_inicial}}</td>
+                <td>{{oferta.ambiente_trabajo}}</td>
+                <td>{{oferta.puesto}}</td>
+                <td>{{oferta.dias_horarios}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
