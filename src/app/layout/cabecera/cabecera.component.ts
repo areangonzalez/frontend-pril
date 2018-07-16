@@ -8,14 +8,13 @@ import { Router} from '@angular/router';
     styleUrls: ['./cabecera.component.css']
 })
 export class CabeceraComponent implements OnInit {
-    //title = 'app';
+    public isCollapsed = true;
 
     constructor(
        private _router: Router
     ){}
 
     ngOnInit(){
-
     }
 
     cerrarSesion(){

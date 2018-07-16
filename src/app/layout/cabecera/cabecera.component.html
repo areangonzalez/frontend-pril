@@ -1,24 +1,24 @@
 <nav class="navbar navbar-expand-md navbar-pril fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarCollapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span>
+      </button>
     <a class="navbar-brand" [routerLink]="['inicio']">
         <img src="../../../assets/img/logomarcarn.png" width="60" height="40" alt="Ministerio desarrollo social">
     </a>
     <!-- <a class="navbar-brand" href="#">PRIL</a> -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav mr-auto" *ngIf="estoyLogueado()">
-            <li class="nav-item" [routerLinkActive]="['active']">
+            <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
                 <a class="nav-link" [routerLink]="['inicio']">Inicio <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" [routerLinkActive]="['active']">
+            <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
                 <a class="nav-link" [routerLink]="['destinatario']">Destinatario<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" [routerLinkActive]="['active']">
+            <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
                 <a class="nav-link" [routerLink]="['ambiente']">Ambiente de trabajo<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" [routerLinkActive]="['active']">
+            <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
                 <a class="nav-link" [routerLink]="['area']">Área de entrenamiento<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
