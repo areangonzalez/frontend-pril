@@ -8,12 +8,18 @@ import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
     styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
-    //title = 'app';
+    public hoverDes = false;
+    public hoverAt = false;
+    public hoverAe = false;
 
-    constructor(private breadcrumbsService: BreadcrumbsService) {
+    constructor(private breadcrumbsService: BreadcrumbsService, private _router: Router) {
     }
 
     ngOnInit() {
         this.breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }]);
+    }
+
+    irA(url){
+        this._router.navigate([url]);
     }
 }

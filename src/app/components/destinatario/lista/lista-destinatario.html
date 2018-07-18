@@ -4,9 +4,9 @@
             <tr>
                 <th scope="col">Apellido y nombre</th>
                 <th scope="col"></th>
-                <th scope="col">Profesión</th>
-                <th scope="col">Oficio</th>
-                <th scope="col">nivel educativo</th>
+                <th class="text-center" scope="col">Profesión</th>
+                <th class="text-center" scope="col">Oficio</th>
+                <th class="text-center" scope="col">nivel educativo</th>
                 <th scope="col">Presentación</th>
                 <th scope="col">Acción</th>
             </tr>
@@ -18,13 +18,16 @@
                     <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.direccion}}">
                         <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.telefono}}, {{destinatario.celular}}">
-                        <span class="oi oi-phone" title="Teléfonos" aria-hidden="true"></span>
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.telefono}}">
+                        <i class="fas fa-phone" title="Telefono"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.celular}}">
+                        <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
                     </button>
                 </td>
-                <td>{{destinatario.profesion}}</td>
-                <td>{{destinatario.oficio}}</td>
-                <td>{{destinatario.nivel_educativo}}</td>
+                <td class="text-center">{{destinatario.profesion}}</td>
+                <td class="text-center">{{destinatario.oficio}}</td>
+                <td class="text-center">{{destinatario.nivel_educativo}}</td>
                 <td>{{destinatario.presentacion}}</td>
                 <td>
                     <button type="button" class="btn btn-info btn-sm">

@@ -20,10 +20,10 @@ export class DestinatarioComponent implements OnInit {
     }
 
     private destinatarios = [
-        { apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000', celular: '2920635572', profesion: '', oficio: '', nivel_educativo: '', presentacion: '19/06/2018', id: 1 },
-        { apellido: 'Díaz', nombre: 'Emanuel', direccion: 'buenos aires 123', telefono: '2920453111', celular: '2920623384', profesion: '', oficio: '', nivel_educativo: '', presentacion: '15/10/2018', id: 2 },
-        { apellido: 'Carrasco', nombre: 'Pablo', direccion: 'alem 123', telefono: '2920423212', celular: '2920612342', profesion: '', oficio: '', nivel_educativo: '', presentacion: '10/06/2018', id: 3 },
-        { apellido: 'Martinez', nombre: 'Juan', direccion: 'neuquen 123', telefono: '2920423322', celular: '2920682734', profesion: '', oficio: '', nivel_educativo: '', presentacion: '20/07/2018', id: 4 },
-        { apellido: 'Rodriguez', nombre: 'Maria', direccion: 'guido 123', telefono: '2920423123', celular: '2920632234', profesion: '', oficio: '', nivel_educativo: '', presentacion: '12/092018', id: 5 }
+        { apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000', celular: '2920635572', profesion: 'Panadero', oficio: 'Pastelero', nivel_educativo: 'Terciario', presentacion: '19/06/2018', id: 1 },
+        { apellido: 'Díaz', nombre: 'Emanuel', direccion: 'buenos aires 123', telefono: '2920453111', celular: '2920623384', profesion: ' - ', oficio: 'Limpieza', nivel_educativo: 'Primario', presentacion: '15/10/2018', id: 2 },
+        { apellido: 'Carrasco', nombre: 'Pablo', direccion: 'alem 123', telefono: '2920423212', celular: '2920612342', profesion: ' - ', oficio: 'Conserje', nivel_educativo: 'Secundario', presentacion: '10/06/2018', id: 3 },
+        { apellido: 'Martinez', nombre: 'Juan', direccion: 'neuquen 123', telefono: '2920423322', celular: '2920682734', profesion: 'Informático', oficio: 'Profesor', nivel_educativo: 'Universitario', presentacion: '20/07/2018', id: 4 },
+        { apellido: 'Rodriguez', nombre: 'Maria', direccion: 'guido 123', telefono: '2920423123', celular: '2920632234', profesion: 'Abogado', oficio: 'Carpintero', nivel_educativo: 'Universitario', presentacion: '12/092018', id: 5 }
     ];
 }

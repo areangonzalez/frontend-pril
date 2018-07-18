@@ -1,0 +1,10 @@
+.centrar-circulo {
+    justify-content: center!important;
+    -webkit-border-radius: 50%!important;
+    -moz-border-radius: 50%!important;
+    border-radius: 50%!important;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}

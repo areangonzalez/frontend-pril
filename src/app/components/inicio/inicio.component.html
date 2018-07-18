@@ -1,0 +1,50 @@
+<!-- <div class="row">
+    <div class="col-md-4">
+        <button type="button" class="btn btn-outline-info">
+                Destinatario
+        </button>
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-outline-info">
+                Ambiente de trabajo
+        </button>
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-outline-info">
+                Area de entrenamiento
+        </button>
+    </div>
+</div> -->
+
+<div class="row">
+    <div class="col-md-4 justify-content-center">
+        <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (mouseover)="hoverDes=true" (mouseleave)="hoverDes=false" 
+        [ngClass]="{'bg-info':(!hoverDes), 'border-info':hoverDes}" (click)="irA('/destinatario')" >
+            <div class="card-body" [ngClass]="{'text-white':(!hoverDes), 'text-info':hoverDes}">
+                <h5 class="card-title">Destinatario/s</h5>
+                <p class="card-text"><i class="fas fa-male" style="font-size: 72px;"></i></p>
+                <p class="card-text">165</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (mouseover)="hoverAt=true" (mouseleave)="hoverAt=false"
+            [ngClass]="{'bg-info':(!hoverAt), 'border-info':hoverAt}" (click)="irA('/ambiente')">
+            <div class="card-body" [ngClass]="{'text-white':(!hoverAt), 'text-info':hoverAt}">
+                <h6 class="card-title">Ambiente/s de trabajo/s</h6>
+                <p class="card-text"><i class="far fa-building" style="font-size: 72px;"></i></p>
+                <p class="card-text">35</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (mouseover)="hoverAe=true" (mouseleave)="hoverAe=false"
+            [ngClass]="{'bg-info':(!hoverAe), 'border-info':hoverAe}" (click)="irA('/area')">
+            <div class="card-body" [ngClass]="{'text-white':(!hoverAe), 'text-info':hoverAe}">
+                <h6 class="card-title">Área/s de entrenamiento</h6>
+                <p class="card-text"><i class="fas fa-dolly" style="font-size: 72px;"></i></p>
+                <p class="card-text">12</p>
+            </div>
+        </div>
+    </div>
+</div>
