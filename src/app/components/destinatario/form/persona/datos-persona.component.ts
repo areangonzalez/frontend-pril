@@ -13,8 +13,9 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 })
 export class DatosPersonaComponent implements OnInit {
     @Input("group") public datosPersona: FormGroup;
+    @Input("submitted") public submitted;
     
-    private cuil_medio = '';
+    public cuil_medio = '';
     constructor(
         private _validarNumero: ValidarNumero,
         private _formatFecha: FormatObjetoAFecha
@@ -34,11 +35,11 @@ export class DatosPersonaComponent implements OnInit {
     }
 
     validarCuil(nroDocumento){
-        /* if (nroDocumento.length == 7) {
+        if (nroDocumento.length == 7) {
             this.cuil_medio = '0' + nroDocumento;
-        }else{ */
+        }else{
             this.cuil_medio = nroDocumento;
-        //}
+        }
         return this.cuil_medio;
     }
 
@@ -54,4 +55,7 @@ export class DatosPersonaComponent implements OnInit {
             return this.datosPersona.controls.cuil.setValue('');
         }
     }
+
+
+    get persona() { return this.datosPersona.controls; }
 }

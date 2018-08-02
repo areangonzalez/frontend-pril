@@ -11,14 +11,18 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 })
 export class DatosDestinatarioComponent implements OnInit {
     @Input("group") public destinatario: FormGroup;
+    @Input("submitted") public submitted;
 
     constructor(
         private _formatFecha: FormatObjetoAFecha
     ){}
 
     ngOnInit() { }
+    
+    get destinatarioForm() { return this.destinatario.controls; }
 
     formatFechapresentacion(obj: any) {
         this.destinatario.controls.fecha_presentacion.setValue(this._formatFecha.onChange(obj));
     }
+
 }

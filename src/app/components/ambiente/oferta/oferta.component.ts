@@ -9,7 +9,8 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
     styleUrls: ['./oferta.css']
 })
 export class OfertaComponent implements OnInit {
-    private oferta: FormGroup;
+    public oferta: FormGroup;
+    public ofertas: Object;
     constructor(
         private breadcrumbsService: BreadcrumbsService,
         private _router: Router,

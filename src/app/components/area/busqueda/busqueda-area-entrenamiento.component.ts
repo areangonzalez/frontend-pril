@@ -7,7 +7,7 @@ import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
     styleUrls: ['./busqueda-area-entrenamiento.css']
 })
 export class BusquedaAreaEntrenamientoComponent implements OnInit {
-    private isCollapsed = true;
+    public isCollapsed = true;
 
     constructor(private _router: Router) {
     }
@@ -16,7 +16,6 @@ export class BusquedaAreaEntrenamientoComponent implements OnInit {
     }
 
     agregarArea(){
-        console.log('click');
         this._router.navigate(['area', 'crear-seleccion']);
     }
 

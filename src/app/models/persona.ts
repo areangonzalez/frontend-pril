@@ -1,0 +1,26 @@
+export interface datosPersona {
+    id: number,
+    nro_documento: string,
+    cuil: string,
+    apellido: string,
+    nombre: string,
+    fecha_nacimiento: string,
+    sexoid: number,
+    generoid: number,
+    estado_civilid: number,
+    telefono: string,
+    celular: string,
+    email: string,
+    nucleoid: number,
+    localidadid: number,
+    calle: string,
+    altura: string,
+    barrio: string,
+    piso: string,
+    departamento: string,
+
+    nivel_educativoid: number,
+    completo: string,
+    en_curso: string,
+    titulo: string
+};

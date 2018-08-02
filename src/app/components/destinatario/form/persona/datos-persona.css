@@ -19,9 +19,9 @@ label > span {
     margin-top: 3.1%;
     text-align: center;
 }
-input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+.is-invalid {
   border: 1px solid red;
 }
-input.ng-invalid.ng-touched.form-control:focus, select.ng-invalid.ng-touched.form-control:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.31);
+.is-invalid:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.31);  
 }

@@ -18,10 +18,10 @@ export class CabeceraComponent implements OnInit {
     }
 
     cerrarSesion(){
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token-pril');
     }
 
     estoyLogueado(){
-        return (localStorage.getItem('currentUser')) ? true : false;
+        return (localStorage.getItem('token-pril')) ? true : false;
     }
 }

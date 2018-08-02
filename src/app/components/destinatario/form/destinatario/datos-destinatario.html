@@ -2,11 +2,11 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label for="deseo_actividad">Actividad en la que se desea formación y entrenamiento (<span>*</span>):</label>
-            <input type="text" id="deseo_actividad" placeholder="deseo_actividad" class="form-control" formControlName="deseo_actividad">
-            <div *ngIf="destinatario.controls.deseo_actividad.invalid && (destinatario.controls.deseo_actividad.dirty || destinatario.controls.deseo_actividad.touched)"
+            <input type="text" id="deseo_actividad" placeholder="deseo_actividad" class="form-control" formControlName="deseo_actividad" [ngClass]="{'is-invalid': (destinatarioForm.deseo_actividad.invalid && submitted)}">
+            <div *ngIf="(destinatarioForm.deseo_actividad.invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatario.controls.deseo_actividad.errors.required">Este campo es requerido. </div>
-                <div *ngIf="destinatario.controls.deseo_actividad.errors.minlength">Por favor, escriba una actividad valida.</div>
+                <div *ngIf="destinatarioForm.deseo_actividad.errors.required">Este campo es requerido. </div>
+                <div *ngIf="destinatarioForm.deseo_actividad.errors.minlength">Por favor, escriba una actividad valida.</div>
             </div>
         </div>
         <div class="form-group col-md-6">
@@ -15,26 +15,26 @@
         </div>
         <div class="form-group col-md-4">
             <label for="profesion">Profesión (<span>*</span>):</label>
-            <select class="form-control" id="profesion" formControlName="profesion">
+            <select class="form-control" id="profesion" formControlName="profesion" [ngClass]="{'is-invalid': (destinatarioForm.profesion.invalid && submitted)}">
                 <option value="">Seleccione Profesión</option>
                 <option value="1">Abogado/a</option>
                 <option value="2">Profesor/a</option>
             </select>
-            <div *ngIf="destinatario.controls.profesion.invalid && (!destinatario.controls.profesion.pristine || destinatario.controls.profesion.touched)"
+            <div *ngIf="(destinatarioForm.profesion.invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatario.controls.profesion.errors.required">Seleccione una profesión. </div>
+                <div *ngIf="destinatarioForm.profesion.errors.required">Seleccione una profesión. </div>
             </div>
         </div>
         <div class="form-group col-md-4">
             <label for="oficio">Oficio (<span>*</span>):</label>
-            <select class="form-control" id="oficio" formControlName="oficio">
+            <select class="form-control" id="oficio" formControlName="oficio" [ngClass]="{'is-invalid': (destinatarioForm.oficio.invalid && submitted)}">
                 <option value="">Seleccione Oficio</option>
                 <option value="1">Barbero</option>
                 <option value="2">Panadero/a</option>
             </select>
-            <div *ngIf="destinatario.controls.oficio.invalid && (!destinatario.controls.oficio.pristine || destinatario.controls.oficio.touched)"
+            <div *ngIf="(destinatarioForm.oficio.invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatario.controls.oficio.errors.required">Seleccione una profesión. </div>
+                <div *ngIf="destinatarioForm.oficio.errors.required">Seleccione una profesión. </div>
             </div>
         </div>
         <div class="form-group form-check col-md-4">
@@ -43,39 +43,40 @@
         </div>
         <div class="form-group col-md-12">
             <label for="conocimientos_basicos">Conocimientos basicos sobre la actividad que desea recibir formación y entrenamiento (<span>*</span>):</label>
-            <input type="text" id="conocimientos_basicos" placeholder="conocimientos_basicos" class="form-control" formControlName="conocimientos_basicos">
-            <div *ngIf="destinatario.controls.conocimientos_basicos.invalid && (destinatario.controls.conocimientos_basicos.dirty || destinatario.controls.conocimientos_basicos.touched)"
+            <input type="text" id="conocimientos_basicos" placeholder="conocimientos_basicos" class="form-control" formControlName="conocimientos_basicos"
+             [ngClass]="{'is-invalid': (destinatarioForm.conocimientos_basicos.invalid && submitted)}">
+            <div *ngIf="(destinatarioForm.conocimientos_basicos.invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatario.controls.conocimientos_basicos.errors.required">Este campo es requerido. </div>
-                <div *ngIf="destinatario.controls.conocimientos_basicos.errors.minlength">El texto es muy corto.</div>
+                <div *ngIf="destinatarioForm.conocimientos_basicos.errors.required">Este campo es requerido. </div>
+                <div *ngIf="destinatarioForm.conocimientos_basicos.errors.minlength">El texto es muy corto.</div>
             </div>
         </div>
         <div class="form-group col-md-8">
             <label for="Organismo_pril">Organismo donde se presento documentación y planilla de inscripción al PRIL (<span>*</span>):</label>
-            <select class="form-control" id="Organismo_pril" formControlName="origen">
+            <select class="form-control" id="Organismo_pril" formControlName="origen" [ngClass]="{'is-invalid': (destinatarioForm.origen.invalid && submitted)}">
                 <option value="">Seleccione Organismo</option>
                 <option value="1">Delegación Valle inferior</option>
                 <option value="2">Ministerio de Desarrollo Social</option>
             </select>
-            <div *ngIf="destinatario.controls.origen.invalid && (!destinatario.controls.origen.pristine || destinatario.controls.origen.touched)"
+            <div *ngIf="(destinatarioForm.origen.invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatario.controls.origen.errors.required">Este campo es requerido. </div>
+                <div *ngIf="destinatarioForm.origen.errors.required">Este campo es requerido. </div>
             </div>
         </div>
         <div class="form-group col-md-4">
             <label for="fecha_presentacion">Fecha presentación (<span>*</span>):</label>
             <div class="input-group">
                 <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fd="ngbDatepicker" id="fecha_presentacion" formControlName="fechaPresentacion"
-                    (ngModelChange)="formatFechapresentacion($event)">
+                    (ngModelChange)="formatFechapresentacion($event)" [ngClass]="{'is-invalid': (destinatarioForm.fechaPresentacion.invalid && submitted)}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info" (click)="fd.toggle()" type="button" [ngClass]="{'btn-outline-danger': (destinatario.controls.fechaPresentacion.invalid && (!destinatario.controls.fechaPresentacion.pristine || destinatario.controls.fechaPresentacion.touched))}">
+                    <button class="btn btn-outline-info" (click)="fd.toggle()" type="button" [ngClass]="{'btn-outline-danger': (destinatarioForm.fechaPresentacion.invalid && submitted)}">
                         <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
                     </button>
                 </div>
             </div>
-            <div *ngIf="destinatario.controls.fechaPresentacion.invalid && (!destinatario.controls.fechaPresentacion.pristine || destinatario.controls.fechaPresentacion.touched)"
+            <div *ngIf="(destinatarioForm.fechaPresentacion.invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatario.controls.fechaPresentacion.errors.required">Este campo es requerido. </div>
+                <div *ngIf="destinatarioForm.fechaPresentacion.errors.required">Este campo es requerido. </div>
             </div>
         </div>
     </div>

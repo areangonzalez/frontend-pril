@@ -2,11 +2,17 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+// models
+import { Persona } from "../../../models/persona.model";
+import { Destinatario } from "../../../models/destinatario.model"; 
+//modal
+import { ModalContentEstudio, ModalEstudioComponent } from "../form/modal-estudio/modal-estudio.component";
 
 @Component({
     selector: 'destinatario-form',
     templateUrl: './form-destinatario.html',
     styleUrls: ['./form-destinatario.css'],
+    entryComponents: [ModalContentEstudio]
 })
 @Injectable()
 export class FormDestinatarioComponent implements OnInit {
@@ -46,11 +52,7 @@ export class FormDestinatarioComponent implements OnInit {
                 altura: ['', Validators.required],
                 barrio: ['', [Validators.required, Validators.minLength(3)]],
                 piso: '',
-                departamento: '',
-                nivel_educativoid: ['', Validators.required],
-                completo: '',
-                en_curso: '',
-                titulo: ['', [Validators.required, Validators.minLength(3)]]
+                departamento: ''
             }),
             destinatario: _fb.group({
                 origen: ['', [Validators.required, Validators.minLength(3)]],
@@ -61,7 +63,8 @@ export class FormDestinatarioComponent implements OnInit {
                 profesion: ['', Validators.required],
                 oficio: ['', Validators.required],
                 experiencia_laboral: [false, Validators.required],
-                conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]]
+                conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]],
+
             })
         });
     }
@@ -75,4 +78,29 @@ export class FormDestinatarioComponent implements OnInit {
         this._router.navigate(['destinatario']);
     }
 
+    submitted = false;
+    onSubmit() {
+        const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario() };
+        this.submitted = true;
+        console.log("llega: ", params);
+        
+        if (this.destinatarioForm.invalid) {
+            return;
+        }
+
+        console.log(this.destinatarioForm.value);
+        /* this.submitted = true;
+
+        // stop here if form is invalid
+
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.destinatarioForm.value)) */
+    }
+
+    private prepararDestinatario() {
+        return new Destinatario().deserialize(this.destinatarioForm.value.destinatario);
+    }
+
+    private prepararPersona() {
+        return new Persona().deserialize(this.destinatarioForm.value.persona);
+    }
 }

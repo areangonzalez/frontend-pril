@@ -1,0 +1,36 @@
+<fieldset class="mb-3">
+    <button class="btn btn-danger" type="button"><span class="oi oi-arrow-left"></span> Volver</button>
+</fieldset>
+<fieldset [formGroup]="estudiosForm">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="nivel_educativo">Nivel educativo (<span>*</span>):</label>
+            <select class="form-control" id="nivel_educativo" formControlName="nivel_educativoid">
+                    <option value="">Seleccione Nivel educativo</option>
+                    <option value="1">Primario</option>
+                    <option value="2">Secundaria</option>
+                </select>
+            <div *ngIf="estudiosForm.controls.nivel_educativoid.invalid && (!estudiosForm.controls.nivel_educativoid.pristine || estudiosForm.controls.nivel_educativoid.touched)"
+                class="text-danger">
+                <div *ngIf="estudiosForm.controls.nivel_educativoid.errors.required">Por favor Seleccione nivel educativo. </div>
+            </div>
+        </div>
+        <div class="form-group form-check col-md-3">
+            <input type="checkbox" id="estudio_completo" class="form-check-input" formControlName="completo">
+            <label class="form-check-label" for="estudio_completo">Completo</label>
+        </div>
+        <div class="form-group form-check col-md-3">
+            <input type="checkbox" id="estudio_en_curso" class="form-check-input" formControlName="en_curso">
+            <label class="form-check-label" for="estudio_en_curso">En curso</label>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="titulo">Título (<span>*</span>):</label>
+            <input type="text" id="titulo" placeholder="titulo" class="form-control" formControlName="titulo">
+            <div *ngIf="estudiosForm.controls.titulo.invalid && (estudiosForm.controls.titulo.dirty || estudiosForm.controls.titulo.touched)"
+                class="text-danger">
+                <div *ngIf="estudiosForm.controls.titulo.errors.required">Este campo es requerido. </div>
+            </div>
+
+        </div>
+    </div>
+</fieldset>

@@ -14,7 +14,7 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 export class AmbienteTrabajoFormComponent implements OnInit {
     @Input("group") public datosAmbienteTrabajo: FormGroup;
     
-    private tipoAt = '';
+    public tipoAt = '';
 
     constructor(
         private _validarNumero: ValidarNumero,

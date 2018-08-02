@@ -27,6 +27,7 @@ import { InicioComponent } from './components/inicio/incio.component';
 import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.component';
 /* Services */
 import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service";
+import { DestinatarioService } from "./services/destinatario.service";
 
 @NgModule({
   declarations: [
@@ -54,9 +55,11 @@ import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
-    BreadcrumbsService,
     // provider used to create fake backend
-    fakeBackendProvider
+    fakeBackendProvider,
+    // servicios del sistema
+    BreadcrumbsService,
+    DestinatarioService    
   ],
   bootstrap: [AppComponent]
 })

@@ -19,7 +19,7 @@ export class AmbienteTrabajoComponent implements OnInit {
             { label: 'Ambiente de trabajo', url: 'ambiente', params: [] }]);
     }
 
-    private ambientes = [
+    public ambientes = [
         { nombre: 'Panaderia san Fernando', cuit: '2033476724', representante: 'Rodriguez, Raul', tipo: 'Empleador Pirvado', estado: 'Activo', id: 1 },
         { nombre: 'Cooperia Obrera', cuit: '2033476723', representante: 'Lopez, laura', tipo: 'Cooperativa', estado: 'Activo', id: 2 },
         { nombre: 'Municipalidad de viedma', cuit: '2033476723', representante: 'Martinez, Francisco', tipo: 'Organismo público', estado: 'Activo', id: 3 },

@@ -1,5 +1,5 @@
 // Imports necesarios para crear módulos
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -13,12 +13,16 @@ import { VistaDestinatarioComponent } from './vista/vista-destinatario.component
 import { BusquedaDestinatarioComponent } from "./busqueda/busqueda-destinatario.component";
 import { DatosPersonaComponent } from "./form/persona/datos-persona.component";
 import { DatosDestinatarioComponent } from "./form/destinatario/datos-destinatario.component";
+import { EstudioComponent } from "./form/estudio/estudio.component";
+import { ListaEstudioComponent } from "./lista/lista-estudio/lista-estudio.component";
+import { ModalContentEstudio, ModalEstudioComponent } from "./form/modal-estudio/modal-estudio.component";
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent],
+    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule.forRoot()],
-    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, ReactiveFormsModule]
-    //entryComponents: [NgbdModalContentGrafica]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ReactiveFormsModule],
+    entryComponents: [ModalContentEstudio]
 })
 export class DestinatarioModule { }
