@@ -39,7 +39,7 @@ export class ModalEstudioComponent {
     constructor(private modalService: NgbModal) { }
 
     open() {
-        const modalRef = this.modalService.open(ModalContentEstudio);
+        const modalRef = this.modalService.open(ModalContentEstudio, {size: 'lg'});
         //modalRef.componentInstance.name = 'World';
     }
 }

@@ -27,20 +27,23 @@ export class EstudioComponent implements OnInit {
     ) { 
         this.estudiosForm = _fb.group({
             nivel_educativoid: ['', Validators.required],
-            completo: '',
-            en_curso: '',
+            completo: true,
+            en_curso: false,
             titulo: ['', [Validators.required, Validators.minLength(3)]]
         })
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 
-    /* crearEstudios(): FormGroup {
-        this._fb.group({
-            nivel_educativoid: ['', Validators.required],
-            completo: '',
-            en_curso: '',
-            titulo: ['', [Validators.required, Validators.minLength(3)]]
-        });  
-    } */
+    estaCheckeado(e){
+        if(e.target.id == 'estudio_completo') {
+            this.estudiosForm.controls.completo.setValue(e.target.checked);
+            this.estudiosForm.controls.en_curso.setValue(!e.target.checked);
+        }else{
+            this.estudiosForm.controls.completo.setValue(!e.target.checked);
+            this.estudiosForm.controls.en_curso.setValue(e.target.checked);
+        }
+    } 
+
 }
