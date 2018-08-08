@@ -1,6 +1,6 @@
-import { Component, OnInit, Injectable, Input } from '@angular/core';
+import { Component, OnInit, Injectable, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'estudio-form',
@@ -9,41 +9,49 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 })
 @Injectable()
 export class EstudioComponent implements OnInit {
-    //@Input("listaEstudios") public listaEstudios;
+    @Input("group") public estudios: FormGroup;
+    @Input("submitted") public submitted;
+    @Input("errorNivelEducativo") public errorNivelEducativo;
+    //@Output() datosEstudios = new EventEmitter();
 
-    /**
-     * @var estudiosForm variable que contiene el formulario de estudios
-     */
-    estudiosForm: FormGroup;
-
+    listaNivelEducativo = [];
 
     /**
      * @param _router Servicio para la navegacion dentro del sistema
-     * @param _fb Servicio para armar el formulario de estudios
      */
     constructor(
         private _router: Router,
-        private _fb: FormBuilder
     ) { 
-        this.estudiosForm = _fb.group({
-            nivel_educativoid: ['', Validators.required],
-            completo: true,
-            en_curso: false,
-            titulo: ['', [Validators.required, Validators.minLength(3)]]
-        })
+        
     }
 
+    get estudiosForm() { return this.estudios.controls; }
+
     ngOnInit() {
+        this.getNivelEducativo();
     }
 
     estaCheckeado(e){
         if(e.target.id == 'estudio_completo') {
-            this.estudiosForm.controls.completo.setValue(e.target.checked);
-            this.estudiosForm.controls.en_curso.setValue(!e.target.checked);
+            this.estudiosForm.completo.setValue(e.target.checked);
+            this.estudiosForm.en_curso.setValue(!e.target.checked);
         }else{
-            this.estudiosForm.controls.completo.setValue(!e.target.checked);
-            this.estudiosForm.controls.en_curso.setValue(e.target.checked);
+            this.estudiosForm.completo.setValue(!e.target.checked);
+            this.estudiosForm.en_curso.setValue(e.target.checked);
         }
     } 
 
+    getNivelEducativo(){
+        return this.listaNivelEducativo = [
+            { id: 1, nombre: 'Primaria' },
+            { id: 2, nombre: 'Secundaria' },
+            { id: 3, nombre: 'Terciaria' },
+            { id: 4, nombre: 'Universitaria' }
+        ];
+    }
+
+    seleccionarNombre(e){
+        let opcionesCombo = e.target['options'];
+        this.estudiosForm.nivel_educativo_nombre.setValue(opcionesCombo[opcionesCombo.selectedIndex].text);
+    }
 }

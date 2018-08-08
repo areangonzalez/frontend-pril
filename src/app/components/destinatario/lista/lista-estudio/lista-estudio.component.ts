@@ -16,14 +16,7 @@ export class ListaEstudioComponent implements OnInit {
         private _router: Router,
     ) {}
 
-    ngOnInit() {}
-
-    /* crearEstudios(): FormGroup {
-        this._fb.group({
-            nivel_educativoid: ['', Validators.required],
-            completo: '',
-            en_curso: '',
-            titulo: ['', [Validators.required, Validators.minLength(3)]]
-        });  
-    } */
+    ngOnInit() {
+        console.log(this.listaEstudios);
+    }
 }

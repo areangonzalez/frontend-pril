@@ -20,6 +20,7 @@ export class FormDestinatarioComponent implements OnInit {
      * @var variable que obtiene el formulario.
      */
     destinatarioForm: FormGroup;
+    listaEstudios = [];
 
     /**
      * @param _breadcrumbsService Servicio que maneja el camino de las paginas accedidas.

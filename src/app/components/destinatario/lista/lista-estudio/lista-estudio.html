@@ -1,9 +1,9 @@
-<fieldset>
+<fieldset class="my-2">
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Nivel educativo</th>
-                <th class="text-center" scope="col">Título</th>
+                <th scope="col">Título</th>
                 <th class="text-center" scope="col">Estado</th>
                 <th scope="col">Acción</th>
             </tr>
@@ -11,9 +11,12 @@
         <tbody>
             <tr></tr>
             <tr *ngFor="let lista of listaEstudios">
-                <td class="text-center">{{lista.profesion}}</td>
-                <td>{{lista.apellido}}, {{lista.nombre}}</td>
-                <td class="text-center">{{lista.oficio}}</td>
+                <td>{{lista.nivel_educativo_nombre}}</td>
+                <td>{{lista.titulo}}</td>
+                <td class="text-center">
+                    <span *ngIf="(lista.completo)">Completo</span>
+                    <span *ngIf="(lista.en_curso)">En curso</span>
+                </td>
                 <td>
                     <button type="button" class="btn btn-info btn-sm">
                         <span class="oi oi-eye" title="Ver lista" aria-hidden="true" (click)="verlista(lista.id)"></span>
