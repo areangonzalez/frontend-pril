@@ -25,9 +25,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/incio.component';
 import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { MensajesComponent } from "./components/mensajes/mensajes.component";
 /* Services */
 import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service";
 import { DestinatarioService } from "./services/destinatario.service";
+import { MensajesService } from "./services/mensajes.service";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { DestinatarioService } from "./services/destinatario.service";
     PieComponent,
     LoginComponent,
     InicioComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    MensajesComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { DestinatarioService } from "./services/destinatario.service";
     fakeBackendProvider,
     // servicios del sistema
     BreadcrumbsService,
-    DestinatarioService    
+    DestinatarioService,    
+    MensajesService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,6 +2,8 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+// services
+import { MensajesService } from "../../../services/mensajes.service";
 // models
 import { Persona } from "../../../models/persona.model";
 import { Destinatario } from "../../../models/destinatario.model"; 
@@ -31,6 +33,7 @@ export class FormDestinatarioComponent implements OnInit {
         private _router:Router,
         private _breadcrumbsService: BreadcrumbsService,
         private _fb: FormBuilder,
+        private _mensajeService: MensajesService
     ){
         this.destinatarioForm = _fb.group({
             persona: _fb.group({
@@ -81,12 +84,19 @@ export class FormDestinatarioComponent implements OnInit {
 
     submitted = false;
     onSubmit() {
-        const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario() };
+        const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario(), estudios:[] };
         this.submitted = true;
         console.log("llega: ", params);
         
         if (this.destinatarioForm.invalid) {
+            this._mensajeService.sendMessage('Campos sin completar');
             return;
+        }else{
+            if (this.listaEstudios.length == 0) {
+                return;
+            }else{ // envio datos al servidor
+
+            }
         }
 
         console.log(this.destinatarioForm.value);

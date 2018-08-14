@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <tr></tr>
-            <tr *ngFor="let lista of listaEstudios">
+            <tr *ngFor="let lista of listaEstudios; index as i;">
                 <td>{{lista.nivel_educativo_nombre}}</td>
                 <td>{{lista.titulo}}</td>
                 <td class="text-center">
@@ -18,11 +18,9 @@
                     <span *ngIf="(lista.en_curso)">En curso</span>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-info btn-sm">
-                        <span class="oi oi-eye" title="Ver lista" aria-hidden="true" (click)="verlista(lista.id)"></span>
-                    </button>
-                    <button type="button" class="btn btn-light btn-sm">
-                        <span class="oi oi-pencil" title="Editar lista" aria-hidden="true"></span>
+                    <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'editar'" [estudio]="lista" [id]="i"></modal-estudio>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="borrarEstudio(i)">
+                        <span class="oi oi-trash" title="borrar estudio" aria-hidden="true"></span>
                     </button>
                 </td>
             </tr>

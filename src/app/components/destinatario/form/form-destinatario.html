@@ -1,7 +1,7 @@
 <form [formGroup]="destinatarioForm" (ngSubmit)="onSubmit()">
     <datos-persona-form [group]="destinatarioForm.controls.persona" [submitted]="submitted" ></datos-persona-form>
     <hr class="my-4">
-    <modal-estudio [listaEstudios]="listaEstudios"></modal-estudio>
+    <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'agregar'" [texto]="'Agregar estudio'"></modal-estudio>
     <lista-estudio *ngIf="(listaEstudios.length > 0)" [listaEstudios]="listaEstudios"></lista-estudio>
     <hr class="my-4">
     <datos-destinatario-form [group]="destinatarioForm.controls.destinatario" [submitted]="submitted"></datos-destinatario-form>

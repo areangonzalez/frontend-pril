@@ -1,0 +1,15 @@
+<!-- <div *ngIf="mensaje" class="alert alert-danger" role="alert">
+    A simple danger alert—check it out!
+</div> -->
+<div *ngIf="mensaje" class="overlay"></div>
+<div *ngIf="mensaje" class="alert alert-success mensajes-alert" role="alert">
+    <div class="mensaje-alert-header">
+        <h4 class="alert-heading">Success</h4>
+    </div>
+    <div class="mensaje-alert-body">
+        <p>{{mensaje.text}}</p>
+    </div>
+    <div class="float-right">
+        <button type="button" class="btn btn-danger" (click)="removerMensaje()" >Cerrar</button>
+    </div>
+</div>

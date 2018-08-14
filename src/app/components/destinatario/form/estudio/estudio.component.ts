@@ -12,6 +12,7 @@ export class EstudioComponent implements OnInit {
     @Input("group") public estudios: FormGroup;
     @Input("submitted") public submitted;
     @Input("errorNivelEducativo") public errorNivelEducativo;
+    @Input("datosEstudio") public datosEstudio;
     //@Output() datosEstudios = new EventEmitter();
 
     listaNivelEducativo = [];
@@ -29,6 +30,9 @@ export class EstudioComponent implements OnInit {
 
     ngOnInit() {
         this.getNivelEducativo();
+        if (this.datosEstudio) {
+            this.estudios.setValue(this.datosEstudio);
+        }
     }
 
     estaCheckeado(e){

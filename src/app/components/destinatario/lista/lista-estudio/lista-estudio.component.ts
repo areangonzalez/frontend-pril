@@ -17,6 +17,9 @@ export class ListaEstudioComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        console.log(this.listaEstudios);
+    }
+
+    borrarEstudio(id){
+        this.listaEstudios.splice(id, 1);
     }
 }
