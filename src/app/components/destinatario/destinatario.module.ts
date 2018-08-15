@@ -16,13 +16,14 @@ import { DatosDestinatarioComponent } from "./form/destinatario/datos-destinatar
 import { EstudioComponent } from "./form/estudio/estudio.component";
 import { ListaEstudioComponent } from "./lista/lista-estudio/lista-estudio.component";
 import { ModalContentEstudio, ModalEstudioComponent } from "./form/modal-estudio/modal-estudio.component";
+import { ModalContentConfirmacion, ModalConfirmacionComponent } from "./form/modal-confirmacion/modal-confirmacion.component";
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent],
+    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule.forRoot()],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ReactiveFormsModule],
-    entryComponents: [ModalContentEstudio]
+    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent, ReactiveFormsModule],
+    entryComponents: [ModalContentEstudio, ModalContentConfirmacion]
 })
 export class DestinatarioModule { }

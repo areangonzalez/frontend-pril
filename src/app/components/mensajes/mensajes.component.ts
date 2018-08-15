@@ -1,6 +1,7 @@
-import { Component, OnDestroy, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, Output, EventEmitter } from '@angular/core';
 import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
+import { Alert, AlertType } from "../../models/alert.model";
 import { MensajesService } from "../../services/mensajes.service";
 
 @Component({
@@ -9,8 +10,10 @@ import { MensajesService } from "../../services/mensajes.service";
     styleUrls: ['./mensajes.css'],
 })
 @Injectable()
-export class MensajesComponent implements OnDestroy {
+export class MensajesComponent implements OnInit {
+    @Output('eventoConfirmacion') eventoConfirmacion = new EventEmitter();
     mensaje: any;
+    tipo: number;
     subscription: Subscription;
 
     /**
@@ -23,12 +26,42 @@ export class MensajesComponent implements OnDestroy {
         this.subscription = this._mensajeService.getMessage().subscribe(mensaje => { this.mensaje = mensaje; });
      }
 
-    ngOnDestroy() {
-        // unsubscribe to ensure no memory leaks
-        this.subscription.unsubscribe();
-    }
+    ngOnInit() {
+        this._mensajeService.getMessage().subscribe(
+            (alert: Alert) => {
+                if (!alert) {
+                    return;
+                }else{
+                    this.mensaje = alert.mensaje;
+                    this.tipo = alert.tipo;
+                }
 
+            }
+        );
+    }
+    // remover alert
     removerMensaje(){
         this._mensajeService.clearMessage();
+    }
+
+    cssAlert(tipo: number){
+        if (!alert) { return; }
+        switch (tipo) {
+            case AlertType.Exitoso:
+                return 'alert alert-success';
+            case AlertType.Cancelado:
+                return 'alert alert-danger';
+
+        }
+    }
+
+    obtenerTitulo(tipo: number){
+        if (!alert) { return; }
+        switch (tipo) {
+            case AlertType.Exitoso:
+             return 'Exitoso';
+            case AlertType.Cancelado:
+             return 'Cancelado';
+        }
     }
 }

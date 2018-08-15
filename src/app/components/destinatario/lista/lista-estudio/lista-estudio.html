@@ -19,9 +19,7 @@
                 </td>
                 <td>
                     <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'editar'" [estudio]="lista" [id]="i"></modal-estudio>
-                    <button type="button" class="btn btn-danger btn-sm" (click)="borrarEstudio(i)">
-                        <span class="oi oi-trash" title="borrar estudio" aria-hidden="true"></span>
-                    </button>
+                    <modal-confirmacion [listaEstudios]="listaEstudios" [id]="i" ></modal-confirmacion>
                 </td>
             </tr>
         </tbody>

@@ -89,10 +89,11 @@ export class FormDestinatarioComponent implements OnInit {
         console.log("llega: ", params);
         
         if (this.destinatarioForm.invalid) {
-            this._mensajeService.sendMessage('Campos sin completar');
+            this._mensajeService.cancelado('Campos sin completar.');
             return;
         }else{
             if (this.listaEstudios.length == 0) {
+                this._mensajeService.cancelado('Por favor, agregue un estudio al destinatario.');
                 return;
             }else{ // envio datos al servidor
 
