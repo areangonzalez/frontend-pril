@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://apireal.local/api'
+  baseUrl: 'http://api.pril.local/api'
 };

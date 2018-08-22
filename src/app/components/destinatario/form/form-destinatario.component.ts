@@ -5,10 +5,14 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 // services
 import { MensajesService } from "../../../services/mensajes.service";
 // models
+import { Hogar } from "./../../../models/hogar.model";
+import { Estudio } from "../../../models/estudio.model";
 import { Persona } from "../../../models/persona.model";
 import { Destinatario } from "../../../models/destinatario.model"; 
 //modal
 import { ModalContentEstudio, ModalEstudioComponent } from "../form/modal-estudio/modal-estudio.component";
+// services
+import { DestinatarioService } from "../../../services/destinatario.service";
 
 @Component({
     selector: 'destinatario-form',
@@ -28,12 +32,14 @@ export class FormDestinatarioComponent implements OnInit {
      * @param _breadcrumbsService Servicio que maneja el camino de las paginas accedidas.
      * @param _router Servicio para la navegacion dentro del sistema
      * @param _fb servicio para la construccion de un formulario customizado
+     * @param _destinatarioService Servicio que otorga la conexión con el servidor para las llamadas ajax
      */
     constructor(
         private _router:Router,
         private _breadcrumbsService: BreadcrumbsService,
         private _fb: FormBuilder,
-        private _mensajeService: MensajesService
+        private _mensajeService: MensajesService,
+        private _destinatarioService: DestinatarioService
     ){
         this.destinatarioForm = _fb.group({
             persona: _fb.group({
@@ -51,15 +57,17 @@ export class FormDestinatarioComponent implements OnInit {
                 telefono: '',
                 celular: '',
                 email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-                localidadid: ['', Validators.required],
-                calle: ['', [Validators.required, Validators.minLength(3)]],
-                altura: ['', Validators.required],
-                barrio: ['', [Validators.required, Validators.minLength(3)]],
-                piso: '',
-                departamento: ''
+                hogar: _fb.group({
+                    localidadid: ['', Validators.required],
+                    calle: ['', [Validators.required, Validators.minLength(3)]],
+                    altura: ['', Validators.required],
+                    barrio: ['', [Validators.required, Validators.minLength(3)]],
+                    piso: '',
+                    departamento: ''
+                })
             }),
             destinatario: _fb.group({
-                origen: ['', [Validators.required, Validators.minLength(3)]],
+                origen: ['', [Validators.required]],
                 fechaPresentacion: ['', Validators.required],
                 fecha_presentacion: '',
                 deseo_actividad: ['', [Validators.required, Validators.minLength(3)]],
@@ -84,35 +92,34 @@ export class FormDestinatarioComponent implements OnInit {
 
     submitted = false;
     onSubmit() {
-        const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario(), estudios:[] };
+        const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario() };
         this.submitted = true;
-        console.log("llega: ", params);
         
         if (this.destinatarioForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.');
             return;
         }else{
-            if (this.listaEstudios.length == 0) {
-                this._mensajeService.cancelado('Por favor, agregue un estudio al destinatario.');
-                return;
-            }else{ // envio datos al servidor
-
-            }
+            
+            this.guardarDestinatario(params,0);
         }
+    }
 
-        console.log(this.destinatarioForm.value);
-        /* this.submitted = true;
 
-        // stop here if form is invalid
-
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.destinatarioForm.value)) */
+    private guardarDestinatario(params:object, id:number){
+        this._destinatarioService.guardar(params,id).subscribe(
+            datos => {
+                console.log(datos);
+                this._mensajeService.exitoso('guardado Exitoso.');
+        })
     }
 
     private prepararDestinatario() {
-        return new Destinatario().deserialize(this.destinatarioForm.value.destinatario);
+        return new Destinatario(0,{},'','','',0,0,false,'').deserialize(this.destinatarioForm.value.destinatario);
     }
 
     private prepararPersona() {
-        return new Persona().deserialize(this.destinatarioForm.value.persona);
+
+        let hogar = new Hogar(0,'','','','','').deserialize(this.destinatarioForm.value.persona.hogar);
+        return new Persona('','','','','',0,0,0,'','','',hogar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
     }
 }

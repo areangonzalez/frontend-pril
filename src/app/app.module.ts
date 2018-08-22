@@ -59,7 +59,7 @@ import { MensajesService } from "./services/mensajes.service";
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     // provider used to create fake backend
-    fakeBackendProvider,
+    //fakeBackendProvider,
     // servicios del sistema
     BreadcrumbsService,
     DestinatarioService,    

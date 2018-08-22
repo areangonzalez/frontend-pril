@@ -1,0 +1,42 @@
+<div class="row" [formGroup]="datosHogar">
+    <div class="form-group col-md-4">
+        <label for="localidad">Localidad (<span>*</span>):</label>
+        <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (hogar.localidadid.invalid && submitted)}">
+                <option value="">Seleccione Localidad</option>
+                <option value="1">Gral. Roca</option>
+                <option value="2">Viedma/option>
+            </select>
+        <div *ngIf="(hogar.localidadid.invalid && submitted)" class="text-danger">
+            <div *ngIf="hogar.localidadid.errors.required">Por favor Seleccione localidad. </div>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="calle">Calle (<span>*</span>):</label>
+        <input type="text" id="calle" placeholder="calle" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (hogar.calle.invalid && submitted)}">
+        <div *ngIf="(hogar.calle.invalid && submitted)" class="text-danger">
+            <div *ngIf="hogar.calle.errors.required">Este campo es requerido. </div>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="altura">Altura (<span>*</span>):</label>
+        <input type="text" id="altura" placeholder="altura" class="form-control" formControlName="altura" [ngClass]="{'is-invalid': (hogar.altura.invalid && submitted)}">
+        <div *ngIf="(hogar.altura.invalid && submitted)" class="text-danger">
+            <div *ngIf="hogar.altura.errors.required">Este campo es requerido. </div>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="barrio">Barrio (<span>*</span>):</label>
+        <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio" [ngClass]="{'is-invalid': (hogar.barrio.invalid && submitted)}">
+        <div *ngIf="(hogar.barrio.invalid && submitted)" class="text-danger">
+            <div *ngIf="hogar.barrio.errors.required">Este campo es requerido. </div>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+        <label for="piso">Piso:</label>
+        <input type="text" id="piso" placeholder="piso" class="form-control" formControlName="piso">
+    </div>
+    <div class="form-group col-md-4">
+        <label for="departamento">Departamento:</label>
+        <input type="text" id="departamento" placeholder="departamento" class="form-control" formControlName="departamento">
+    </div>
+</div>

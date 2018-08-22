@@ -7,9 +7,9 @@ import { User } from '../models/user';
 export class UserService {
     constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<User[]>('/api/users');
-    }
+    /* getAll() {
+        return this.http.get<User[]>('/usuario/login');
+    } */
 
     public getToken(): any {
         return localStorage.getItem('currentUser');

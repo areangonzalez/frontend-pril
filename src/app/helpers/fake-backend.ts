@@ -10,16 +10,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let testUser = { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
-        let destinatario: any[] = JSON.parse(localStorage.getItem('destinatario')) || [{ apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000', celular: '2920635572', profesion: 'Panadero', oficio: 'Pastelero', nivel_educativo: 'Terciario', presentacion: '19/06/2018', id: 1 }];
-
+        let destinatario: any[] = JSON.parse(localStorage.getItem('destinatario')) || [{ nro_documento:'33476725', apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000', celular: '2920635572', profesion: 'Panadero', oficio: 'Pastelero', nivel_educativo: 'Terciario', presentacion: '19/06/2018', id: 1 }];
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
             // authenticate
-            if (request.url.endsWith('/login') && request.method === 'POST') {
-                if (request.body.username === testUser.username && request.body.password === testUser.password) {
+            if (request.url.endsWith('/apimock/usuario/login') && request.method === 'POST') {
+                if (request.body.username === testUser.username && request.body.password_hash === testUser.password) {
                     // if login details are valid return 200 OK with a fake jwt token
-                    return of(new HttpResponse({ status: 200, body: { token: 'fake-jwt-token' } }));
+                    return of(new HttpResponse({ status: 200, body: { access_token: 'fake-jwt-token' } }));
                 } else {
                     // else return 400 bad request
                     return throwError({ error: { message: 'Username or password is incorrect' } });
@@ -38,7 +37,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // lista de destinatario
-            if (request.url.endsWith('/destinatarios/lista') && request.method === 'GET') {
+            if (request.url.endsWith('/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: destinatario }));
@@ -49,19 +48,33 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // registrar destinatario
-            if (request.url.endsWith('/destinatarios/crear') && request.method === 'POST') {
+            if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
                 // get new user object from post body
                 let newDestinatario = request.body;
-
+                console.log("respuesta post: ",destinatario);
                 // validation
-                let duplicateUser = destinatario.filter(destinatario => { return destinatario.persona.nro_documento === newDestinatario.persona.nro_documento; }).length;
+                let duplicateUser = destinatario.filter(destinatario => { return destinatario.nro_documento === newDestinatario.persona.nro_documento; }).length;
                 if (duplicateUser) {
                     return throwError({ error: { message: 'El destinatario con el nro documento:  "' + newDestinatario.persona.nro_documento + '" ya existe' } });
                 }
 
+
                 // save new user
+                // array de la tabla
+                //{ nro_documento: '33476725', apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000',
+                // celular: '2920635572', profesion: 'Panadero', oficio: 'Pastelero', nivel_educativo: 'Terciario', presentacion: '19/06/2018', id: 1 }
                 newDestinatario.id = destinatario.length + 1;
-                destinatario.push(newDestinatario);
+                destinatario.push({ 
+                    nro_documento: newDestinatario.persona.nro_documento,
+                    apellido: newDestinatario.persona.apellido,
+                    nombre: newDestinatario.persona.nombre,
+                    direccion: newDestinatario.persona.calle + ' ' + newDestinatario.persona.altura,
+                    telefono: newDestinatario.persona.telefono,
+                    celular: newDestinatario.persona.celular,
+                    profesion: newDestinatario.destinatario.profesion,
+                    oficio: newDestinatario.destinatario.oficio,
+                    presentacion: newDestinatario.destinatario.fecha_presentacion
+                });
                 localStorage.setItem('destinatario', JSON.stringify(destinatario));
 
                 // respond 200 OK
