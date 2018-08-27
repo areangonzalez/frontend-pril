@@ -76,7 +76,10 @@ export class FormDestinatarioComponent implements OnInit {
                 oficio: ['', Validators.required],
                 experiencia_laboral: [false, Validators.required],
                 conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]],
-
+                banco_cbu: '',
+                banco_nombre: '',
+                banco_alias: '',
+                legajo: ['', [Validators.required]]
             })
         });
     }

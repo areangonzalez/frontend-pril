@@ -2,7 +2,7 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label for="deseo_actividad">Actividad en la que se desea formación y entrenamiento (<span>*</span>):</label>
-            <input type="text" id="deseo_actividad" placeholder="deseo_actividad" class="form-control" formControlName="deseo_actividad" [ngClass]="{'is-invalid': (destinatarioForm.deseo_actividad.invalid && submitted)}">
+            <input type="text" id="deseo_actividad" placeholder="Actividad o formación que se desea" class="form-control" formControlName="deseo_actividad" [ngClass]="{'is-invalid': (destinatarioForm.deseo_actividad.invalid && submitted)}">
             <div *ngIf="(destinatarioForm.deseo_actividad.invalid && submitted)"
                 class="text-danger">
                 <div *ngIf="destinatarioForm.deseo_actividad.errors.required">Este campo es requerido. </div>
@@ -11,7 +11,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="deseo_lugar_entrenamiento">Lugar donde se pretende adquirir entrenamiento (<span class="opcional">Opcional</span>):</label>
-            <input type="text" id="deseo_lugar_entrenamiento" placeholder="deseo_lugar_entrenamiento" class="form-control" formControlName="deseo_lugar_entrenamiento">
+            <input type="text" id="deseo_lugar_entrenamiento" placeholder="Lugar donde se desea el entrenamiento" class="form-control" formControlName="deseo_lugar_entrenamiento">
         </div>
         <div class="form-group col-md-4">
             <label for="profesion">Profesión (<span>*</span>):</label>
@@ -42,8 +42,8 @@
             <label class="form-check-label" for="experiencia_laboral">Experiencia laboral</label>
         </div>
         <div class="form-group col-md-12">
-            <label for="conocimientos_basicos">Conocimientos basicos sobre la actividad que desea recibir formación y entrenamiento (<span>*</span>):</label>
-            <input type="text" id="conocimientos_basicos" placeholder="conocimientos_basicos" class="form-control" formControlName="conocimientos_basicos"
+            <label for="conocimientos_basicos">Conocimientos básicos sobre la actividad que desea recibir formación y entrenamiento (<span>*</span>):</label>
+            <input type="text" id="conocimientos_basicos" placeholder="Conocimientos básicos" class="form-control" formControlName="conocimientos_basicos"
              [ngClass]="{'is-invalid': (destinatarioForm.conocimientos_basicos.invalid && submitted)}">
             <div *ngIf="(destinatarioForm.conocimientos_basicos.invalid && submitted)"
                 class="text-danger">
@@ -78,6 +78,21 @@
                 class="text-danger">
                 <div *ngIf="destinatarioForm.fechaPresentacion.errors.required">Este campo es requerido. </div>
             </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="banco_nombre">Nombre de banco:</label>
+            <input type="text" id="banco_nombre" placeholder="Nombre del banco" class="form-control" formControlName="banco_nombre">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="banco_cbu">CBU:</label>
+            <input type="text" id="banco_cbu" placeholder="Número de CBU" class="form-control" formControlName="banco_cbu" (keyup)="esNumero($event.target)">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="banco_alias">Alias:</label>
+            <input type="text" id="banco_alias" placeholder="Alias de la cuenta" class="form-control" formControlName="banco_alias">
         </div>
     </div>
 </fieldset>
