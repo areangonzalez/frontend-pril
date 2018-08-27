@@ -1,5 +1,11 @@
 <fieldset [formGroup]="destinatario">
     <div class="row">
+        <div class="form-group col-md-4">
+            <label for="legajo">Legajo:</label>
+            <input type="text" id="legajo" placeholder="#######" class="form-control" formControlName="legajo">
+        </div>
+    </div>
+    <div class="row">
         <div class="form-group col-md-6">
             <label for="deseo_actividad">Actividad en la que se desea formación y entrenamiento (<span>*</span>):</label>
             <input type="text" id="deseo_actividad" placeholder="Actividad o formación que se desea" class="form-control" formControlName="deseo_actividad" [ngClass]="{'is-invalid': (destinatarioForm.deseo_actividad.invalid && submitted)}">

@@ -8,7 +8,7 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
     selector: 'datos-destinatario-form',
     templateUrl: './datos-destinatario.html',
     styleUrls: ['./datos-destinatario.css'],
-    providers: [FormatObjetoAFecha]
+    providers: [FormatObjetoAFecha, ValidarNumero]
 })
 export class DatosDestinatarioComponent implements OnInit {
     @Input("group") public destinatario: FormGroup;
