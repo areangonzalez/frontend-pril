@@ -20,28 +20,13 @@
             <input type="text" id="deseo_lugar_entrenamiento" placeholder="Lugar donde se desea el entrenamiento" class="form-control" formControlName="deseo_lugar_entrenamiento">
         </div>
         <div class="form-group col-md-4">
-            <label for="profesion">Profesión (<span>*</span>):</label>
-            <select class="form-control" id="profesion" formControlName="profesion" [ngClass]="{'is-invalid': (destinatarioForm.profesion.invalid && submitted)}">
-                <option value="">Seleccione Profesión</option>
-                <option value="1">Abogado/a</option>
-                <option value="2">Profesor/a</option>
-            </select>
-            <div *ngIf="(destinatarioForm.profesion.invalid && submitted)"
-                class="text-danger">
-                <div *ngIf="destinatarioForm.profesion.errors.required">Seleccione una profesión. </div>
-            </div>
+            <auto-completar [listado]="listaProfesiones" [submitted]="submitted" [mensaje]="'Este campo es requerido.'" [titulo]="'Profesión'"
+                            [placeHolder]="'Seleccione una profesión'" (seleccionaValor)="getProfesion($event)" ></auto-completar> 
         </div>
         <div class="form-group col-md-4">
-            <label for="oficio">Oficio (<span>*</span>):</label>
-            <select class="form-control" id="oficio" formControlName="oficio" [ngClass]="{'is-invalid': (destinatarioForm.oficio.invalid && submitted)}">
-                <option value="">Seleccione Oficio</option>
-                <option value="1">Barbero</option>
-                <option value="2">Panadero/a</option>
-            </select>
-            <div *ngIf="(destinatarioForm.oficio.invalid && submitted)"
-                class="text-danger">
-                <div *ngIf="destinatarioForm.oficio.errors.required">Seleccione una profesión. </div>
-            </div>
+            <auto-completar [listado]="listaOficios" [submitted]="submitted" [mensaje]="'Este campo es requerido.'" [titulo]="'Oficio'"
+                            [placeHolder]="'Seleccione un oficio'" (seleccionaValor)="getOficio($event)"></auto-completar>
+
         </div>
         <div class="form-group form-check col-md-4">
             <input type="checkbox" id="experiencia_laboral" class="form-check-input" formControlName="experiencia_laboral">

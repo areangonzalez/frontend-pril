@@ -72,8 +72,8 @@ export class FormDestinatarioComponent implements OnInit {
                 fecha_presentacion: '',
                 deseo_actividad: ['', [Validators.required, Validators.minLength(3)]],
                 deseo_lugar_entrenamiento: '',
-                profesion: ['', Validators.required],
-                oficio: ['', Validators.required],
+                profesionid: ['', Validators.required],
+                oficioid: ['', Validators.required],
                 experiencia_laboral: [false, Validators.required],
                 conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]],
                 banco_cbu: '',
@@ -97,7 +97,7 @@ export class FormDestinatarioComponent implements OnInit {
     onSubmit() {
         const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario() };
         this.submitted = true;
-        
+        console.log(params);
         if (this.destinatarioForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.');
             return;
@@ -117,7 +117,7 @@ export class FormDestinatarioComponent implements OnInit {
     }
 
     private prepararDestinatario() {
-        return new Destinatario(0,{},'','','',0,0,false,'').deserialize(this.destinatarioForm.value.destinatario);
+        return new Destinatario(0,{},'','','',0,0,false,'','','','','').deserialize(this.destinatarioForm.value.destinatario);
     }
 
     private prepararPersona() {

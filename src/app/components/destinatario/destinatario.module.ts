@@ -18,13 +18,14 @@ import { ListaEstudioComponent } from "./lista/lista-estudio/lista-estudio.compo
 import { ModalContentEstudio, ModalEstudioComponent } from "./form/modal-estudio/modal-estudio.component";
 import { ModalContentConfirmacion, ModalConfirmacionComponent } from "./form/modal-confirmacion/modal-confirmacion.component";
 import { HogarComponent } from "./form/hogar/hogar.component";
+import { AutoCompletarComponent } from "./form/auto-completar/auto-completar.component";
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent, HogarComponent],
+    declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent, HogarComponent, AutoCompletarComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule.forRoot()],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent, HogarComponent, ReactiveFormsModule],
+    exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent, HogarComponent, AutoCompletarComponent, ReactiveFormsModule],
     entryComponents: [ModalContentEstudio, ModalContentConfirmacion]
 })
 export class DestinatarioModule { }

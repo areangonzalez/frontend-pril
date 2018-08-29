@@ -30,6 +30,8 @@ import { MensajesComponent } from "./components/mensajes/mensajes.component";
 import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service";
 import { DestinatarioService } from "./services/destinatario.service";
 import { MensajesService } from "./services/mensajes.service";
+import { ProfesionService } from "./services/profesion.service";
+import { OficioService } from "./services/oficio.service";
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { MensajesService } from "./services/mensajes.service";
     // servicios del sistema
     BreadcrumbsService,
     DestinatarioService,    
-    MensajesService
+    MensajesService,
+    ProfesionService,
+    OficioService
   ],
   bootstrap: [AppComponent]
 })
