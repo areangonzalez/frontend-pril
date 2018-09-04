@@ -32,6 +32,11 @@ import { DestinatarioService } from "./services/destinatario.service";
 import { MensajesService } from "./services/mensajes.service";
 import { ProfesionService } from "./services/profesion.service";
 import { OficioService } from "./services/oficio.service";
+import { SexoService } from "./services/sexo.service";
+import { GeneroService } from "./services/genero.service";
+import { EstadoCivilService } from "./services/estado-civil.service";
+import { LocalidadService } from "./services/localidad.service";
+import { NivelEducativoService } from "./services/nivel-educativo.service";
 
 @NgModule({
   declarations: [
@@ -67,7 +72,12 @@ import { OficioService } from "./services/oficio.service";
     DestinatarioService,    
     MensajesService,
     ProfesionService,
-    OficioService
+    OficioService,
+    SexoService,
+    GeneroService,
+    EstadoCivilService,
+    LocalidadService,
+    NivelEducativoService
   ],
   bootstrap: [AppComponent]
 })

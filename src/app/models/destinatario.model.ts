@@ -1,5 +1,5 @@
 export interface IDestinatario {
-    origen: number,
+    origen: string,
     fechaPresentacion: object,
     fecha_presentacion: string,
     deseo_actividad: string,
@@ -17,7 +17,7 @@ export interface IDestinatario {
 export class Destinatario implements IDestinatario {
 
     constructor(
-        public origen: number,
+        public origen: string,
         public fechaPresentacion: object,
         public fecha_presentacion: string,
         public deseo_actividad: string,

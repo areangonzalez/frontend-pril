@@ -44,11 +44,8 @@
         </div>
         <div class="form-group col-md-8">
             <label for="Organismo_pril">Organismo donde se presento documentación y planilla de inscripción al PRIL (<span>*</span>):</label>
-            <select class="form-control" id="Organismo_pril" formControlName="origen" [ngClass]="{'is-invalid': (destinatarioForm.origen.invalid && submitted)}">
-                <option value="">Seleccione Organismo</option>
-                <option value="1">Delegación Valle inferior</option>
-                <option value="2">Ministerio de Desarrollo Social</option>
-            </select>
+            <input type="text" id="organismo_pril" placeholder="Organismo donde se presento documentación o planilla de inscripción" class="form-control"
+                formControlName="origen" [ngClass]="{'is-invalid': (destinatarioForm.origen.invalid && submitted)}">
             <div *ngIf="(destinatarioForm.origen.invalid && submitted)"
                 class="text-danger">
                 <div *ngIf="destinatarioForm.origen.errors.required">Este campo es requerido. </div>

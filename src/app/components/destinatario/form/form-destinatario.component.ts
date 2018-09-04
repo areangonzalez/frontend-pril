@@ -117,7 +117,7 @@ export class FormDestinatarioComponent implements OnInit {
     }
 
     private prepararDestinatario() {
-        return new Destinatario(0,{},'','','',0,0,false,'','','','','').deserialize(this.destinatarioForm.value.destinatario);
+        return new Destinatario('',{},'','','',0,0,false,'','','','','').deserialize(this.destinatarioForm.value.destinatario);
     }
 
     private prepararPersona() {
