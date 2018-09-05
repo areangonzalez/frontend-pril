@@ -20,6 +20,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let estadoCivil: any[] = [{ id: 1, nombre: "Casado/a" }, { id: 2, nombre: "Soltero/a" }, { id: 2, nombre: "Viudo/a" }];
         let localidad: any[] = [{ id: 1, nombre: "Bariloche" }, { id: 2, nombre: "Cipolletti" }, { id: 3, nombre: "Gral. Roca" }, { id: 3, nombre: "Viedma" }];
         let nivelEducativo: any[] = [{ id: 1, nombre: "Primaria" }, { id: 2, nombre: "Secundaria" }, { id: 3, nombre: "Terciaria" }, { id: 3, nombre: "Universitaria" }];
+
+
+        /*** Funciones para el uso de datos ***/
+
+        function getNombreArray(id, listado){
+            let seleccion: '';
+            // busco el elemento en la lista
+            for (var key in listado) {
+                // verifico que exista el elemento
+                if (listado[key].id == id) {
+                    seleccion = listado[key].nombre;
+                }
+            }
+
+            return (seleccion != '')?seleccion:'';
+        }
+
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
@@ -80,8 +97,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     direccion: newDestinatario.persona.calle + ' ' + newDestinatario.persona.altura,
                     telefono: newDestinatario.persona.telefono,
                     celular: newDestinatario.persona.celular,
-                    profesion: newDestinatario.destinatario.profesion,
-                    oficio: newDestinatario.destinatario.oficio,
+                    profesion: getNombreArray(newDestinatario.destinatario.profesionid, profesion),
+                    oficio: getNombreArray(newDestinatario.destinatario.oficioid, oficio),
                     presentacion: newDestinatario.destinatario.fecha_presentacion
                 });
                 localStorage.setItem('destinatario', JSON.stringify(destinatario));

@@ -27,7 +27,8 @@ import { AuthGuard } from './guards/auth.guard'
             
             { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', }, canActivate: [AuthGuard] },
             { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', }, canActivate: [AuthGuard]  },
-            { path: 'destinatario/vista', component: VistaDestinatarioComponent, data: { title: 'Ver destinatario', }, canActivate: [AuthGuard] },
+            { path: 'destinatario/editar/:id', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', }, canActivate: [AuthGuard] },
+            { path: 'destinatario/vista/:id', component: VistaDestinatarioComponent, data: { title: 'Ver destinatario', }, canActivate: [AuthGuard] },
             { path: 'destinatario/estudio', component: EstudioComponent, data: { title: 'Estudio/s', }, canActivate: [AuthGuard] },
             
             { path: 'ambiente', component: AmbienteTrabajoComponent, data: { title: 'Lista ambiente de Trabajo' }, canActivate: [AuthGuard] },
