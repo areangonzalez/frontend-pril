@@ -162,14 +162,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/localidads') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    return of(new HttpResponse({ status: 200, body: sexo }));
+                    return of(new HttpResponse({ status: 200, body: localidad }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
             }
             //Nivel educativo
-            if (request.url.endsWith('/nivel_educativos') && request.method === 'GET') {
+            if (request.url.endsWith('/nivel-educativos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: nivelEducativo }));

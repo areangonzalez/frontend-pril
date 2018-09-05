@@ -57,6 +57,7 @@ export class EstudioComponent implements OnInit {
     getNivelEducativo(){
         this._nivelEducativoService.listado().subscribe(
             datos => {
+                console.log(datos);
                 this.listaNivelEducativo = datos;
             }, error => { console.log(Error); }
         );

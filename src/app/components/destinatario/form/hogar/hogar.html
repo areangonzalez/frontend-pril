@@ -3,8 +3,7 @@
         <label for="localidad">Localidad (<span>*</span>):</label>
         <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (hogar.localidadid.invalid && submitted)}">
                 <option value="">Seleccione Localidad</option>
-                <option value="1">Gral. Roca</option>
-                <option value="2">Viedma/option>
+                <option *ngFor="let localidad of localidadLista" value="sexo.id">{{localidad.nombre}}</option>
             </select>
         <div *ngIf="(hogar.localidadid.invalid && submitted)" class="text-danger">
             <div *ngIf="hogar.localidadid.errors.required">Por favor Seleccione localidad. </div>
