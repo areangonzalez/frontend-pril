@@ -22,15 +22,15 @@ export class MensajesService {
         return this.subject.asObservable();
     }
 
-    alert(tipo: AlertType, mensaje: string){
-        this.subject.next(<Alert>{tipo:tipo, mensaje:mensaje})
+    alert(tipo: AlertType, mensaje: string, url: string){
+        this.subject.next(<Alert>{tipo:tipo, mensaje:mensaje, urlLink:url})
     }
 
-    exitoso(mensaje: string){
-        this.alert(AlertType.Exitoso, mensaje);
+    exitoso(mensaje: string, url: string){
+        this.alert(AlertType.Exitoso, mensaje, url);
     }
-    cancelado(mensaje: string) {
-        this.alert(AlertType.Cancelado, mensaje);
+    cancelado(mensaje: string, url: string) {
+        this.alert(AlertType.Cancelado, mensaje, url);
     }
 
 }

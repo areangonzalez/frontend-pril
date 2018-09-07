@@ -10,6 +10,7 @@
         <p>{{mensaje}}</p>
     </div>
     <div class="float-right">
-        <button type="button" class="btn btn-danger" (click)="removerMensaje()" >Cerrar</button>&nbsp;
+        <button type="button" class="btn btn-danger" *ngIf="(tipo == 1)" (click)="removerMensaje()" >Cerrar</button>&nbsp;
+        <button type="button" class="btn btn-success" *ngIf="(tipo == 0)" (click)="redireccionamiento()">Aceptar</button>&nbsp;
     </div>
 </div>

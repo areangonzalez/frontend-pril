@@ -21,5 +21,10 @@ export class DestinatarioService {
         return this._http.get(this.url + '/destinatarios');
     }
 
+    destinatarioPorId(id){
+        return this._http.get(this.url + '/destinatarios/' + id);
+    }
+
+
     
 }

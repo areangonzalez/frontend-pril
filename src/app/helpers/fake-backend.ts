@@ -10,7 +10,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let testUser = { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
-        let destinatario: any[] = JSON.parse(localStorage.getItem('destinatario')) || [{ nro_documento:'33476725', apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000', celular: '2920635572', profesion: 'Panadero', oficio: 'Pastelero', nivel_educativo: 'Terciario', presentacion: '19/06/2018', id: 1 }];
+        let destinatarioLista: any[] = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
+        let destinatarioAgregados: any[] = JSON.parse(localStorage.getItem('destinatariosAgregados')) || [];
         let profesion: any[] = [{ id: 1, nombre: 'Abogado'},{ id: 3, nombre: 'Agrónomo'},{ id: 4, nombre: 'Bacteriólogo' },{ id: 5, nombre: 'Biofísico' },
             { id: 6, nombre: 'climatologo' },{ id: 7, nombre: 'Cirujano' },{ id: 8, nombre: 'Dentista' },{ id: 9, nombre: 'Doctor' },{ id: 10, nombre: 'Enfermero' }];
         let oficio: any[] = [{ id: 1, nombre: 'Albañil' },{ id: 2, nombre: 'Arbitro' },{ id: 3, nombre: 'Banquero' },{ id: 4, nombre: 'Bailarin' },{ id: 5, nombre: 'Cantante' },
@@ -23,6 +24,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
         /*** Funciones para el uso de datos ***/
+
+        function generarId(listado){
+            let count = listado.length;
+            return count + 1;
+        }
 
         function getNombreArray(id, listado){
             let seleccion: '';
@@ -66,7 +72,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    return of(new HttpResponse({ status: 200, body: destinatario }));
+                    return of(new HttpResponse({ status: 200, body: destinatarioLista }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
@@ -77,9 +83,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
                 // get new user object from post body
                 let newDestinatario = request.body;
-                console.log("respuesta post: ",destinatario);
+                console.log("respuesta post: ", destinatarioLista);
                 // validation
-                let duplicateUser = destinatario.filter(destinatario => { return destinatario.nro_documento === newDestinatario.persona.nro_documento; }).length;
+                let duplicateUser = destinatarioLista.filter(destinatario => { return destinatario.nro_documento === newDestinatario.persona.nro_documento; }).length;
                 if (duplicateUser) {
                     return throwError({ error: { message: 'El destinatario con el nro documento:  "' + newDestinatario.persona.nro_documento + '" ya existe' } });
                 }
@@ -89,22 +95,53 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // array de la tabla
                 //{ nro_documento: '33476725', apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000',
                 // celular: '2920635572', profesion: 'Panadero', oficio: 'Pastelero', nivel_educativo: 'Terciario', presentacion: '19/06/2018', id: 1 }
-                newDestinatario.id = destinatario.length + 1;
-                destinatario.push({ 
+                newDestinatario.id = generarId(destinatarioLista);
+                destinatarioLista.push({
+                    id: newDestinatario.id,
                     nro_documento: newDestinatario.persona.nro_documento,
                     apellido: newDestinatario.persona.apellido,
                     nombre: newDestinatario.persona.nombre,
-                    direccion: newDestinatario.persona.calle + ' ' + newDestinatario.persona.altura,
+                    direccion: newDestinatario.persona.hogar.calle + ' ' + newDestinatario.persona.hogar.altura,
                     telefono: newDestinatario.persona.telefono,
                     celular: newDestinatario.persona.celular,
                     profesion: getNombreArray(newDestinatario.destinatario.profesionid, profesion),
                     oficio: getNombreArray(newDestinatario.destinatario.oficioid, oficio),
                     presentacion: newDestinatario.destinatario.fecha_presentacion
                 });
-                localStorage.setItem('destinatario', JSON.stringify(destinatario));
+                // datos a mostrar en la tabla
+                localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
+                // datos de usuarios agregados
+                destinatarioAgregados.push(newDestinatario);
+                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
+            }
+
+            // conseguir destinatario por id
+            if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'GET') {
+                // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find user by id in users array
+                    let urlParts = request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matchedUsers = destinatarioAgregados.filter(destinatario => { return destinatario.id === id; });
+                    let seleccion = matchedUsers.length ? matchedUsers[0] : null;
+
+                    if (seleccion != null ) {
+                        console.log(seleccion);
+                        delete seleccion.persona.cuil_prin;
+                        delete seleccion.persona.cuil_ult;
+                        delete seleccion.persona.fechaNacimiento;
+                        delete seleccion.destinatario.fechaPresentacion;
+                        delete seleccion.id;
+                    }
+
+                    return of(new HttpResponse({ status: 200, body: seleccion }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
             }
 
             /* LISTADOS */

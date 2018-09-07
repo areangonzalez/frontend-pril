@@ -14,6 +14,7 @@ export class MensajesComponent implements OnInit {
     @Output('eventoConfirmacion') eventoConfirmacion = new EventEmitter();
     mensaje: any;
     tipo: number;
+    url: string;
     subscription: Subscription;
 
     /**
@@ -34,6 +35,7 @@ export class MensajesComponent implements OnInit {
                 }else{
                     this.mensaje = alert.mensaje;
                     this.tipo = alert.tipo;
+                    this.url = alert.urlLink;
                 }
 
             }
@@ -63,5 +65,10 @@ export class MensajesComponent implements OnInit {
             case AlertType.Cancelado:
              return 'Cancelado';
         }
+    }
+
+    redireccionamiento(){
+        this._mensajeService.clearMessage();
+        this._router.navigate([this.url]);
     }
 }

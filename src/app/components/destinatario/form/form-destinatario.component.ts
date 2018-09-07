@@ -1,7 +1,8 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { switchMap } from 'rxjs/operators';
 // services
 import { MensajesService } from "../../../services/mensajes.service";
 // models
@@ -23,10 +24,14 @@ import { DestinatarioService } from "../../../services/destinatario.service";
 @Injectable()
 export class FormDestinatarioComponent implements OnInit {
     /**
-     * @var variable que obtiene el formulario.
+     * @var destinatarioForm variable que obtiene el formulario.
+     * @var listaEstudios listado de los estudios ingresados.
      */
     destinatarioForm: FormGroup;
     listaEstudios = [];
+    idDestinatario = '';
+    nroDoc: string = '';
+
 
     /**
      * @param _breadcrumbsService Servicio que maneja el camino de las paginas accedidas.
@@ -36,6 +41,7 @@ export class FormDestinatarioComponent implements OnInit {
      */
     constructor(
         private _router:Router,
+        private _route: ActivatedRoute,
         private _breadcrumbsService: BreadcrumbsService,
         private _fb: FormBuilder,
         private _mensajeService: MensajesService,
@@ -87,6 +93,12 @@ export class FormDestinatarioComponent implements OnInit {
     ngOnInit() {
         // breadcrumbs Dinamico
         this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Destinatario', url: 'destinatario', params: [] }, { label: 'Agregar', url: 'destinatario/agregar', params: [] }]);
+        // obtener parametro
+        let id = this._route.snapshot.paramMap.get('id');
+        if (id != undefined) {
+            this.idDestinatario = id;
+            this.destinatarioPorId(id);
+        }
     }
 
     volver() {
@@ -99,7 +111,7 @@ export class FormDestinatarioComponent implements OnInit {
         this.submitted = true;
         console.log(params);
         if (this.destinatarioForm.invalid) {
-            this._mensajeService.cancelado('Campos sin completar.');
+            this._mensajeService.cancelado('Campos sin completar.', '');
             return;
         }else{
             
@@ -111,9 +123,34 @@ export class FormDestinatarioComponent implements OnInit {
     private guardarDestinatario(params:object, id:number){
         this._destinatarioService.guardar(params,id).subscribe(
             datos => {
-                console.log(datos);
-                this._mensajeService.exitoso('guardado Exitoso.');
+                this._mensajeService.exitoso('guardado Exitoso.','destinatario');
+        },error => {
+            this._mensajeService.cancelado(error, '');
         })
+    }
+
+    private destinatarioPorId(id){
+        this._destinatarioService.destinatarioPorId(id).subscribe(
+            datos => {
+                console.log("lista: ",datos);
+                // agrego los estudios a la lista
+                (datos['persona']['estudios'].length > 0)?this.listaEstudios.push(datos['persona']['estudios']):[];
+                // borro la propiedad estudio del objeto
+                delete datos['persona']['estudios'];
+                // agrego propiedades al objeto
+                datos['persona']['cuil_prin'] = this.primerosDigitosCuil(datos['persona']['cuil']);
+                datos['persona']['cuil_ult'] = this.ultimoDigitoCuil(datos['persona']['cuil']);
+                datos['persona']['fechaNacimiento'] = this.formatFecha(datos['persona']['fecha_nacimiento']);
+                datos['destinatario']['fechaPresentacion'] = this.formatFecha(datos['destinatario']['fecha_presentacion']);
+                this.nroDoc = datos['persona']['nro_documento'];
+                console.log("api: ", this.nroDoc);
+                this.destinatarioForm.setValue(datos);
+                console.log("estudios: ", this.listaEstudios);
+            }, error => {
+                this._mensajeService.cancelado(error,'');
+            }
+        );
+        
     }
 
     private prepararDestinatario() {
@@ -125,4 +162,21 @@ export class FormDestinatarioComponent implements OnInit {
         let hogar = new Hogar(0,'','','','','').deserialize(this.destinatarioForm.value.persona.hogar);
         return new Persona('','','','','',0,0,0,'','','',hogar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
     }
+
+    private formatFecha(fecha:string){
+        let objFecha = fecha.split('-');
+
+        return { year: parseInt(objFecha[0]), month: parseInt(objFecha[1]), day: parseInt(objFecha[2]) };
+    }
+
+    private primerosDigitosCuil(cuil:string){
+        let cuil_primero = cuil.substring(0, 2);
+        return cuil_primero;
+    }
+
+    private ultimoDigitoCuil(cuil:string){
+        let cuil_ult = cuil.substring(10);
+        return cuil_ult;
+    }
+
 }

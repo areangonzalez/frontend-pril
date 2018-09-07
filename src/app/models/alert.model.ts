@@ -1,7 +1,7 @@
 export class Alert {
     tipo: AlertType;
     mensaje: string;
- //   urlLink: string;
+    urlLink: string;
 }
 
 export enum AlertType {

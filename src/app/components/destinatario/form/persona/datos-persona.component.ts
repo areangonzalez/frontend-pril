@@ -21,6 +21,7 @@ export class DatosPersonaComponent implements OnInit {
      */
     @Input("group") public datosPersona: FormGroup;
     @Input("submitted") public submitted;
+    @Input("documento") public setDocumento: string;
     
     /**
      * @var cuil_medio String que guarda el documento para el numero de cuil
@@ -142,5 +143,19 @@ export class DatosPersonaComponent implements OnInit {
         }
     }
 
+    generarCuilEditado(cuil){
+        let cuil_primero = '';
+        let cuil_ult = '';
+        if (cuil != '') {
+            cuil_primero = cuil.substring(0,2);
+            this.cuil_medio = cuil.substring(2,10)
+            cuil_ult = cuil.substring(10);
+
+            this.datosPersona.controls.cuil_prin.setValue(31);
+            this.datosPersona.controls.cuil_ult.setValue(cuil_ult);
+
+            return this.cuil_medio;
+        }
+    }
 
 }

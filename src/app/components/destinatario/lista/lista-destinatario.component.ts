@@ -25,6 +25,6 @@ export class ListaDestinatarioComponent {
     }
 
     editarDestinatario(id){
-        this._router.navigate(['destinatario', 'editar', id]);
+        this._router.navigate(['destinatario/editar', id]);
     }
 }
