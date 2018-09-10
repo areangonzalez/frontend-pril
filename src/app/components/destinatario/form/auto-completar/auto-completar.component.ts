@@ -15,8 +15,9 @@ export class AutoCompletarComponent {
     @Input("mensaje") mensaje: string;
     @Input("titulo") titulo:string;
     @Input("placeHolder") placeHolder:string;
+    @Input("nombreValor") model:string;
     @Output("seleccionaValor") seleccionaValor = new EventEmitter();
-    public model: any;
+    //public model: string = (this.nombreValor != '')?this.nombreValor:'';
     public validacion:boolean = true;
     //public mensaje:string;
 

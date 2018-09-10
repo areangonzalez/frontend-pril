@@ -16,6 +16,8 @@ import { OficioService } from "../../../../services/oficio.service";
 export class DatosDestinatarioComponent implements OnInit {
     @Input("group") public destinatario: FormGroup;
     @Input("submitted") public submitted;
+    @Input("setProfesion") public setProfesionid;
+    @Input("setOficio") public setOficioid;
 
     public listaProfesiones:object;
     public listaOficios:object;
@@ -71,8 +73,20 @@ export class DatosDestinatarioComponent implements OnInit {
         this.destinatario.controls.profesionid.setValue(profesion.id);
     }
 
+    getNombreListadoPorId(id, listado){
+        let seleccion = "";
+        for (var key in listado) {
+            if(listado[key].id == id ){
+                seleccion = listado[key].nombre;
+            }
+        }
+        return seleccion;
+    }
+
     getOficio(oficio){
         this.destinatario.controls.oficioid.setValue(oficio.id);
     }
+
+
 
 }

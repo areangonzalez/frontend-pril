@@ -8,3 +8,7 @@
     margin-right: auto;
     cursor: pointer;
 }
+.border-info {
+    transform: scale(1.2);
+    box-shadow: 2px 2px 5px #000;
+}

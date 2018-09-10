@@ -11,7 +11,7 @@ export class DestinatarioService {
 
     guardar(params:object,id:number) {
         if (id != 0) {
-            console.log('editar');
+            return this._http.put(this.url + '/destinatarios/' + id, params, httpOptions);
         }else{
             return this._http.post(this.url + '/destinatarios', params, httpOptions);
         }

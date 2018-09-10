@@ -4,7 +4,7 @@
     <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'agregar'" [texto]="'Agregar estudio'"></modal-estudio>
     <lista-estudio *ngIf="(listaEstudios.length > 0)" [listaEstudios]="listaEstudios"></lista-estudio>
     <hr class="my-4">
-    <datos-destinatario-form [group]="destinatarioForm.controls.destinatario" [submitted]="submitted" [setProfesion]="setearProfesionid" [setOficio]="setearOficioid" ></datos-destinatario-form>
+    <datos-destinatario-form [group]="destinatarioForm.controls.destinatario" [submitted]="submitted" [setProfesion]="profesionid" [setOficio]="oficioid" ></datos-destinatario-form>
     <hr class="my-4">
     <div class="float-right">
         <button type="button" class="btn btn-danger" (click)="volver()"><span class="oi oi-ban" title="Guardar" aria-hidden="true"></span> Cancelar</button> &nbsp;

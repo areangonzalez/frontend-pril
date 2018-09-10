@@ -144,6 +144,53 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
+            // registrar destinatario
+            if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'PUT') {
+                
+                let urlParts = request.url.split('/');
+                let id = parseInt(urlParts[urlParts.length - 1]);
+                
+                // consigo el destinatario a editar en la respuesta
+                let editDestinatario = request.body;
+                // busco en el listado el destinatario
+                console.log('antes del update: ',destinatarioLista);
+                for (var i = 0; i < destinatarioLista.length; i++) {
+                    if(destinatarioLista[i]['id'] == id){
+                            destinatarioLista[i] = {
+                                id: id,
+                                nro_documento: editDestinatario.persona.nro_documento,
+                                apellido: editDestinatario.persona.apellido,
+                                nombre: editDestinatario.persona.nombre,
+                                direccion: editDestinatario.persona.hogar.calle + ' ' + editDestinatario.persona.hogar.altura,
+                                telefono: editDestinatario.persona.telefono,
+                                celular: editDestinatario.persona.celular,
+                                profesion: getNombreArray(editDestinatario.destinatario.profesionid, profesion),
+                                oficio: getNombreArray(editDestinatario.destinatario.oficioid, oficio),
+                                presentacion: editDestinatario.destinatario.fecha_presentacion
+                            }
+                    }
+                }
+                console.log('despues del update: ', destinatarioLista);
+                console.log('antes de editar: ', destinatarioAgregados);
+                // verifico el array de usuarios agregados
+                for (var d = 0; d < destinatarioAgregados.length; d++) {
+                    if (destinatarioAgregados[d]['id'] == id ){
+                        // elimino 1 elemento desde el indice especificado y agrego el nuevo array
+                        editDestinatario['id'] = id;
+                        destinatarioAgregados.splice(d,1,editDestinatario);
+                    }
+                }
+                console.log('despues de editar: ', destinatarioAgregados);
+
+                // datos a mostrar en la tabla
+                localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
+                // datos de usuarios agregados
+                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados));
+
+                // respond 200 OK
+                return of(new HttpResponse({ status: 200 }));
+            }
+
             /* LISTADOS */
             // profesiones
             if (request.url.endsWith('/profesions') && request.method === 'GET') {

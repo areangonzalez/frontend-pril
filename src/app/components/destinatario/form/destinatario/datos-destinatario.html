@@ -21,12 +21,11 @@
         </div>
         <div class="form-group col-md-4">
             <auto-completar [listado]="listaProfesiones" [submitted]="submitted" [mensaje]="'Este campo es requerido.'" [titulo]="'Profesión'"
-                            [placeHolder]="'Seleccione una profesión'" (seleccionaValor)="getProfesion($event)" ></auto-completar> 
+                            [placeHolder]="'Seleccione una profesión'" [nombreValor]="getNombreListadoPorId(setProfesionid, listaProfesiones)" (seleccionaValor)="getProfesion($event)" ></auto-completar> 
         </div>
         <div class="form-group col-md-4">
             <auto-completar [listado]="listaOficios" [submitted]="submitted" [mensaje]="'Este campo es requerido.'" [titulo]="'Oficio'"
-                            [placeHolder]="'Seleccione un oficio'" (seleccionaValor)="getOficio($event)"></auto-completar>
-
+                            [placeHolder]="'Seleccione un oficio'" [nombreValor]="getNombreListadoPorId(setOficioid, listaOficios)" (seleccionaValor)="getOficio($event)"></auto-completar>
         </div>
         <div class="form-group form-check col-md-4">
             <input type="checkbox" id="experiencia_laboral" class="form-check-input" formControlName="experiencia_laboral">
