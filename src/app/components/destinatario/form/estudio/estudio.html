@@ -1,4 +1,3 @@
-{{errorNivelEducativo}}
 <fieldset [formGroup]="estudios">
         <div class="row">
             <div class="form-group col-md-6">
@@ -21,14 +20,20 @@
                 <input type="checkbox" id="estudio_en_curso" class="form-check-input" (change)="estaCheckeado($event)" formControlName="en_curso">
                 <label class="form-check-label" for="estudio_en_curso">En curso</label>
             </div>
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-9">
                 <label for="titulo">Título (<span>*</span>):</label>
                 <input type="text" id="titulo" placeholder="titulo" class="form-control" formControlName="titulo" [ngClass]="{'is-invalid': (estudiosForm.titulo.invalid && submitted)}">
                 <div *ngIf="(estudiosForm.titulo.invalid && submitted)"
                     class="text-danger">
                     <div *ngIf="estudiosForm.titulo.errors.required">Este campo es requerido. </div>
                 </div>
-
+            </div>
+            <div *ngIf="estudioCompleto" class="form-group col-md-3" style="margin-top:4px;">
+                <label for="nivel_educativo">Año egreso:</label>
+                <select class="form-control" id="año_estudio" formControlName="anio" placeholder="Ej: 2013">
+                        <option value="">Seleccione año</option>
+                        <option *ngFor="let anio of listaAnios" value="{{anio}}">{{anio}}</option>
+                </select>
             </div>
         </div>
 </fieldset>

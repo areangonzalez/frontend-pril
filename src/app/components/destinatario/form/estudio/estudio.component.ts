@@ -17,6 +17,8 @@ export class EstudioComponent implements OnInit {
     @Input("datosEstudio") public datosEstudio;
 
     listaNivelEducativo: Object = [];
+    listaAnios: any = [];
+    estudioCompleto: boolean = true;
 
     /**
      * @param _router Servicio para la navegacion dentro del sistema
@@ -34,6 +36,7 @@ export class EstudioComponent implements OnInit {
 
     ngOnInit() {
         this.getNivelEducativo();
+        this.obtenerAnios();
         if (this.datosEstudio) {
             this.estudios.setValue(this.datosEstudio);
         }
@@ -46,9 +49,12 @@ export class EstudioComponent implements OnInit {
         if(e.target.id == 'estudio_completo') {
             this.estudiosForm.completo.setValue(e.target.checked);
             this.estudiosForm.en_curso.setValue(!e.target.checked);
+            this.estudioCompleto = true;
         }else{
             this.estudiosForm.completo.setValue(!e.target.checked);
             this.estudiosForm.en_curso.setValue(e.target.checked);
+            this.estudiosForm.anio.setValue('');
+            this.estudioCompleto = false;
         }
     } 
     /**
@@ -69,5 +75,14 @@ export class EstudioComponent implements OnInit {
     seleccionarNombre(e){
         let opcionesCombo = e.target['options'];
         this.estudiosForm.nivel_educativo_nombre.setValue(opcionesCombo[opcionesCombo.selectedIndex].text);
+    }
+
+    obtenerAnios(){
+        let anioActual = (new Date()).getFullYear();
+        for (var i = 1970; i <= anioActual; i++) {
+            this.listaAnios.push(i);
+        }
+
+        return this.listaAnios;
     }
 }

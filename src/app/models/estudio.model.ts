@@ -4,7 +4,7 @@ export class Estudio {
         public completo: string,
         public en_curso: string,
         public titulo: string,
-        public fecha: string
+        public anio: string
     ) { }
 
     deserialize(input: Estudio) {

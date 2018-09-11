@@ -24,7 +24,7 @@ export class Persona {
     deserialize(input: Persona) {
         Object.assign(this, input);
         this.hogar = new Hogar(0,'','','','','').deserialize(input.hogar);
-        this.estudios.map((estudio: Estudio) => new Estudio(0,'','','').deserialize(estudio));
+        this.estudios.map((estudio: Estudio) => new Estudio(0,'','','','').deserialize(estudio));
         return this;
     }
 }

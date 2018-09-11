@@ -42,7 +42,8 @@ export class ModalContentEstudio {
             nivel_educativo_nombre: '',
             completo: true,
             en_curso: false,
-            titulo: ['', [Validators.required, Validators.minLength(3)]]
+            titulo: ['', [Validators.required, Validators.minLength(3)]],
+            anio: ''
         });
      }
 
