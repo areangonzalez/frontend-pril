@@ -21,6 +21,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let estadoCivil: any[] = [{ id: 1, nombre: "Casado/a" }, { id: 2, nombre: "Soltero/a" }, { id: 2, nombre: "Viudo/a" }];
         let localidad: any[] = [{ id: 1, nombre: "Bariloche" }, { id: 2, nombre: "Cipolletti" }, { id: 3, nombre: "Gral. Roca" }, { id: 3, nombre: "Viedma" }];
         let nivelEducativo: any[] = [{ id: 1, nombre: "Primaria" }, { id: 2, nombre: "Secundaria" }, { id: 3, nombre: "Terciaria" }, { id: 3, nombre: "Universitaria" }];
+        let personas: any[] = [{ id: 1, nombre: "Romina", apellido: "Rodríguez", nro_documento: "29890098",fecha_nacimiento: "1980-12-12", telefono: "2920430690", celular: "2920412127", estado_civilid: 1, sexoid: 2, generoid: 1, email: "rr1980@gmail.com", cuil: "20298900988", estudios: [{ nivel_educativoid: 1, titulo: "grado", completo: true, en_curso: false, fecha: "2014-12-20" }], hogar: { barrio: "Santa Clara", calle: "misiones", altura: "27", piso: "", depto: "", localidadid: 1 } },{ id: 2, nombre: "Juan jose", apellido: "Casillas", nro_documento: "29232132", fecha_nacimiento: "1985-10-23", telefono: "2920430753", celular: "2920412265", estado_civilid: 1, sexoid: 2, generoid: 1, email: "jjcasillas@gmail.com", cuil: "20292321328", estudios: [{ nivel_educativoid: 2, titulo: "bachiller en economía financiera", completo: false, en_curso: true, fecha: "2014-12-20" }], hogar: { barrio: "Don bosco", calle: "Mitre", altura: "327", piso: "", depto: "", localidadid: 1 } },{ id: 3, nombre: "Carlos", apellido: "Mansilla", nro_documento: "29857364", fecha_nacimiento: "1988-05-14", telefono: "2920430132", celular: "2920412628", estado_civilid: 1, sexoid: 2, generoid: 1, email: "carlosmansilla@gmail.com", cuil: "20298573648", estudios: [{ nivel_educativoid: 3, titulo: "tecnico en desarrollo web", completo: true, en_curso: false, fecha: "2014-12-20" }], hogar: { barrio: "Fátima", calle: "san luis", altura: "1032", piso: "", depto: "", localidadid: 1 } }];
 
 
         /*** Funciones para el uso de datos ***/
@@ -153,7 +154,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // consigo el destinatario a editar en la respuesta
                 let editDestinatario = request.body;
                 // busco en el listado el destinatario
-                console.log('antes del update: ',destinatarioLista);
                 for (var i = 0; i < destinatarioLista.length; i++) {
                     if(destinatarioLista[i]['id'] == id){
                             destinatarioLista[i] = {
@@ -170,8 +170,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                             }
                     }
                 }
-                console.log('despues del update: ', destinatarioLista);
-                console.log('antes de editar: ', destinatarioAgregados);
                 // verifico el array de usuarios agregados
                 for (var d = 0; d < destinatarioAgregados.length; d++) {
                     if (destinatarioAgregados[d]['id'] == id ){
@@ -180,7 +178,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         destinatarioAgregados.splice(d,1,editDestinatario);
                     }
                 }
-                console.log('despues de editar: ', destinatarioAgregados);
 
                 // datos a mostrar en la tabla
                 localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
@@ -189,6 +186,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
+            }
+
+            // get personas
+            if (request.url.endsWith('/personas') && request.method === 'GET') {
+                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    let nro_documento = request.body;
+                    let mensaje:any = [{ mensaje: 'Esta persona no existe.'}];
+                    console.log(nro_documento);
+
+                    let matchedUsers = personas.filter(persona => { return persona.nro_documento === nro_documento; });
+                    let seleccion = matchedUsers.length ? matchedUsers[0] : null;
+                    if (seleccion != null) {
+                        return of(new HttpResponse({ status: 200, body: [{resultado:[seleccion]}] }));
+                    }else{
+                        return of(new HttpResponse({ status: 200, body: mensaje }));
+                    }
+
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
             }
 
             /* LISTADOS */
