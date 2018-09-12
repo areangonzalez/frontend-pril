@@ -23,8 +23,8 @@
                     <button *ngIf="(destinatario.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.celular}}">
                         <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
                     </button>
-                    <button *ngIf="(destinatario.nivel_educativo != undefined)" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.nivel_educativo}}">
-                        <i class="fas fa-user-graduate" title="Nivel educativo" aria-hidden="true"></i>
+                    <button *ngIf="(destinatario.estudio != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.estudio}}">
+                        <i class="fas fa-user-graduate" title="Estudio" aria-hidden="true"></i>
                     </button>
                 </td>
                 <td class="text-center">{{destinatario.profesion}}</td>

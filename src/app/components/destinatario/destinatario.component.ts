@@ -29,6 +29,7 @@ export class DestinatarioComponent implements OnInit {
         this._destinatarioService.listarDestinatario().subscribe(
             datos => {
                 this.destinatarios = datos;
+                console.log(this.destinatarios);
             },
             error => {
                 console.log(<any>error);

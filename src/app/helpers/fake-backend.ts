@@ -44,6 +44,44 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return (seleccion != '')?seleccion:'';
         }
 
+        function obtenerUltimoEstudio(estudio){
+            let anio = 0;
+            let seleccion:any;
+            for (var i in estudio) {
+                if (parseInt(estudio[i].anio) > anio) {
+                    anio = parseInt(estudio[i].anio);
+                    seleccion = estudio[i];
+                }
+            }
+
+            return seleccion;
+        }
+
+        function concatEstudio(obj) {
+            let texto = '';
+            for (var clave in obj) {
+                if (clave == 'nivel_educativoid') {
+                    texto += '';
+                }else if (clave == 'en_curso'){
+                    texto+='';
+                }else if (clave == 'completo') {
+                    if (obj[clave] == true) {
+                        texto += 'completo';
+                    }else{
+                        texto += 'en curso';
+                    }
+                }else if (clave == 'anio'){
+                    if (obj['anio'] != '') {
+                        texto += obj.anio
+                    }
+                }else{
+                    texto += obj[clave];
+                }
+                texto+=' ';
+            }
+            return texto;
+        }
+
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
@@ -96,6 +134,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // array de la tabla
                 //{ nro_documento: '33476725', apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000',
                 // celular: '2920635572', profesion: 'Panadero', oficio: 'Pastelero', nivel_educativo: 'Terciario', presentacion: '19/06/2018', id: 1 }
+                let estudioDestinatario = (newDestinatario.persona.estudios.length > 0)?obtenerUltimoEstudio(newDestinatario.persona.estudios):[];
                 newDestinatario.id = generarId(destinatarioLista);
                 destinatarioLista.push({
                     id: newDestinatario.id,
@@ -107,7 +146,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     celular: newDestinatario.persona.celular,
                     profesion: getNombreArray(newDestinatario.destinatario.profesionid, profesion),
                     oficio: getNombreArray(newDestinatario.destinatario.oficioid, oficio),
-                    presentacion: newDestinatario.destinatario.fecha_presentacion
+                    presentacion: newDestinatario.destinatario.fecha_presentacion,
+                    estudio: (estudioDestinatario != null) ? concatEstudio(estudioDestinatario) : ''
                 });
                 // datos a mostrar en la tabla
                 localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
@@ -145,7 +185,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
-            // registrar destinatario
+            // Editar destinatario
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'PUT') {
                 
                 let urlParts = request.url.split('/');
@@ -154,6 +194,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // consigo el destinatario a editar en la respuesta
                 let editDestinatario = request.body;
                 // busco en el listado el destinatario
+                let estudioDestinatario = (editDestinatario.persona.estudios.length > 0) ? obtenerUltimoEstudio(editDestinatario.persona.estudios) : null;
                 for (var i = 0; i < destinatarioLista.length; i++) {
                     if(destinatarioLista[i]['id'] == id){
                             destinatarioLista[i] = {
@@ -166,7 +207,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                                 celular: editDestinatario.persona.celular,
                                 profesion: getNombreArray(editDestinatario.destinatario.profesionid, profesion),
                                 oficio: getNombreArray(editDestinatario.destinatario.oficioid, oficio),
-                                presentacion: editDestinatario.destinatario.fecha_presentacion
+                                presentacion: editDestinatario.destinatario.fecha_presentacion,
+                                estudio: (estudioDestinatario != null) ? concatEstudio(estudioDestinatario) : ''
                             }
                     }
                 }
@@ -175,7 +217,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     if (destinatarioAgregados[d]['id'] == id ){
                         // elimino 1 elemento desde el indice especificado y agrego el nuevo array
                         editDestinatario['id'] = id;
-                        destinatarioAgregados.splice(d,1,editDestinatario);
+                        destinatarioAgregados.splice(d, 1, editDestinatario);
                     }
                 }
 
