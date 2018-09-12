@@ -37,6 +37,7 @@ import { GeneroService } from "./services/genero.service";
 import { EstadoCivilService } from "./services/estado-civil.service";
 import { LocalidadService } from "./services/localidad.service";
 import { NivelEducativoService } from "./services/nivel-educativo.service";
+import { PersonaService } from "./services/persona.service";
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { NivelEducativoService } from "./services/nivel-educativo.service";
     GeneroService,
     EstadoCivilService,
     LocalidadService,
-    NivelEducativoService
+    NivelEducativoService,
+    PersonaService
   ],
   bootstrap: [AppComponent]
 })

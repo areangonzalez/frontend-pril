@@ -7,6 +7,7 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 import { SexoService } from "../../../../services/sexo.service";
 import { GeneroService } from "../../../../services/genero.service";
 import { EstadoCivilService } from "../../../../services/estado-civil.service";
+import { PersonaService } from "../../../../services/persona.service";
 
 @Component({
     selector: 'datos-persona-form',
@@ -48,6 +49,7 @@ export class DatosPersonaComponent implements OnInit {
         private _sexoService: SexoService,
         private _generoService: GeneroService,
         private _estadoCivilService: EstadoCivilService,
+        private _personaService: PersonaService
     ){}
 
     ngOnInit(){
@@ -142,7 +144,10 @@ export class DatosPersonaComponent implements OnInit {
             return this.datosPersona.controls.cuil.setValue('');
         }
     }
-
+    /**
+     * @function generarCuilEditado genera el cuil para el formulario en estado de edición
+     * @param cuil numero de cuil que viene por la edicion de una persona
+     */
     generarCuilEditado(cuil){
         let cuil_primero = '';
         let cuil_ult = '';
@@ -156,6 +161,22 @@ export class DatosPersonaComponent implements OnInit {
 
             return this.cuil_medio;
         }
+    }
+    /**
+     * @function validarPersonaPorNroDocumento validación para la existencia de una persona dentro de la base de datos
+     */
+    validarPersonaPorNroDocumento(nro_documento){
+        this._personaService.personaPorNroDocumento(nro_documento).subscribe(
+            respuesta => {
+                console.log(respuesta);
+                if (respuesta['resultado'][0].mensaje != undefined){
+                    console.log('mensaje: ', respuesta['resultado'][0].mensaje);
+                }else if (respuesta['resultado'][0].mensaje != undefined) {
+                    console.log('mensaje: ', respuesta['resultado'][0].mensaje);
+                }
+            }, error => {
+                console.log('Error: ', error);
+            })
     }
 
 }

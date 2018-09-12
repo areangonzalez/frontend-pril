@@ -10,7 +10,7 @@ export class EstadoCivilService {
     constructor(private _http: HttpClient) { }
 
     listado() {
-        return this._http.get(this.url + '/estado_civils');
+        return this._http.get(this.url + '/estado-civils');
     }
 
 

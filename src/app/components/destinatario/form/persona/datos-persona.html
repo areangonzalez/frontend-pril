@@ -2,8 +2,13 @@
     <div class="row">
         <div class="form-group col-md-4">
             <label for="nro_documento">Nro. documento (<span>*</span>):</label>
-            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" 
-            (keyup)="esNumero($event.target)" (change)="validarCuil($event.target.value)" [ngClass]="{'is-invalid': (persona.nro_documento.invalid && submitted)}">
+            <div class="input-group">
+                <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" 
+                (keyup)="esNumero($event.target)" (change)="validarCuil($event.target.value)" [ngClass]="{'is-invalid': (persona.nro_documento.invalid && submitted)}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="validar_persona_existe" (click)="validarPersonaPorNroDocumento($event.target.value)">Button</button>
+                </div>
+            </div>
             <div *ngIf="(persona.nro_documento.invalid && submitted)" class="text-danger">
                 <div *ngIf="persona.nro_documento.errors.required">Este campo es requerido. </div>
                 <div *ngIf="persona.nro_documento.errors.minlength">El número de documento debe tener al menos 7 digitos.</div>

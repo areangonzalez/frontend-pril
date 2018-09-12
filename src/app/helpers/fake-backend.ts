@@ -234,18 +234,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/personas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    let nro_documento = request.body;
+                    let nro_documento = request.params.get('nro_documento');
                     let mensaje:any = [{ mensaje: 'Esta persona no existe.'}];
                     console.log(nro_documento);
 
                     let matchedUsers = personas.filter(persona => { return persona.nro_documento === nro_documento; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
+                    let resultado:any = [];
                     if (seleccion != null) {
-                        return of(new HttpResponse({ status: 200, body: [{resultado:[seleccion]}] }));
+                        resultado.push({resultado:seleccion});
                     }else{
-                        return of(new HttpResponse({ status: 200, body: mensaje }));
+                        resultado.push({resultado:mensaje});                        
                     }
 
+                    return of(new HttpResponse({ status: 200, body: resultado[0] }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
@@ -294,7 +296,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             // Estado Civil
-            if (request.url.endsWith('/estado_civils') && request.method === 'GET') {
+            if (request.url.endsWith('/estado-civils') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: estadoCivil }));
