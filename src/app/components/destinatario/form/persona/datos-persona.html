@@ -6,7 +6,7 @@
                 <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" 
                 (keyup)="esNumero($event.target)" (change)="validarCuil($event.target.value)" [ngClass]="{'is-invalid': (persona.nro_documento.invalid && submitted)}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="validar_persona_existe" (click)="validarPersonaPorNroDocumento($event.target.value)">Button</button>
+                    <button class="btn btn-outline-secondary" type="button" id="validar_persona_existe" (click)="validarPersonaPorNroDocumento(persona.nro_documento.value)">Button</button>
                 </div>
             </div>
             <div *ngIf="(persona.nro_documento.invalid && submitted)" class="text-danger">

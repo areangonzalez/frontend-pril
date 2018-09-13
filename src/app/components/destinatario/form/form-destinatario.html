@@ -1,5 +1,5 @@
 <form [formGroup]="destinatarioForm" >
-    <datos-persona-form [group]="destinatarioForm.controls.persona" [submitted]="submitted" [documento]="nroDoc" ></datos-persona-form>
+    <datos-persona-form [group]="destinatarioForm.controls.persona" [submitted]="submitted" [documento]="nroDoc" (setListaEstudios)="setListaEstudios($event)" ></datos-persona-form>
     <hr class="my-4">
     <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'agregar'" [texto]="'Agregar estudio'"></modal-estudio>
     <lista-estudio *ngIf="(listaEstudios.length > 0)" [listaEstudios]="listaEstudios"></lista-estudio>

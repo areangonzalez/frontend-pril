@@ -5,7 +5,7 @@ import { Estudio } from "./estudio.model";
 export class Persona {
 
     constructor(
-        //public id: number,
+        public id: number,
         public nro_documento: string,
         public cuil: string,
         public apellido: string,

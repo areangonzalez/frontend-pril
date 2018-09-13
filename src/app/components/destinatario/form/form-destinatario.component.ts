@@ -56,6 +56,7 @@ export class FormDestinatarioComponent implements OnInit {
     ){
         this.destinatarioForm = _fb.group({
             persona: _fb.group({
+                id: '',
                 nro_documento: ['', [Validators.required, Validators.minLength(7)]],
                 cuil: '',
                 cuil_prin: ['', [Validators.required, Validators.minLength(2)]],
@@ -76,7 +77,7 @@ export class FormDestinatarioComponent implements OnInit {
                     altura: ['', Validators.required],
                     barrio: ['', [Validators.required, Validators.minLength(3)]],
                     piso: '',
-                    departamento: ''
+                    depto: ''
                 })
             }),
             destinatario: _fb.group({
@@ -188,7 +189,7 @@ export class FormDestinatarioComponent implements OnInit {
     private prepararPersona() {
 
         let hogar = new Hogar(0,'','','','','').deserialize(this.destinatarioForm.value.persona.hogar);
-        return new Persona('','','','','',0,0,0,'','','',hogar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
+        return new Persona(0,'','','','','',0,0,0,'','','',hogar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
     }
     /**
      * @function formatFecha formatea la fecha de string a un objeto para los input de fecha
@@ -217,6 +218,11 @@ export class FormDestinatarioComponent implements OnInit {
     private ultimoDigitoCuil(cuil:string){
         let cuil_ult = cuil.substring(10);
         return cuil_ult;
+    }
+
+    public setListaEstudios(e){
+        this.listaEstudios = e;
+        return this.listaEstudios;
     }
 
 }

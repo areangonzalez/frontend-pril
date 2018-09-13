@@ -5,7 +5,7 @@ export class Hogar {
         public altura: string,
         public barrio: string,
         public piso: string,
-        public departamento: string
+        public depto: string
     ) { }
 
     deserialize(input: Hogar) {

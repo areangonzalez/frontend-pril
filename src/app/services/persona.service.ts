@@ -10,7 +10,7 @@ export class PersonaService {
     constructor(private _http: HttpClient) { }
 
     personaPorNroDocumento(nro_documento) {
-        let options = { headears: httpOptions, params:{nro_documento:nro_documento} };
+        let options = { headears: httpOptions, params:new HttpParams().set('nro_documento',nro_documento) };
         return this._http.get(this.url + '/personas', options);
     }
 

@@ -176,6 +176,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         delete seleccion.persona.fechaNacimiento;
                         delete seleccion.destinatario.fechaPresentacion;
                         delete seleccion.id;
+                        seleccion.persona['id'] = generarId(destinatarioLista);
                     }
 
                     return of(new HttpResponse({ status: 200, body: seleccion }));
@@ -231,20 +232,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // get personas
+            // persona 1 29890098
             if (request.url.endsWith('/personas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let nro_documento = request.params.get('nro_documento');
-                    let mensaje:any = [{ mensaje: 'Esta persona no existe.'}];
+                    let mensaje:string = 'Esta persona no existe.';
                     console.log(nro_documento);
 
                     let matchedUsers = personas.filter(persona => { return persona.nro_documento === nro_documento; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
                     let resultado:any = [];
                     if (seleccion != null) {
-                        resultado.push({resultado:seleccion});
+                        resultado.push({estado:true, resultado:[seleccion]});
                     }else{
-                        resultado.push({resultado:mensaje});                        
+                        resultado.push({ estado: false, resultado: [], message:mensaje});                        
                     }
 
                     return of(new HttpResponse({ status: 200, body: resultado[0] }));
