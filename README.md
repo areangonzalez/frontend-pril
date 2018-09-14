@@ -35,7 +35,7 @@ Iniciando proyecto con la imagen de docker [Trion/ng-cli](https://hub.docker.com
 
    - **Producción:**
 
-   `docker run -u $(id -u) --rm -p 4400:4200 -v "$PWD":/app trion-ng-cli:6.0.7 ng serve --configuration=production --host 0.0.0.0`
+   `docker run -u $(id -u) --rm -p 4400:4200 -v "$PWD":/app trion/ng-cli:6.0.7 ng serve --configuration=production --host 0.0.0.0`
 
 ## Ayuda
 
