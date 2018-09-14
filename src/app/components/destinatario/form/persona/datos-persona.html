@@ -4,9 +4,13 @@
             <label for="nro_documento">Nro. documento (<span>*</span>):</label>
             <div class="input-group">
                 <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" 
-                (keyup)="esNumero($event.target)" (change)="validarCuil($event.target.value)" [ngClass]="{'is-invalid': (persona.nro_documento.invalid && submitted)}">
+                (keyup)="[esNumero($event.target), nroDocumentoCambia($event.target.value)]" (change)="validarCuil($event.target.value)"  [ngClass]="{'is-invalid': (persona.nro_documento.invalid && submitted)}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="validar_persona_existe" (click)="validarPersonaPorNroDocumento(persona.nro_documento.value)">Button</button>
+                    <button class="btn" [ngClass]="{'btn-outline-success': (existePersona && !cambiaNro), 'btn-outline-danger': (!existePersona && !cambiaNro), 'btn-outline-secondary': (cambiaNro)}" type="button" id="validar_persona_existe" (click)="validarPersonaPorNroDocumento(persona.nro_documento.value)">
+                        <span *ngIf="(cambiaNro)" class="oi oi-magnifying-glass" title="buscar persona" aria-hidden="true"></span>
+                        <span *ngIf="(existePersona && !cambiaNro)" class="oi oi-check" title="buscar persona" aria-hidden="true"></span>
+                        <span *ngIf="(!existePersona && !cambiaNro)" class="oi oi-ban" title="buscar persona" aria-hidden="true"></span>
+                    </button>
                 </div>
             </div>
             <div *ngIf="(persona.nro_documento.invalid && submitted)" class="text-danger">

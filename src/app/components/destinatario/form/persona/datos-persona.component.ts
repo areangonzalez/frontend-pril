@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from "@angular/forms";
+import { FormGroup, AbstractControl } from "@angular/forms";
 import { Router } from '@angular/router';
 import { ValidarNumero } from "../../../../shareds/validar-numero";
 import { FormatObjetoAFecha } from "../../../../shareds/fechas";
@@ -35,8 +35,9 @@ export class DatosPersonaComponent implements OnInit {
     public sexoLista:Object = [];
     public generoLista:Object = [];
     public estadoCivilLista:Object = [];
-
-    toStr = JSON.stringify;
+    existePersona:boolean = false;
+    cambiaNro:boolean = true;
+    nroDocumentoBusqueda:string = '';
 
     /**
      * 
@@ -169,11 +170,10 @@ export class DatosPersonaComponent implements OnInit {
      * @function validarPersonaPorNroDocumento validación para la existencia de una persona dentro de la base de datos
      */
     validarPersonaPorNroDocumento(nro_documento){
+        this.nroDocumentoBusqueda = nro_documento;
         this._personaService.personaPorNroDocumento(nro_documento).subscribe(
             respuesta => {
-                console.log(respuesta);
                 if (respuesta['estado']){
-                    console.log('array: ', respuesta['resultado']);
                     let persona = respuesta['resultado'][0];
                     // actualizo la lista de estudio enviandolo al componente padre.
                     this.setListaEstudios.emit(persona.estudios);
@@ -185,7 +185,13 @@ export class DatosPersonaComponent implements OnInit {
                     persona['fechaNacimiento'] = this.fechaAObjeto(persona.fecha_nacimiento);
                     // seteo los valores al formularios con los datos de persona
                     this.datosPersona.setValue(persona);
+                    this.existePersona = true;
+                    this.cambiaNro = false;
                 }else{
+                    this.setListaEstudios.emit([]);
+                    this.resetForm(this.datosPersona);
+                    this.existePersona = false;
+                    this.cambiaNro = false;
                     console.log('message: ', respuesta['message']);
                 }
             }, error => {
@@ -221,6 +227,22 @@ export class DatosPersonaComponent implements OnInit {
         let objFecha = fecha.split('-');
 
         return { year: parseInt(objFecha[0]), month: parseInt(objFecha[1]), day: parseInt(objFecha[2]) };
+    }
+    // Verifico si se cambia el numero de documento.
+    nroDocumentoCambia(nroDocumento) {
+        this.cambiaNro = (this.nroDocumentoBusqueda != nroDocumento);
+    }
+
+    // reseteo el formulario y pongo las variables en vacio
+    public resetForm(formGroup: FormGroup) {
+        let control: AbstractControl = null;
+        formGroup.reset();
+        formGroup.markAsUntouched();
+        Object.keys(formGroup.controls).forEach((name) => {
+            control = formGroup.controls[name];
+            control.setValue('');
+            control.setErrors(null);
+        });
     }
 
 }
