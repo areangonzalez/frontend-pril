@@ -1,7 +1,7 @@
 <label for="auto-completar">{{titulo}} (<span style="font-size:18;color:red;font-weight:700;">*</span>):</label>
 <input id="auto-completar" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)"
     (click)="click$.next($event.target.value)" #instance="ngbTypeahead" (ngModelChange)="seleccionaElemento(listado, model)"
- [ngClass]="{'is-invalid': (validacion && submitted)}" placeholder="{{placeHolder}}"/>
-<div *ngIf="(submitted && validacion)" class="text-danger">
+ [ngClass]="{'is-invalid': (validacion && submitted && (model == ''))}" placeholder="{{placeHolder}}"/>
+<div *ngIf="(submitted && validacion && (model == ''))" class="text-danger">
     <span>{{mensaje}}</span>
 </div>

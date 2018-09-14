@@ -55,10 +55,12 @@ export class AutoCompletarComponent {
         // Reviso si hubo una selección
         if (seleccion != undefined) {
             this.validacion = false;
+            this.submitted = false;
             this.seleccionaValor.emit(seleccion);
         }else{// sino hubo seleccion mando un mensaje de error
             this.validacion = true;
-            this.submitted = true;
+            this.submitted = false;
+            this.seleccionaValor.emit({id:'',nombre:''});
             this.mensaje = "Por favor seleccione un valor del listado.";
         } 
 
