@@ -23,7 +23,7 @@ import { AuthGuard } from './guards/auth.guard'
     imports: [
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
-            { path: 'inicio', component: InicioComponent, data: { title: 'Bienvenido a PRIL', }, canActivate: [AuthGuard] },
+            { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
             
             { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', }, canActivate: [AuthGuard] },
             { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', }, canActivate: [AuthGuard]  },
