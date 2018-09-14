@@ -36,6 +36,8 @@ export class DatosPersonaComponent implements OnInit {
     public generoLista:Object = [];
     public estadoCivilLista:Object = [];
 
+    toStr = JSON.stringify;
+
     /**
      * 
      * @param _validarNumero funcion que verifica si los datos ingresado son números

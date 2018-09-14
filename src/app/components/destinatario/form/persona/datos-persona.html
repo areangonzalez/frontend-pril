@@ -70,7 +70,7 @@
             <label for="sexo">Sexo (<span>*</span>):</label>
             <select class="form-control" id="sexo" formControlName="sexoid" [ngClass]="{'is-invalid': (persona.sexoid.invalid && submitted)}">
                 <option value="">Seleccione Sexo</option>
-                <option *ngFor="let sexo of sexoLista" value="sexo.id">{{sexo.nombre}}</option>
+                <option *ngFor="let sexo of sexoLista" value="{{sexo.id}}">{{sexo.nombre}}</option>
             </select>
             <div *ngIf="(persona.sexoid.invalid && submitted)" class="text-danger">
                 <div *ngIf="persona.sexoid.errors.required">Por favor Seleccione sexo. </div>
@@ -80,7 +80,7 @@
             <label for="genero">Género (<span>*</span>):</label>
             <select class="form-control" id="genero" formControlName="generoid" [ngClass]="{'is-invalid': (persona.generoid.invalid && submitted)}">
                 <option value="">Seleccione Género</option>
-                <option *ngFor="let genero of generoLista" value="genero.id">{{genero.nombre}}</option>
+                <option *ngFor="let genero of generoLista" value="{{genero.id}}">{{genero.nombre}}</option>
             </select>
             <div *ngIf="(persona.generoid.invalid && submitted)"
                 class="text-danger">
@@ -91,7 +91,7 @@
             <label for="estado_civil">Estado civil (<span>*</span>):</label>
             <select class="form-control" id="estado_civil" formControlName="estado_civilid" [ngClass]="{'is-invalid': (persona.estado_civilid.invalid && submitted)}">
                 <option value="">Seleccione Estado civil</option>
-                <option *ngFor="let estadoCivil of estadoCivilLista" value="estadoCivil.id">{{estadoCivil.nombre}}</option>
+                <option *ngFor="let estadoCivil of estadoCivilLista" value="{{estadoCivil.id}}">{{estadoCivil.nombre}}</option>
             </select>
             <div *ngIf="(persona.estado_civilid.invalid && submitted)"
                 class="text-danger">
