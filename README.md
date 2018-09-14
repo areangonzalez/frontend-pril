@@ -13,15 +13,29 @@ Nos dirigimos al directorio donde tenemos el proyecto y seguimos los siguientes 
     
     `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:6.0.7 npm install`
 
- - Compilamos el codigo con el siguiente comando:
+# Modo desarrollo
+
+- Compilamos el codigo con el siguiente comando:
+   
+    - **Desarrollo:**
     
     `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:6.0.7 ng build`
+
+    - **producción:**
+
+    `docker run -u $(id -u) --rm -v "$PWD":/app trion/ng-cli:6.0.7 ng build --configuration=production`
 
 Una vez completado los pasos anteriores iniciamos el docker que contiene nuestro sistema:
 
 Iniciando proyecto con la imagen de docker [Trion/ng-cli](https://hub.docker.com/r/trion/ng-cli/):
 
+   - **Desarrollo:**
+
    `docker run -u $(id -u) --rm -p 4200:4200 -v "$PWD":/app trion/ng-cli:6.0.7 ng serve --host 0.0.0.0`
+
+   - **Producción:**
+
+   `docker run -u $(id -u) --rm -p 4400:4200 -v "$PWD":/app trion-ng-cli:6.0.7 ng serve --configuration=production --host 0.0.0.0`
 
 ## Ayuda
 
