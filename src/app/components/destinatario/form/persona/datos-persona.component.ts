@@ -8,6 +8,7 @@ import { SexoService } from "../../../../services/sexo.service";
 import { GeneroService } from "../../../../services/genero.service";
 import { EstadoCivilService } from "../../../../services/estado-civil.service";
 import { PersonaService } from "../../../../services/persona.service";
+import { MensajesService } from "../../../../services/mensajes.service";
 
 @Component({
     selector: 'datos-persona-form',
@@ -36,7 +37,6 @@ export class DatosPersonaComponent implements OnInit {
     public generoLista:Object = [];
     public estadoCivilLista:Object = [];
     existePersona:boolean = false;
-    cambiaNro:boolean = true;
     nroDocumentoBusqueda:string = '';
 
     /**
@@ -53,7 +53,8 @@ export class DatosPersonaComponent implements OnInit {
         private _sexoService: SexoService,
         private _generoService: GeneroService,
         private _estadoCivilService: EstadoCivilService,
-        private _personaService: PersonaService
+        private _personaService: PersonaService,
+        private _mensajeService: MensajesService
     ){}
 
     ngOnInit(){
@@ -186,13 +187,9 @@ export class DatosPersonaComponent implements OnInit {
                     // seteo los valores al formularios con los datos de persona
                     this.datosPersona.setValue(persona);
                     this.existePersona = true;
-                    this.cambiaNro = false;
                 }else{
-                    this.setListaEstudios.emit([]);
                     this.resetForm(this.datosPersona);
-                    this.existePersona = false;
-                    this.cambiaNro = false;
-                    console.log('message: ', respuesta['message']);
+                    this._mensajeService.cancelado(respuesta['message'],'');
                 }
             }, error => {
                 console.log('Error: ', error);
@@ -230,18 +227,34 @@ export class DatosPersonaComponent implements OnInit {
     }
     // Verifico si se cambia el numero de documento.
     nroDocumentoCambia(nroDocumento) {
-        this.cambiaNro = (this.nroDocumentoBusqueda != nroDocumento);
+        console.log('busqueda: ',this.nroDocumentoBusqueda);
+        if (this.nroDocumentoBusqueda != nroDocumento && this.nroDocumentoBusqueda != ''){
+            this.resetForm(this.datosPersona);
+        }
     }
 
     // reseteo el formulario y pongo las variables en vacio
     public resetForm(formGroup: FormGroup) {
         let control: AbstractControl = null;
+        // variables generales en el formulario
+        this.cuil_medio = '';
+        this.nroDocumentoBusqueda = '';
+        this.existePersona = false;
+        this.setListaEstudios.emit([]);
+
+        // formulario reset
         formGroup.reset();
         formGroup.markAsUntouched();
+        console.log(formGroup.controls);
         Object.keys(formGroup.controls).forEach((name) => {
             control = formGroup.controls[name];
-            control.setValue('');
-            control.setErrors(null);
+            if(control instanceof FormGroup){
+                this.resetForm(control)
+            }else{
+                control.setValue('');
+                control.setErrors(null);
+            }
+
         });
     }
 
