@@ -47,3 +47,10 @@ services:
     volumes:
      - /var/www/html/desarrolloPRILFront:/app
     command: ["ng", "serve", "--host", "0.0.0.0"]
+  seleniumchrome:
+    image: selenium/standalone-chrome-debug
+    ports:
+      - 4444:4444
+      - 5900:5900
+    volumes:
+     - /dev/shm:/dev/shm

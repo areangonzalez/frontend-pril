@@ -77,7 +77,8 @@ export class FormDestinatarioComponent implements OnInit {
                     altura: ['', Validators.required],
                     barrio: ['', [Validators.required, Validators.minLength(3)]],
                     piso: '',
-                    depto: ''
+                    depto: '',
+                    escalera: ''
                 })
             }),
             destinatario: _fb.group({
@@ -188,7 +189,7 @@ export class FormDestinatarioComponent implements OnInit {
      */
     private prepararPersona() {
 
-        let hogar = new Hogar(0,'','','','','').deserialize(this.destinatarioForm.value.persona.hogar);
+        let hogar = new Hogar(0,'','','','','','').deserialize(this.destinatarioForm.value.persona.hogar);
         return new Persona(0,'','','','','',0,0,0,'','','',hogar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
     }
     /**

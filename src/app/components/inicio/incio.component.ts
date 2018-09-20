@@ -8,6 +8,7 @@ import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
     styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
+    
     public hoverDes = false;
     public hoverAt = false;
     public hoverAe = false;

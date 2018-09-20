@@ -170,7 +170,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
 
                     if (seleccion != null ) {
-                        console.log(seleccion);
                         delete seleccion.persona.cuil_prin;
                         delete seleccion.persona.cuil_ult;
                         delete seleccion.persona.fechaNacimiento;

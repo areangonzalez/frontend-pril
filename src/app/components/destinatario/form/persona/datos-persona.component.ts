@@ -192,7 +192,7 @@ export class DatosPersonaComponent implements OnInit {
                     this._mensajeService.cancelado(respuesta['message'],'');
                 }
             }, error => {
-                console.log('Error: ', error);
+                this._mensajeService.cancelado(error,'');
             })
     }
 

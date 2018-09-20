@@ -126,6 +126,6 @@ export class BreadcrumbComponent implements OnInit {
   }// fin ngOnInit
 
   estoyLogueado(){
-    return (localStorage.getItem('currentUser')) ? true : false;
+    return (localStorage.getItem('token-pril')) ? true : false;
   }
 }

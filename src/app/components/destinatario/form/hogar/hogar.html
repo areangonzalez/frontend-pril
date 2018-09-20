@@ -23,18 +23,22 @@
             <div *ngIf="hogar.altura.errors.required">Este campo es requerido. </div>
         </div>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <label for="barrio">Barrio (<span>*</span>):</label>
         <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio" [ngClass]="{'is-invalid': (hogar.barrio.invalid && submitted)}">
         <div *ngIf="(hogar.barrio.invalid && submitted)" class="text-danger">
             <div *ngIf="hogar.barrio.errors.required">Este campo es requerido. </div>
         </div>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
+        <label for="escalera">Escalera/Modulo:</label>
+        <input type="text" id="escalera" placeholder="escalera" class="form-control" formControlName="escarlera">
+    </div>
+    <div class="form-group col-md-3">
         <label for="piso">Piso:</label>
         <input type="text" id="piso" placeholder="piso" class="form-control" formControlName="piso">
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <label for="departamento">Departamento:</label>
         <input type="text" id="departamento" placeholder="departamento" class="form-control" formControlName="depto">
     </div>
