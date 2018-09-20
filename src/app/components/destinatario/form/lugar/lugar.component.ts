@@ -5,17 +5,17 @@ import { Router } from '@angular/router';
 import { LocalidadService } from "../../../../services/localidad.service";
 
 @Component({
-    selector: 'hogar-form',
-    templateUrl: './hogar.html',
-    styleUrls: ['./hogar.css']
+    selector: 'lugar-form',
+    templateUrl: './lugar.html',
+    styleUrls: ['./lugar.css']
 })
-export class HogarComponent implements OnInit {
+export class LugarComponent implements OnInit {
     /**
-     * @param datosHogar objeto del formulario que viene del componente padre
+     * @param datosLugar objeto del formulario que viene del componente padre
      * @param submitted booleano que verifica el estado del fornulario
      * @var localidadLista object que obtiene el listado de localidades
      */
-    @Input("group") public datosHogar: FormGroup;
+    @Input("group") public datosLugar: FormGroup;
     @Input("submitted") public submitted;
 
     public localidadLista:Object = [];
@@ -33,7 +33,7 @@ export class HogarComponent implements OnInit {
     /**
      * @function hogar maneja el objeto del formulario de hogar
      */
-    get hogar() { return this.datosHogar.controls; }
+    get hogar() { return this.datosLugar.controls; }
 
     /**
      * @function listarLocalidades función que obtiene el listado de localidades

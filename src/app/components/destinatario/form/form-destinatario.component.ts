@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 // services
 import { MensajesService } from "../../../services/mensajes.service";
 // models
-import { Hogar } from "./../../../models/hogar.model";
+import { Lugar } from "./../../../models/lugar.model";
 import { Estudio } from "../../../models/estudio.model";
 import { Persona } from "../../../models/persona.model";
 import { Destinatario } from "../../../models/destinatario.model"; 
@@ -71,7 +71,7 @@ export class FormDestinatarioComponent implements OnInit {
                 telefono: '',
                 celular: '',
                 email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-                hogar: _fb.group({
+                lugar: _fb.group({
                     localidadid: ['', Validators.required],
                     calle: ['', [Validators.required, Validators.minLength(3)]],
                     altura: ['', Validators.required],
@@ -189,8 +189,8 @@ export class FormDestinatarioComponent implements OnInit {
      */
     private prepararPersona() {
 
-        let hogar = new Hogar(0,'','','','','','').deserialize(this.destinatarioForm.value.persona.hogar);
-        return new Persona(0,'','','','','',0,0,0,'','','',hogar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
+        let lugar = new Lugar(0,'','','','','','').deserialize(this.destinatarioForm.value.persona.lugar);
+        return new Persona(0,'','','','','',0,0,0,'','','',lugar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
     }
     /**
      * @function formatFecha formatea la fecha de string a un objeto para los input de fecha

@@ -1,4 +1,4 @@
-export class Hogar {
+export class Lugar {
     constructor(
         public localidadid: number,
         public calle: string,
@@ -9,7 +9,7 @@ export class Hogar {
         public escalera: string
     ) { }
 
-    deserialize(input: Hogar) {
+    deserialize(input: Lugar) {
         Object.assign(this, input);
         return this;
     }

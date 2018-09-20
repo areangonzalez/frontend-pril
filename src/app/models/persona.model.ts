@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { Hogar } from "./hogar.model";
+import { Lugar } from "./lugar.model";
 import { Estudio } from "./estudio.model";
 
 export class Persona {
@@ -17,13 +17,13 @@ export class Persona {
         public telefono: string,
         public celular: string,
         public email: string,
-        public hogar: Hogar,
+        public lugar: Lugar,
         public estudios: Array<Estudio>
     ){}
 
     deserialize(input: Persona) {
         Object.assign(this, input);
-        this.hogar = new Hogar(0,'','','','','','').deserialize(input.hogar);
+        this.lugar = new Lugar(0,'','','','','','').deserialize(input.lugar);
         this.estudios.map((estudio: Estudio) => new Estudio(0,'','','','').deserialize(estudio));
         return this;
     }

@@ -1,4 +1,4 @@
-<div class="row" [formGroup]="datosHogar">
+<div class="row" [formGroup]="datosLugar">
     <div class="form-group col-md-4">
         <label for="localidad">Localidad (<span>*</span>):</label>
         <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (hogar.localidadid.invalid && submitted)}">
@@ -32,7 +32,7 @@
     </div>
     <div class="form-group col-md-3">
         <label for="escalera">Escalera/Modulo:</label>
-        <input type="text" id="escalera" placeholder="escalera" class="form-control" formControlName="escarlera">
+        <input type="text" id="escalera" placeholder="escalera" class="form-control" formControlName="escalera">
     </div>
     <div class="form-group col-md-3">
         <label for="piso">Piso:</label>
