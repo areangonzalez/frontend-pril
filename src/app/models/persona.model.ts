@@ -23,7 +23,7 @@ export class Persona {
 
     deserialize(input: Persona) {
         Object.assign(this, input);
-        this.lugar = new Lugar(0,'','','','','','').deserialize(input.lugar);
+        this.lugar = new Lugar(0,0,'','','','','','',false).deserialize(input.lugar);
         this.estudios.map((estudio: Estudio) => new Estudio(0,'','','','').deserialize(estudio));
         return this;
     }

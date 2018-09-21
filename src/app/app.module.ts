@@ -38,6 +38,7 @@ import { EstadoCivilService } from "./services/estado-civil.service";
 import { LocalidadService } from "./services/localidad.service";
 import { NivelEducativoService } from "./services/nivel-educativo.service";
 import { PersonaService } from "./services/persona.service";
+import { TipoAmbienteTrabajoService } from "./services/tipo-ambiente-trabajo.service";
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { PersonaService } from "./services/persona.service";
     EstadoCivilService,
     LocalidadService,
     NivelEducativoService,
-    PersonaService
+    PersonaService,
+    TipoAmbienteTrabajoService
   ],
   bootstrap: [AppComponent]
 })

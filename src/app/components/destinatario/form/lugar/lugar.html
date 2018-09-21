@@ -1,33 +1,33 @@
 <div class="row" [formGroup]="datosLugar">
     <div class="form-group col-md-4">
         <label for="localidad">Localidad (<span>*</span>):</label>
-        <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (hogar.localidadid.invalid && submitted)}">
+        <select class="form-control" id="localidad" formControlName="localidadid" [ngClass]="{'is-invalid': (lugar.localidadid.invalid && submitted)}">
                 <option value="">Seleccione Localidad</option>
                 <option *ngFor="let localidad of localidadLista" value="{{localidad.id}}">{{localidad.nombre}}</option>
             </select>
-        <div *ngIf="(hogar.localidadid.invalid && submitted)" class="text-danger">
-            <div *ngIf="hogar.localidadid.errors.required">Por favor Seleccione localidad. </div>
+        <div *ngIf="(lugar.localidadid.invalid && submitted)" class="text-danger">
+            <div *ngIf="lugar.localidadid.errors.required">Por favor Seleccione localidad. </div>
         </div>
     </div>
     <div class="form-group col-md-4">
         <label for="calle">Calle (<span>*</span>):</label>
-        <input type="text" id="calle" placeholder="calle" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (hogar.calle.invalid && submitted)}">
-        <div *ngIf="(hogar.calle.invalid && submitted)" class="text-danger">
-            <div *ngIf="hogar.calle.errors.required">Este campo es requerido. </div>
+        <input type="text" id="calle" placeholder="calle" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (lugar.calle.invalid && submitted)}">
+        <div *ngIf="(lugar.calle.invalid && submitted)" class="text-danger">
+            <div *ngIf="lugar.calle.errors.required">Este campo es requerido. </div>
         </div>
     </div>
     <div class="form-group col-md-4">
         <label for="altura">Altura (<span>*</span>):</label>
-        <input type="text" id="altura" placeholder="altura" class="form-control" formControlName="altura" [ngClass]="{'is-invalid': (hogar.altura.invalid && submitted)}">
-        <div *ngIf="(hogar.altura.invalid && submitted)" class="text-danger">
-            <div *ngIf="hogar.altura.errors.required">Este campo es requerido. </div>
+        <input type="text" id="altura" placeholder="altura" class="form-control" formControlName="altura" [ngClass]="{'is-invalid': (lugar.altura.invalid && submitted)}">
+        <div *ngIf="(lugar.altura.invalid && submitted)" class="text-danger">
+            <div *ngIf="lugar.altura.errors.required">Este campo es requerido. </div>
         </div>
     </div>
     <div class="form-group col-md-3">
         <label for="barrio">Barrio (<span>*</span>):</label>
-        <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio" [ngClass]="{'is-invalid': (hogar.barrio.invalid && submitted)}">
-        <div *ngIf="(hogar.barrio.invalid && submitted)" class="text-danger">
-            <div *ngIf="hogar.barrio.errors.required">Este campo es requerido. </div>
+        <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio" [ngClass]="{'is-invalid': (lugar.barrio.invalid && submitted)}">
+        <div *ngIf="(lugar.barrio.invalid && submitted)" class="text-danger">
+            <div *ngIf="lugar.barrio.errors.required">Este campo es requerido. </div>
         </div>
     </div>
     <div class="form-group col-md-3">

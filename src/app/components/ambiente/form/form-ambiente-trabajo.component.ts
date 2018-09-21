@@ -30,12 +30,17 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 celular: '',
                 fax: '',
                 email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-                localidadid: ['', Validators.required],
-                calle: ['', [Validators.required, Validators.minLength(3)]],
-                altura: ['', Validators.required],
-                personaid: '',
-                depto: '',
-                piso: ''
+                lugar: _fb.group({
+                    lugarid: '',
+                    localidadid: ['', Validators.required],
+                    calle: ['', [Validators.required, Validators.minLength(3)]],
+                    altura: ['', Validators.required],
+                    personaid: '',
+                    depto: '',
+                    piso: '',
+                    escalera: '',
+                    usarLugarEncontrando: false
+                })
             }),
             ambienteTrabajo: _fb.group({
                 nombre: ['', [Validators.required, Validators.minLength(3)]],

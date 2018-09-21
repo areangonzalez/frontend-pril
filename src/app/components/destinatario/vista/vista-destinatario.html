@@ -1,8 +1,8 @@
 <div class="row botton-separate">
     <div class="col-md-12">
-        <button class="btn btn-danger btn-md" (click)="volver()">
+        <button class="btn btn-primary btn-md" (click)="volver()">
             <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
-        <button class="btn btn-success btn-md">
+        <button class="btn btn-success btn-md" (click)="editar();">
             <span class="oi oi-pencil"></span> Editar</button>
     </div>
 </div>
@@ -13,34 +13,34 @@
                 <ng-template ngbPanelContent>
                     <dl class="row">
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Nro. Documento:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">1234567</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.nro_documento}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Cuil:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">2012345673</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.cuil}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Apellido y nombre:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">Díaz, Alejandro.</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.apellido}}, {{destinatario.persona.nombre}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Fecha nacimiento:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">12/08/1986</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.fecha_nacimiento | date:'dd/MM/yyyy'}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Sexo:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">Hombre</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.sexoid}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Género:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">Masculino</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.generoid}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Estado civil:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">Casado/a</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.estado_civilid}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Teléfono:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">2920434434</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.telefono}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Celular:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">2920655443</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.celular}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Email:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">alejandrodiaz@gmail.com</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.email}}</dd>
                     </dl>
                     <hr class="mb-4">
                     <dl class="row">
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Localidad:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">Viedma</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.lugar.localidadid}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Dirección:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">Alem 123</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.lugar.calle}} {{destinatario.persona.altura}}</dd>
                         <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Barrio:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">Zatti.</dd>
+                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">{{destinatario.persona.lugar.barrio}}</dd>
                     </dl>
                     <hr class="mb-4">
                     <dl class="row">
@@ -55,34 +55,34 @@
                 <ng-template ngbPanelContent>
                     <dl class="row">
                         <dt class="col-8 col-sm-6 col-md-3 col-lg-3">Fecha presentación:</dt>
-                        <dd class="col-4 col-sm-6 col-md-2 col-lg-3">12/07/2018</dd>
+                        <dd class="col-4 col-sm-6 col-md-2 col-lg-3">{{destinatario.destinatario.fecha_presentacion | date:'dd/MM/yyyy'}}</dd>
                         <dt class="col-8 col-sm-6 col-md-3 col-lg-3">Experiencia laboral:</dt>
-                        <dd class="col-4 col-sm-6 col-md-2 col-lg-3">Si</dd>
+                        <dd class="col-4 col-sm-6 col-md-2 col-lg-3">{{(destinatario.destinatario.experiencia_laboral)?'si':'no'}}</dd>
                     </dl>
                     <hr class="mb-4">
                     <dl class="row">
                         <dt class="col">Actividad en la que se desea formación:</dt>
-                        <dd class="col">Carpinteria</dd>
+                        <dd class="col">{{destinatario.destinatario.deseo_actividad}}</dd>
                     </dl>
                     <dl class="row">
                         <dt class="col">Lugar donde se pretende adquirir entrenamiento:</dt>
-                        <dd class="col">viedma</dd>
+                        <dd class="col">{{destinatario.destinatario.deseo_lugar_entrenamiento}}</dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-8">Conocimientos basicos sobre la actividad que desea recibir formación y entrenamiento:</dt>
-                        <dd class="col-4">Cortar madera</dd>
+                        <dd class="col-4">{{destinatario.destinatario.conocimientos_basicos}}</dd>
                     </dl>
                     <hr class="mb-4">
                     <dl class="row">
-                        <dt class="col-5 col-sm-6 col-md-3 col-lg-3">profesión:</dt>
-                        <dd class="col-7 col-sm-6 col-md-3 col-lg-3">Abogado</dd>
+                        <dt class="col-5 col-sm-6 col-md-3 col-lg-3">Profesión:</dt>
+                        <dd class="col-7 col-sm-6 col-md-3 col-lg-3">{{destinatario.profesion}}</dd>
                         <dt class="col-5 col-sm-6 col-md-3 col-lg-3">Oficio:</dt>
-                        <dd class="col-7 col-sm-6 col-md-3 col-lg-3">Albañil</dd>
+                        <dd class="col-7 col-sm-6 col-md-3 col-lg-3">{{destinatario.destinatario.oficio}}</dd>
                     </dl>
                     <hr class="mb-4">
                     <dl class="row">
                         <dt class="col-sm-6">Organismo donde se presento documentación de inscripción al PRIL:</dt>
-                        <dd class="col-sm-6">Ministerio de desarrollo social</dd>
+                        <dd class="col-sm-6">{{destinatario.destinatario.origen}}</dd>
                     </dl>
                 </ng-template>
             </ngb-panel>

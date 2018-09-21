@@ -21,7 +21,7 @@ export class ListaDestinatarioComponent {
     }
 
     verDestinatario(id){
-        this._router.navigate(['destinatario', 'vista']);
+        this._router.navigate(['destinatario/vista', id ]);
     }
 
     editarDestinatario(id){

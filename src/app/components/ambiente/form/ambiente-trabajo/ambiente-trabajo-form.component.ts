@@ -3,7 +3,9 @@ import { FormGroup } from "@angular/forms";
 import { Router } from '@angular/router';
 import { ValidarNumero } from "../../../../shareds/validar-numero";
 import { FormatObjetoAFecha } from "../../../../shareds/fechas";
-
+// services
+import { TipoAmbienteTrabajoService } from "../../../../services/tipo-ambiente-trabajo.service";
+import { MensajesService } from "../../../../services/mensajes.service";
 
 @Component({
     selector: 'datos-ambiente-trabajo-form',
@@ -15,13 +17,17 @@ export class AmbienteTrabajoFormComponent implements OnInit {
     @Input("group") public datosAmbienteTrabajo: FormGroup;
     
     public tipoAt = '';
+    public tipoAmbienteTrabajoListado:any = [];
 
     constructor(
         private _validarNumero: ValidarNumero,
-        private _formatFecha: FormatObjetoAFecha
+        private _formatFecha: FormatObjetoAFecha,
+        private _mensajeService: MensajesService,
+        private _tipoAmbienteTrabajoService: TipoAmbienteTrabajoService
     ) { }
 
     ngOnInit() {
+        this.listarTipoAmbienteTrabajo();
     }
 
     selTipo(event){
@@ -42,5 +48,14 @@ export class AmbienteTrabajoFormComponent implements OnInit {
         if (!this._validarNumero.onKey(event)) {
             this.datosAmbienteTrabajo.controls.cuit.setValue(nro_docuemnto.substring(0, nro_docuemnto.length - 1));
         }
+    }
+
+    private listarTipoAmbienteTrabajo() {
+        this._tipoAmbienteTrabajoService.listado().subscribe(
+            datos => {
+                this.tipoAmbienteTrabajoListado = datos;
+        }, error => {
+            this._mensajeService.cancelado(error,'');
+        });
     }
 }

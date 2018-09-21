@@ -22,6 +22,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let localidad: any[] = [{ id: 1, nombre: "Bariloche" }, { id: 2, nombre: "Cipolletti" }, { id: 3, nombre: "Gral. Roca" }, { id: 3, nombre: "Viedma" }];
         let nivelEducativo: any[] = [{ id: 1, nombre: "Primaria" }, { id: 2, nombre: "Secundaria" }, { id: 3, nombre: "Terciaria" }, { id: 3, nombre: "Universitaria" }];
         let personas: any[] = [{ id: 1, nombre: "Romina", apellido: "Rodríguez", nro_documento: "29890098", fecha_nacimiento: "1980-12-12", telefono: "2920430690", celular: "2920412127", estado_civilid: 1, sexoid: 2, generoid: 1, email: "rr1980@gmail.com", cuil: "20298900988", estudios: [{ anio: "2013", nivel_educativoid: 1, nivel_educativo_nombre: 'Primaria', titulo: "grado", completo: true, en_curso: false, fecha: "2014-12-20" }], lugar: { barrio: "Santa Clara", calle: "misiones", altura: "27", escalera: '', piso: "", depto: "", localidadid: 1 } },{ id: 2, nombre: "Juan jose", apellido: "Casillas", nro_documento: "29232132", fecha_nacimiento: "1985-10-23", telefono: "2920430753", celular: "2920412265", estado_civilid: 1, sexoid: 2, generoid: 1, email: "jjcasillas@gmail.com", cuil: "20292321328", estudios: [{ anio: "2013", nivel_educativoid: 2, nivel_educativo_nombre: 'Secundaria', titulo: "bachiller en economía financiera", completo: false, en_curso: true, fecha: "2014-12-20" }], lugar: { barrio: "Don bosco", calle: "Mitre", altura: "327", escalera: '', piso: "", depto: "", localidadid: 1 } },{ id: 3, nombre: "Carlos", apellido: "Mansilla", nro_documento: "29857364", fecha_nacimiento: "1988-05-14", telefono: "2920430132", celular: "2920412628", estado_civilid: 1, sexoid: 2, generoid: 1, email: "carlosmansilla@gmail.com", cuil: "20298573648", estudios: [{ anio: "2013", nivel_educativoid: 3, nivel_educativo_nombre: 'Terciaria', titulo: "tecnico en desarrollo web", completo: true, en_curso: false, fecha: "2014-12-20" }], lugar: { barrio: "Fátima", calle: "san luis", altura: "1032", escalera: '', piso: "", depto: "", localidadid: 1 } }];
+        let tipoAmbienteTrabajoLista: any[] = [{ id: 1, nombre: 'Comisión de fomento' }, { id: 1, nombre: 'Empleador privado' },{ id: 1, nombre: 'Empresa' }, { id: 1, nombre: 'Institución gubernamental' },{ id: 1, nombre: 'Institución sin fines de lucro' }, { id: 1, nombre: 'Municipio' }]
 
 
         /*** Funciones para el uso de datos ***/
@@ -112,6 +113,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: destinatarioLista }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
+            }
+
+            // lista tipos de ambientes de trabajos
+            if (request.url.endsWith('/tipo-ambiente-trabajos') && request.method === 'GET') {
+                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    return of(new HttpResponse({ status: 200, body: tipoAmbienteTrabajoLista }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });

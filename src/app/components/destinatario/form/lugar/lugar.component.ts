@@ -31,9 +31,9 @@ export class LugarComponent implements OnInit {
         this.listarLocalidades();
     }
     /**
-     * @function hogar maneja el objeto del formulario de hogar
+     * @function lugar maneja el objeto del formulario de hogar
      */
-    get hogar() { return this.datosLugar.controls; }
+    get lugar() { return this.datosLugar.controls; }
 
     /**
      * @function listarLocalidades función que obtiene el listado de localidades

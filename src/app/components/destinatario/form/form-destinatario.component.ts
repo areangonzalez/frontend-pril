@@ -72,13 +72,15 @@ export class FormDestinatarioComponent implements OnInit {
                 celular: '',
                 email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
                 lugar: _fb.group({
+                    lugarid: 0,
                     localidadid: ['', Validators.required],
                     calle: ['', [Validators.required, Validators.minLength(3)]],
                     altura: ['', Validators.required],
                     barrio: ['', [Validators.required, Validators.minLength(3)]],
                     piso: '',
                     depto: '',
-                    escalera: ''
+                    escalera: '',
+                    usarLugarEncontrado: false
                 })
             }),
             destinatario: _fb.group({
@@ -189,7 +191,7 @@ export class FormDestinatarioComponent implements OnInit {
      */
     private prepararPersona() {
 
-        let lugar = new Lugar(0,'','','','','','').deserialize(this.destinatarioForm.value.persona.lugar);
+        let lugar = new Lugar(0,0,'','','','','','',false).deserialize(this.destinatarioForm.value.persona.lugar);
         return new Persona(0,'','','','','',0,0,0,'','','',lugar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
     }
     /**

@@ -3,7 +3,7 @@
     <div class="row">
         <div class="form-group col-md-4">
             <label for="nro_documento">Nro. documento (<span>*</span>):</label>
-            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" (keyup)="esNumeroDocumento($event.target.value)" minlength="7" maxlength="8">
+            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" (keyup)="esNumeroDocumento($event.target.value)" minlength="7" maxlength="8" placeholder="Ej.: 23123987">
             <div *ngIf="datosPersona.controls.nro_documento.invalid && (datosPersona.controls.nro_documento.dirty || datosPersona.controls.nro_documento.touched)"
                 class="text-danger">
                 <div *ngIf="datosPersona.controls.nro_documento.errors.required">Este campo es requerido. </div>
@@ -13,7 +13,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="apellido">Apellido (<span>*</span>):</label>
-            <input type="text" id="apellido" class="form-control" formControlName="apellido">
+            <input type="text" id="apellido" class="form-control" formControlName="apellido" placeholder="Apellido">
             <div *ngIf="datosPersona.controls.apellido.invalid && (datosPersona.controls.apellido.dirty || datosPersona.controls.apellido.touched)"
                 class="text-danger">
                 <div *ngIf="datosPersona.controls.apellido.errors.required">Este campo es requerido. </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="nombre">Nombre (<span>*</span>):</label>
-            <input type="text" id="nombre" class="form-control" formControlName="nombre">
+            <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre">
             <div *ngIf="datosPersona.controls.nombre.invalid && (datosPersona.controls.nombre.dirty || datosPersona.controls.nombre.touched)"
                 class="text-danger">
                 <div *ngIf="datosPersona.controls.nombre.errors.required">Este campo es requerido. </div>
@@ -31,19 +31,19 @@
         </div>
         <div class="form-group col-md-4">
             <label for="telefono">Teléfono:</label>
-            <input type="text" id="telefono" class="form-control" formControlName="telefono">
+            <input type="text" id="telefono" class="form-control" formControlName="telefono" placeholder="Ej.: (2920) 427633">
         </div>
         <div class="form-group col-md-4">
             <label for="celular">Celular:</label>
-            <input type="text" id="celular" class="form-control" formControlName="celular">
+            <input type="text" id="celular" class="form-control" formControlName="celular" placeholder="Ej.: (2920) 567365">
         </div>
         <div class="form-group col-md-4">
             <label for="fax">Fax:</label>
-            <input type="text" id="fax" class="form-control" formControlName="fax">
+            <input type="text" id="fax" class="form-control" formControlName="fax" placeholder="Ej.: (2920) 456765">
         </div>
         <div class="form-group col-md-4">
             <label for="email">Email (<span>*</span>):</label>
-            <input type="text" id="email" class="form-control" formControlName="email">
+            <input type="text" id="email" class="form-control" formControlName="email" placeholder="Ej.: micorreo@mail.com">
             <div *ngIf="datosPersona.controls.email.invalid && (datosPersona.controls.email.dirty || datosPersona.controls.email.touched)"
                 class="text-danger">
                 <div *ngIf="datosPersona.controls.email.errors.required">Este campo es requerido. </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="calle">Calle (<span>*</span>):</label>
-            <input type="text" id="calle" class="form-control" formControlName="calle">
+            <input type="text" id="calle" class="form-control" formControlName="calle" placeholder="calle">
             <div *ngIf="datosPersona.controls.calle.invalid && (datosPersona.controls.calle.dirty || datosPersona.controls.calle.touched)"
                 class="text-danger">
                 <div *ngIf="datosPersona.controls.calle.errors.required">Este campo es requerido. </div>
@@ -76,19 +76,23 @@
         </div>
         <div class="form-group col-md-4">
             <label for="altura">Altura (<span>*</span>):</label>
-            <input type="text" id="altura" class="form-control" formControlName="altura">
+            <input type="text" id="altura" class="form-control" formControlName="altura"  placeholder="altura">
             <div *ngIf="datosPersona.controls.altura.invalid && (datosPersona.controls.altura.dirty || datosPersona.controls.altura.touched)"
                 class="text-danger">
                 <div *ngIf="datosPersona.controls.altura.errors.required">Este campo es requerido.</div>
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label for="depto">Depto:</label>
-            <input type="text" id="depto" class="form-control" formControlName="depto">
+            <label for="depto">Departamento:</label>
+            <input type="text" id="depto" class="form-control" formControlName="depto" placeholder="Departamento">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="escalera">Escalera/módulo:</label>
+            <input type="text" id="escalera" class="form-control" formControlName="escalera" placeholder="Escalera">
         </div>
         <div class="form-group col-md-4">
             <label for="piso">Piso:</label>
-            <input type="text" id="piso" class="form-control" formControlName="piso">
+            <input type="text" id="piso" class="form-control" formControlName="piso" placeholder="Piso">
         </div>
     </div>
 </fieldset>
