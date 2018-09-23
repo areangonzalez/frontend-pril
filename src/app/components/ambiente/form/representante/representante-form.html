@@ -52,7 +52,8 @@
         </div>
     </div>
     <hr class="mb-4">
-    <div class="row">
+    <lugar-form [group]="datosPersona.controls.lugar" [submitted]="submitted"></lugar-form>
+    <!-- <div class="row">
         <div class="form-group col-md-4">
             <label for="localidad">Localidad (<span>*</span>):</label>
             <select class="form-control" id="localidad" formControlName="localidadid">
@@ -94,5 +95,5 @@
             <label for="piso">Piso:</label>
             <input type="text" id="piso" class="form-control" formControlName="piso" placeholder="Piso">
         </div>
-    </div>
+    </div> -->
 </fieldset>

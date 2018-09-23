@@ -15,8 +15,7 @@ import { MensajesService } from "../../../../services/mensajes.service";
 })
 export class RepresentanteFormComponent implements OnInit {
     @Input("group") public datosPersona: FormGroup;
-    public localidadLista:any = [];
-
+    public submitted = false;
     constructor(
         private _validarNumero: ValidarNumero,
         private _formatFecha: FormatObjetoAFecha,
@@ -26,6 +25,9 @@ export class RepresentanteFormComponent implements OnInit {
 
     ngOnInit() {
     }
+
+    get persona() { return this.datosPersona.controls; }
+
     /**
      * @function esNumeroDocuemnto funcion que sirve para escribir solo números
      * @param event evento que toma el objeto de el input
@@ -37,13 +39,5 @@ export class RepresentanteFormComponent implements OnInit {
         }
     }
 
-    private listarLocalidades(){
-        this._localidadService.listado().subscribe(
-            datos => {
-                this.localidadLista = datos;
-        }, error => {
-            this._mensajeService.cancelado(error, '');
-        });
-    }
 
 }

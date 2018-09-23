@@ -17,7 +17,6 @@ import { CustomDatepickerI18n } from "./shareds/i18n-values";
 import { DestinatarioModule } from './components/destinatario/destinatario.module'
 import { AmbienteTrabajoModule } from './components/ambiente/ambiente-trabajo.module';
 import { AreaEntrenamientoModule } from './components/area/area-entrenamiento.module';
-
 /* Componentes */
 import { JwtInterceptor } from "./helpers/jwt.interceptor";
 import { ErrorInterceptor } from './helpers/error.interceptor';

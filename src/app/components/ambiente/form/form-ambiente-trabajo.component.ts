@@ -31,15 +31,15 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 fax: '',
                 email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
                 lugar: _fb.group({
-                    lugarid: '',
+                    lugarid: 0,
                     localidadid: ['', Validators.required],
                     calle: ['', [Validators.required, Validators.minLength(3)]],
                     altura: ['', Validators.required],
-                    personaid: '',
-                    depto: '',
+                    barrio: ['', [Validators.required, Validators.minLength(3)]],
                     piso: '',
+                    depto: '',
                     escalera: '',
-                    usarLugarEncontrando: false
+                    usarLugarEncontrado: false
                 })
             }),
             ambienteTrabajo: _fb.group({

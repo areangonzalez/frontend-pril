@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { ChartsModule } from 'ng2-charts';
+import { DestinatarioModule } from "../destinatario/destinatario.module";
 
 //Importo los componentes
 import { AmbienteTrabajoComponent } from './ambiente-trabajo.component';
@@ -21,7 +21,7 @@ import { FormOfertaComponent } from "./oferta/form/form-oferta.components";
 // Metadatos del módulo
 @NgModule({
     declarations: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, ListaOfertaComponent, FormOfertaComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule.forRoot()],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, DestinatarioModule, NgbModule.forRoot()],
     exports: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, ListaOfertaComponent, FormOfertaComponent, ReactiveFormsModule]
     //entryComponents: [NgbdModalContentGrafica]
 })
