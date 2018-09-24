@@ -28,6 +28,9 @@ export class FormDestinatarioComponent implements OnInit {
      * @var listaEstudios listado de los estudios ingresados.
      * @var idDestinatario guarda el parametro id del destinatario a editar
      * @var nroDoc guarda el numero de documento para reutilización en otros componentes
+     * @var profesionid id de profesion
+     * @var oficioid id de oficio
+     * @var id identificador del destinatario
      */
     destinatarioForm: FormGroup;
     listaEstudios = [];
@@ -36,6 +39,7 @@ export class FormDestinatarioComponent implements OnInit {
     profesionid: number = 0;
     oficioid: number = 0;
     id: any;
+    mostrarBoton: boolean = true;
 
 
     /**
@@ -109,6 +113,7 @@ export class FormDestinatarioComponent implements OnInit {
         if (this.id != undefined) {
             this.idDestinatario = this.id;
             this.destinatarioPorId(this.id);
+            this.mostrarBoton = false;
         }
     }
     /**

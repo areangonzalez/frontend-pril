@@ -20,10 +20,12 @@ export class DatosPersonaComponent implements OnInit {
     /**
      * @var datosPersoa Variable que contiene el formulario de persona
      * @var submitted indica el estado del envio del formulario
+     * @var documento setea el documento cuando el formulario esta en modo edición
      */
     @Input("group") public datosPersona: FormGroup;
     @Input("submitted") public submitted;
     @Input("documento") public setDocumento: string;
+    @Input("mostrarBtnBusqueda") public mostrarBtnBusqueda: boolean;
     @Output("setListaEstudios") public setListaEstudios = new EventEmitter();
     
     /**

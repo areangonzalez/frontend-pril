@@ -3,9 +3,9 @@
         <div class="form-group col-md-4">
             <label for="nro_documento">Nro. documento (<span>*</span>):</label>
             <div class="input-group">
-                <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" 
+                <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" minlength="7" maxlength="8" placeholder="Ej.: 23123987"
                 (keyup)="esNumero($event.target)" (change)="[validarCuil($event.target.value), nroDocumentoCambia($event.target.value)]"  [ngClass]="{'is-invalid': (persona.nro_documento.invalid && submitted)}">
-                <div class="input-group-append">
+                <div *ngIf="mostrarBtnBusqueda" class="input-group-append">
                     <button class="btn" [ngClass]="{'btn-outline-success': (existePersona), 'btn-outline-secondary': (!existePersona)}" type="button" id="validar_persona_existe" (click)="validarPersonaPorNroDocumento(persona.nro_documento.value)">
                         <span *ngIf="(!existePersona)" class="oi oi-magnifying-glass" title="buscar persona" aria-hidden="true"></span>
                         <span *ngIf="(existePersona)" class="oi oi-check" title="Encontro persona" aria-hidden="true"></span>
