@@ -6,6 +6,7 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 // services
 import { LocalidadService } from "../../../../services/localidad.service";
 import { MensajesService } from "../../../../services/mensajes.service";
+import { PersonaService } from "../../../../services/persona.service";
 
 @Component({
     selector: 'datos-representante-form',
@@ -15,11 +16,14 @@ import { MensajesService } from "../../../../services/mensajes.service";
 })
 export class RepresentanteFormComponent implements OnInit {
     @Input("group") public datosPersona: FormGroup;
-    public submitted = false;
+    @Input("submitted") public submitted: boolean;
+    @Input("mostrarBtnBusqueda") public mostrarBtnBusqueda: boolean;
+    public existeRepresentante: boolean = false;
     constructor(
         private _validarNumero: ValidarNumero,
         private _formatFecha: FormatObjetoAFecha,
         private _localidadService: LocalidadService,
+        private _personaService: PersonaService,
         private _mensajeService: MensajesService
     ) { }
 
@@ -39,5 +43,15 @@ export class RepresentanteFormComponent implements OnInit {
         }
     }
 
-
+    public representante: any = {};
+    private validarRepresentantePorDocumento(nroDocumento) {
+        this._personaService.personaPorNroDocumento(nroDocumento).subscribe(
+            datos => {
+                this.representante = datos;
+                this.existeRepresentante = true;
+            }, error => {
+                this._mensajeService.cancelado(error, '');
+            }
+        )
+    }
 }

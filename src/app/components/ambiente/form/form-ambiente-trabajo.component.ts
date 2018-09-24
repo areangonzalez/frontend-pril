@@ -2,6 +2,8 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+// services
+import { MensajesService } from "../../../services/mensajes.service";
 
 @Component({
     selector: 'destinatario-form',
@@ -13,13 +15,14 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     /**
      * @param breadcrumbs Array que contiene el camino de las paginas accedidas.
      */
-    //breadcrumbs = ;
-    ambienteForm: FormGroup;
+    public ambienteForm: FormGroup;
+    public mostrarBtnBusqueda: boolean = true;
+    public submitted: boolean = false;
 
     constructor(
         private _router: Router,
         private _breadcrumbsService: BreadcrumbsService,
-        private _fb: FormBuilder,
+        private _fb: FormBuilder
     ) {
        this.ambienteForm = _fb.group({
             persona: _fb.group({
@@ -31,7 +34,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 fax: '',
                 email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
                 lugar: _fb.group({
-                    lugarid: 0,
+                    id: 0,
                     localidadid: ['', Validators.required],
                     calle: ['', [Validators.required, Validators.minLength(3)]],
                     altura: ['', Validators.required],
@@ -63,5 +66,6 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     volver() {
         this._router.navigate(['ambiente']);
     }
+    
 
 }

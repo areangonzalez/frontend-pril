@@ -1,9 +1,19 @@
 <h3><small class="text-muted">Datos del representante</small></h3>
+<pre>{{representante | json}}</pre>
 <fieldset [formGroup]="datosPersona">
     <div class="row">
         <div class="form-group col-md-4">
             <label for="nro_documento">Nro. documento (<span>*</span>):</label>
-            <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" (keyup)="esNumeroDocumento($event.target.value)" minlength="7" maxlength="8" placeholder="Ej.: 23123987">
+            <div class="input-group">
+                <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" (keyup)="esNumeroDocumento($event.target.value)" minlength="7" maxlength="8" placeholder="Ej.: 23123987">
+                <div *ngIf="mostrarBtnBusqueda" class="input-group-append">
+                    <button class="btn" [ngClass]="{'btn-outline-success': (existePersona), 'btn-outline-secondary': (!existePersona)}" type="button"
+                        id="validar_persona_existe" (click)="validarRepresentantePorDocumento(persona.nro_documento.value)">
+                        <span *ngIf="(!existePersona)" class="oi oi-magnifying-glass" title="buscar persona" aria-hidden="true"></span>
+                        <span *ngIf="(existePersona)" class="oi oi-check" title="Encontro persona" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
             <div *ngIf="datosPersona.controls.nro_documento.invalid && (datosPersona.controls.nro_documento.dirty || datosPersona.controls.nro_documento.touched)"
                 class="text-danger">
                 <div *ngIf="datosPersona.controls.nro_documento.errors.required">Este campo es requerido. </div>
@@ -53,47 +63,4 @@
     </div>
     <hr class="mb-4">
     <lugar-form [group]="datosPersona.controls.lugar" [submitted]="submitted"></lugar-form>
-    <!-- <div class="row">
-        <div class="form-group col-md-4">
-            <label for="localidad">Localidad (<span>*</span>):</label>
-            <select class="form-control" id="localidad" formControlName="localidadid">
-                <option value="">Seleccione localidad</option>
-                <option value="1">Gral.Roca</option>
-                <option value="2">Viedma</option>
-            </select>
-            <div *ngIf="datosPersona.controls.localidadid.invalid && (!datosPersona.controls.localidadid.pristine || datosPersona.controls.localidadid.touched)"
-                class="text-danger">
-                <div *ngIf="datosPersona.controls.localidadid.errors.required">Este campo es requerido. </div>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="calle">Calle (<span>*</span>):</label>
-            <input type="text" id="calle" class="form-control" formControlName="calle" placeholder="calle">
-            <div *ngIf="datosPersona.controls.calle.invalid && (datosPersona.controls.calle.dirty || datosPersona.controls.calle.touched)"
-                class="text-danger">
-                <div *ngIf="datosPersona.controls.calle.errors.required">Este campo es requerido. </div>
-                <div *ngIf="datosPersona.controls.nombre.errors.minlength">Escriba un calle valida.</div>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="altura">Altura (<span>*</span>):</label>
-            <input type="text" id="altura" class="form-control" formControlName="altura"  placeholder="altura">
-            <div *ngIf="datosPersona.controls.altura.invalid && (datosPersona.controls.altura.dirty || datosPersona.controls.altura.touched)"
-                class="text-danger">
-                <div *ngIf="datosPersona.controls.altura.errors.required">Este campo es requerido.</div>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="depto">Departamento:</label>
-            <input type="text" id="depto" class="form-control" formControlName="depto" placeholder="Departamento">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="escalera">Escalera/módulo:</label>
-            <input type="text" id="escalera" class="form-control" formControlName="escalera" placeholder="Escalera">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="piso">Piso:</label>
-            <input type="text" id="piso" class="form-control" formControlName="piso" placeholder="Piso">
-        </div>
-    </div> -->
 </fieldset>

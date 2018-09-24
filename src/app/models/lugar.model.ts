@@ -1,6 +1,6 @@
 export class Lugar {
     constructor(
-        public lugarid: number,
+        public id: number,
         public localidadid: number,
         public calle: string,
         public altura: string,
