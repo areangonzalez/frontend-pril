@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from "@angular/forms";
+import { FormGroup, AbstractControl } from "@angular/forms";
 import { Router } from '@angular/router';
 import { ValidarNumero } from "../../../../shareds/validar-numero";
 import { FormatObjetoAFecha } from "../../../../shareds/fechas";
@@ -46,12 +46,48 @@ export class RepresentanteFormComponent implements OnInit {
     public representante: any = {};
     private validarRepresentantePorDocumento(nroDocumento) {
         this._personaService.personaPorNroDocumento(nroDocumento).subscribe(
-            datos => {
-                this.representante = datos;
-                this.existeRepresentante = true;
+            respuesta => {
+                if (respuesta['estado']) {
+                    let persona = respuesta['resultado'][0];
+                    // borro variables que no son utilizadas en el objeto
+                    delete persona.estudios;
+                    delete persona.fecha_nacimiento;
+                    delete persona.estado_civilid;
+                    delete persona.sexoid;
+                    delete persona.generoid;
+                    delete persona.cuil;
+                    // seteo los valores en el formulario
+                    this.datosPersona.setValue(persona);
+                    this.existeRepresentante = true;
+                }else{
+                    this.resetForm(this.datosPersona);
+                    this._mensajeService.cancelado(respuesta['message'], '');
+                }
             }, error => {
                 this._mensajeService.cancelado(error, '');
             }
         )
+    }
+
+    // reseteo el formulario y pongo las variables en vacio
+    public resetForm(formGroup: FormGroup) {
+        let control: AbstractControl = null;
+        // variables generales en el formulario
+        this.existeRepresentante = false;
+
+        // formulario reset
+        formGroup.reset();
+        formGroup.markAsUntouched();
+        console.log(formGroup.controls);
+        Object.keys(formGroup.controls).forEach((name) => {
+            control = formGroup.controls[name];
+            if (control instanceof FormGroup) {
+                this.resetForm(control)
+            } else {
+                control.setValue('');
+                control.setErrors(null);
+            }
+
+        });
     }
 }

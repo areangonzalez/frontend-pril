@@ -180,8 +180,9 @@ export class DatosPersonaComponent implements OnInit {
                     let persona = respuesta['resultado'][0];
                     // actualizo la lista de estudio enviandolo al componente padre.
                     this.setListaEstudios.emit(persona.estudios);
-                    // borro los estudios del objeto
+                    // borro los estudios y fax del objeto
                     delete persona.estudios;
+                    delete persona.fax;
                     // Agrego parametros que son representativos en el formulario.
                     persona['cuil_prin'] = this.primerosDigitosCuil(persona.cuil);
                     persona['cuil_ult'] = this.ultimoDigitoCuil(persona.cuil);

@@ -26,6 +26,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     ) {
        this.ambienteForm = _fb.group({
             persona: _fb.group({
+                id: '',
                 nro_documento: ['', [Validators.required, Validators.minLength(7)]],
                 apellido: ['', [Validators.required, Validators.minLength(3)]],
                 nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -41,11 +42,11 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                     barrio: ['', [Validators.required, Validators.minLength(3)]],
                     piso: '',
                     depto: '',
-                    escalera: '',
-                    usarLugarEncontrado: false
+                    escalera: ''
                 })
             }),
             ambienteTrabajo: _fb.group({
+                id: '',
                 nombre: ['', [Validators.required, Validators.minLength(3)]],
                 legajo: ['', Validators.required],
                 observacion: '',

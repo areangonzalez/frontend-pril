@@ -166,8 +166,9 @@ export class FormDestinatarioComponent implements OnInit {
             datos => {
                 // agrego los estudios a la lista
                 (datos['persona']['estudios'].length > 0)?this.listaEstudios = datos['persona']['estudios']:[];
-                // borro la propiedad estudio del objeto
+                // borro la propiedad estudio y fax del objeto
                 delete datos['persona']['estudios'];
+                delete datos['persona']['fax'];
                 // agrego propiedades al objeto
                 datos['persona']['cuil_prin'] = this.primerosDigitosCuil(datos['persona']['cuil']);
                 datos['persona']['cuil_ult'] = this.ultimoDigitoCuil(datos['persona']['cuil']);
