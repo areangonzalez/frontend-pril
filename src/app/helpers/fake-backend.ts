@@ -297,10 +297,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     telefono: newAmbiente.persona.telefono,
                     celular: newAmbiente.persona.celular,
                     fax: newAmbiente.persona.fax,
-                    tipo_ambiente_trabajo: getNombreArray(newAmbiente.ambiente.tipo_ambiente_trabajo, tipoAmbienteTrabajoLista),
+                    tipo: getNombreArray(newAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
                     nombre_ambiente: newAmbiente.ambiente.nombre,
                     cuit: newAmbiente.ambiente.cuit,
-                    Estado: 'Activo'
+                    estado: 'Activo'
                 });
                 // datos a mostrar en la tabla
                 localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));

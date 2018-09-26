@@ -5,7 +5,7 @@ export interface IAmbienteTrabajo {
     observacion: string,
     cuit: string,
     actividad: string,
-    tipo_ambiente_trabajo: number,
+    tipo_ambiente_trabajoid: number,
 }
 
 export class AmbienteTrabajo implements IAmbienteTrabajo {
@@ -17,7 +17,7 @@ export class AmbienteTrabajo implements IAmbienteTrabajo {
         public observacion: string,
         public cuit: string,
         public actividad: string,
-        public tipo_ambiente_trabajo: number,
+        public tipo_ambiente_trabajoid: number,
     ){}
 
     deserialize(input: any) {
