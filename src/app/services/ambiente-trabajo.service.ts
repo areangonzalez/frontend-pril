@@ -16,15 +16,10 @@ export class AmbienteTrabajoService {
             return this._http.post(this.url + '/ambiente-trabajos', params, httpOptions);
         }
     }
-
-    /* listarDestinatario() {
-        return this._http.get(this.url + '/destinatarios');
+    /**
+     * @function listarAmbientesTrabajo conexion con api para obtener el listado de ambientes de trabajo
+     */
+     listarAmbienteTrabajo() {
+        return this._http.get(this.url + '/ambiente-trabajos');
     }
-
-    destinatarioPorId(id) {
-        return this._http.get(this.url + '/destinatarios/' + id);
-    } */
-
-
-
 }

@@ -10,8 +10,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListaAmbienteTrabajoComponent {
     @Input('ambientes') ambientes: Object;
-    //title = 'app';
-
+    
     constructor(
         private _router: Router,
         config: NgbTooltipConfig
