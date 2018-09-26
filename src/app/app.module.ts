@@ -38,6 +38,7 @@ import { LocalidadService } from "./services/localidad.service";
 import { NivelEducativoService } from "./services/nivel-educativo.service";
 import { PersonaService } from "./services/persona.service";
 import { TipoAmbienteTrabajoService } from "./services/tipo-ambiente-trabajo.service";
+import { AmbienteTrabajoService } from "./services/ambiente-trabajo.service";
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { TipoAmbienteTrabajoService } from "./services/tipo-ambiente-trabajo.ser
     LocalidadService,
     NivelEducativoService,
     PersonaService,
-    TipoAmbienteTrabajoService
+    TipoAmbienteTrabajoService,
+    AmbienteTrabajoService
   ],
   bootstrap: [AppComponent]
 })

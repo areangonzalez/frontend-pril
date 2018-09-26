@@ -10,8 +10,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let testUser = { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
+        // listados de datos agregados
         let destinatarioLista: any[] = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
+        let ambienteLista: any[] = JSON.parse(localStorage.getItem('ambienteLista')) || [];
+        // Agregados
         let destinatarioAgregados: any[] = JSON.parse(localStorage.getItem('destinatariosAgregados')) || [];
+        let ambientesAgregados: any[] = JSON.parse(localStorage.getItem('ambientesAgregados')) || [];
+        // listados globales
         let profesion: any[] = [{ id: 1, nombre: 'Abogado'},{ id: 3, nombre: 'Agrónomo'},{ id: 4, nombre: 'Bacteriólogo' },{ id: 5, nombre: 'Biofísico' },
             { id: 6, nombre: 'climatologo' },{ id: 7, nombre: 'Cirujano' },{ id: 8, nombre: 'Dentista' },{ id: 9, nombre: 'Doctor' },{ id: 10, nombre: 'Enfermero' }];
         let oficio: any[] = [{ id: 1, nombre: 'Albañil' },{ id: 2, nombre: 'Arbitro' },{ id: 3, nombre: 'Banquero' },{ id: 4, nombre: 'Bailarin' },{ id: 5, nombre: 'Cantante' },
@@ -21,8 +26,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let estadoCivil: any[] = [{ id: 1, nombre: "Casado/a" }, { id: 2, nombre: "Soltero/a" }, { id: 2, nombre: "Viudo/a" }];
         let localidad: any[] = [{ id: 1, nombre: "Bariloche" }, { id: 2, nombre: "Cipolletti" }, { id: 3, nombre: "Gral. Roca" }, { id: 3, nombre: "Viedma" }];
         let nivelEducativo: any[] = [{ id: 1, nombre: "Primaria" }, { id: 2, nombre: "Secundaria" }, { id: 3, nombre: "Terciaria" }, { id: 3, nombre: "Universitaria" }];
-        let personas: any[] = [{ id: 1, nombre: "Romina", apellido: "Rodríguez", nro_documento: "29890098", fecha_nacimiento: "1980-12-12", telefono: "2920430690", celular: "2920412127", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "rr1980@gmail.com", cuil: "20298900988", estudios: [{ anio: "2013", nivel_educativoid: 1, nivel_educativo_nombre: 'Primaria', titulo: "grado", completo: true, en_curso: false, fecha: "2014-12-20" }], lugar: { id: 1, barrio: "Santa Clara", calle: "misiones", altura: "27", escalera: '', piso: "", depto: "", localidadid: 1 } }, { id: 2, nombre: "Juan jose", apellido: "Casillas", nro_documento: "29232132", fecha_nacimiento: "1985-10-23", telefono: "2920430753", celular: "2920412265", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "jjcasillas@gmail.com", cuil: "20292321328", estudios: [{ anio: "2013", nivel_educativoid: 2, nivel_educativo_nombre: 'Secundaria', titulo: "bachiller en economía financiera", completo: false, en_curso: true, fecha: "2014-12-20" }], lugar: { id: 2, barrio: "Don bosco", calle: "Mitre", altura: "327", escalera: '', piso: "", depto: "", localidadid: 1 } }, { id: 3, nombre: "Carlos", apellido: "Mansilla", nro_documento: "29857364", fecha_nacimiento: "1988-05-14", telefono: "2920430132", celular: "2920412628", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "carlosmansilla@gmail.com", cuil: "20298573648", estudios: [{ anio: "2013", nivel_educativoid: 3, nivel_educativo_nombre: 'Terciaria', titulo: "tecnico en desarrollo web", completo: true, en_curso: false, fecha: "2014-12-20" }], lugar: { id: 3, barrio: "Fátima", calle: "san luis", altura: "1032", escalera: '', piso: "", depto: "", localidadid: 1 } }];
         let tipoAmbienteTrabajoLista: any[] = [{ id: 1, nombre: 'Comisión de fomento' }, { id: 1, nombre: 'Empleador privado' },{ id: 1, nombre: 'Empresa' }, { id: 1, nombre: 'Institución gubernamental' },{ id: 1, nombre: 'Institución sin fines de lucro' }, { id: 1, nombre: 'Municipio' }]
+        // datos adicionales
+        let personas: any[] = [{ id: 1, nombre: "Romina", apellido: "Rodríguez", nro_documento: "29890098", fecha_nacimiento: "1980-12-12", telefono: "2920430690", celular: "2920412127", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "rr1980@gmail.com", cuil: "20298900988", estudios: [{ anio: "2013", nivel_educativoid: 1, nivel_educativo_nombre: 'Primaria', titulo: "grado", completo: true, en_curso: false, fecha: "2014-12-20" }], lugar: { id: 1, barrio: "Santa Clara", calle: "misiones", altura: "27", escalera: '', piso: "", depto: "", localidadid: 1 } }, { id: 2, nombre: "Juan jose", apellido: "Casillas", nro_documento: "29232132", fecha_nacimiento: "1985-10-23", telefono: "2920430753", celular: "2920412265", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "jjcasillas@gmail.com", cuil: "20292321328", estudios: [{ anio: "2013", nivel_educativoid: 2, nivel_educativo_nombre: 'Secundaria', titulo: "bachiller en economía financiera", completo: false, en_curso: true, fecha: "2014-12-20" }], lugar: { id: 2, barrio: "Don bosco", calle: "Mitre", altura: "327", escalera: '', piso: "", depto: "", localidadid: 1 } }, { id: 3, nombre: "Carlos", apellido: "Mansilla", nro_documento: "29857364", fecha_nacimiento: "1988-05-14", telefono: "2920430132", celular: "2920412628", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "carlosmansilla@gmail.com", cuil: "20298573648", estudios: [{ anio: "2013", nivel_educativoid: 3, nivel_educativo_nombre: 'Terciaria', titulo: "tecnico en desarrollo web", completo: true, en_curso: false, fecha: "2014-12-20" }], lugar: { id: 3, barrio: "Fátima", calle: "san luis", altura: "1032", escalera: '', piso: "", depto: "", localidadid: 1 } }];
 
 
         /*** Funciones para el uso de datos ***/
@@ -119,16 +125,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
-            // lista tipos de ambientes de trabajos
-            if (request.url.endsWith('/tipo-ambiente-trabajos') && request.method === 'GET') {
-                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    return of(new HttpResponse({ status: 200, body: tipoAmbienteTrabajoLista }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
-            }
+            
 
             // guardar destinatario
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
@@ -267,7 +264,56 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
+            if (request.url.endsWith('/ambiente-trabajos') && request.method === 'POST') {
+                // get new user object from post body
+                let newAmbiente = request.body;
+                // validation
+                let duplicateUser = ambienteLista.filter(ambiente => { return ambiente.nro_documento === newAmbiente.persona.nro_documento; }).length;
+                if (duplicateUser) {
+                    return throwError({ error: { message: 'El representante con el nro documento:  "' + newAmbiente.persona.nro_documento + '" ya esta en un ambiente de trabajo' } });
+                }
+
+                // save new user
+                // array de la tabla
+                let estudioDestinatario = (newAmbiente.persona.estudios.length > 0) ? obtenerUltimoEstudio(newAmbiente.persona.estudios) : [];
+                newAmbiente.ambiente.id = generarId(ambienteLista);
+                newAmbiente.persona.id = generarId(ambienteLista);
+                newAmbiente.persona.lugar.id = generarId(ambienteLista);
+                ambienteLista.push({
+                    id: newAmbiente.ambiente.id,
+                    nro_documento: newAmbiente.persona.nro_documento,
+                    apellido: newAmbiente.persona.apellido,
+                    nombre: newAmbiente.persona.nombre,
+                    direccion: newAmbiente.persona.lugar.calle + ' ' + newAmbiente.persona.lugar.altura,
+                    telefono: newAmbiente.persona.telefono,
+                    celular: newAmbiente.persona.celular,
+                    fax: newAmbiente.persona.fax,
+                    tipo_ambiente_trabajo: getNombreArray(newAmbiente.ambiente.tipo_ambiente_trabajo, tipoAmbienteTrabajoLista),
+                    nombre_ambiente: newAmbiente.ambiente.nombre,
+                    cuit: newAmbiente.ambiente.cuit,
+                    Estado: 'Activo'
+                });
+                // datos a mostrar en la tabla
+                localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
+                // datos de usuarios agregados
+                ambientesAgregados.push(newAmbiente);
+                localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
+
+                // respond 200 OK
+                return of(new HttpResponse({ status: 200 }));
+            }
+
             /* LISTADOS */
+            // lista tipos de ambientes de trabajos
+            if (request.url.endsWith('/tipo-ambiente-trabajos') && request.method === 'GET') {
+                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    return of(new HttpResponse({ status: 200, body: tipoAmbienteTrabajoLista }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
+            }
             // profesiones
             if (request.url.endsWith('/profesions') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application

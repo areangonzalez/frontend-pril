@@ -4,6 +4,7 @@ import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // services
 import { MensajesService } from "../../../services/mensajes.service";
+import { AmbienteTrabajoService } from "../../../services/ambiente-trabajo.service";
 // modelos
 import { AmbienteTrabajo } from "../../../models/ambiente-trabajo.model";
 import { Persona } from "../../../models/persona.model";
@@ -32,12 +33,14 @@ export class FormAmbienteTrabajoComponent implements OnInit {
      * @param _breadcrumbsService maneja el camino del cliente por el sistema
      * @param _fb formBuilder servicio para crear el formulario
      * @param _mensajeService servicio que maneja los mensajes.
+     * @param _ambienteTrabajoService maneja el guarado y editado del formulario
      */
     constructor(
         private _router: Router,
         private _breadcrumbsService: BreadcrumbsService,
         private _fb: FormBuilder,
-        private _mensajeService: MensajesService
+        private _mensajeService: MensajesService,
+        private _ambienteTrabajoService: AmbienteTrabajoService
     ) {
        this.ambienteForm = _fb.group({
             persona: _fb.group({
@@ -84,7 +87,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     }
 
     GuardarAmbiente() {
-        const params = {persona: {}, ambiente: {}};
+        const params = {persona: this.prepararPersona(), ambiente: this.prepararAmbienteTrabajo()};
         this.submitted = true;
         if (this.ambienteForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.', '');
@@ -99,7 +102,13 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     }
 
     private guardarAmbiente(params, id) {
-        
+        this._ambienteTrabajoService.guardar(params, id).subscribe(
+            datos => {
+                this._mensajeService.exitoso('Guardado Exitoso.', 'ambiente');
+            }, error => {
+                this._mensajeService.cancelado(error,'');
+            }
+        );
         console.log(params);
     }
     
