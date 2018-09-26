@@ -125,7 +125,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
-            
+            // lista de ambientes de trabajos
+            if (request.url.endsWith('/ambiente-trabajos') && request.method === 'GET') {
+                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    return of(new HttpResponse({ status: 200, body: ambienteLista }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
+            }            
 
             // guardar destinatario
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {

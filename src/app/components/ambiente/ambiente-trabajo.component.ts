@@ -3,6 +3,7 @@ import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
 // services
 import { AmbienteTrabajoService } from "../../services/ambiente-trabajo.service";
+import { MensajesService } from "../../services/mensajes.service";
 
 @Component({
     selector: 'app-ambiente-trabajo',
@@ -10,12 +11,19 @@ import { AmbienteTrabajoService } from "../../services/ambiente-trabajo.service"
     // styleUrls: ['./lista.component.css']
 })
 export class AmbienteTrabajoComponent implements OnInit {
-    public ambienteListado:any[] = [];
+    public ambientes:any;
     public page = 1;
 
+    /**
+     * Inicializacion de servicios utiles para el componente
+     * @param _breadcrumbsService servicio del recorrido del usuario por el sistema
+     * @param _ambienteTrabajoService servicio que maneja la conexion con el api
+     * @param _mensajeService servicio que maneja los mensajes para el usuario
+     */
     constructor(
         private _breadcrumbsService: BreadcrumbsService,
-        private _ambienteTrabajoService: AmbienteTrabajoService
+        private _ambienteTrabajoService: AmbienteTrabajoService,
+        private _mensajeService: MensajesService
     ) {
     }
 
@@ -27,16 +35,13 @@ export class AmbienteTrabajoComponent implements OnInit {
         this.listaAmbientes();
     }
 
-    public ambientes = [
-        { nombre: 'Panaderia san Fernando', cuit: '2033476724', representante: 'Rodriguez, Raul', tipo: 'Empleador Pirvado', estado: 'Activo', id: 1 },
-        { nombre: 'Cooperia Obrera', cuit: '2033476723', representante: 'Lopez, laura', tipo: 'Cooperativa', estado: 'Activo', id: 2 },
-        { nombre: 'Municipalidad de viedma', cuit: '2033476723', representante: 'Martinez, Francisco', tipo: 'Organismo público', estado: 'Activo', id: 3 },
-        { nombre: 'Heladeria Sei Tu', cuit: '2033476722', representante: 'Martinez, Pamela', tipo: 'Organismo público', estado: 'Activo', id: 4 },
-        { nombre: 'Panaderia Panonto', cuit: '2033476721', representante: 'Acosta, Jose', tipo: 'Organismo público', estado: 'Activo', id: 5 }
-    ];
-    
-    
     private listaAmbientes() {
-        //this._ambienteTrabajoService
+        this._ambienteTrabajoService.listarAmbienteTrabajo().subscribe(
+            datos => {
+                this.ambientes = datos;
+            }, error => {
+                this._mensajeService.cancelado(error,'');
+            }
+        );
     }
 }
