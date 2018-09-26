@@ -1,11 +1,11 @@
 <form [formGroup]="ambienteForm">
-    <datos-ambiente-trabajo-form [group]="ambienteForm.controls.ambienteTrabajo"></datos-ambiente-trabajo-form>
+    <datos-ambiente-trabajo-form [group]="ambienteForm.controls.ambiente" [submitted]="submitted"></datos-ambiente-trabajo-form>
     <hr class="mb-4">
     <datos-representante-form [group]="ambienteForm.controls.persona" [submitted]="submitted" [mostrarBtnBusqueda]="mostrarBtnBusqueda"></datos-representante-form>
 
     <hr class="mb-4">
     <div class="float-right">
-        <button class="btn btn-danger" (click)="volver()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
-        <button class="btn btn-success"><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
+        <button type="button" class="btn btn-danger" (click)="volver()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
+        <button type="button" class="btn btn-success" (click)="GuardarAmbiente()"><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
     </div>
 </form>

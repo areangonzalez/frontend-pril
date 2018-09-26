@@ -15,10 +15,24 @@ import { PersonaService } from "../../../../services/persona.service";
     providers: [ValidarNumero, FormatObjetoAFecha]
 })
 export class RepresentanteFormComponent implements OnInit {
+    /**
+     * @var datosPersona contiene los datos del formulario
+     * @var submitted otorga la activación de errores de los inputs del formulario
+     * @var mostrarBtnBusqueda muestra el boton de busqueda por documento, si el formulario no esta en modo edición
+     * @var existeRepresentante cambia los estilos del boton de busqueda por documento
+     */
     @Input("group") public datosPersona: FormGroup;
     @Input("submitted") public submitted: boolean;
     @Input("mostrarBtnBusqueda") public mostrarBtnBusqueda: boolean;
     public existeRepresentante: boolean = false;
+
+    /**
+     * Inicializacion de servicios para el componente
+     * @param _validarNumero 
+     * @param _formatFecha 
+     * @param _personaService 
+     * @param _mensajeService 
+     */
     constructor(
         private _validarNumero: ValidarNumero,
         private _formatFecha: FormatObjetoAFecha,
@@ -30,7 +44,7 @@ export class RepresentanteFormComponent implements OnInit {
     ngOnInit() {
     }
 
-    get persona() { return this.datosPersona.controls; }
+    get representante() { return this.datosPersona.controls; }
 
     /**
      * @function esNumeroDocuemnto funcion que sirve para escribir solo números
@@ -43,7 +57,6 @@ export class RepresentanteFormComponent implements OnInit {
         }
     }
 
-    public representante: any = {};
     private validarRepresentantePorDocumento(nroDocumento) {
         this._personaService.personaPorNroDocumento(nroDocumento).subscribe(
             respuesta => {
@@ -78,7 +91,6 @@ export class RepresentanteFormComponent implements OnInit {
         // formulario reset
         formGroup.reset();
         formGroup.markAsUntouched();
-        console.log(formGroup.controls);
         Object.keys(formGroup.controls).forEach((name) => {
             control = formGroup.controls[name];
             if (control instanceof FormGroup) {

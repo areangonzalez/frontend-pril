@@ -15,6 +15,7 @@ import { MensajesService } from "../../../../services/mensajes.service";
 })
 export class AmbienteTrabajoFormComponent implements OnInit {
     @Input("group") public datosAmbienteTrabajo: FormGroup;
+    @Input("submitted") public submitted: boolean;
     
     public tipoAt = '';
     public tipoAmbienteTrabajoListado:any = [];
@@ -28,7 +29,10 @@ export class AmbienteTrabajoFormComponent implements OnInit {
 
     ngOnInit() {
         this.listarTipoAmbienteTrabajo();
+        console.log(this.ambiente);
     }
+
+    get ambiente(){ return this.datosAmbienteTrabajo.controls; }
 
     selTipo(event){
         if (event.target.selectedOptions[0].value != ''){

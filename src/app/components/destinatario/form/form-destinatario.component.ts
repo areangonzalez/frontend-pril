@@ -130,7 +130,6 @@ export class FormDestinatarioComponent implements OnInit {
     onSubmit() {
         const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario() };
         this.submitted = true;
-        console.log(params);
         if (this.destinatarioForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.', '');
             return;
