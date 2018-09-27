@@ -7,7 +7,7 @@ import { MensajesService } from "../../../services/mensajes.service";
 import { AmbienteTrabajoService } from "../../../services/ambiente-trabajo.service";
 // modelos
 import { AmbienteTrabajo } from "../../../models/ambiente-trabajo.model";
-import { Persona } from "../../../models/persona.model";
+import { Representante } from "../../../models/representante.model";
 import { Lugar } from "../../../models/lugar.model";
 
 @Component({
@@ -51,7 +51,16 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 telefono: '',
                 celular: '',
                 fax: '',
-                email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+                email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]]
+            }),
+            ambiente: _fb.group({
+                id: 0,
+                nombre: ['', [Validators.required, Validators.minLength(3)]],
+                legajo: ['', Validators.required],
+                observacion: '',
+                cuit: ['', [Validators.required, Validators.minLength(3)]],
+                actividad: ['', [Validators.required, Validators.minLength(5)]],
+                tipo_ambiente_trabajoid: ['', Validators.required],
                 lugar: _fb.group({
                     id: 0,
                     localidadid: ['', Validators.required],
@@ -62,15 +71,6 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                     depto: '',
                     escalera: ''
                 })
-            }),
-            ambiente: _fb.group({
-                id: 0,
-                nombre: ['', [Validators.required, Validators.minLength(3)]],
-                legajo: ['', Validators.required],
-                observacion: '',
-                cuit: ['', [Validators.required, Validators.minLength(3)]],
-                actividad: ['', [Validators.required, Validators.minLength(5)]],
-                tipo_ambiente_trabajoid: ['', Validators.required]
             })
         }); 
     }
@@ -113,12 +113,12 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     }
     
     private prepararAmbienteTrabajo() {
-        return new AmbienteTrabajo(0, '', '', '', '', '', 0).deserialize(this.ambienteForm.value.ambiente);
+        let lugar = new Lugar(0, 0, '', '', '', '', '', '', false).deserialize(this.ambienteForm.value.persona.lugar);
+        return new AmbienteTrabajo(0, '', '', '', '', '', 0, lugar).deserialize(this.ambienteForm.value.ambiente);
     }
 
     private prepararPersona() {
-        let lugar = new Lugar(0, 0, '', '', '', '', '', '', false).deserialize(this.ambienteForm.value.persona.lugar);
-        return new Persona(0, '', '', '', '', '', 0, 0, 0, '', '', '', lugar, []).deserialize(this.ambienteForm.value.persona);
+        return new Representante(0, '', '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona)
     }
 
 }

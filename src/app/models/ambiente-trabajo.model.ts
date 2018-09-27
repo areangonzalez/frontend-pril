@@ -1,3 +1,5 @@
+import { Lugar } from "./lugar.model";
+
 export interface IAmbienteTrabajo {
     id: number,
     nombre: string,
@@ -18,10 +20,12 @@ export class AmbienteTrabajo implements IAmbienteTrabajo {
         public cuit: string,
         public actividad: string,
         public tipo_ambiente_trabajoid: number,
+        public lugar: Lugar
     ){}
 
     deserialize(input: any) {
         Object.assign(this, input);
+        this.lugar = new Lugar(0, 0, '', '', '', '', '', '', false).deserialize(input.lugar);
         return this;
     }
 

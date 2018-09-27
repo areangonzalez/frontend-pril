@@ -57,4 +57,6 @@
             <textarea class="form-control" id="observacion" rows="2" formControlName="observacion" placeholder="Observación o detalle del ambiente de trabajo..."></textarea>
         </div>
     </div>
+    <hr class="mb-4">
+    <lugar-form [group]="ambiente.lugar" [submitted]="submitted"></lugar-form>
 </fieldset>

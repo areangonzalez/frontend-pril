@@ -7,7 +7,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
     selector: 'modal-content-estudio',
     template: `
     <div class="modal-header">
-      <h4 class="modal-title">Hi there!</h4>
+      <h4 class="modal-title">Estudio</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
         <span aria-hidden="true">&times;</span>
       </button>

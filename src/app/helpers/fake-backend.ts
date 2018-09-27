@@ -272,15 +272,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
             }
-
+            // Crear ambiente de trabajo
             if (request.url.endsWith('/ambiente-trabajos') && request.method === 'POST') {
                 // get new user object from post body
                 let newAmbiente = request.body;
-                // validation
-                let duplicateUser = ambienteLista.filter(ambiente => { return ambiente.nro_documento === newAmbiente.persona.nro_documento; }).length;
-                if (duplicateUser) {
-                    return throwError({ error: { message: 'El representante con el nro documento:  "' + newAmbiente.persona.nro_documento + '" ya esta en un ambiente de trabajo' } });
-                }
 
                 // save new user
                 // array de la tabla
@@ -307,6 +302,51 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // datos de usuarios agregados
                 ambientesAgregados.push(newAmbiente);
                 localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
+
+                // respond 200 OK
+                return of(new HttpResponse({ status: 200 }));
+            }
+
+            // Editar ambiente de trabajo
+            if (request.url.match(/\/ambiente\-trabajos\/\d+$/) && request.method === 'PUT') {
+
+                let urlParts = request.url.split('/');
+                let id = parseInt(urlParts[urlParts.length - 1]);
+
+                // consigo el ambiente a editar en la respuesta
+                let editAmbiente = request.body;
+                // busco en el listado el ambiente
+                for (var i = 0; i < ambienteLista.length; i++) {
+                    if (ambienteLista[i]['id'] == id) {
+                        ambienteLista[i] = {
+                            id: id,
+                            nro_documento: editAmbiente.persona.nro_documento,
+                            apellido: editAmbiente.persona.apellido,
+                            nombre: editAmbiente.persona.nombre,
+                            direccion: editAmbiente.persona.lugar.calle + ' ' + editAmbiente.persona.lugar.altura,
+                            telefono: editAmbiente.persona.telefono,
+                            celular: editAmbiente.persona.celular,
+                            fax: editAmbiente.persona.fax,
+                            tipo: getNombreArray(editAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
+                            nombre_ambiente: editAmbiente.ambiente.nombre,
+                            cuit: editAmbiente.ambiente.cuit,
+                            estado: 'Activo'
+                        }
+                    }
+                }
+                // verifico el array de usuarios agregados
+                for (var d = 0; d < destinatarioAgregados.length; d++) {
+                    if (destinatarioAgregados[d]['id'] == id) {
+                        // elimino 1 elemento desde el indice especificado y agrego el nuevo array
+                        editAmbiente['id'] = id;
+                        destinatarioAgregados.splice(d, 1, editAmbiente);
+                    }
+                }
+
+                // datos a mostrar en la tabla
+                localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
+                // datos de usuarios agregados
+                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
