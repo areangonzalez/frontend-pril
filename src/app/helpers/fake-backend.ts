@@ -24,7 +24,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let sexo: any[] = [{ id: 1, nombre: "Hombre"}, {id: 2, nombre: "Mujer"}];
         let genero: any[] = [{ id: 1, nombre: "Femenino" }, { id: 2, nombre: "Masculino" }];
         let estadoCivil: any[] = [{ id: 1, nombre: "Casado/a" }, { id: 2, nombre: "Soltero/a" }, { id: 2, nombre: "Viudo/a" }];
-        let localidad: any[] = [{ id: 1, nombre: "Bariloche" }, { id: 2, nombre: "Cipolletti" }, { id: 3, nombre: "Gral. Roca" }, { id: 3, nombre: "Viedma" }];
+        let localidad: any[] = [{ id: 1, nombre: "Bariloche" }, { id: 2, nombre: "Cipolletti" }, { id: 3, nombre: "Gral. Roca" }, { id: 4, nombre: "Viedma" }];
         let nivelEducativo: any[] = [{ id: 1, nombre: "Primaria" }, { id: 2, nombre: "Secundaria" }, { id: 3, nombre: "Terciaria" }, { id: 3, nombre: "Universitaria" }];
         let tipoAmbienteTrabajoLista: any[] = [{ id: 1, nombre: 'Comisión de fomento' }, { id: 1, nombre: 'Empleador privado' },{ id: 1, nombre: 'Empresa' }, { id: 1, nombre: 'Institución gubernamental' },{ id: 1, nombre: 'Institución sin fines de lucro' }, { id: 1, nombre: 'Municipio' }]
         // datos adicionales
@@ -92,6 +92,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
+        /* ************************************************************************
+         *                                LOGIN 
+         * ************************************************************************ */
             // authenticate
             if (request.url.endsWith('/apimock/usuario/login') && request.method === 'POST') {
                 if (request.body.username === testUser.username && request.body.password_hash === testUser.password) {
@@ -113,7 +116,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
             }
-
+        /* ************************************************************************
+         *                                DESTINATARIO 
+         * ************************************************************************ */
             // lista de destinatario
             if (request.url.endsWith('/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
@@ -124,17 +129,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
             }
-
-            // lista de ambientes de trabajos
-            if (request.url.endsWith('/ambiente-trabajos') && request.method === 'GET') {
-                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    return of(new HttpResponse({ status: 200, body: ambienteLista }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
-            }            
 
             // guardar destinatario
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
@@ -249,34 +243,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return of(new HttpResponse({ status: 200 }));
             }
 
-            // get personas
-            // persona 1 29890098
-            if (request.url.endsWith('/personas') && request.method === 'GET') {
+        /* ************************************************************************
+         *                            AMBIENTE DE TRABAJO 
+         * ************************************************************************ */
+            // lista de ambientes de trabajos
+            if (request.url.endsWith('/ambiente-trabajos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    let nro_documento = request.params.get('nro_documento');
-                    let mensaje:string = 'Esta persona no existe.';
-
-                    let matchedUsers = personas.filter(persona => { return persona.nro_documento === nro_documento; });
-                    let seleccion = matchedUsers.length ? matchedUsers[0] : null;
-                    let resultado:any = [];
-                    if (seleccion != null) {
-                        resultado.push({estado:true, resultado:[seleccion]});
-                    }else{
-                        resultado.push({ estado: false, resultado: [], message:mensaje});                        
-                    }
-
-                    return of(new HttpResponse({ status: 200, body: resultado[0] }));
+                    return of(new HttpResponse({ status: 200, body: ambienteLista }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
-            }
+            }            
+
             // Crear ambiente de trabajo
             if (request.url.endsWith('/ambiente-trabajos') && request.method === 'POST') {
                 // get new user object from post body
                 let newAmbiente = request.body;
-                console.log(newAmbiente);
                 // save new user
                 // array de la tabla
                 newAmbiente.ambiente.id = generarId(ambienteLista);
@@ -306,53 +290,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return of(new HttpResponse({ status: 200 }));
             }
 
-            // Editar ambiente de trabajo
-            if (request.url.match(/\/ambiente\-trabajos\/\d+$/) && request.method === 'PUT') {
-
-                let urlParts = request.url.split('/');
-                let id = parseInt(urlParts[urlParts.length - 1]);
-
-                // consigo el ambiente a editar en la respuesta
-                let editAmbiente = request.body;
-                // busco en el listado el ambiente
-                for (var i = 0; i < ambienteLista.length; i++) {
-                    if (ambienteLista[i]['id'] == id) {
-                        ambienteLista[i] = {
-                            id: id,
-                            nro_documento: editAmbiente.persona.nro_documento,
-                            apellido: editAmbiente.persona.apellido,
-                            nombre: editAmbiente.persona.nombre,
-                            direccion: editAmbiente.ambiente.lugar.calle + ' ' + editAmbiente.ambiente.lugar.altura,
-                            telefono: editAmbiente.persona.telefono,
-                            celular: editAmbiente.persona.celular,
-                            fax: editAmbiente.persona.fax,
-                            tipo: getNombreArray(editAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
-                            nombre_ambiente: editAmbiente.ambiente.nombre,
-                            cuit: editAmbiente.ambiente.cuit,
-                            estado: 'Activo'
-                        }
-                    }
-                }
-                // verifico el array de usuarios agregados
-                for (var d = 0; d < ambientesAgregados.length; d++) {
-                    if (ambientesAgregados[d]['id'] == id) {
-                        // elimino 1 elemento desde el indice especificado y agrego el nuevo array
-                        editAmbiente['id'] = id;
-                        ambientesAgregados.splice(d, 1, editAmbiente);
-                    }
-                }
-
-                // datos a mostrar en la tabla
-                localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
-                // datos de usuarios agregados
-                localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
-
-                // respond 200 OK
-                return of(new HttpResponse({ status: 200 }));
-            }
-
             // conseguir AMBIENTE DE TRABAJO por id
-            if (request.url.match(/\/ambiente\-trabajo\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/ambiente\-trabajos\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let mensaje = 'No existe este ambiente';
@@ -376,7 +315,83 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
-            /* LISTADOS */
+            // Editar ambiente trabajo
+            if (request.url.match(/\/ambiente\-trabajos\/\d+$/) && request.method === 'PUT') {
+
+                let urlParts = request.url.split('/');
+                let id = parseInt(urlParts[urlParts.length - 1]);
+
+                // consigo el destinatario a editar en la respuesta
+                let editAmbiente = request.body;
+                console.log(editAmbiente);
+                // busco en el listado el destinatario
+                for (var i = 0; i < ambienteLista.length; i++) {
+                    if (ambienteLista[i]['id'] == id) {
+                        ambienteLista[i] = {
+                            id: editAmbiente.ambiente.id,
+                            nro_documento: editAmbiente.persona.nro_documento,
+                            apellido: editAmbiente.persona.apellido,
+                            nombre: editAmbiente.persona.nombre,
+                            direccion: editAmbiente.ambiente.lugar.calle + ' ' + editAmbiente.ambiente.lugar.altura,
+                            telefono: editAmbiente.persona.telefono,
+                            celular: editAmbiente.persona.celular,
+                            fax: editAmbiente.persona.fax,
+                            tipo: getNombreArray(editAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
+                            nombre_ambiente: editAmbiente.ambiente.nombre,
+                            cuit: editAmbiente.ambiente.cuit,
+                            estado: 'Activo'
+                        }
+                    }
+                }
+                // verifico el array de usuarios agregados
+                console.log(ambientesAgregados);
+                for (var d = 0; d < ambientesAgregados.length; d++) {
+                    if (ambientesAgregados[d]['ambiente']['id'] == id) {
+                        // elimino 1 elemento desde el indice especificado y agrego el nuevo array
+                        editAmbiente.ambiente['id'] = id;
+                        ambientesAgregados.splice(d, 1, editAmbiente);
+                    }
+                }
+
+                // datos a mostrar en la tabla
+                localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
+                // datos de usuarios agregados
+                localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
+
+                // respond 200 OK
+                return of(new HttpResponse({ status: 200 }));
+            }
+
+        /* ************************************************************************
+         *                                  PERSONAS
+         * ************************************************************************ */
+            // Buscar personas
+            if (request.url.endsWith('/personas') && request.method === 'GET') {
+                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    let nro_documento = request.params.get('nro_documento');
+                    let mensaje:string = 'Esta persona no existe.';
+
+                    let matchedUsers = personas.filter(persona => { return persona.nro_documento === nro_documento; });
+                    let seleccion = matchedUsers.length ? matchedUsers[0] : null;
+                    let resultado:any = [];
+                    if (seleccion != null) {
+                        resultado.push({estado:true, resultado:[seleccion]});
+                    }else{
+                        resultado.push({ estado: false, resultado: [], message:mensaje});                        
+                    }
+
+                    return of(new HttpResponse({ status: 200, body: resultado[0] }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
+            }
+
+        /* ************************************************************************
+         *                             LISTADOS GENERALES
+         * ************************************************************************ */
+
             // lista tipos de ambientes de trabajos
             if (request.url.endsWith('/tipo-ambiente-trabajos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application

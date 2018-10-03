@@ -24,6 +24,6 @@ export class AmbienteTrabajoService {
     }
 
     ambientePorId(id){
-        return this._http.get(this.url + '/ambiente-trabajo/' + id);
+        return this._http.get(this.url + '/ambiente-trabajos/' + id);
     }
 }
