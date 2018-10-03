@@ -8,6 +8,7 @@ export interface IAmbienteTrabajo {
     cuit: string,
     actividad: string,
     tipo_ambiente_trabajoid: number,
+    lugar: Lugar
 }
 
 export class AmbienteTrabajo implements IAmbienteTrabajo {

@@ -22,4 +22,8 @@ export class AmbienteTrabajoService {
      listarAmbienteTrabajo() {
         return this._http.get(this.url + '/ambiente-trabajos');
     }
+
+    ambientePorId(id){
+        return this._http.get(this.url + '/ambiente-trabajo/' + id);
+    }
 }

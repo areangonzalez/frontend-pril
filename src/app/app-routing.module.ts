@@ -34,6 +34,7 @@ import { AuthGuard } from './guards/auth.guard'
             { path: 'ambiente', component: AmbienteTrabajoComponent, data: { title: 'Lista ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/vista', component: VistaAmbienteTrabajoComponent, data: { title: 'Ver ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/agregar', component: FormAmbienteTrabajoComponent, data: { title: 'Agregar ambiente de Trabajo' }, canActivate: [AuthGuard] },
+            { path: 'ambiente/editar/:id', component: FormAmbienteTrabajoComponent, data: { title: 'Editar ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/oferta/agregar', component: OfertaComponent, data: { title: 'Agregar oferta' }, canActivate: [AuthGuard] },
 
             { path: 'area', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },

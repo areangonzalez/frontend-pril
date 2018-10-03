@@ -276,19 +276,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/ambiente-trabajos') && request.method === 'POST') {
                 // get new user object from post body
                 let newAmbiente = request.body;
-
+                console.log(newAmbiente);
                 // save new user
                 // array de la tabla
-                let estudioDestinatario = (newAmbiente.persona.estudios.length > 0) ? obtenerUltimoEstudio(newAmbiente.persona.estudios) : [];
                 newAmbiente.ambiente.id = generarId(ambienteLista);
                 newAmbiente.persona.id = generarId(ambienteLista);
-                newAmbiente.persona.lugar.id = generarId(ambienteLista);
+                newAmbiente.ambiente.lugar.id = generarId(ambienteLista);
                 ambienteLista.push({
                     id: newAmbiente.ambiente.id,
                     nro_documento: newAmbiente.persona.nro_documento,
                     apellido: newAmbiente.persona.apellido,
                     nombre: newAmbiente.persona.nombre,
-                    direccion: newAmbiente.persona.lugar.calle + ' ' + newAmbiente.persona.lugar.altura,
+                    direccion: newAmbiente.ambiente.lugar.calle + ' ' + newAmbiente.ambiente.lugar.altura,
                     telefono: newAmbiente.persona.telefono,
                     celular: newAmbiente.persona.celular,
                     fax: newAmbiente.persona.fax,
@@ -323,7 +322,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                             nro_documento: editAmbiente.persona.nro_documento,
                             apellido: editAmbiente.persona.apellido,
                             nombre: editAmbiente.persona.nombre,
-                            direccion: editAmbiente.persona.lugar.calle + ' ' + editAmbiente.persona.lugar.altura,
+                            direccion: editAmbiente.ambiente.lugar.calle + ' ' + editAmbiente.ambiente.lugar.altura,
                             telefono: editAmbiente.persona.telefono,
                             celular: editAmbiente.persona.celular,
                             fax: editAmbiente.persona.fax,
@@ -335,21 +334,46 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 }
                 // verifico el array de usuarios agregados
-                for (var d = 0; d < destinatarioAgregados.length; d++) {
-                    if (destinatarioAgregados[d]['id'] == id) {
+                for (var d = 0; d < ambientesAgregados.length; d++) {
+                    if (ambientesAgregados[d]['id'] == id) {
                         // elimino 1 elemento desde el indice especificado y agrego el nuevo array
                         editAmbiente['id'] = id;
-                        destinatarioAgregados.splice(d, 1, editAmbiente);
+                        ambientesAgregados.splice(d, 1, editAmbiente);
                     }
                 }
 
                 // datos a mostrar en la tabla
                 localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
                 // datos de usuarios agregados
-                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados));
+                localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
+            }
+
+            // conseguir AMBIENTE DE TRABAJO por id
+            if (request.url.match(/\/ambiente\-trabajo\/\d+$/) && request.method === 'GET') {
+                // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    let mensaje = 'No existe este ambiente';
+                    // find user by id in users array
+                    let urlParts = request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);                    
+                    let matchedUsers = ambientesAgregados.filter(ambiente => { return ambiente.ambiente.id === id; });
+                    let seleccion = matchedUsers.length ? matchedUsers[0] : null;
+                    let resultado: any = [];
+                    if (seleccion != null) {
+                        delete seleccion.ambiente.lugar.usarLugarEncontrado;
+                        resultado.push({ estado: true, resultado: [seleccion] });
+                    } else {
+                        resultado.push({ estado: false, resultado: [], message: mensaje });
+                    }
+
+                    return of(new HttpResponse({ status: 200, body: resultado[0] }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
             }
 
             /* LISTADOS */

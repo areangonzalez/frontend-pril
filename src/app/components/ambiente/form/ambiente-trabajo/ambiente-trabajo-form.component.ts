@@ -29,7 +29,6 @@ export class AmbienteTrabajoFormComponent implements OnInit {
 
     ngOnInit() {
         this.listarTipoAmbienteTrabajo();
-        console.log(this.ambiente);
     }
 
     get ambiente(){ return this.datosAmbienteTrabajo.controls; }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // services
@@ -27,9 +27,11 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     public mostrarBtnBusqueda: boolean = true;
     public submitted: boolean = false;
     private id: any;
+    public idAmbiente = '';
     /**
      * Inicializa los servicios
      * @param _router manejo de rutas dentro del componente
+     * @param _route Servicio para obtener el parametro del ruteo
      * @param _breadcrumbsService maneja el camino del cliente por el sistema
      * @param _fb formBuilder servicio para crear el formulario
      * @param _mensajeService servicio que maneja los mensajes.
@@ -37,6 +39,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
      */
     constructor(
         private _router: Router,
+        private _route: ActivatedRoute,
         private _breadcrumbsService: BreadcrumbsService,
         private _fb: FormBuilder,
         private _mensajeService: MensajesService,
@@ -78,6 +81,11 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     ngOnInit() {
         // breadcrumbs Dinamico
         this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Ambiente de trabajo', url: 'ambiente', params: [] }, { label: 'Agregar', url: 'ambiente/agregar', params: [] }]);
+        this.id = this._route.snapshot.paramMap.get('id');
+        if (this.id != undefined) {
+            this.idAmbiente = this.id;
+            this.ambientePorId(this.id);
+        }
     }
     /**
      * @function volver Vuelve a la vista del listado de ambiente de trabajo
@@ -109,7 +117,6 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 this._mensajeService.cancelado(error,'');
             }
         );
-        console.log(params);
     }
     
     private prepararAmbienteTrabajo() {
@@ -119,6 +126,21 @@ export class FormAmbienteTrabajoComponent implements OnInit {
 
     private prepararPersona() {
         return new Representante(0, '', '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona)
+    }
+
+    private ambientePorId(id) {
+        this._ambienteTrabajoService.ambientePorId(id).subscribe(
+            datos => {
+                if (datos['estado']) {
+                this.ambienteForm.setValue(datos['resultado'][0]);
+                }else{
+                    this._router.navigate(['ambiente']);
+                    this._mensajeService.cancelado(datos['message'], '');
+                }
+            }, error => {
+                this._mensajeService.cancelado(error, '');
+            }
+        );
     }
 
 }

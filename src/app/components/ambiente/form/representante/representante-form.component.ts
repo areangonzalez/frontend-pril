@@ -64,6 +64,7 @@ export class RepresentanteFormComponent implements OnInit {
                     let persona = respuesta['resultado'][0];
                     // borro variables que no son utilizadas en el objeto
                     delete persona.estudios;
+                    delete persona.lugar;
                     delete persona.fecha_nacimiento;
                     delete persona.estado_civilid;
                     delete persona.sexoid;
