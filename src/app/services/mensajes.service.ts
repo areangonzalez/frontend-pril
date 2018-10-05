@@ -32,8 +32,8 @@ export class MensajesService {
     cancelado(mensaje: string, url: IUrl) {
         this.alert(AlertType.Cancelado, mensaje, url);
     }
-    ofertar(mensaje: string, url: IUrl) {
-        this.alert(AlertType.Ofertar, mensaje, url);
+    ofrecer(mensaje: string, url: IUrl) {
+        this.alert(AlertType.Ofrecer, mensaje, url);
     }
 
 }

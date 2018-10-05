@@ -75,10 +75,10 @@ export class RepresentanteFormComponent implements OnInit {
                     this.existeRepresentante = true;
                 }else{
                     this.resetForm(this.datosPersona);
-                    this._mensajeService.cancelado(respuesta['message'], { name: '' });
+                    this._mensajeService.cancelado(respuesta['message'], [{ name: '' }]);
                 }
             }, error => {
-                this._mensajeService.cancelado(error, { name: '' });
+                this._mensajeService.cancelado(error, [{ name: '' }]);
             }
         )
     }

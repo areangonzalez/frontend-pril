@@ -58,7 +58,7 @@ export class AmbienteTrabajoFormComponent implements OnInit {
             datos => {
                 this.tipoAmbienteTrabajoListado = datos;
         }, error => {
-            this._mensajeService.cancelado(error, { name: '' });
+            this._mensajeService.cancelado(error, [{ name: '' }]);
         });
     }
 }

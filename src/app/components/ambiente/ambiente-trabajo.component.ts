@@ -40,7 +40,7 @@ export class AmbienteTrabajoComponent implements OnInit {
             datos => {
                 this.ambientes = datos;
             }, error => {
-                this._mensajeService.cancelado(error, { name: '' });
+                this._mensajeService.cancelado(error, [{ name: '' }]);
             }
         );
     }

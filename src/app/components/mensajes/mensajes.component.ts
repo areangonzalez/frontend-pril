@@ -14,7 +14,7 @@ export class MensajesComponent implements OnInit {
     @Output('eventoConfirmacion') eventoConfirmacion = new EventEmitter();
     mensaje: any;
     tipo: number;
-    url: string;
+    url: any;
     subscription: Subscription;
 
     /**
@@ -53,7 +53,7 @@ export class MensajesComponent implements OnInit {
                 return 'alert alert-success';
             case AlertType.Cancelado:
                 return 'alert alert-danger';
-            case AlertType.Ofertar:
+            case AlertType.Ofrecer:
                 return 'alert alert-success';
 
         }
@@ -66,22 +66,33 @@ export class MensajesComponent implements OnInit {
              return 'Exitoso';
             case AlertType.Cancelado:
              return 'Cancelado';
-            case AlertType.Ofertar:
+            case AlertType.Ofrecer:
              return 'Exitoso'; // despues de guardar ambiente de trabajo
         }
     }
 
-    redireccionamiento(){
-        if (typeof this.url === 'string') {
-            this._mensajeService.clearMessage();
-            this._router.navigate([this.url]);            
+    redireccionamiento(tipoVista){
+        for (var i in this.url) {
+            let param = (this.url[i].param != undefined)?this.url[i].param:'';
+            if (this.url[i].name != '') {
+                if (this.url[i].tipo != undefined){
+                    if (this.url[i].tipo == tipoVista) {
+                        if (param != ''){
+                            this._mensajeService.clearMessage();
+                            this._router.navigate([this.url[i].name, param]);
+                        }else{
+                            this._mensajeService.clearMessage();
+                            this._router.navigate([this.url[i].name]);        
+                        }
+                    }
+                }else{
+                    this._mensajeService.clearMessage();
+                    this._router.navigate([this.url[i].name]);
+                }
+            }else{
+                this._mensajeService.clearMessage();
+            }
         }
-        if (typeof this.url === 'object') {
-            this._mensajeService.clearMessage();
-            
-            this._router.navigate([this.url]);  
-        }
-
     }
 
     vistaAmbiente() {

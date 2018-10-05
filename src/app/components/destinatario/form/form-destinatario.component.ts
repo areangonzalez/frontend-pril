@@ -131,7 +131,7 @@ export class FormDestinatarioComponent implements OnInit {
         const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario() };
         this.submitted = true;
         if (this.destinatarioForm.invalid) {
-            this._mensajeService.cancelado('Campos sin completar.', { name: '' });
+            this._mensajeService.cancelado('Campos sin completar.', [{ name: '' }]);
             return;
         }else{
             if (this.id){
@@ -150,9 +150,9 @@ export class FormDestinatarioComponent implements OnInit {
     private guardarDestinatario(params:object, id:number){
         this._destinatarioService.guardar(params,id).subscribe(
             datos => {
-                this._mensajeService.exitoso('guardado Exitoso.', { name: 'destinatario' });
+                this._mensajeService.exitoso('guardado Exitoso.', [{ name: 'destinatario' }]);
         },error => {
-            this._mensajeService.cancelado(error, { name: '' });
+            this._mensajeService.cancelado(error, [{ name: '' }]);
         })
     }
 
@@ -180,7 +180,7 @@ export class FormDestinatarioComponent implements OnInit {
                 // seteo los valores para el formulario
                 this.destinatarioForm.setValue(datos);
             }, error => {
-                this._mensajeService.cancelado(error, { name: '' });
+                this._mensajeService.cancelado(error, [{ name: '' }]);
             }
         );
         

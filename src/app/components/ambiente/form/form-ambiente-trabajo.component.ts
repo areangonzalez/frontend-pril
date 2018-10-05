@@ -98,7 +98,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
         const params = {persona: this.prepararPersona(), ambiente: this.prepararAmbienteTrabajo()};
         this.submitted = true;
         if (this.ambienteForm.invalid) {
-            this._mensajeService.cancelado('Campos sin completar.', '');
+            this._mensajeService.cancelado('Campos sin completar.', [{ name: '' }]);
             return;
         }else{
             if (this.id) {
@@ -113,9 +113,9 @@ export class FormAmbienteTrabajoComponent implements OnInit {
         this._ambienteTrabajoService.guardar(params, id).subscribe(
             datos => {
                 //this._mensajeService.exitoso('Guardado Exitoso.', 'ambiente');
-                this._mensajeService.ofertar('Se ha guardado correctamente el ambiente de trabajo.', 'ambiente/ofertas');
+                this._mensajeService.ofrecer('Se ha guardado correctamente el ambiente de trabajo.', [{ name: 'ambiente/ofertas', tipo: 'agregar' }, { name: 'ambiente/vista', tipo: 'vista' }]);
             }, error => {
-                this._mensajeService.cancelado(error,'');
+                this._mensajeService.cancelado(error, [{ name: '' }]);
             }
         );
     }
@@ -136,10 +136,10 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                     this.ambienteForm.setValue(datos['resultado'][0]);
                 }else{
                     this._router.navigate(['ambiente']);
-                    this._mensajeService.cancelado(datos['message'], '');
+                    this._mensajeService.cancelado(datos['message'], [{ name: '' }]);
                 }
             }, error => {
-                this._mensajeService.cancelado(error, '');
+                this._mensajeService.cancelado(error, [{ name: '' }]);
             }
         );
     }
