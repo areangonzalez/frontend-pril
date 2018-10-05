@@ -1,11 +1,17 @@
 export class Alert {
     tipo: AlertType;
     mensaje: string;
-    urlLink: string;
+    urlLink?: IUrl;
 }
 
 export enum AlertType {
     Exitoso,
     Cancelado,
-    Confirmar
+    Confirmar,
+    Ofertar
+}
+
+export interface IUrl {
+    name: string,
+    param?: number
 }

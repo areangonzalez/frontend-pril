@@ -112,7 +112,8 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     private guardarAmbiente(params, id) {
         this._ambienteTrabajoService.guardar(params, id).subscribe(
             datos => {
-                this._mensajeService.exitoso('Guardado Exitoso.', 'ambiente');
+                //this._mensajeService.exitoso('Guardado Exitoso.', 'ambiente');
+                this._mensajeService.ofertar('Se ha guardado correctamente el ambiente de trabajo.', 'ambiente/ofertas');
             }, error => {
                 this._mensajeService.cancelado(error,'');
             }
@@ -132,7 +133,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
         this._ambienteTrabajoService.ambientePorId(id).subscribe(
             datos => {
                 if (datos['estado']) {
-                this.ambienteForm.setValue(datos['resultado'][0]);
+                    this.ambienteForm.setValue(datos['resultado'][0]);
                 }else{
                     this._router.navigate(['ambiente']);
                     this._mensajeService.cancelado(datos['message'], '');

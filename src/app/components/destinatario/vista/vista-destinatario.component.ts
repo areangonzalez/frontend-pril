@@ -48,7 +48,7 @@ export class VistaDestinatarioComponent {
             datos => {
                 this.destinatario = datos;
         }, error => {
-            this._mensajesService.cancelado(error,'');
+            this._mensajesService.cancelado(error, { name: '' });
         });
     }
 

@@ -323,7 +323,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // consigo el destinatario a editar en la respuesta
                 let editAmbiente = request.body;
-                console.log(editAmbiente);
                 // busco en el listado el destinatario
                 for (var i = 0; i < ambienteLista.length; i++) {
                     if (ambienteLista[i]['id'] == id) {
@@ -344,7 +343,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 }
                 // verifico el array de usuarios agregados
-                console.log(ambientesAgregados);
                 for (var d = 0; d < ambientesAgregados.length; d++) {
                     if (ambientesAgregados[d]['ambiente']['id'] == id) {
                         // elimino 1 elemento desde el indice especificado y agrego el nuevo array

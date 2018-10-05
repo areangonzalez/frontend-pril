@@ -53,6 +53,8 @@ export class MensajesComponent implements OnInit {
                 return 'alert alert-success';
             case AlertType.Cancelado:
                 return 'alert alert-danger';
+            case AlertType.Ofertar:
+                return 'alert alert-success';
 
         }
     }
@@ -64,11 +66,26 @@ export class MensajesComponent implements OnInit {
              return 'Exitoso';
             case AlertType.Cancelado:
              return 'Cancelado';
+            case AlertType.Ofertar:
+             return 'Exitoso'; // despues de guardar ambiente de trabajo
         }
     }
 
     redireccionamiento(){
+        if (typeof this.url === 'string') {
+            this._mensajeService.clearMessage();
+            this._router.navigate([this.url]);            
+        }
+        if (typeof this.url === 'object') {
+            this._mensajeService.clearMessage();
+            
+            this._router.navigate([this.url]);  
+        }
+
+    }
+
+    vistaAmbiente() {
         this._mensajeService.clearMessage();
-        this._router.navigate([this.url]);
+        this._router.navigate([]);
     }
 }

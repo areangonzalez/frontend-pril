@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Alert, AlertType } from "../models/alert.model";
+import { Alert, AlertType, IUrl } from "../models/alert.model";
 
 @Injectable()
 export class MensajesService {
@@ -22,15 +22,18 @@ export class MensajesService {
         return this.subject.asObservable();
     }
 
-    alert(tipo: AlertType, mensaje: string, url: string){
+    alert(tipo: AlertType, mensaje: string, url: IUrl){
         this.subject.next(<Alert>{tipo:tipo, mensaje:mensaje, urlLink:url})
     }
 
-    exitoso(mensaje: string, url: string){
+    exitoso(mensaje: string, url: IUrl){
         this.alert(AlertType.Exitoso, mensaje, url);
     }
-    cancelado(mensaje: string, url: string) {
+    cancelado(mensaje: string, url: IUrl) {
         this.alert(AlertType.Cancelado, mensaje, url);
+    }
+    ofertar(mensaje: string, url: IUrl) {
+        this.alert(AlertType.Ofertar, mensaje, url);
     }
 
 }

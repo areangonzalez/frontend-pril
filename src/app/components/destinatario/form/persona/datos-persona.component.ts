@@ -192,10 +192,10 @@ export class DatosPersonaComponent implements OnInit {
                     this.existePersona = true;
                 }else{
                     this.resetForm(this.datosPersona);
-                    this._mensajeService.cancelado(respuesta['message'],'');
+                    this._mensajeService.cancelado(respuesta['message'], { name: '' });
                 }
             }, error => {
-                this._mensajeService.cancelado(error,'');
+                this._mensajeService.cancelado(error, { name: '' });
             })
     }
 
