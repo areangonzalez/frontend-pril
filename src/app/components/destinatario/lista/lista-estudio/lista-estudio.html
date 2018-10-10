@@ -6,7 +6,7 @@
                 <th scope="col">Título</th>
                 <th class="text-center" scope="col">Estado</th>
                 <th class="text-center" scope="col">Año egreso</th>
-                <th scope="col">Acción</th>
+                <th scope="col" *ngIf="(tipo == 'vista')" >Acción</th>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +19,7 @@
                     <span *ngIf="(lista.en_curso)">En curso</span>
                 </td>
                 <td class="text-center">{{lista.anio}}</td>
-                <td>
+                <td *ngIf="(tipo == 'vista')">
                     <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'editar'" [estudio]="lista" [id]="i"></modal-estudio>
                     <modal-confirmacion [listaEstudios]="listaEstudios" [id]="i" ></modal-confirmacion>
                 </td>

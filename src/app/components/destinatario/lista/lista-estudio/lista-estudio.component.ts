@@ -10,7 +10,13 @@ import { Observable } from "rxjs";
 })
 @Injectable()
 export class ListaEstudioComponent implements OnInit {
+    /**
+     * @var listaEstudio listado de estudio que se mostrara en la tabla
+     * @var tipo vista: oculta la columna de accion y muestra los datos
+     *           form: muestra todas las columnas para el formulario.
+     */
     @Input("listaEstudios") public listaEstudios;
+    @Input("tipo") public tipo:any; 
 
     private respuestaMensaje: any;
 

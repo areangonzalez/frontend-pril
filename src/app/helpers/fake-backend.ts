@@ -191,7 +191,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         seleccion.persona['id'] = generarId(destinatarioLista);
                     }
 
-                    return of(new HttpResponse({ status: 200, body: seleccion }));
+                    return of(new HttpResponse({ status: 200, body: { success: true, resultado: seleccion} }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });

@@ -46,7 +46,12 @@ export class VistaDestinatarioComponent {
     private destinatarioPorId(id){
         this._destinatarioService.destinatarioPorId(id).subscribe(
             datos => {
-                this.destinatario = datos;
+                if (datos['success']) {
+                    this.destinatario = datos['resultado'];
+                }else{
+                    this._mensajesService.cancelado('Este destinatario no esta registrado.', [{ name: '' }]);        
+                    this._router.navigate(['destinatario']);
+                }
         }, error => {
             this._mensajesService.cancelado(error, [{ name: '' }]);
         });
