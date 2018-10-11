@@ -173,30 +173,34 @@ export class DatosPersonaComponent implements OnInit {
      * @function validarPersonaPorNroDocumento validación para la existencia de una persona dentro de la base de datos
      */
     validarPersonaPorNroDocumento(nro_documento){
-        this.nroDocumentoBusqueda = nro_documento;
-        this._personaService.personaPorNroDocumento(nro_documento).subscribe(
-            respuesta => {
-                if (respuesta['estado']){
-                    let persona = respuesta['resultado'][0];
-                    // actualizo la lista de estudio enviandolo al componente padre.
-                    this.setListaEstudios.emit(persona.estudios);
-                    // borro los estudios y fax del objeto
-                    delete persona.estudios;
-                    delete persona.fax;
-                    // Agrego parametros que son representativos en el formulario.
-                    persona['cuil_prin'] = this.primerosDigitosCuil(persona.cuil);
-                    persona['cuil_ult'] = this.ultimoDigitoCuil(persona.cuil);
-                    persona['fechaNacimiento'] = this.fechaAObjeto(persona.fecha_nacimiento);
-                    // seteo los valores al formularios con los datos de persona
-                    this.datosPersona.setValue(persona);
-                    this.existePersona = true;
-                }else{
-                    this.resetForm(this.datosPersona);
-                    this._mensajeService.cancelado(respuesta['message'], [{ name: '' }]);
-                }
-            }, error => {
-                this._mensajeService.cancelado(error, [{ name: '' }]);
-            })
+        if (nro_documento != '') {
+            this.nroDocumentoBusqueda = nro_documento;
+            this._personaService.personaPorNroDocumento(nro_documento).subscribe(
+                respuesta => {
+                    if (respuesta['estado']){
+                        let persona = respuesta['resultado'][0];
+                        // actualizo la lista de estudio enviandolo al componente padre.
+                        this.setListaEstudios.emit(persona.estudios);
+                        // borro los estudios y fax del objeto
+                        delete persona.estudios;
+                        delete persona.fax;
+                        // Agrego parametros que son representativos en el formulario.
+                        persona['cuil_prin'] = this.primerosDigitosCuil(persona.cuil);
+                        persona['cuil_ult'] = this.ultimoDigitoCuil(persona.cuil);
+                        persona['fechaNacimiento'] = this.fechaAObjeto(persona.fecha_nacimiento);
+                        // seteo los valores al formularios con los datos de persona
+                        this.datosPersona.setValue(persona);
+                        this.existePersona = true;
+                    }else{
+                        this.resetForm(this.datosPersona);
+                        this._mensajeService.cancelado(respuesta['message'], [{ name: '' }]);
+                        this.datosPersona.controls.nro_documento.setValue(nro_documento);
+                        this.cuil_medio = nro_documento;
+                    }
+                }, error => {
+                    this._mensajeService.cancelado(error, [{ name: '' }]);
+                });
+        }
     }
 
     /**
@@ -228,13 +232,6 @@ export class DatosPersonaComponent implements OnInit {
 
         return { year: parseInt(objFecha[0]), month: parseInt(objFecha[1]), day: parseInt(objFecha[2]) };
     }
-    // Verifico si se cambia el numero de documento.
-    nroDocumentoCambia(nroDocumento) {
-        console.log('busqueda: ',this.nroDocumentoBusqueda);
-        if (this.nroDocumentoBusqueda != nroDocumento && this.nroDocumentoBusqueda != ''){
-            this.resetForm(this.datosPersona);
-        }
-    }
 
     // reseteo el formulario y pongo las variables en vacio
     public resetForm(formGroup: FormGroup) {
@@ -248,7 +245,6 @@ export class DatosPersonaComponent implements OnInit {
         // formulario reset
         formGroup.reset();
         formGroup.markAsUntouched();
-        console.log(formGroup.controls);
         Object.keys(formGroup.controls).forEach((name) => {
             control = formGroup.controls[name];
             if(control instanceof FormGroup){

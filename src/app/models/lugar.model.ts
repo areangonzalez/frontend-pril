@@ -7,8 +7,7 @@ export class Lugar {
         public barrio: string,
         public piso: string,
         public depto: string,
-        public escalera: string,
-        public usarLugarEncontrado:boolean
+        public escalera: string
     ) { }
 
     deserialize(input: Lugar) {
