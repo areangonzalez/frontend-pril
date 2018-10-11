@@ -38,7 +38,6 @@ export class DatosPersonaComponent implements OnInit {
     public sexoLista:Object = [];
     public generoLista:Object = [];
     public estadoCivilLista:Object = [];
-    existePersona:boolean = false;
     nroDocumentoBusqueda:string = '';
 
     /**
@@ -190,7 +189,6 @@ export class DatosPersonaComponent implements OnInit {
                         persona['fechaNacimiento'] = this.fechaAObjeto(persona.fecha_nacimiento);
                         // seteo los valores al formularios con los datos de persona
                         this.datosPersona.setValue(persona);
-                        this.existePersona = true;
                     }else{
                         this.resetForm(this.datosPersona);
                         this._mensajeService.cancelado(respuesta['message'], [{ name: '' }]);
@@ -239,7 +237,6 @@ export class DatosPersonaComponent implements OnInit {
         // variables generales en el formulario
         this.cuil_medio = '';
         this.nroDocumentoBusqueda = '';
-        this.existePersona = false;
         this.setListaEstudios.emit([]);
 
         // formulario reset

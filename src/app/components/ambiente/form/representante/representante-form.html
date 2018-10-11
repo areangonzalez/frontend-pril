@@ -5,14 +5,8 @@
             <label for="nro_documento">Nro. documento (<span>*</span>):</label>
             <div class="input-group">
                 <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" (keyup)="esNumeroDocumento($event.target.value)"
-                 minlength="7" maxlength="8" placeholder="Ej.: 23123987" [ngClass]="{'is-invalid': (representante.nro_documento.invalid && submitted)}">
-                <div *ngIf="mostrarBtnBusqueda" class="input-group-append">
-                    <button class="btn" [ngClass]="{'btn-outline-success': (existeRepresentante), 'btn-outline-secondary': (!existeRepresentante)}" type="button"
-                        id="validar_representante_existe" (click)="validarRepresentantePorDocumento(representante.nro_documento.value)">
-                        <span *ngIf="(!existeRepresentante)" class="oi oi-magnifying-glass" title="buscar persona" aria-hidden="true"></span>
-                        <span *ngIf="(existeRepresentante)" class="oi oi-check" title="Encontro persona" aria-hidden="true"></span>
-                    </button>
-                </div>
+                 minlength="7" maxlength="8" placeholder="Ej.: 23123987" [ngClass]="{'is-invalid': (representante.nro_documento.invalid && submitted)}"
+                 (change)="validarRepresentantePorDocumento($event.target.value)" >
             </div>
             <div *ngIf="(representante.nro_documento.invalid && submitted)" class="text-danger">
                 <div *ngIf="representante.nro_documento.errors.required">Este campo es requerido. </div>
