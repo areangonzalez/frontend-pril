@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
+import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 //services
 import { DestinatarioService } from "../../../services/destinatario.service";
 import { MensajesService } from "../../../services/mensajes.service";
@@ -8,7 +9,8 @@ import { MensajesService } from "../../../services/mensajes.service";
 @Component({
     selector: 'destinatario-vista',
     templateUrl: './vista-destinatario.html',
-    styleUrls: ['./vista-destinatario.css'] 
+    styleUrls: ['./vista-destinatario.css'] ,
+    providers: [NgbTooltipConfig]
 })
 export class VistaDestinatarioComponent {
     //title = 'app';
@@ -22,8 +24,12 @@ export class VistaDestinatarioComponent {
         private _route: ActivatedRoute,
         private _breadcrumbsService: BreadcrumbsService,
         private _mensajesService: MensajesService,
-        private _destinatarioService: DestinatarioService
-    ){}
+        private _destinatarioService: DestinatarioService,
+        config: NgbTooltipConfig
+){
+        config.placement = 'top';
+        config.triggers = 'click';
+}
 
     ngOnInit() {
         // breadcrumbs Dinamico
