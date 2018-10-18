@@ -26,7 +26,7 @@ export class AmbienteTrabajo implements IAmbienteTrabajo {
 
     deserialize(input: any) {
         Object.assign(this, input);
-        this.lugar = new Lugar(0, 0, '', '', '', '', '', '', false).deserialize(input.lugar);
+        this.lugar = new Lugar(0, 0, '', '', '', '', '', '').deserialize(input.lugar);
         return this;
     }
 

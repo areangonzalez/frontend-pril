@@ -130,7 +130,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
-            // guardar destinatario
+            // Agregar destinatario
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
                 // get new user object from post body
                 let newDestinatario = request.body;
@@ -149,6 +149,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let estudioDestinatario = (newDestinatario.persona.estudios.length > 0)?obtenerUltimoEstudio(newDestinatario.persona.estudios):[];
                 newDestinatario.id = generarId(destinatarioLista);
                 newDestinatario.persona.lugar.id = generarId(destinatarioLista);
+                personas.push(newDestinatario.persona);
                 destinatarioLista.push({
                     id: newDestinatario.id,
                     nro_documento: newDestinatario.persona.nro_documento,

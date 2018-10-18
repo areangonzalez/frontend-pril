@@ -57,7 +57,7 @@ export class RepresentanteFormComponent implements OnInit {
         }
     }
 
-    private validarRepresentantePorDocumento(nroDocumento) {
+    validarRepresentantePorDocumento(nroDocumento) {
         let doc = nroDocumento;
         if (nroDocumento != '') {
             this._personaService.personaPorNroDocumento(nroDocumento).subscribe(

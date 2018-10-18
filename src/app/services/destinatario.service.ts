@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from "../../environments/environment";
 import { httpOptions } from "../services/http-options.service";
 
@@ -21,8 +21,10 @@ export class DestinatarioService {
         return this._http.get(this.url + '/destinatarios');
     }
 
-    destinatarioPorId(id){
-        return this._http.get(this.url + '/destinatarios/' + id);
+    destinatarioPorId(id, modificar:boolean = false){
+        let param = (modificar == true)?'true':'false';
+        let options = { headears: httpOptions, params: new HttpParams().set('modificar', param ) };
+        return this._http.get(this.url + '/destinatarios/' + id, options);
     }
 
 

@@ -121,7 +121,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     }
     
     private prepararAmbienteTrabajo() {
-        let lugar = new Lugar(0, 0, '', '', '', '', '', '', false).deserialize(this.ambienteForm.value.persona.lugar);
+        let lugar = new Lugar(0, 0, '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona.lugar);
         return new AmbienteTrabajo(0, '', '', '', '', '', 0, lugar).deserialize(this.ambienteForm.value.ambiente);
     }
 

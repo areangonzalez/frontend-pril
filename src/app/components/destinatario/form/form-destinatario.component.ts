@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
-import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from "@angular/forms";
 import { switchMap } from 'rxjs/operators';
 // services
 import { MensajesService } from "../../../services/mensajes.service";
@@ -87,6 +87,7 @@ export class FormDestinatarioComponent implements OnInit {
                 })
             }),
             destinatario: _fb.group({
+                id: null,
                 origen: ['', [Validators.required]],
                 fechaPresentacion: ['', Validators.required],
                 fecha_presentacion: '',
@@ -160,24 +161,19 @@ export class FormDestinatarioComponent implements OnInit {
      * @param id identificador del destinatario a buscar
      */
     private destinatarioPorId(id){
-        this._destinatarioService.destinatarioPorId(id).subscribe(
-            datos => {
+        this._destinatarioService.destinatarioPorId(id,true).subscribe(
+            datos => { 
+
+                let dDatos = datos;
                 // agrego los estudios a la lista
                 (datos['persona']['estudios'].length > 0)?this.listaEstudios = datos['persona']['estudios']:[];
-                // borro la propiedad estudio y fax del objeto
-                delete datos['persona']['estudios'];
-                delete datos['persona']['fax'];
-                // agrego propiedades al objeto
-                datos['persona']['cuil_prin'] = this.primerosDigitosCuil(datos['persona']['cuil']);
-                datos['persona']['cuil_ult'] = this.ultimoDigitoCuil(datos['persona']['cuil']);
-                datos['persona']['fechaNacimiento'] = this.formatFecha(datos['persona']['fecha_nacimiento']);
-                datos['destinatario']['fechaPresentacion'] = this.formatFecha(datos['destinatario']['fecha_presentacion']);
                 // variables para el documento, profesion y oficio
                 this.nroDoc = datos['persona']['nro_documento'];
                 this.profesionid = datos['destinatario']['profesionid'];
                 this.oficioid = datos['destinatario']['oficioid'];
                 // seteo los valores para el formulario
-                this.destinatarioForm.setValue(datos);
+                this.setValuesForm(this.destinatarioForm, datos);                
+
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }
@@ -230,6 +226,44 @@ export class FormDestinatarioComponent implements OnInit {
     public setListaEstudios(e){
         this.listaEstudios = e;
         return this.listaEstudios;
+    }
+
+    private setValuesForm(formGroup: FormGroup, asignarObjeto: Object){
+        let control: AbstractControl = null;
+        
+        Object.keys(formGroup.controls).forEach((name) => {
+
+            for (var key in asignarObjeto) {
+                if (name == 'fechaNacimiento') {
+                    control = formGroup.controls[name];
+                    control.setValue(this.formatFecha(asignarObjeto['fecha_nacimiento']));
+                    control.setErrors(null);
+                } else if (name == 'fechaPresentacion') {
+                    control = formGroup.controls[name];
+                    control.setValue(this.formatFecha(asignarObjeto['fecha_presentacion']));
+                    control.setErrors(null);
+                } else if (name == 'cuil_prin') {
+                    control = formGroup.controls[name];
+                    control.setValue(this.primerosDigitosCuil(asignarObjeto['cuil']));
+                    control.setErrors(null);
+                } else if (name == 'cuil_ult') {
+                    control = formGroup.controls[name];
+                    control.setValue(this.ultimoDigitoCuil(asignarObjeto['cuil']));
+                    control.setErrors(null);
+                } else if (key == name) {
+                    control = formGroup.controls[name];
+                    if (control instanceof FormGroup) {
+                      this.setValuesForm(control, asignarObjeto[key]);
+                    } else {
+                        control.setValue(asignarObjeto[key]);
+                        control.setErrors(null);
+                    }
+                }
+                    
+            }
+            
+
+        });
     }
 
 }
