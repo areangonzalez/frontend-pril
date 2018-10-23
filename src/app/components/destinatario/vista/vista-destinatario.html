@@ -87,7 +87,16 @@
                     <div class="col-md-12">
                         <ul class="list-inline d-flex justify-content-center">
                             <li class="list-inline-item">
-                                <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.lugar.localidad}} - {{destinatario.persona.lugar.calle}} {{destinatario.persona.lugar.altura}}">
+                                <ng-template #direccionContent>
+                                    {{destinatario.persona.lugar.localidad}} <br>
+                                    {{destinatario.persona.lugar.barrio}} <br>
+                                    {{destinatario.persona.lugar.calle}} {{destinatario.persona.lugar.altura}} 
+                                    <span *ngIf="(destinatario.persona.lugar.escalera != '' || destinatario.persona.lugar.depto != '' || destinatario.persona.lugar.piso != '')">
+                                        <br>
+                                        {{(destinatario.persona.lugar.escalera != "")?destinatario.persona.lugar.escalera:""}} {{(destinatario.persona.lugar.depto != "")?destinatario.persona.lugar.depto:""}} {{(destinatario.persona.lugar.piso != "")?destinatario.persona.lugar.piso:""}}
+                                    </span>
+                                </ng-template>
+                                <button type="button" class="btn btn-outline-secondary btn-margin-left" [ngbTooltip]="direccionContent">
                                     <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                                 </button>
                             </li>
@@ -101,10 +110,17 @@
                                     <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
                                 </button>
                             </li>
+                            <li class="list-inline-item">
+                                <ng-template #bancoContent>{{destinatario.destinatario.banco_nombre}} <br> <b>CBU:</b> {{destinatario.destinatario.banco_cbu}} <br> <b>Alias:</b> {{destinatario.destinatario.banco_alias}}</ng-template>
+                                <button *ngIf="(destinatario.destinatario.banco_nombre != '')" type="button" class="btn btn-outline-secondary btn-margin-left"
+                                  [ngbTooltip]="bancoContent">
+                                    <i class="fas fa-university"></i>
+                                </button>
+                            </li>
                         </ul>
                     </div>
                      <div class="col-md-12">
-                        <lista-estudio *ngIf="(destinatario.persona.estudios.length > 0)" [listaEstudios]="destinatario.persona.estudios" ></lista-estudio>
+                        <lista-estudio *ngIf="(destinatario.persona.estudios.length > 0)" [listaEstudios]="destinatario.persona.estudios" [tipo]="0" ></lista-estudio>
                         <hr *ngIf="(destinatario.persona.estudios.length == 0)" class="mb-3">
                         <div *ngIf="(destinatario.persona.estudios.length == 0)" class="d-flex justify-content-center alert alert-danger">
                                 Destinatario sin  estudios. 

@@ -39,7 +39,7 @@ export class ModalContentEstudio {
     constructor(public activeModal: NgbActiveModal, _fb: FormBuilder ) {
         this.estudiosForm = _fb.group({
             nivel_educativoid: ['', Validators.required],
-            nivel_educativo_nombre: '',
+            nivel_educativo: '',
             completo: true,
             en_curso: false,
             titulo: ['', [Validators.required, Validators.minLength(3)]],

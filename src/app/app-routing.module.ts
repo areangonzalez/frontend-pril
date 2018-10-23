@@ -27,15 +27,15 @@ import { AuthGuard } from './guards/auth.guard'
             
             { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', }, canActivate: [AuthGuard] },
             { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', }, canActivate: [AuthGuard]  },
-            { path: 'destinatario/editar/:id', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', }, canActivate: [AuthGuard] },
+            { path: 'destinatario/editar/:id', component: FormDestinatarioComponent, data: { title: 'Editar destinatario', }, canActivate: [AuthGuard] },
             { path: 'destinatario/vista/:id', component: VistaDestinatarioComponent, data: { title: 'Ver destinatario', }, canActivate: [AuthGuard] },
             { path: 'destinatario/estudio', component: EstudioComponent, data: { title: 'Estudio/s', }, canActivate: [AuthGuard] },
             
-            { path: 'ambiente', component: AmbienteTrabajoComponent, data: { title: 'Lista ambiente de Trabajo' }, canActivate: [AuthGuard] },
+            { path: 'ambiente', component: AmbienteTrabajoComponent, data: { title: 'Lista ambiente de Trabajo' }, canActivate: [AuthGuard]},
             { path: 'ambiente/vista', component: VistaAmbienteTrabajoComponent, data: { title: 'Ver ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/agregar', component: FormAmbienteTrabajoComponent, data: { title: 'Agregar ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/editar/:id', component: FormAmbienteTrabajoComponent, data: { title: 'Editar ambiente de Trabajo' }, canActivate: [AuthGuard] },
-            { path: 'ambiente/ofertas', component: OfertaComponent, data: { title: 'Ofertas' }, canActivate: [AuthGuard] },
+            { path: 'ambiente/:id/ofertas', component: OfertaComponent, data: { title: 'Ofertas' }, canActivate: [AuthGuard] },
 
             { path: 'area', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },
             { path: 'area/crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },

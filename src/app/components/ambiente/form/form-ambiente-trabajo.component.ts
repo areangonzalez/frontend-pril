@@ -112,8 +112,10 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     private guardarAmbiente(params, id) {
         this._ambienteTrabajoService.guardar(params, id).subscribe(
             datos => {
-                //this._mensajeService.exitoso('Guardado Exitoso.', 'ambiente');
-                this._mensajeService.ofrecer('Se ha guardado correctamente el ambiente de trabajo.', [{ name: 'ambiente/ofertas', tipo: 'agregar' }, { name: 'ambiente/vista', tipo: 'vista' }]);
+                if (id == '') {
+                    id = datos['id'];
+                }
+                this._mensajeService.ofrecer('Se ha guardado correctamente el ambiente de trabajo.', [{ name: 'ambiente/' + id + '/ofertas', tipo: 'agregar' }, { name: 'ambiente/vista', tipo: 'vista' }]);
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }

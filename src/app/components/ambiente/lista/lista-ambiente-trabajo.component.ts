@@ -26,4 +26,8 @@ export class ListaAmbienteTrabajoComponent {
     editarAmbienteTrabajo(id) {
         this._router.navigate(['ambiente/editar', id]);
     }
+
+    agregarOfertas(id) {
+        this._router.navigate(['ambiente', id, 'ofertas']);
+    }
 }

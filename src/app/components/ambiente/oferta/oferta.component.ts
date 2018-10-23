@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 
@@ -11,9 +11,13 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 export class OfertaComponent implements OnInit {
     public oferta: FormGroup;
     public ofertas: Object;
+    private id:any;
+    public idAmbiente = '';
+
     constructor(
         private breadcrumbsService: BreadcrumbsService,
         private _router: Router,
+        private _route: ActivatedRoute,
         private _fb: FormBuilder,
     ) {
         this.oferta = _fb.group({
@@ -44,6 +48,17 @@ export class OfertaComponent implements OnInit {
             { label: 'Ambiente de trabajo', url: 'ambiente', params: [] },
             { label: 'Agregar oferta', url: 'ambiente/oferta/agregar', params: [] }
         ]);
+        this.id = this._route.snapshot.paramMap.get('id');
+        if (this.id != undefined) {
+            this.buscarOfertas(this.id);
+        }else{
+            this._router.navigate(['ambiente']);
+        }
+    }
+
+
+    private buscarOfertas(idAmbiente) {
+        console.log(idAmbiente);
     }
 
 }

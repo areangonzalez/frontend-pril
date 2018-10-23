@@ -114,6 +114,7 @@ export class FormDestinatarioComponent implements OnInit {
             this.idDestinatario = this.id;
             this.destinatarioPorId(this.id);
             this.mostrarBoton = false;
+            this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Destinatario', url: 'destinatario', params: [] }, { label: 'Editar', url: 'destinatario/agregar', params: [] }]);
         }
     }
     /**

@@ -63,7 +63,6 @@ export class EstudioComponent implements OnInit {
     getNivelEducativo(){
         this._nivelEducativoService.listado().subscribe(
             datos => {
-                console.log(datos);
                 this.listaNivelEducativo = datos;
             }, error => { console.log(Error); }
         );
@@ -74,7 +73,7 @@ export class EstudioComponent implements OnInit {
      */
     seleccionarNombre(e){
         let opcionesCombo = e.target['options'];
-        this.estudiosForm.nivel_educativo_nombre.setValue(opcionesCombo[opcionesCombo.selectedIndex].text);
+        this.estudiosForm.nivel_educativo.setValue(opcionesCombo[opcionesCombo.selectedIndex].text);
     }
 
     obtenerAnios(){

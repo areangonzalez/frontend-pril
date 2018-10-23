@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from "../../environments/environment";
 import { httpOptions } from "../services/http-options.service";
 
@@ -10,7 +10,8 @@ export class LocalidadService {
     constructor(private _http: HttpClient) { }
 
     listado() {
-        return this._http.get(this.url + '/localidads');
+        let options = { headears: httpOptions, params: new HttpParams().set('modificar', '16') };
+        return this._http.get(this.url + '/localidads', options);
     }
 
 

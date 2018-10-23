@@ -2,7 +2,7 @@
     <datos-persona-form [group]="destinatarioForm.controls.persona" [submitted]="submitted" [documento]="nroDoc" (setListaEstudios)="setListaEstudios($event)" [mostrarBtnBusqueda]="mostrarBoton" ></datos-persona-form>
     <hr class="my-4">
     <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'agregar'" [texto]="'Agregar estudio'"></modal-estudio>
-    <lista-estudio *ngIf="(listaEstudios.length > 0)" [listaEstudios]="listaEstudios" [tipo]="form"></lista-estudio>
+    <lista-estudio *ngIf="(listaEstudios.length > 0)" [listaEstudios]="listaEstudios" [tipo]="1"></lista-estudio>
     <hr class="my-4">
     <datos-destinatario-form [group]="destinatarioForm.controls.destinatario" [submitted]="submitted" [setProfesion]="profesionid" [setOficio]="oficioid" ></datos-destinatario-form>
     <hr class="my-4">

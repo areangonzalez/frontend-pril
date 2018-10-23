@@ -68,7 +68,7 @@ import { AmbienteTrabajoService } from "./services/ambiente-trabajo.service";
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     // provider used to create fake backend
-    //fakeBackendProvider,
+    fakeBackendProvider,
     // servicios del sistema
     BreadcrumbsService,
     DestinatarioService,    
