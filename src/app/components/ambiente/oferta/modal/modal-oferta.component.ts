@@ -74,23 +74,18 @@ export class ModalContentOferta {
         this.ofertaForm.controls.ambienteid.setValue(this.ambienteid);
         let lugar = new Lugar(0, 0, '', '', '', '', '', '').deserialize(this.ofertaForm.value.lugar.value);
         let oferta = new Oferta(0,0,'','','','','','','', lugar).deserialize(this.ofertaForm.value);
-        let params = oferta;
 
+        this.submitted = true;
+        console.log(this.ofertaForm.invalid);
         if (this.ofertaForm.invalid) {
-            this.submitted = true;
             this._mensajeService.cancelado('Campos sin completar.', [{ name: '' }]);
             return;
         } else {
-                this.activeModal.close(params);
+                this.activeModal.close({params: oferta, id:oferta.id});
         }
 
 
-        /* this._ofertaService.guardar(params, 0).subscribe(
-            data => {
-                
-            }, error => {
-                this.activeModal.close('error');
-            }); */
+        /*  */
         
     }
  
@@ -107,7 +102,7 @@ export class ModalContentOferta {
 }
 @Component({
     selector: 'modal-oferta',
-    templateUrl: './modal-oferta.html',
+    templateUrl: './modal-oferta.html'
 })
 @Injectable()
 export class ModalOfertaComponent {

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
+// servicios
 import { OfertaService } from "../../../services/oferta.service";
+import { MensajesService } from "../../../services//mensajes.service";
 
 @Component({
     selector: 'ambiente-trabajo-oferta',
@@ -17,7 +19,8 @@ export class OfertaComponent implements OnInit {
         private breadcrumbsService: BreadcrumbsService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _ofertaService: OfertaService
+        private _ofertaService: OfertaService,
+        private _mensajeService: MensajesService
     ) {}
 
     ngOnInit() {
@@ -45,10 +48,13 @@ export class OfertaComponent implements OnInit {
     }
 
     public guardarOferta(datos) {
-        console.log(datos);
-        /* if (datos.value == 'update') {
-            this.buscarOfertas(this.idAmbiente);
-        } */
+        this._ofertaService.guardar(datos['params'], datos['id']).subscribe(
+            data => {
+                this._mensajeService.exitoso('Se ha guardado correctamente la oferta', [{name: ''}]);
+                //this._mensajeService.ofrecer('Se ha guardado correctamente la oferta', [{ name: '', tipo: 'continuar' }, { name: 'ambiente/vista', tipo: 'vista' }]);
+            }, error => {
+                this._mensajeService.cancelado(error, [{name:''}]);
+            });
     }
 
 }

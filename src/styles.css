@@ -8,3 +8,7 @@
   top:73px;
   bottom: 70px;
 } 
+
+.modal-lg {
+    max-width: 1200px !important;
+}
