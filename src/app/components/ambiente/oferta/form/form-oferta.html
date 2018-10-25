@@ -1,107 +1,58 @@
-<h4>Localización de la práctica en el puesto de trabajo</h4>
-<fieldset [formGroup]="oferta">
-    <div class="row">
-        <div class="form-group col-md-4">
-            <label for="lugar_Calle">Calle (<span>*</span>):</label>
-            <input type="text" id="Calle" class="form-control" formControlName="calle">
-            <div *ngIf="oferta.controls.calle.invalid && (oferta.controls.calle.dirty || oferta.controls.calle.touched)"
-                class="text-danger">
-                <div *ngIf="oferta.controls.calle.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.controls.calle.errors.minlength">Escriba una calle valida.</div>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="lugar_altura">Altura (<span>*</span>):</label>
-            <input type="text" id="lugar_altura" class="form-control" formControlName="altura">
-            <div *ngIf="oferta.controls.altura.invalid && (oferta.controls.altura.dirty || oferta.controls.altura.touched)" class="text-danger">
-                <div *ngIf="oferta.controls.altura.errors.required">Por favor Seleccione localidad. </div>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="localidad">Localidad (<span>*</span>):</label>
-            <select class="form-control" id="localidad" formControlName="localidadid">
-                <option value="">Seleccione Localidad</option>
-                <option value="1">Gral. Roca</option>
-                <option value="2">Viedma</option>
-            </select>
-            <div *ngIf="oferta.controls.localidadid.invalid && (!oferta.controls.localidadid.pristine || oferta.controls.localidadid.touched)"
-                class="text-danger">
-                <div *ngIf="oferta.controls.localidadid.errors.required">Por favor Seleccione localidad. </div>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="telefono">Teléfono (<span>*</span>):</label>
-            <input type="text" id="telefono" class="form-control" formControlName="telefono">
-            <div *ngIf="oferta.controls.telefono.invalid && (oferta.controls.telefono.dirty || oferta.controls.telefono.touched)" class="text-danger">
-                <div *ngIf="oferta.controls.telefono.errors.required">Este campo es requerido</div>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="celular">Celular:</label>
-            <input type="text" id="celular" class="form-control" formControlName="celular">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="fax">Fax:</label>
-            <input type="text" id="fax" class="form-control" formControlName="fax">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="email">Email (<span>*</span>):</label>
-            <input type="text" id="email" class="form-control" formControlName="email">
-            <div *ngIf="oferta.controls.email.invalid && (oferta.controls.email.dirty || oferta.controls.email.touched)"
-                class="text-danger">
-                <div *ngIf="oferta.controls.email.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.controls.email.errors.pattern">El email es invalido.</div>
-            </div>
-        </div>
-    </div>
+<fieldset [formGroup]="datosOferta">
+    <lugar-form [group]="oferta.lugar" [submitted]="submitted"></lugar-form>
     <hr class="mb-4">
     <div class="row">
         <div class="form-group col-md-12">
             <label for="tarea">Tarea (<span>*</span>):</label>
-            <textarea class="form-control" id="tarea" rows="2" formControlName="tarea"></textarea>
-            <div *ngIf="oferta.controls.tarea.invalid && (oferta.controls.tarea.dirty || oferta.controls.tarea.touched)"
+            <textarea class="form-control" id="tarea" rows="2" formControlName="tarea"
+             [ngClass]="{'is-invalid': (oferta.tarea.invalid && submitted)}" ></textarea>
+            <div *ngIf="(oferta.tarea.invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="oferta.controls.tarea.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.controls.tarea.errors.minlength">Por favor, describa la tarea.</div>
+                <div *ngIf="oferta.tarea.errors.required">Este campo es requerido.</div>
+                <div *ngIf="oferta.tarea.errors.minlength">Por favor, describa la tarea.</div>
             </div>
         </div>
         <div class="form-group col-md-6">
             <label for="demanda_laboral">Demanda laboral (<span>*</span>):</label>
-            <textarea class="form-control" id="demanda_laboral" rows="2" formControlName="demanda_laboral"></textarea>
-            <div *ngIf="oferta.controls.demanda_laboral.invalid && (oferta.controls.demanda_laboral.dirty || oferta.controls.demanda_laboral.touched)"
+            <textarea class="form-control" id="demanda_laboral" rows="2" formControlName="demanda_laboral" 
+             [ngClass]="{'is-invalid': (oferta.demanda_laboral.invalid && submitted)}"></textarea>
+            <div *ngIf="(oferta.demanda_laboral.invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="oferta.controls.demanda_laboral.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.controls.demanda_laboral.errors.minlength">Por favor, describa la demanda laboral.</div>
+                <div *ngIf="oferta.demanda_laboral.errors.required">Este campo es requerido.</div>
+                <div *ngIf="oferta.demanda_laboral.errors.minlength">Por favor, describa la demanda laboral.</div>
             </div>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-6 align-no-input-validate">
             <label for="objetivo">objetivo:</label>
-            <textarea class="form-control" id="objetivo" rows="2" formControlName="objetivo"></textarea>
+            <textarea class="form-control" id="objetivo" rows="2" formControlName="objetivo" ></textarea>
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-4">
             <label for="area">Área:</label>
-            <input type="text" id="area" class="form-control" formControlName="area">
-            <div *ngIf="oferta.controls.area.invalid && (oferta.controls.area.dirty || oferta.controls.area.touched)" class="text-danger">
-                <div *ngIf="oferta.controls.area.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.controls.area.errors.minlength">El texto es muy corto.</div>
+            <input type="text" id="area" class="form-control" formControlName="area" 
+             [ngClass]="{'is-invalid': (oferta.area.invalid && submitted)}">
+            <div *ngIf="(oferta.area.invalid && submitted)" class="text-danger">
+                <div *ngIf="oferta.area.errors.required">Este campo es requerido.</div>
+                <div *ngIf="oferta.area.errors.minlength">El texto es muy corto.</div>
             </div>
         </div>
         <div class="form-group col-md-4">
             <label for="puesto">Puesto:</label>
-            <input type="text" id="puesto" class="form-control" formControlName="puesto">
-            <div *ngIf="oferta.controls.puesto.invalid && (oferta.controls.puesto.dirty || oferta.controls.puesto.touched)" class="text-danger">
-                <div *ngIf="oferta.controls.puesto.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.controls.puesto.errors.minlength">El texto es muy corto.</div>
+            <input type="text" id="puesto" class="form-control" formControlName="puesto" 
+             [ngClass]="{'is-invalid': (oferta.puesto.invalid && submitted)}">
+            <div *ngIf="(oferta.puesto.invalid && submitted)" class="text-danger">
+                <div *ngIf="oferta.puesto.errors.required">Este campo es requerido.</div>
+                <div *ngIf="oferta.puesto.errors.minlength">El texto es muy corto.</div>
             </div>
         </div>
         <div class="form-group col-md-4">
             <label for="dia_horario">Días y horarios:</label>
-            <input type="text" id="dia_horario" class="form-control" formControlName="dia_horario">
-            <div *ngIf="oferta.controls.dia_horario.invalid && (oferta.controls.dia_horario.dirty || oferta.controls.dia_horario.touched)" class="text-danger">
-                <div *ngIf="oferta.controls.dia_horario.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.controls.dia_horario.errors.minlength">Por favor, detalle bien el horario y los días.</div>
+            <input type="text" id="dia_horario" class="form-control" formControlName="dia_horario" 
+             [ngClass]="{'is-invalid': (oferta.dia_horario.invalid && submitted)}">
+            <div *ngIf="(oferta.dia_horario.invalid && submitted)" class="text-danger">
+                <div *ngIf="oferta.dia_horario.errors.required">Este campo es requerido.</div>
+                <div *ngIf="oferta.dia_horario.errors.minlength">Por favor, detalle bien el horario y los días.</div>
             </div>
         </div>
     </div>

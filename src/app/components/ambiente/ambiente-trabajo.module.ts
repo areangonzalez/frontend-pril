@@ -1,5 +1,5 @@
 // Imports necesarios para crear módulos
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -16,13 +16,15 @@ import { RepresentanteFormComponent } from "./form/representante/representante-f
 import { OfertaComponent } from "./oferta/oferta.component";
 import { ListaOfertaComponent } from "./oferta/lista/lista-oferta.component";
 import { FormOfertaComponent } from "./oferta/form/form-oferta.components";
+import { ModalContentOferta, ModalOfertaComponent } from "./oferta/modal/modal-oferta.component";
 
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, ListaOfertaComponent, FormOfertaComponent],
+    declarations: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, ListaOfertaComponent, FormOfertaComponent, ModalContentOferta, ModalOfertaComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, DestinatarioModule, NgbModule.forRoot()],
-    exports: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, ListaOfertaComponent, FormOfertaComponent, ReactiveFormsModule]
-    //entryComponents: [NgbdModalContentGrafica]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    exports: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, ListaOfertaComponent, FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ReactiveFormsModule],
+    entryComponents: [ModalContentOferta]
 })
 export class AmbienteTrabajoModule { }

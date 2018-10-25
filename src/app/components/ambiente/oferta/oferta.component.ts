@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
-import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { OfertaService } from "../../../services/oferta.service";
 
 @Component({
     selector: 'ambiente-trabajo-oferta',
@@ -9,8 +9,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
     styleUrls: ['./oferta.css']
 })
 export class OfertaComponent implements OnInit {
-    public oferta: FormGroup;
-    public ofertas: Object;
+    public listaOfertas: Object;
     private id:any;
     public idAmbiente = '';
 
@@ -18,29 +17,8 @@ export class OfertaComponent implements OnInit {
         private breadcrumbsService: BreadcrumbsService,
         private _router: Router,
         private _route: ActivatedRoute,
-        private _fb: FormBuilder,
-    ) {
-        this.oferta = _fb.group({
-            nombre_sucursal: ['', [Validators.required, Validators.minLength(3)]],
-            puesto: ['', [Validators.required, Validators.minLength(3)]],
-            area: ['', [Validators.required, Validators.minLength(3)]],
-            demanda_laboral: ['', [Validators.required, Validators.minLength(8)]],
-            objetivo: '',
-            dia_horario: ['', [Validators.required, Validators.minLength(5)]],
-            tarea: ['', [Validators.required, Validators.minLength(8)]],
-            // lugar
-            localidadid: ['', Validators.required],
-            calle: ['', [Validators.required, Validators.minLength(3)]],
-            altura: ['', Validators.required],
-            barrio: '',
-            depto: '',
-            piso: '',
-            telefono: ['', Validators.required],
-            celular: '', 
-            fax: '',
-            email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]]
-        }); 
-    }
+        private _ofertaService: OfertaService
+    ) {}
 
     ngOnInit() {
         this.breadcrumbsService.store([
@@ -50,6 +28,7 @@ export class OfertaComponent implements OnInit {
         ]);
         this.id = this._route.snapshot.paramMap.get('id');
         if (this.id != undefined) {
+            this.idAmbiente = this.id;
             this.buscarOfertas(this.id);
         }else{
             this._router.navigate(['ambiente']);
@@ -58,7 +37,18 @@ export class OfertaComponent implements OnInit {
 
 
     private buscarOfertas(idAmbiente) {
-        console.log(idAmbiente);
+        this._ofertaService.listarOfertas(idAmbiente).subscribe(
+            datos => {
+                console.log(datos);
+                this.listaOfertas = datos;
+            });
+    }
+
+    public guardarOferta(datos) {
+        console.log(datos);
+        /* if (datos.value == 'update') {
+            this.buscarOfertas(this.idAmbiente);
+        } */
     }
 
 }

@@ -7,7 +7,7 @@ import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
     //styleUrls: ['./lista-oferta.css']
 })
 export class ListaOfertaComponent implements OnInit {
-    @Input('ofertas') ofertas: Object;
+    @Input('listaOfertas') public listaOfertas: Object;
 
     constructor(
         private _router: Router

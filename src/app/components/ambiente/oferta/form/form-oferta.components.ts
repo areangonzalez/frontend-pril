@@ -8,7 +8,8 @@ import { FormGroup } from "@angular/forms";
     styleUrls: ['./form-oferta.css']
 })
 export class FormOfertaComponent implements OnInit {
-    @Input("group") public oferta: FormGroup;
+    @Input("group") public datosOferta: FormGroup;
+    @Input("submitted") public submitted: boolean;
 
     constructor(
         private _router: Router,
@@ -18,5 +19,7 @@ export class FormOfertaComponent implements OnInit {
     ngOnInit() {
         // breadcrumbs Dinamico
     }
+
+    get oferta() { return this.datosOferta.controls; }
 
 }

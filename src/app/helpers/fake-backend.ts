@@ -13,9 +13,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // listados de datos agregados
         let destinatarioLista: any[] = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
         let ambienteLista: any[] = JSON.parse(localStorage.getItem('ambienteLista')) || [];
+        let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
         // Agregados
         let destinatarioAgregados: any[] = JSON.parse(localStorage.getItem('destinatariosAgregados')) || [];
         let ambientesAgregados: any[] = JSON.parse(localStorage.getItem('ambientesAgregados')) || [];
+        let ofertasAgregadas: any[] = JSON.parse(localStorage.getItem('ofertasAgregadas')) || [];
         // listados globales
         let profesion: any[] = [{ id: 1, nombre: 'Abogado'},{ id: 3, nombre: 'Agrónomo'},{ id: 4, nombre: 'Bacteriólogo' },{ id: 5, nombre: 'Biofísico' },
             { id: 6, nombre: 'climatologo' },{ id: 7, nombre: 'Cirujano' },{ id: 8, nombre: 'Dentista' },{ id: 9, nombre: 'Doctor' },{ id: 10, nombre: 'Enfermero' }];
@@ -87,6 +89,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 texto+=' ';
             }
             return texto;
+        }
+
+        function hoy() {
+            let fecha = new Date();
+            return fecha.getFullYear() + '-' + fecha.getMonth() + '-' + fecha.getDate();
         }
 
         // wrap in delayed observable to simulate server api call
@@ -367,6 +374,75 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
             }
+
+        /* ************************************************************************
+         *                                  OFERTAS
+         * ************************************************************************ */
+            
+            // Buscar ofertas por ambiente
+            if (request.url.endsWith('/ofertas') && request.method === 'GET') {
+                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    let ambienteId = request.params.get('ambienteid');
+                    //let mensaje: string = 'Este ambiente no existe.';
+                    console.log("id: ", ambienteId);                    
+
+                    let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.idAmbiente === ambienteId; });
+                    console.log("match: ",matchedAmbiente);                    
+                    let seleccion = matchedAmbiente.length ? matchedAmbiente : [];
+                    console.log(seleccion);
+
+                    return of(new HttpResponse({ status: 200, body: seleccion }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
+            }
+
+            // Crear ofertas
+            if (request.url.endsWith('/ofertas') && request.method === 'POST') {
+                // get new user object from post body
+                let newOfertas = request.body;
+                // save new user
+                // array de la tabla
+                console.log(newOfertas);
+                // genero la lista de ofertas
+                newOfertas.id = generarId(ofertasAgregadas);
+                newOfertas.fecha_inicial = hoy();
+                ofertasLista.push({
+                    id: newOfertas.id,
+                    ambienteid: newOfertas.ambienteid,
+                    ambiente: getNombreArray(newOfertas.ambienteid, ambientesAgregados),
+                    nombre_sucursal: newOfertas.nombre_sucursal,
+                    puesto: newOfertas.puesto,
+                    area: newOfertas.area,
+                    demanda_laboral: newOfertas.demanda_laboral,
+                    objetivo: newOfertas.objetivo,
+                    dia_horario: newOfertas.dia_horario,
+                    tarea: newOfertas.tarea,
+                    lugar: {
+                        id: newOfertas.id,
+                        localidadid: newOfertas.localidadid,
+                        localidad: getNombreArray(newOfertas.localidadid, localidad),
+                        calle: newOfertas.calle,
+                        altura: newOfertas.altura,
+                        barrio: newOfertas.barrio,
+                        piso: newOfertas.piso,
+                        depto: newOfertas.depto,
+                        escalera: newOfertas.escalera
+                    }
+                });
+                // datos a mostrar en la tabla
+                localStorage.setItem('ofertasLista', JSON.stringify(ofertasLista));
+                // datos de usuarios agregados
+                ofertasAgregadas.push(newOfertas);
+                localStorage.setItem('ofertasAgregadas', JSON.stringify(ofertasAgregadas));
+
+                // respond 200 OK
+                return of(new HttpResponse({ status: 200 }));
+            }
+
+
 
         /* ************************************************************************
          *                                  PERSONAS

@@ -1,0 +1,5 @@
+<button type="button" class="btn" [ngClass]="{'btn-md btn-outline-success form-control': (tipo == 'agregar'), 'btn-light btn-sm':(tipo == 'editar')}"
+    (click)="open()">
+        <span class="oi oi-plus" aria-hidden="true" [ngClass]="{'oi-plus': (tipo == 'agregar'), 'oi-pencil': (tipo == 'editar')}"></span>
+        {{texto}}
+    </button>
