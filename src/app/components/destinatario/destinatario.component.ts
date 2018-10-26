@@ -19,7 +19,6 @@ export class DestinatarioComponent implements OnInit {
         this.breadcrumbsService.store([
             { label: 'Inicio', url: 'inicio', params: [] },
             { label: 'Destinatario', url: 'destinatario', params: [] }]);
-        console.log(this.breadcrumbsService);
         // listar destinatarios
         this.listar();
         

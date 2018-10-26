@@ -1,3 +1,3 @@
 <modal-oferta [tipo]="'agregar'" [texto]="'Agregar Oferta'" [ambienteid]="idAmbiente" (guardarOferta)="guardarOferta($event)"></modal-oferta>
 <div class="clearfix mb-4"></div>
-<lista-oferta [listaOfertas]="listaOfertas"></lista-oferta>
+<lista-oferta [listaOfertas]="listaOfertas" (guardarOferta)="guardarOferta($event)"></lista-oferta>

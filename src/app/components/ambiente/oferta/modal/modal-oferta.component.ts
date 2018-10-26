@@ -1,9 +1,10 @@
-import { Component, Input, Injectable, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Injectable, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 import { Oferta } from "../../../../models/oferta.model";
 import { Lugar } from "../../../../models/lugar.model";
 import { MensajesService } from "../../../../services/mensajes.service";
+import { OfertaService } from "../../../../services/oferta.service";
 
 @Component({
     selector: 'modal-content-oferta',
@@ -30,8 +31,9 @@ import { MensajesService } from "../../../../services/mensajes.service";
   `
 })
 @Injectable()
-export class ModalContentOferta {
+export class ModalContentOferta implements OnInit {
     @Input('ambienteid') public ambienteid: number;
+    @Input('ofertaid') public ofertaid: number;
     /* @Input('estudio') estudio;
     @Input('tipo') tipo;
     @Input('id') id;
@@ -45,7 +47,8 @@ export class ModalContentOferta {
      constructor(
          public activeModal: NgbActiveModal, 
          private _fb: FormBuilder, 
-         private _mensajeService: MensajesService
+         private _mensajeService: MensajesService,
+         private _ofertaService: OfertaService,
         ) {
          this.ofertaForm = _fb.group({
              id: 0,
@@ -70,36 +73,43 @@ export class ModalContentOferta {
          }); 
     }
 
+    ngOnInit(): void {
+        if (this.ofertaid != undefined) {
+            this.getOferta(this.ofertaid);
+        }
+        
+    }
+
     guardarOferta() {
         this.ofertaForm.controls.ambienteid.setValue(this.ambienteid);
         let lugar = new Lugar(0, 0, '', '', '', '', '', '').deserialize(this.ofertaForm.value.lugar.value);
         let oferta = new Oferta(0,0,'','','','','','','', lugar).deserialize(this.ofertaForm.value);
 
         this.submitted = true;
-        console.log(this.ofertaForm.invalid);
         if (this.ofertaForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.', [{ name: '' }]);
             return;
         } else {
                 this.activeModal.close({params: oferta, id:oferta.id});
         }
+    }
 
-
-        /*  */
-        
+    private getOferta(id) {
+        if (id != undefined) {
+            this._ofertaService.getOfertaPorId(id).subscribe(
+                datos => {
+                    // borro atributos que no son utilizados en el formulario
+                    delete datos['fecha_inicial'];
+                    this.ofertaForm.setValue(datos);
+                    /* this.ofertaDatos = datos; */
+                }, error => {
+                    this._mensajeService.cancelado('Esta oferta no existe, Por favor verifique los datos.', [{ name: '' }]);
+                });
+        }
     }
  
-    /*
-    validarNivelEducativo(nivelEducativo) {
-        // busco en el listado el nivel educativo por ID
-        for (var i = 0; i < this.listaOfertas.length; i++) {
-            if (this.listaOfertas[i].nivel_educativoid == nivelEducativo) {
-                return true;
-            }
-        }
-        return false;
-    } */
 }
+
 @Component({
     selector: 'modal-oferta',
     templateUrl: './modal-oferta.html'
@@ -114,15 +124,18 @@ export class ModalOfertaComponent {
     @Input("texto") texto;
     @Input("tipo") tipo;
     @Input("ambienteid") ambienteid:number;
+    @Input("ofertaid") ofertaid:number;
     @Output("guardarOferta") guardarOferta = new EventEmitter();
     /*@Input("estudio") estudio;
     @Input("id") id; */
+
 
     constructor(private modalService: NgbModal) { }
 
     open() {
         const modalRef = this.modalService.open(ModalContentOferta, { size: 'lg' });
         modalRef.componentInstance.ambienteid = this.ambienteid;
+        modalRef.componentInstance.ofertaid = this.ofertaid;
         /* modalRef.componentInstance.estudio = this.estudio;
         modalRef.componentInstance.tipo = this.tipo;
         modalRef.componentInstance.id = this.id; */
@@ -139,5 +152,7 @@ export class ModalOfertaComponent {
             }
         ); 
     }
+
+    
 
 }

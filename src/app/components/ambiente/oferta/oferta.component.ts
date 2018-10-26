@@ -51,6 +51,7 @@ export class OfertaComponent implements OnInit {
         this._ofertaService.guardar(datos['params'], datos['id']).subscribe(
             data => {
                 this._mensajeService.exitoso('Se ha guardado correctamente la oferta', [{name: ''}]);
+                this.buscarOfertas(this.idAmbiente);
                 //this._mensajeService.ofrecer('Se ha guardado correctamente la oferta', [{ name: '', tipo: 'continuar' }, { name: 'ambiente/vista', tipo: 'vista' }]);
             }, error => {
                 this._mensajeService.cancelado(error, [{name:''}]);

@@ -385,12 +385,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let ambienteId = request.params.get('ambienteid');
                     //let mensaje: string = 'Este ambiente no existe.';
-                    console.log("id: ", ambienteId);                    
 
-                    let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.idAmbiente === ambienteId; });
-                    console.log("match: ",matchedAmbiente);                    
+                    let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.ambienteid === ambienteId; });
                     let seleccion = matchedAmbiente.length ? matchedAmbiente : [];
-                    console.log(seleccion);
 
                     return of(new HttpResponse({ status: 200, body: seleccion }));
                 } else {
@@ -405,10 +402,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let newOfertas = request.body;
                 // save new user
                 // array de la tabla
-                console.log(newOfertas);
                 // genero la lista de ofertas
                 newOfertas.id = generarId(ofertasAgregadas);
                 newOfertas.fecha_inicial = hoy();
+                
                 ofertasLista.push({
                     id: newOfertas.id,
                     ambienteid: newOfertas.ambienteid,
@@ -420,6 +417,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     objetivo: newOfertas.objetivo,
                     dia_horario: newOfertas.dia_horario,
                     tarea: newOfertas.tarea,
+                    fecha_inicial: newOfertas.fecha_inicial,
+                    estado: 'Vacante',
                     lugar: {
                         id: newOfertas.id,
                         localidadid: newOfertas.localidadid,
@@ -442,7 +441,79 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return of(new HttpResponse({ status: 200 }));
             }
 
+            // conseguir OFERTA por id
+            if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'GET') {
+                // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find user by id in users array
+                    let urlParts = request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matchedOferta = ofertasAgregadas.filter(oferta => { return oferta.id === id; });
+                    let seleccion = matchedOferta.length ? matchedOferta[0] : null;
 
+                    return of(new HttpResponse({ status: 200, body: seleccion }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
+            }
+
+            // Editar Oferta
+            if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'PUT') {
+
+                let urlParts = request.url.split('/');
+                let id = parseInt(urlParts[urlParts.length - 1]);
+
+                // consigo el destinatario a editar en la respuesta
+                let editOferta = request.body;
+                console.log(editOferta);
+                // busco en el listado el destinatario
+                for (var i = 0; i < ofertasLista.length; i++) {
+                    if (ofertasLista[i]['id'] == id) {
+                        ofertasLista[i] = {
+                            id: editOferta.id,
+                            ambienteid: editOferta.ambienteid,
+                            ambiente: getNombreArray(editOferta.ambienteid, ambientesAgregados),
+                            nombre_sucursal: editOferta.nombre_sucursal,
+                            puesto: editOferta.puesto,
+                            area: editOferta.area,
+                            demanda_laboral: editOferta.demanda_laboral,
+                            objetivo: editOferta.objetivo,
+                            dia_horario: editOferta.dia_horario,
+                            tarea: editOferta.tarea,
+                            fecha_inicial: hoy(),
+                            estado: 'Vacante',
+                            lugar: {
+                                id: editOferta.id,
+                                localidadid: editOferta.localidadid,
+                                localidad: getNombreArray(editOferta.localidadid, localidad),
+                                calle: editOferta.calle,
+                                altura: editOferta.altura,
+                                barrio: editOferta.barrio,
+                                piso: editOferta.piso,
+                                depto: editOferta.depto,
+                                escalera: editOferta.escalera
+                            }
+                        }
+                    }
+                }
+                // verifico el array de usuarios agregados
+                for (var d = 0; d < ofertasAgregadas.length; d++) {
+                    if (ofertasAgregadas[d]['id'] == id) {
+                        // elimino 1 elemento desde el indice especificado y agrego el nuevo array
+                        editOferta['id'] = id;
+                        ofertasAgregadas.splice(d, 1, editOferta);
+                    }
+                }
+
+                // datos a mostrar en la tabla
+                localStorage.setItem('ofertasLista', JSON.stringify(ofertasLista));
+                // datos de usuarios agregados
+                localStorage.setItem('ofertasAgregadas', JSON.stringify(ofertasAgregadas));
+
+                // respond 200 OK
+                return of(new HttpResponse({ status: 200 }));
+            }
 
         /* ************************************************************************
          *                                  PERSONAS

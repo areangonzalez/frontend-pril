@@ -2,16 +2,17 @@
     <table class="table table-hover">
         <thead>
             <tr>
+                <th scope="col">Nro. documento</th>
                 <th scope="col">Apellido y nombre</th>
                 <th scope="col"></th>
                 <th class="text-center" scope="col">Profesión</th>
                 <th class="text-center" scope="col">Oficio</th>
-                <th scope="col">Fecha de ingreso</th>
                 <th scope="col">Acción</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let destinatario of destinatarios">
+                <td>{{destinatario.nro_documento}}</td>
                 <th>{{destinatario.apellido}}, {{destinatario.nombre}}</th>
                 <td>
                     <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.direccion}}">
@@ -26,7 +27,6 @@
                 </td>
                 <td class="text-center">{{destinatario.profesion}}</td>
                 <td class="text-center">{{destinatario.oficio}}</td>
-                <td>{{destinatario.presentacion | date:'dd/MM/yyyy'}}</td>
                 <td>
                     <button type="button" class="btn btn-info btn-sm">
                         <span class="oi oi-eye" title="Ver destinatario" aria-hidden="true" (click)="verDestinatario(destinatario.id)"></span>
