@@ -18,16 +18,9 @@
                     <td>{{oferta.dia_horario}}</td>
                     <td>{{oferta.estado}}</td>
                     <td>
-                        <button type="button" class="btn btn-info btn-sm">
-                            <span class="oi oi-eye" title="Ver oferta" aria-hidden="true"></span>
-                        </button>
-
+                        <modal-vista-oferta [ofertaid]="oferta.id"></modal-vista-oferta>
                         <modal-oferta [tipo]="'editar'" [texto]="''" [ambienteid]="oferta.ambienteid"
                          (guardarOferta)="obtenerParametrosOferta($event)" [ofertaid]="oferta.id" ></modal-oferta>
-
-                         <!-- <button type="button" class="btn btn-danger btn-sm">
-                            <span class="oi oi-trash" title="Eliminar Oferta" aria-hidden="true"></span>
-                        </button> -->
                     </td>
                 </tr>
             </tbody>

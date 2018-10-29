@@ -434,6 +434,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // datos a mostrar en la tabla
                 localStorage.setItem('ofertasLista', JSON.stringify(ofertasLista));
                 // datos de usuarios agregados
+                console.log(newOfertas);
                 ofertasAgregadas.push(newOfertas);
                 localStorage.setItem('ofertasAgregadas', JSON.stringify(ofertasAgregadas));
 
@@ -466,7 +467,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // consigo el destinatario a editar en la respuesta
                 let editOferta = request.body;
-                console.log(editOferta);
+                
                 // busco en el listado el destinatario
                 for (var i = 0; i < ofertasLista.length; i++) {
                     if (ofertasLista[i]['id'] == id) {
@@ -502,6 +503,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     if (ofertasAgregadas[d]['id'] == id) {
                         // elimino 1 elemento desde el indice especificado y agrego el nuevo array
                         editOferta['id'] = id;
+                        editOferta['fecha_inicial'] = ofertasAgregadas[d]['id']['fecha_inicial'];
                         ofertasAgregadas.splice(d, 1, editOferta);
                     }
                 }

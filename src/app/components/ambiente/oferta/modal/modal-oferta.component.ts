@@ -34,13 +34,7 @@ import { OfertaService } from "../../../../services/oferta.service";
 export class ModalContentOferta implements OnInit {
     @Input('ambienteid') public ambienteid: number;
     @Input('ofertaid') public ofertaid: number;
-    /* @Input('estudio') estudio;
-    @Input('tipo') tipo;
-    @Input('id') id;
-
     
-    errorNivelEducativo = false;
-    */
     public ofertaForm: FormGroup;
     public submitted = false;
 
@@ -152,7 +146,4 @@ export class ModalOfertaComponent {
             }
         ); 
     }
-
-    
-
 }

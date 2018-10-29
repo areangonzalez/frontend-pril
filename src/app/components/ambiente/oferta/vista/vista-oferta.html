@@ -1,0 +1,84 @@
+        <div class="card">
+            <div class="card-body">
+                 <div class="row">
+                    <div class="col-md-4">
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha incial:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.fecha_inicial}}</dd>   
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre Sucursal:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.nombre_sucursal}}</dd>  
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Área:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.area}}</dd>  
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">puesto:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.puesto}}</dd>  
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Días y horarios:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.dia_horario}}</dd>  
+                        </dl>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <dl class="row">
+                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">tarea:</dt>
+                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">{{datosOferta.tarea}}</dd>  
+                                </dl>
+                            </div>
+                            <div class="col-md-12">
+                                <dl class="row">
+                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Demanda Laboral:</dt>
+                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">{{datosOferta.demanda_laboral}}</dd>  
+                                </dl>
+                            </div>
+                            <div class="col-md-12">
+                                <dl class="row">
+                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Objetivo:</dt>
+                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">{{datosOferta.objetivo}}</dd>  
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-12">
+                        <ul class="list-inline d-flex justify-content-center">
+                            <li class="list-inline-item">
+                                <ng-template #direccionContent>
+                                    {{destinatario.persona.lugar.localidad}} <br> {{destinatario.persona.lugar.barrio}} <br>                                    {{destinatario.persona.lugar.calle}} {{destinatario.persona.lugar.altura}}
+                                    <span *ngIf="(destinatario.persona.lugar.escalera != '' || destinatario.persona.lugar.depto != '' || destinatario.persona.lugar.piso != '')">
+                                        <br>
+                                        {{(destinatario.persona.lugar.escalera != "")?destinatario.persona.lugar.escalera:""}} {{(destinatario.persona.lugar.depto != "")?destinatario.persona.lugar.depto:""}} {{(destinatario.persona.lugar.piso != "")?destinatario.persona.lugar.piso:""}}
+                                    </span>
+                                </ng-template>
+                                <button type="button" class="btn btn-outline-secondary btn-margin-left" [ngbTooltip]="direccionContent">
+                                    <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button *ngIf="(destinatario.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.telefono}}">
+                                    <i class="fas fa-phone" title="Telefono"></i>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button *ngIf="(destinatario.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.celular}}">
+                                    <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <ng-template #bancoContent>{{destinatario.destinatario.banco_nombre}} <br> <b>CBU:</b> {{destinatario.destinatario.banco_cbu}}
+                                    <br> <b>Alias:</b> {{destinatario.destinatario.banco_alias}}</ng-template>
+                                <button *ngIf="(destinatario.destinatario.banco_nombre != '')" type="button" class="btn btn-outline-secondary btn-margin-left"
+                                    [ngbTooltip]="bancoContent">
+                                    <i class="fas fa-university"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div> -->
+                </div> 
+            </div>
+        </div>
