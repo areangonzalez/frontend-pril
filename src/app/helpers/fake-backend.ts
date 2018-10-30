@@ -11,7 +11,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let testUser = { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
         // listados de datos agregados
-        let destinatarioLista: any =  { success: true, resultado: JSON.parse(localStorage.getItem('destinatarioLista')) } || {success: false, resultado:{}};
+        let destinatarioLista: any = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
         let ambienteLista: any[] = JSON.parse(localStorage.getItem('ambienteLista')) || [];
         let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
         // Agregados
@@ -130,7 +130,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    return of(new HttpResponse({ status: 200, body: destinatarioLista }));
+                    return of(new HttpResponse({ status: 200, body: { success: true, resultado: destinatarioLista  } }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
@@ -141,9 +141,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
                 // get new user object from post body
                 let newDestinatario = request.body;
-                //console.log("respuesta post: ", destinatarioLista);
+                console.log("respuesta post: ", destinatarioLista);
                 // validation
-                let duplicateUser = destinatarioLista.resultado.filter(destinatario => { return destinatario.nro_documento === newDestinatario.persona.nro_documento; }).length;
+
+                
+                let duplicateUser = destinatarioLista.filter(destinatario => { return destinatario.nro_documento === newDestinatario.persona.nro_documento; }).length;
                 if (duplicateUser) {
                     return throwError({ error: { message: 'El destinatario con el nro documento:  "' + newDestinatario.persona.nro_documento + '" ya existe' } });
                 }
@@ -151,11 +153,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // save new user
                 // array de la tabla Listado de la tabla
-                newDestinatario.destinatario.id = generarId(destinatarioLista.resultado);
-                newDestinatario.persona.lugar.id = generarId(destinatarioLista.resultado);
+                newDestinatario.destinatario.id = generarId(destinatarioLista);
+                newDestinatario.persona.lugar.id = generarId(destinatarioLista);
                 personas.push(newDestinatario.persona);
 
-                destinatarioLista.resultado.push({
+                destinatarioLista.push({
                     id: newDestinatario.destinatario.id,
                     oficioid: 4,
                     legajo: newDestinatario.destinatario.legajo,
@@ -188,7 +190,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }                                   
                 });
                 // datos a mostrar en la tabla
-                localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista.resultado));
+                localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
                 // datos de usuarios agregados
                 destinatarioAgregados.push(newDestinatario);
                 localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados));
@@ -213,7 +215,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         delete seleccion.persona.fechaNacimiento;
                         delete seleccion.destinatario.fechaPresentacion;
                         delete seleccion.id;
-                        seleccion.persona['id'] = generarId(destinatarioLista);
+                        seleccion.persona['id'] = generarId(destinatarioLista.resultado);
                         // agrego datos al array
                         seleccion.persona.sexo = getNombreArray(seleccion.persona.sexoid, sexo);
                         seleccion.persona.genero = getNombreArray(seleccion.persona.generoid, genero);
