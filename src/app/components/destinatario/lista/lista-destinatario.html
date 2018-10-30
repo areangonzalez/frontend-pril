@@ -10,18 +10,29 @@
                 <th scope="col">Acción</th>
             </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let destinatario of destinatarios">
-                <td>{{destinatario.nro_documento}}</td>
-                <th>{{destinatario.apellido}}, {{destinatario.nombre}}</th>
+        <tbody *ngIf="(totalFiltrado == 0)">
+            <tr>
+                <td class="text-center" colspan="6" rowspan="1">No se han encontrado resultados que mostrar.</td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="(totalFiltrado > 0)">
+            <tr *ngFor="let destinatario of destinatarios; let i = index;">
+                <td>{{destinatario.dato_extra.nro_documento}}</td>
+                <th>{{destinatario.dato_extra.apellido}}, {{destinatario.dato_extra.nombre}}</th>
                 <td>
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.direccion}}">
+                    <!-- <ng-template #direccionContent>
+                         {{destinatario.dato_extra.direccion}}
+                    </ng-template> -->
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="direccionContent">
                         <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                     </button>
-                    <button *ngIf="(destinatario.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.telefono}}">
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.dato_extra.email}}">
+                        <span class="oi oi-envelope-closed" title="Email" aria-hidden="true"></span>
+                    </button>
+                    <button *ngIf="(destinatario.dato_extra.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.dato_extra.telefono}}">
                         <i class="fas fa-phone" title="Telefono"></i>
                     </button>
-                    <button *ngIf="(destinatario.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.celular}}">
+                    <button *ngIf="(destinatario.dato_extra.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.dato_extra.celular}}">
                         <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
                     </button>
                 </td>

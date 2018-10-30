@@ -9,7 +9,8 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
     providers: [NgbTooltipConfig]
 })
 export class ListaDestinatarioComponent {
-    @Input('destinatarios') destinatarios:Object;
+    @Input('destinatarios') public destinatarios:any;
+    @Input('totalFiltrado') public totalFiltrado:number;
     //title = 'app';
 
     constructor(

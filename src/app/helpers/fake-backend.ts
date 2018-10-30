@@ -11,7 +11,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let testUser = { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
         // listados de datos agregados
-        let destinatarioLista: any[] = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
+        let destinatarioLista: any =  { success: true, resultado: JSON.parse(localStorage.getItem('destinatarioLista')) } || {success: false, resultado:{}};
         let ambienteLista: any[] = JSON.parse(localStorage.getItem('ambienteLista')) || [];
         let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
         // Agregados
@@ -141,37 +141,54 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
                 // get new user object from post body
                 let newDestinatario = request.body;
-                console.log("respuesta post: ", destinatarioLista);
+                //console.log("respuesta post: ", destinatarioLista);
                 // validation
-                let duplicateUser = destinatarioLista.filter(destinatario => { return destinatario.nro_documento === newDestinatario.persona.nro_documento; }).length;
+                let duplicateUser = destinatarioLista.resultado.filter(destinatario => { return destinatario.nro_documento === newDestinatario.persona.nro_documento; }).length;
                 if (duplicateUser) {
                     return throwError({ error: { message: 'El destinatario con el nro documento:  "' + newDestinatario.persona.nro_documento + '" ya existe' } });
                 }
 
 
                 // save new user
-                // array de la tabla
-                //{ nro_documento: '33476725', apellido: 'González', nombre: 'Carlos', direccion: 'alberdi 123', telefono: '2920423000',
-                // celular: '2920635572', profesion: 'Panadero', oficio: 'Pastelero', nivel_educativo: 'Terciario', presentacion: '19/06/2018', id: 1 }
-                let estudioDestinatario = (newDestinatario.persona.estudios.length > 0)?obtenerUltimoEstudio(newDestinatario.persona.estudios):[];
-                newDestinatario.id = generarId(destinatarioLista);
-                newDestinatario.persona.lugar.id = generarId(destinatarioLista);
+                // array de la tabla Listado de la tabla
+                newDestinatario.destinatario.id = generarId(destinatarioLista.resultado);
+                newDestinatario.persona.lugar.id = generarId(destinatarioLista.resultado);
                 personas.push(newDestinatario.persona);
-                destinatarioLista.push({
-                    id: newDestinatario.id,
-                    nro_documento: newDestinatario.persona.nro_documento,
-                    apellido: newDestinatario.persona.apellido,
-                    nombre: newDestinatario.persona.nombre,
-                    direccion: newDestinatario.persona.lugar.calle + ' ' + newDestinatario.persona.lugar.altura,
-                    telefono: newDestinatario.persona.telefono,
-                    celular: newDestinatario.persona.celular,
+
+                destinatarioLista.resultado.push({
+                    id: newDestinatario.destinatario.id,
+                    oficioid: 4,
+                    legajo: newDestinatario.destinatario.legajo,
+                    calificacion: null,
+                    profesionid: newDestinatario.destinatario.profesionid,
+                    fecha_ingreso: hoy(),
+                    origen: newDestinatario.destinatario.origen,
+                    observacion: newDestinatario.destinatario.observacion,
+                    deseo_lugar_entrenamiento: newDestinatario.destinatario.deseo_lugar_entrenamiento,
+                    deseo_actividad: newDestinatario.destinatario.deseo_actividad,
+                    fecha_presentacion: newDestinatario.destinatario.fecha_presentacion,
+                    personaid: 64,
+                    banco_cbu: newDestinatario.destinatario.banco_cbu,
+                    banco_nombre: newDestinatario.destinatario.banco_nombre,
+                    banco_alias: newDestinatario.destinatario.banco_alias,
+                    experiencia_laboral: (newDestinatario.destinatario.experiencia_laboral == true)?1:0,
+                    conocimientos_basicos: newDestinatario.destinatario.conocimientos_basicos,
                     profesion: getNombreArray(newDestinatario.destinatario.profesionid, profesion),
                     oficio: getNombreArray(newDestinatario.destinatario.oficioid, oficio),
-                    presentacion: newDestinatario.destinatario.fecha_presentacion,
-                    estudio: (estudioDestinatario != null) ? concatEstudio(estudioDestinatario) : ''
+                    dato_extra: {
+                        nombre: newDestinatario.persona.nombre,
+                        apellido: newDestinatario.persona.apellido,
+                        telefono: newDestinatario.persona.telefono,
+                        celular: newDestinatario.persona.celular,
+                        email: newDestinatario.persona.email,
+                        nro_documento: newDestinatario.persona.nro_documento,
+                        cuil: newDestinatario.destinatario.cuil,
+                        fecha_nacimiento: newDestinatario.destinatario.fecha_nacimiento,
+                        direccion: getNombreArray(newDestinatario.persona.lugar.localidadid, localidad) + '<br>' + newDestinatario.persona.lugar.barrio + '<br>' + newDestinatario.persona.lugar.calle + '<br>' + newDestinatario.persona.lugar.altura + '<br>' + (newDestinatario.persona.lugar.escalera != "") ? newDestinatario.persona.lugar.escalera : "" + '<br>' + (newDestinatario.persona.lugar.piso != "") ? newDestinatario.persona.lugar.piso : "" + '<br>' + (newDestinatario.persona.lugar.depto != "") ? newDestinatario.persona.lugar.depto : "",
+                    }                                   
                 });
                 // datos a mostrar en la tabla
-                localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
+                localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista.resultado));
                 // datos de usuarios agregados
                 destinatarioAgregados.push(newDestinatario);
                 localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados));

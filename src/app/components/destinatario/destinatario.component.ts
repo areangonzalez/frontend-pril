@@ -10,7 +10,8 @@ import { DestinatarioService } from "../../services/destinatario.service";
 })
 export class DestinatarioComponent implements OnInit {
     page = 1;
-    destinatarios:any;
+    destinatarios: any;
+    totalFiltrado: number;
 
     constructor(private breadcrumbsService: BreadcrumbsService, private _destinatarioService: DestinatarioService) {
     }
@@ -27,7 +28,10 @@ export class DestinatarioComponent implements OnInit {
     listar() {
         this._destinatarioService.listarDestinatario().subscribe(
             datos => {
-                this.destinatarios = datos;
+                if (datos['success']) {
+                    this.destinatarios = datos['resultado'];
+                    this.totalFiltrado = (datos['resultado'] == null) ? 0 : datos['resultado'].length;
+                }
             },
             error => {
                 console.log(<any>error);
