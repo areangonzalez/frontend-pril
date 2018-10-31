@@ -28,4 +28,12 @@ export class ListaDestinatarioComponent {
     editarDestinatario(id){
         this._router.navigate(['destinatario/editar', id]);
     }
+
+    getDireccion(direccion) {
+        console.log(direccion);
+        let dir = direccion.replace(/<br>/gi, "&#013;");
+        console.log(dir);
+        
+        return dir;
+    }
 }

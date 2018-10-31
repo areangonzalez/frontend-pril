@@ -26,6 +26,8 @@ import { InicioComponent } from './components/inicio/incio.component';
 import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { MensajesComponent } from "./components/mensajes/mensajes.component";
 /* Services */
+import { JwtService } from "./services/jwt.service";
+import { ApiService } from "./services/api.service";
 import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service";
 import { DestinatarioService } from "./services/destinatario.service";
 import { MensajesService } from "./services/mensajes.service";
@@ -71,6 +73,8 @@ import { OfertaService } from "./services/oferta.service";
     // provider used to create fake backend
     fakeBackendProvider,
     // servicios del sistema
+    JwtService,
+    ApiService,
     BreadcrumbsService,
     DestinatarioService,    
     MensajesService,

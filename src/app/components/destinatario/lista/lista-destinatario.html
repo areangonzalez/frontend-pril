@@ -20,10 +20,10 @@
                 <td>{{destinatario.dato_extra.nro_documento}}</td>
                 <th>{{destinatario.dato_extra.apellido}}, {{destinatario.dato_extra.nombre}}</th>
                 <td>
-                    <!-- <ng-template #direccionContent>
-                         {{destinatario.dato_extra.direccion}}
-                    </ng-template> -->
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="direccionContent">
+                    
+                        <!-- <span [innerHTML]="destinatario.dato_extra.direccion"></span> -->
+                         <!-- {{destinatario.dato_extra.direccion}} -->
+                    <button type="button" class="btn btn-outline-secondary btn-margin-left" tooltipClass="tooltip-inner" ngbTooltip="{{getDireccion(destinatario.dato_extra.direccion)}}">
                         <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.dato_extra.email}}">
