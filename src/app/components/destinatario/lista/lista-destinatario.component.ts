@@ -29,11 +29,17 @@ export class ListaDestinatarioComponent {
         this._router.navigate(['destinatario/editar', id]);
     }
 
-    getDireccion(direccion) {
-        console.log(direccion);
-        let dir = direccion.replace(/<br>/gi, "&#013;");
+    getDireccion(lugar: Object) {
+        let dir = "";
+        dir += lugar['localidad'] + " - " + lugar['barrio'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+        dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
+        dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
+        dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
+        console.log(lugar);
+        /* let dir = direccion.replace(/<br>/gi, "&#013;");
         console.log(dir);
-        
+         */
         return dir;
+        
     }
 }
