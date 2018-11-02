@@ -137,29 +137,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
             }
-
             // Agregar destinatario
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
                 // get new user object from post body
                 let newDestinatario = request.body;
                 let estudios = [];
-                console.log("respuesta post: ", destinatarioLista);
                 // validation
-
-                
                 let duplicateUser = destinatarioLista.filter(destinatario => { return destinatario.persona.nro_documento === newDestinatario.persona.nro_documento; }).length;
                 if (duplicateUser) {
                     return throwError({ error: { message: 'El destinatario con el nro documento:  "' + newDestinatario.persona.nro_documento + '" ya existe' } });
                 }
-
-
-                // save new user
                 // array de la tabla Listado de la tabla
                 newDestinatario.destinatario.id = (destinatarioLista.length > 0)?generarId(destinatarioLista):1;
                 newDestinatario.persona.lugar.id = (destinatarioLista.length > 0) ? generarId(destinatarioLista) : 1;
                 newDestinatario.persona.id = generarId(personas);
                 personas.push(newDestinatario.persona);
-
+                // listado de estudios
                 for (var i = 0; i < newDestinatario.persona.estudios.length; i++) {
                     estudios[i] = {
                         nivel_educativoid: newDestinatario.persona.estudios[i].nivel_educativoid,
@@ -169,9 +162,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         en_curso: (newDestinatario.persona.estudios[i].en_curso == true) ? 1 : 0,
                         anio: newDestinatario.persona.estudios[i].anio
                     }
-                    
                 }
-
                 destinatarioLista.push({
                     id: newDestinatario.destinatario.id,
                     oficioid: newDestinatario.destinatario.oficioid,
@@ -231,14 +222,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 });
                 // datos a mostrar en la tabla
                 localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
-                // datos de usuarios agregados
-                /* destinatarioAgregados.push(newDestinatario);
-                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados)); */
-
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
             }
-
             // conseguir destinatario por id
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
@@ -247,51 +233,46 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // find user by id in users array
                     let urlParts = request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
-                    console.log("destinatario por id: ",id);
                     let matchedUsers = destinatarioLista.filter(destinatario => { return destinatario.id === id; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
-                    console.log(seleccion);
-                    /* if (seleccion != null ) {
-                        respuesta = { error: 404, message: 'no se encontro el destinatario' };
-                    }else{ */
-                        respuesta = { status: 200, body: seleccion };
-                    /* } */
-                    console.log(respuesta);
+                    
+                    respuesta = { status: 200, body: seleccion };
                     return of(new HttpResponse(respuesta));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
             }
-
             // Editar destinatario
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'PUT') {
                 
                 let urlParts = request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length - 1]);
-                let direccion = "";
+                let estudios = [];
                 
                 // consigo el destinatario a editar en la respuesta
                 let editDestinatario = request.body;
-                // direccion del destinatario                
-                direccion += getNombreArray(editDestinatario.persona.lugar.localidadid, localidad) + '<br>';
-                direccion += editDestinatario.persona.lugar.barrio + '<br>';
-                console.log("salida 1:", direccion);
-                direccion += editDestinatario.persona.lugar.calle + ' ' + editDestinatario.persona.lugar.altura;
-                direccion += (editDestinatario.persona.lugar.escalera != "") ? '<br>' + editDestinatario.persona.lugar.escalera : "";
-                console.log("salida 2:", direccion);
-                direccion += (editDestinatario.persona.lugar.piso != "") ? '<br>' + editDestinatario.persona.lugar.piso : "";
-                direccion += (editDestinatario.persona.lugar.depto != "") ? '<br>' + editDestinatario.persona.lugar.depto : "";
-                console.log("salida final:",direccion);
-                
+                // creo los estudios
+                for (var i = 0; i < editDestinatario.persona.estudios.length; i++) {
+                    estudios[i] = {
+                        nivel_educativoid: editDestinatario.persona.estudios[i].nivel_educativoid,
+                        nivel_educativo: getNombreArray(editDestinatario.persona.estudios[i].nivel_educativoid, nivelEducativo),
+                        titulo: editDestinatario.persona.estudios[i].titulo,
+                        completo: (editDestinatario.persona.estudios[i].completo == true) ? 1 : 0,
+                        en_curso: (editDestinatario.persona.estudios[i].en_curso == true) ? 1 : 0,
+                        anio: editDestinatario.persona.estudios[i].anio
+                    }
+
+                }
 
                 for (var i = 0; i < destinatarioLista.length; i++) {
                     if(destinatarioLista[i]['id'] == id){
                             destinatarioLista[i] = {
-                                id: id,
-                                oficioid: 4,
+                                id: editDestinatario.destinatario.id,
+                                oficioid: editDestinatario.destinatario.oficioid,
+                                oficio: getNombreArray(editDestinatario.destinatario.oficioid, oficio),
                                 legajo: editDestinatario.destinatario.legajo,
-                                calificacion: null,
+                                calificacion: 1,
                                 profesionid: editDestinatario.destinatario.profesionid,
                                 fecha_ingreso: hoy(),
                                 origen: editDestinatario.destinatario.origen,
@@ -299,41 +280,57 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                                 deseo_lugar_entrenamiento: editDestinatario.destinatario.deseo_lugar_entrenamiento,
                                 deseo_actividad: editDestinatario.destinatario.deseo_actividad,
                                 fecha_presentacion: editDestinatario.destinatario.fecha_presentacion,
-                                personaid: 64,
+                                personaid: editDestinatario.persona.id,
                                 banco_cbu: editDestinatario.destinatario.banco_cbu,
                                 banco_nombre: editDestinatario.destinatario.banco_nombre,
                                 banco_alias: editDestinatario.destinatario.banco_alias,
                                 experiencia_laboral: (editDestinatario.destinatario.experiencia_laboral == true) ? 1 : 0,
                                 conocimientos_basicos: editDestinatario.destinatario.conocimientos_basicos,
                                 profesion: getNombreArray(editDestinatario.destinatario.profesionid, profesion),
-                                oficio: getNombreArray(editDestinatario.destinatario.oficioid, oficio),
-                                dato_extra: {
+                                persona: {
+                                    id: editDestinatario.persona.id,
                                     nombre: editDestinatario.persona.nombre,
                                     apellido: editDestinatario.persona.apellido,
+                                    apodo: null,
+                                    nro_documento: editDestinatario.persona.nro_documento,
+                                    cuil: editDestinatario.persona.cuil,
                                     telefono: editDestinatario.persona.telefono,
                                     celular: editDestinatario.persona.celular,
                                     email: editDestinatario.persona.email,
-                                    nro_documento: editDestinatario.persona.nro_documento,
-                                    cuil: editDestinatario.destinatario.cuil,
-                                    fecha_nacimiento: editDestinatario.destinatario.fecha_nacimiento,
-                                    direccion: direccion,
+                                    fecha_nacimiento: editDestinatario.persona.fecha_nacimiento,
+                                    estado_civilid: editDestinatario.persona.estado_civilid,
+                                    sexoid: editDestinatario.persona.sexoid,
+                                    tipo_documentoid: null,
+                                    nucleoid: null,
+                                    situacion_laboralid: null,
+                                    generoid: editDestinatario.persona.generoid,
+                                    estudios: estudios,
+                                    sexo: getNombreArray(editDestinatario.persona.sexoid, sexo),
+                                    genero: getNombreArray(editDestinatario.persona.generoid, genero),
+                                    estado_civil: getNombreArray(editDestinatario.persona.estado_civilid, estadoCivil),
+                                    lugar: {
+                                        id: editDestinatario.persona.lugar.id,
+                                        nombre: null,
+                                        calle: editDestinatario.persona.lugar.calle,
+                                        altura: editDestinatario.persona.lugar.altura,
+                                        localidadid: editDestinatario.persona.lugar.localidadid,
+                                        latitud: null,
+                                        longitud: null,
+                                        barrio: editDestinatario.persona.lugar.barrio,
+                                        piso: editDestinatario.persona.lugar.piso,
+                                        depto: editDestinatario.persona.lugar.depto,
+                                        escalera: editDestinatario.persona.lugar.escalera,
+                                        localidad: getNombreArray(editDestinatario.persona.lugar.localidadid, localidad)
+                                    }
                                 }
                             }
-                    }
-                }
-                // verifico el array de usuarios agregados
-                for (var d = 0; d < destinatarioLista.length; d++) {
-                    if (destinatarioLista[d]['id'] == id ){
-                        // elimino 1 elemento desde el indice especificado y agrego el nuevo array
-                        editDestinatario['id'] = id;
-                        destinatarioLista.splice(d, 1, editDestinatario);
                     }
                 }
 
                 // datos a mostrar en la tabla
                 localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
                 // datos de usuarios agregados
-                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioLista));
+                //localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioLista));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));

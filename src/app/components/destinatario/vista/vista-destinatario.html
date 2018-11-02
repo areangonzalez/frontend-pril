@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <dl class="row">
                                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha presentación:</dt>
-                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.destinatario.fecha_presentacion | date:'dd/MM/yyyy'}}</dd>
+                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.fecha_presentacion | date:'dd/MM/yyyy'}}</dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuil:</dt>
@@ -51,35 +51,35 @@
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Formación deseada:</dt>
-                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.destinatario.deseo_actividad}}</dd>
+                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.deseo_actividad}}</dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Conocimientos basicos:</dt>
-                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.destinatario.conocimientos_basicos}}</dd>
+                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.conocimientos_basicos}}</dd>
                                 </dl>
                             </div>
                             <div class="col-md-6">
                                 <dl class="row">
                                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Experiencia laboral:</dt>
-                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{(destinatario.destinatario.experiencia_laboral)?'si':'no'}}</dd>
+                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{(destinatario.experiencia_laboral)?'si':'no'}}</dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Profesión:</dt>
-                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.destinatario.profesion}}</dd>
+                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.profesion}}</dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Oficio:</dt>
-                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.destinatario.oficio}}</dd>
+                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.oficio}}</dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Lugar elegido:</dt>
-                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.destinatario.deseo_lugar_entrenamiento}}</dd>
+                                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.deseo_lugar_entrenamiento}}</dd>
                                 </dl>
                             </div>
                             <div class="col-md-12">
                                 <dl class="row">
                                     <dt class="col col-sm-6 col-md-3 col-lg-3">Origen de inscripción:</dt>
-                                    <dd class="col col-sm-6 col-md-9 col-lg-9">{{destinatario.destinatario.origen}}</dd>
+                                    <dd class="col col-sm-6 col-md-9 col-lg-9">{{destinatario.origen}}</dd>
                                 </dl>                        
                             </div>
                         </div>
@@ -111,8 +111,8 @@
                                 </button>
                             </li>
                             <li class="list-inline-item">
-                                <ng-template #bancoContent>{{destinatario.destinatario.banco_nombre}} <br> <b>CBU:</b> {{destinatario.destinatario.banco_cbu}} <br> <b>Alias:</b> {{destinatario.destinatario.banco_alias}}</ng-template>
-                                <button *ngIf="(destinatario.destinatario.banco_nombre != '')" type="button" class="btn btn-outline-secondary btn-margin-left"
+                                <ng-template #bancoContent>{{destinatario.banco_nombre}} <br> <b>CBU:</b> {{destinatario.banco_cbu}} <br> <b>Alias:</b> {{destinatario.banco_alias}}</ng-template>
+                                <button *ngIf="(destinatario.banco_nombre != '')" type="button" class="btn btn-outline-secondary btn-margin-left"
                                   [ngbTooltip]="bancoContent">
                                     <i class="fas fa-university"></i>
                                 </button>

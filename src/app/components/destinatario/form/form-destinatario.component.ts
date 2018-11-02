@@ -167,7 +167,6 @@ export class FormDestinatarioComponent implements OnInit {
             let vDatos = {destinatario:{}, persona:{}};
             // agrego los estudios a la lista
             this.listaEstudios = (vPersona.persona.estudios.length > 0) ? vPersona.persona.estudios : [];
-            console.log(this.listaEstudios);
             vPersona.persona.fechaNacimiento = this.formatFecha(vPersona.persona.fecha_nacimiento);
             vPersona.fechaPresentacion = this.formatFecha(vPersona.fecha_presentacion);
             vPersona.persona.cuil_prin = this.primerosDigitosCuil(vPersona.persona.cuil);
@@ -176,7 +175,6 @@ export class FormDestinatarioComponent implements OnInit {
             vDatos.persona = vPersona.persona;
             delete(vPersona.persona);
             vDatos.destinatario = vPersona;
-            console.log(vDatos);
             return vDatos;
         }) 
         .subscribe(

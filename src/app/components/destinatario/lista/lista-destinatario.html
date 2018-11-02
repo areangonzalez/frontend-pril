@@ -20,9 +20,6 @@
                 <td>{{destinatario.persona.nro_documento}}</td>
                 <th>{{destinatario.persona.apellido}}, {{destinatario.persona.nombre}}</th>
                 <td>
-                    
-                        <!-- <span [innerHTML]="destinatario.dato_extra.direccion"></span> -->
-                         <!-- {{destinatario.dato_extra.direccion}} -->
                     <button type="button" class="btn btn-outline-secondary btn-margin-left" tooltipClass="tooltip-inner" ngbTooltip="{{getDireccion(destinatario.persona.lugar)}}">
                         <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                     </button>
@@ -39,8 +36,8 @@
                 <td class="text-center">{{destinatario.profesion}}</td>
                 <td class="text-center">{{destinatario.oficio}}</td>
                 <td>
-                    <button type="button" class="btn btn-info btn-sm">
-                        <span class="oi oi-eye" title="Ver destinatario" aria-hidden="true" (click)="verDestinatario(destinatario.id)"></span>
+                    <button type="button" class="btn btn-info btn-sm" (click)="verDestinatario(destinatario.id)">
+                        <span class="oi oi-eye" title="Ver destinatario" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="btn btn-light btn-sm" (click)="editarDestinatario(destinatario.id)">
                         <span class="oi oi-pencil" title="Editar destinatario" aria-hidden="true" ></span>
