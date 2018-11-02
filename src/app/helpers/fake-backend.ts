@@ -15,7 +15,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let ambienteLista: any[] = JSON.parse(localStorage.getItem('ambienteLista')) || [];
         let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
         // Agregados
-        let destinatarioAgregados: any[] = JSON.parse(localStorage.getItem('destinatariosAgregados')) || [];
+        //let destinatarioAgregados: any[] = JSON.parse(localStorage.getItem('destinatariosAgregados')) || [];
         let ambientesAgregados: any[] = JSON.parse(localStorage.getItem('ambientesAgregados')) || [];
         let ofertasAgregadas: any[] = JSON.parse(localStorage.getItem('ofertasAgregadas')) || [];
         // listados globales
@@ -142,7 +142,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
                 // get new user object from post body
                 let newDestinatario = request.body;
-                let direccion = "";
+                let estudios = [];
                 console.log("respuesta post: ", destinatarioLista);
                 // validation
 
@@ -159,6 +159,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 newDestinatario.persona.lugar.id = (destinatarioLista.length > 0) ? generarId(destinatarioLista) : 1;
                 newDestinatario.persona.id = generarId(personas);
                 personas.push(newDestinatario.persona);
+
+                for (var i = 0; i < newDestinatario.persona.estudios.length; i++) {
+                    estudios[i] = {
+                        nivel_educativoid: newDestinatario.persona.estudios[i].nivel_educativoid,
+                        nivel_educativo: getNombreArray(newDestinatario.persona.estudios[i].nivel_educativoid, nivelEducativo),
+                        titulo: newDestinatario.persona.estudios[i].titulo,
+                        completo: (newDestinatario.persona.estudios[i].completo == true) ? 1 : 0,
+                        en_curso: (newDestinatario.persona.estudios[i].en_curso == true) ? 1 : 0,
+                        anio: newDestinatario.persona.estudios[i].anio
+                    }
+                    
+                }
 
                 destinatarioLista.push({
                     id: newDestinatario.destinatario.id,
@@ -186,26 +198,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         apellido: newDestinatario.persona.apellido,
                         apodo: null,
                         nro_documento: newDestinatario.persona.nro_documento,
-                        cuil: newDestinatario.destinatario.cuil,
+                        cuil: newDestinatario.persona.cuil,
                         telefono: newDestinatario.persona.telefono,
                         celular: newDestinatario.persona.celular,
                         email: newDestinatario.persona.email,
-                        fecha_nacimiento: newDestinatario.destinatario.fecha_nacimiento,
+                        fecha_nacimiento: newDestinatario.persona.fecha_nacimiento,
                         estado_civilid: newDestinatario.persona.estado_civilid,
                         sexoid: newDestinatario.persona.sexoid,
                         tipo_documentoid: null,
                         nucleoid: null,
                         situacion_laboralid: null,
                         generoid: newDestinatario.persona.generoid,
-                        estudios: [
-                            {
-                                nivel_educativoid: newDestinatario.persona.estudios.nivel_educativoid,
-                                titulo: newDestinatario.persona.estudios.titulo,
-                                completo: (newDestinatario.persona.estudios.completo == true)?1:0,
-                                en_curso: (newDestinatario.persona.estudios.en_curso == true)?1:0,
-                                anio: newDestinatario.persona.estudios.anio
-                            }
-                        ],
+                        estudios: estudios,
                         sexo: getNombreArray(newDestinatario.persona.sexoid, sexo),
                         genero: getNombreArray(newDestinatario.persona.generoid, genero),
                         estado_civil: getNombreArray(newDestinatario.persona.estado_civilid, estadoCivil),
@@ -228,8 +232,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // datos a mostrar en la tabla
                 localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
                 // datos de usuarios agregados
-                destinatarioAgregados.push(newDestinatario);
-                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados));
+                /* destinatarioAgregados.push(newDestinatario);
+                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados)); */
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
@@ -239,28 +243,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    let respuesta = {};
                     // find user by id in users array
                     let urlParts = request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
-                    let matchedUsers = destinatarioAgregados.filter(destinatario => { return destinatario.destinatario.id === id; });
+                    console.log("destinatario por id: ",id);
+                    let matchedUsers = destinatarioLista.filter(destinatario => { return destinatario.id === id; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
-                    console.log("uno: ", seleccion);
-                    if (seleccion != null ) {
-                        delete seleccion.persona.cuil_prin;
-                        delete seleccion.persona.cuil_ult;
-                        delete seleccion.persona.fechaNacimiento;
-                        delete seleccion.destinatario.fechaPresentacion;
-                        delete seleccion.id;
-                        // agrego datos al array
-                        seleccion.persona.sexo = getNombreArray(seleccion.persona.sexoid, sexo);
-                        seleccion.persona.genero = getNombreArray(seleccion.persona.generoid, genero);
-                        seleccion.persona.estado_civil = getNombreArray(seleccion.persona.estado_civilid, estadoCivil);
-                        seleccion.persona.lugar.localidad = getNombreArray(seleccion.persona.lugar.localidadid, localidad);
-                        seleccion.destinatario.profesion = getNombreArray(seleccion.destinatario.profesionid, profesion);
-                        seleccion.destinatario.oficio = getNombreArray(seleccion.destinatario.oficioid, oficio);
-                    }
-                    console.log("dos: ",seleccion);
-                    return of(new HttpResponse({ status: 200, body: seleccion }));
+                    console.log(seleccion);
+                    /* if (seleccion != null ) {
+                        respuesta = { error: 404, message: 'no se encontro el destinatario' };
+                    }else{ */
+                        respuesta = { status: 200, body: seleccion };
+                    /* } */
+                    console.log(respuesta);
+                    return of(new HttpResponse(respuesta));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
@@ -325,18 +322,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 }
                 // verifico el array de usuarios agregados
-                for (var d = 0; d < destinatarioAgregados.length; d++) {
-                    if (destinatarioAgregados[d]['id'] == id ){
+                for (var d = 0; d < destinatarioLista.length; d++) {
+                    if (destinatarioLista[d]['id'] == id ){
                         // elimino 1 elemento desde el indice especificado y agrego el nuevo array
                         editDestinatario['id'] = id;
-                        destinatarioAgregados.splice(d, 1, editDestinatario);
+                        destinatarioLista.splice(d, 1, editDestinatario);
                     }
                 }
 
                 // datos a mostrar en la tabla
                 localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
                 // datos de usuarios agregados
-                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioAgregados));
+                localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioLista));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));

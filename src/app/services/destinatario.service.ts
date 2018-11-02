@@ -24,10 +24,12 @@ export class DestinatarioService {
         //return this._http.get(this.url + '/destinatarios');
     }
 
-    destinatarioPorId(id, modificar:boolean = false){
-        let param = (modificar == true)?'true':'false';
-        let options = { headears: httpOptions, params: new HttpParams().set('modificar', param ) };
-        return this._http.get(this.url + '/destinatarios/' + id, options);
+    destinatarioPorId(id){
+        //let param = (modificar == true)?'modificar=true':'';
+        //let param = new HttpParams().set('modificar', modificar);
+        //let options = { headears: httpOptions, params: new HttpParams().set('modificar', param ) };
+        //return this._http.get(this.url + '/destinatarios/' + id, options);
+        return this._apiServcie.get('/destinatarios/' + id);
     }
 
 

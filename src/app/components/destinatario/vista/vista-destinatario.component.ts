@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
@@ -9,14 +10,14 @@ import { MensajesService } from "../../../services/mensajes.service";
 @Component({
     selector: 'destinatario-vista',
     templateUrl: './vista-destinatario.html',
-    styleUrls: ['./vista-destinatario.css'] ,
+    styleUrls: ['./vista-destinatario.css'],
     providers: [NgbTooltipConfig]
 })
 export class VistaDestinatarioComponent {
     //title = 'app';
-    private id:any;
+    private id: any;
     private idDestinatario = '';
-    public destinatario:any = {persona: {lugar: {}, estudios: []}, destinatario:{}};
+    public destinatario: any = { persona: { lugar: {}, estudios: [] }, destinatario: {} };
 
 
     constructor(
@@ -26,10 +27,10 @@ export class VistaDestinatarioComponent {
         private _mensajesService: MensajesService,
         private _destinatarioService: DestinatarioService,
         config: NgbTooltipConfig
-){
+    ) {
         config.placement = 'top';
         config.triggers = 'click';
-}
+    }
 
     ngOnInit() {
         // breadcrumbs Dinamico
@@ -49,14 +50,13 @@ export class VistaDestinatarioComponent {
         this._router.navigate(['destinatario/editar', this.idDestinatario]);
     }
 
-    private destinatarioPorId(id){
-        this._destinatarioService.destinatarioPorId(id,false).subscribe(
+    private destinatarioPorId(id) {
+        this._destinatarioService.destinatarioPorId(id).subscribe(
             datos => {
-                    this.destinatario = datos;
-        }, error => {
-            this._mensajesService.cancelado(error, [{ name: '' }]);
-        });
+                this.destinatario = datos;
+            }, error => {
+                this._mensajesService.cancelado(error, [{ name: '' }]);
+            });
     }
 
 }
- 

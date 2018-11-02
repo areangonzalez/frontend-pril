@@ -27,6 +27,6 @@ import { LugarComponent } from "./form/lugar/lugar.component";
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent, AutoCompletarComponent, LugarComponent, ReactiveFormsModule],
     entryComponents: [ModalContentEstudio, ModalContentConfirmacion]
-    
+
 })
 export class DestinatarioModule { }

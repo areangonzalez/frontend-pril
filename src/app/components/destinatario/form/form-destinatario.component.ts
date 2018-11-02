@@ -162,18 +162,31 @@ export class FormDestinatarioComponent implements OnInit {
      * @param id identificador del destinatario a buscar
      */
     private destinatarioPorId(id){
-        this._destinatarioService.destinatarioPorId(id,true).subscribe(
-            datos => { 
+        this._destinatarioService.destinatarioPorId(id)
+        .map(vPersona => {
+            let vDatos = {destinatario:{}, persona:{}};
+            // agrego los estudios a la lista
+            this.listaEstudios = (vPersona.persona.estudios.length > 0) ? vPersona.persona.estudios : [];
+            console.log(this.listaEstudios);
+            vPersona.persona.fechaNacimiento = this.formatFecha(vPersona.persona.fecha_nacimiento);
+            vPersona.fechaPresentacion = this.formatFecha(vPersona.fecha_presentacion);
+            vPersona.persona.cuil_prin = this.primerosDigitosCuil(vPersona.persona.cuil);
+            vPersona.persona.cuil_ult = this.ultimoDigitoCuil(vPersona.persona.cuil);
 
-                let dDatos = datos;
-                // agrego los estudios a la lista
-                (datos['persona']['estudios'].length > 0)?this.listaEstudios = datos['persona']['estudios']:[];
+            vDatos.persona = vPersona.persona;
+            delete(vPersona.persona);
+            vDatos.destinatario = vPersona;
+            console.log(vDatos);
+            return vDatos;
+        }) 
+        .subscribe(
+            datos => { 
                 // variables para el documento, profesion y oficio
                 this.nroDoc = datos['persona']['nro_documento'];
                 this.profesionid = datos['destinatario']['profesionid'];
-                this.oficioid = datos['destinatario']['oficioid'];
-                // seteo los valores para el formulario
-                this.setValuesForm(this.destinatarioForm, datos);                
+                this.oficioid = datos['destinatario']['oficioid']; 
+                // seteo los valores del objeto
+                this.destinatarioForm.patchValue(datos);
 
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
