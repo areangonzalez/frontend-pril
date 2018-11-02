@@ -71,7 +71,7 @@ import { OfertaService } from "./services/oferta.service";
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     // provider used to create fake backend
-    //fakeBackendProvider,
+    fakeBackendProvider,
     // servicios del sistema
     JwtService,
     ApiService,
