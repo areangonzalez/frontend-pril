@@ -31,7 +31,8 @@ export class DestinatarioComponent implements OnInit {
                 console.log(datos);
                 if (datos['success']) {
                     this.destinatarios = datos['coleccion'];
-                    this.totalFiltrado = datos['total_filtrado'];
+                    this.totalFiltrado = datos['coleccion'].length;
+                    //this.totalFiltrado = datos['total_filtrado'];
                 }
             },
             error => {
