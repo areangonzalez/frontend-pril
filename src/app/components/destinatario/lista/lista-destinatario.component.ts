@@ -35,11 +35,7 @@ export class ListaDestinatarioComponent {
         dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
         dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
         dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
-        console.log(lugar);
-        /* let dir = direccion.replace(/<br>/gi, "&#013;");
-        console.log(dir);
-         */
-        return dir;
-        
+     
+        return dir;   
     }
 }

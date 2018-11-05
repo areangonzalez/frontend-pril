@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
 import { DestinatarioService } from "../../services/destinatario.service";
+import { MensajesService } from "../../services/mensajes.service";
 
 @Component({
     selector: 'app-destinatario',
@@ -13,7 +14,7 @@ export class DestinatarioComponent implements OnInit {
     destinatarios: any;
     totalFiltrado: number = 0;
 
-    constructor(private breadcrumbsService: BreadcrumbsService, private _destinatarioService: DestinatarioService) {
+    constructor(private breadcrumbsService: BreadcrumbsService, private _destinatarioService: DestinatarioService, private _mensajeService: MensajesService) {
     }
 
     ngOnInit(){
@@ -28,7 +29,6 @@ export class DestinatarioComponent implements OnInit {
     listar() {
         this._destinatarioService.listarDestinatario().subscribe(
             datos => {
-                console.log(datos);
                 if (datos['success']) {
                     this.destinatarios = datos['coleccion'];
                     this.totalFiltrado = datos['coleccion'].length;
@@ -36,6 +36,7 @@ export class DestinatarioComponent implements OnInit {
                 }
             },
             error => {
+                this._mensajeService.cancelado(error, [{name:''}]);
                 console.log(<any>error);
             }
         );

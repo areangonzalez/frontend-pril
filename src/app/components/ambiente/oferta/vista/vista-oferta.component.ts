@@ -11,7 +11,7 @@ import { OfertaService } from "../../../../services/oferta.service";
 export class VistaOfertaComponent implements OnInit {
     @Input("ofertaid") public ofertaid;
     public datosOferta = {
-        id: 1,
+        id: 0,
         ambienteid: "",
         nombre_sucursal: "",
         puesto: "",
@@ -39,8 +39,6 @@ export class VistaOfertaComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
         this.ofertaPorId(this.ofertaid);
     }
 
