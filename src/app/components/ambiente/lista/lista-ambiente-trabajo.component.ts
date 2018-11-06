@@ -20,7 +20,7 @@ export class ListaAmbienteTrabajoComponent {
     }
 
     verAmbienteTrabajo(id) {
-        this._router.navigate(['ambiente', 'vista']);
+        this._router.navigate(['ambiente', 'vista', id]);
     }
     
     editarAmbienteTrabajo(id) {

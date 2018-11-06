@@ -3,6 +3,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
 // servicios
 import { OfertaService } from "../../../services/oferta.service";
+import { AmbienteTrabajoService } from "../../../services/ambiente-trabajo.service";
 import { MensajesService } from "../../../services//mensajes.service";
 
 @Component({
@@ -14,14 +15,48 @@ export class OfertaComponent implements OnInit {
     public listaOfertas: Object;
     private id:any;
     public idAmbiente = '';
+    public ambiente: Object;
 
     constructor(
         private breadcrumbsService: BreadcrumbsService,
         private _router: Router,
         private _route: ActivatedRoute,
         private _ofertaService: OfertaService,
+        private _ambienteTrabajoService: AmbienteTrabajoService,
         private _mensajeService: MensajesService
-    ) {}
+    ) {
+        this.ambiente = {
+            ambiente: {
+                id: 0,
+                nombre: "Saturno hogar S.A",
+                legajo: "",
+                observacion: "",
+                cuit: "",
+                actividad: "Venta de ",
+                tipo_ambiente_trabajoid: "",
+                lugar: {
+                    id: 0,
+                    localidadid: "",
+                    calle: "",
+                    altura: "",
+                    barrio: "",
+                    piso: "",
+                    depto: "",
+                    escalera: ""
+                }
+            },
+            persona: {
+                id: 0,
+                nro_documento: "",
+                apellido: "",
+                nombre: "",
+                telefono: "",
+                celular: "",
+                fax: "",
+                email: ""
+            }
+        }
+    }
 
     ngOnInit() {
         this.breadcrumbsService.store([
@@ -33,6 +68,7 @@ export class OfertaComponent implements OnInit {
         if (this.id != undefined) {
             this.idAmbiente = this.id;
             this.buscarOfertas(this.id);
+            this.ambientePorId(this.id);
         }else{
             this._router.navigate(['ambiente']);
         }
@@ -43,6 +79,19 @@ export class OfertaComponent implements OnInit {
         this._ofertaService.listarOfertas(idAmbiente).subscribe(
             datos => {
                 this.listaOfertas = datos;
+            }, error => {
+                this._mensajeService.cancelado(error, [{ name: '' }]);
+            });
+    }
+
+    private ambientePorId(id){
+        this._ambienteTrabajoService.ambientePorId(id).subscribe(
+            datos => {
+                for (var key in datos) {
+                    this.ambiente[key] = datos[key];
+                }
+            }, error => {
+                this._mensajeService.cancelado(error, [{name:''}]);
             });
     }
 
@@ -51,10 +100,17 @@ export class OfertaComponent implements OnInit {
             data => {
                 this._mensajeService.exitoso('Se ha guardado correctamente la oferta', [{name: ''}]);
                 this.buscarOfertas(this.idAmbiente);
-                //this._mensajeService.ofrecer('Se ha guardado correctamente la oferta', [{ name: '', tipo: 'continuar' }, { name: 'ambiente/vista', tipo: 'vista' }]);
             }, error => {
                 this._mensajeService.cancelado(error, [{name:''}]);
             });
+    }
+
+    public volver(){
+        this._router.navigate(['ambiente']);
+    }
+
+    public vistaAmbiente(id){
+        this._router.navigate(['ambiente', 'vista', id]);
     }
 
 }

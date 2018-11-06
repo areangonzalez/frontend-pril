@@ -134,12 +134,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     private ambientePorId(id) {
         this._ambienteTrabajoService.ambientePorId(id).subscribe(
             datos => {
-                if (datos['estado']) {
-                    this.ambienteForm.setValue(datos['resultado'][0]);
-                }else{
-                    this._router.navigate(['ambiente']);
-                    this._mensajeService.cancelado(datos['message'], [{ name: '' }]);
-                }
+                this.ambienteForm.setValue(datos);
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }

@@ -240,7 +240,7 @@ export class FormDestinatarioComponent implements OnInit {
         return this.listaEstudios;
     }
 
-    private setValuesForm(formGroup: FormGroup, asignarObjeto: Object){
+    /* private setValuesForm(formGroup: FormGroup, asignarObjeto: Object){
         let control: AbstractControl = null;
         
         Object.keys(formGroup.controls).forEach((name) => {
@@ -276,6 +276,6 @@ export class FormDestinatarioComponent implements OnInit {
             
 
         });
-    }
+    } */
 
 }

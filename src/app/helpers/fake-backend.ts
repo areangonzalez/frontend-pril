@@ -401,7 +401,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         resultado.push({ estado: false, resultado: [], message: mensaje });
                     }
 
-                    return of(new HttpResponse({ status: 200, body: resultado[0] }));
+                    return of(new HttpResponse({ status: 200, body: seleccion }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
