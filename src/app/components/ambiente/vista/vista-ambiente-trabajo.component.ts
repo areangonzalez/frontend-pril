@@ -55,6 +55,7 @@ export class VistaAmbienteTrabajoComponent {
         this._ofertaService.listarOfertas(id).subscribe(
             datos => {
                 this.listaOfertas = datos;
+                console.log(this.listaOfertas);
             }, error => {
                 this._mensajeService.cancelado(error, [{name:''}]);
             });

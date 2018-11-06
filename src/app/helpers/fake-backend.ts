@@ -114,7 +114,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // get users
-            if (request.url.endsWith('/api/users') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/users') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: [testUser] }));
@@ -127,7 +127,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          *                                DESTINATARIO 
          * ************************************************************************ */
             // lista de destinatario
-            if (request.url.endsWith('/destinatarios') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let totalF = destinatarioLista.length;
@@ -138,7 +138,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             // Agregar destinatario
-            if (request.url.endsWith('/destinatarios') && request.method === 'POST') {
+            if (request.url.endsWith('/apimock/destinatarios') && request.method === 'POST') {
                 // get new user object from post body
                 let newDestinatario = request.body;
                 let estudios = [];
@@ -340,7 +340,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          *                            AMBIENTE DE TRABAJO 
          * ************************************************************************ */
             // lista de ambientes de trabajos
-            if (request.url.endsWith('/ambiente-trabajos') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: ambienteLista }));
@@ -351,7 +351,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }            
 
             // Crear ambiente de trabajo
-            if (request.url.endsWith('/ambiente-trabajos') && request.method === 'POST') {
+            if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'POST') {
                 // get new user object from post body
                 let newAmbiente = request.body;
                 // save new user
@@ -458,7 +458,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          * ************************************************************************ */
             
             // Buscar ofertas por ambiente
-            if (request.url.endsWith('/ofertas') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/ofertas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let ambienteId = request.params.get('ambienteid');
@@ -475,7 +475,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // Crear ofertas
-            if (request.url.endsWith('/ofertas') && request.method === 'POST') {
+            if (request.url.endsWith('/apimock/ofertas') && request.method === 'POST') {
                 // get new user object from post body
                 let newOfertas = request.body;
                 // save new user
@@ -599,7 +599,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          *                                  PERSONAS
          * ************************************************************************ */
             // Buscar personas
-            if (request.url.endsWith('/personas') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/personas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let nro_documento = request.params.get('nro_documento');
@@ -626,7 +626,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          * ************************************************************************ */
 
             // lista tipos de ambientes de trabajos
-            if (request.url.endsWith('/tipo-ambiente-trabajos') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/tipo-ambiente-trabajos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: tipoAmbienteTrabajoLista }));
@@ -636,7 +636,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             // profesiones
-            if (request.url.endsWith('/profesions') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/profesions') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: profesion }));
@@ -646,7 +646,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             // oficios
-            if (request.url.endsWith('/oficios') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/oficios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: oficio }));
@@ -656,7 +656,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             //sexo
-            if (request.url.endsWith('/sexos') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/sexos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: sexo }));
@@ -666,7 +666,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             // genero
-            if (request.url.endsWith('/generos') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/generos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: genero }));
@@ -676,7 +676,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             // Estado Civil
-            if (request.url.endsWith('/estado-civils') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/estado-civils') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: estadoCivil }));
@@ -686,7 +686,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             //localidades
-            if (request.url.endsWith('/localidads') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/localidads') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: localidad }));
@@ -696,7 +696,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             //Nivel educativo
-            if (request.url.endsWith('/nivel-educativos') && request.method === 'GET') {
+            if (request.url.endsWith('/apimock/nivel-educativos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: nivelEducativo }));

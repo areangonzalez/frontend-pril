@@ -1,42 +1,62 @@
 <div class="row botton-separate">
-    <div class="col-md-12">
-        <button class="btn btn-danger btn-md" (click)="volver()">
-            <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
-        <button class="btn btn-light btn-md" (click)="editarAmbiente(idAmbiente)">
-            <span class="oi oi-pencil"></span> Editar</button>  &nbsp;
-        <button class="btn btn-success btn-md" (click)="agregarOferta(idAmbiente)">
-            <span class="oi oi-plus"></span> Agregar oferta</button>
-    </div>
-</div>
+    <div class="col-md-12 ">
+        <div class="d-flex justify-content-between"> 
+            <button class="btn btn-outline-danger btn-md" (click)="volver()">
+                <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
+            <button class="btn btn-outline-secondary btn-md" (click)="editarAmbiente(idAmbiente)">
+                <span class="oi oi-pencil"></span> Editar</button> &nbsp;
+            <button class="btn btn-outline-success btn-md" (click)="agregarOferta(idAmbiente)">
+                <span class="oi oi-plus"></span> Agregar oferta</button>
+        </div> 
+    </div> 
+</div> 
 <div class="row">
-    <div class="col-md-12">
-        <ngb-accordion #acc="ngbAccordion" activeIds="toggle-1">
-            <ngb-panel id="toggle-1" title="Ambiente de trabajo: Panadería san Fernando">
-                <ng-template ngbPanelContent>
-                    <dl class="row">
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Nombre:</dt>
-                        <dd class="col-7 col-sm-3 col-md-3 col-lg-2">Panadería San Fernando</dd>
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Actividad:</dt>
-                        <dd class="col-7 col-sm-3 col-md-3 col-lg-2">Panadería y pasteleria</dd>
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Representante:</dt>
-                        <dd class="col-7 col-sm-3 col-md-3 col-lg-2">Rodriguez, Raul</dd>
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Tipo:</dt>
-                        <dd class="col-7 col-sm-3 col-md-3 col-lg-2">Empleador privado</dd>
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Cuit:</dt>
-                        <dd class="col-7 col-sm-3 col-md-3 col-lg-2">2033476724</dd>
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Legajo:</dt>
-                        <dd class="col-7 col-sm-3 col-md-3 col-lg-2">078965/8</dd>
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Direccion:</dt>
-                        <dd class="col-7 col-sm-3 col-md-3 col-lg-2">Rivadavia 123</dd>
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Calificación:</dt>
-                        <dd class="col-7 col-sm-3 col-md-3 col-lg-2">4.0</dd>
-                    </dl>
-                </ng-template>
-            </ngb-panel>
-        </ngb-accordion>
+    <div class="col-md-12 ">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Panadería San Fernando</dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Actividad:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Panadería y pasteleria</dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Rodriguez, Raul</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-4">
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Empleador privado</dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuit:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">2033476724</dd>
+                        </dl>
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">078965/8</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-4">
+                        <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Direccion:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Rivadavia 123</dd>
+                        </dl>
+                        <!-- <dl class="row">
+                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Calificación:</dt>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">4.0</dd>
+                        </dl> -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<hr class="mb-4">
-<h4>Ofertas</h4>
-<lista-oferta [ofertas]="ofertas"></lista-oferta>
-<!-- <vista-oferta [ofertas]="ofertas"></vista-oferta> -->
+<hr>
+<lista-oferta [listaOfertas]="listaOfertas" [nombreAmbiente]="'Carlos Perez'" [mostrarEdicion]="0"></lista-oferta>

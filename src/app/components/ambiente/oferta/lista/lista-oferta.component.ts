@@ -9,6 +9,7 @@ import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 export class ListaOfertaComponent implements OnInit {
     @Input('listaOfertas') public listaOfertas: Object;
     @Input('nombreAmbiente') public nombreAmbiente: string;
+    @Input('mostrarEdicion') public mostrarEdicion:number; 
     @Output('guardarOferta') public guardarOferta = new EventEmitter();
 
     constructor(
