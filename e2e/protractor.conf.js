@@ -11,10 +11,10 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome'
   },
-  seleniumAddress: 'http://seleniumchrome:4444/wd/hub',
+  seleniumAddress: 'http://selenium:4444/wd/hub',
   chromeOnly: true,
-  directConnect: true,
-  baseUrl: 'http://prilfrontend:4300/',
+  directConnect: false,
+  baseUrl: 'http://angular:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

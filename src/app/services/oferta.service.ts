@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from "../../environments/environment";
-import { httpOptions } from "../services/http-options.service";
+import { HttpParams } from '@angular/common/http';
+import { ApiService } from "../services/api.service";
+
 
 @Injectable()
 export class OfertaService {
-    private url: string = environment.baseUrl;
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: ApiService) { }
 
     listarOfertas(idAmbiente) {
-        let options = { headears: httpOptions, params: new HttpParams().set('ambienteid', idAmbiente) };
-        return this._http.get(this.url + '/ofertas', options);
+        let params = new HttpParams().set('ambienteid', idAmbiente);
+        return this._http.get('/ofertas', params);
     }
 
     getOfertaPorId(id: number) {
-        return this._http.get(this.url + '/ofertas/' + id);
+        return this._http.get('/ofertas/' + id);
     }
 
     guardar(params: object, id: number) {
         if (id != 0) {
-            return this._http.put(this.url + '/ofertas/' + id, params, httpOptions);
+            return this._http.put('/ofertas/' + id, params);
         } else {
-            return this._http.post(this.url + '/ofertas', params, httpOptions);
+            return this._http.post('/ofertas', params);
         }
     }
 

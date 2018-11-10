@@ -1,6 +1,13 @@
 version: '2'
 
 services:
-  prilphp: 
+  prilphp:
    environment:
        RUNMODE: dev
+   seleniumchrome:
+    image: selenium/standalone-chrome-debug
+    ports:
+      - 4444:4444
+      - 5900:5900
+    volumes:
+     - /dev/shm:/dev/shm

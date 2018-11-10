@@ -20,12 +20,14 @@ import { AreaEntrenamientoModule } from './components/area/area-entrenamiento.mo
 /* Componentes */
 import { JwtInterceptor } from "./helpers/jwt.interceptor";
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { LoaderComponent } from "./components/loader/loader.component";
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/incio.component';
 import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { MensajesComponent } from "./components/mensajes/mensajes.component";
 /* Services */
+import { LoaderService } from "./components/loader/loader.service";
 import { JwtService } from "./services/jwt.service";
 import { ApiService } from "./services/api.service";
 import { BreadcrumbsService } from "./components/breadcrumbs/breadcrumbs.service";
@@ -46,6 +48,7 @@ import { OfertaService } from "./services/oferta.service";
 @NgModule({
   declarations: [
     AppComponent,
+    LoaderComponent,
     CabeceraComponent,
     PieComponent,
     LoginComponent,
@@ -75,6 +78,7 @@ import { OfertaService } from "./services/oferta.service";
     // servicios del sistema
     JwtService,
     ApiService,
+    LoaderService,
     BreadcrumbsService,
     DestinatarioService,    
     MensajesService,

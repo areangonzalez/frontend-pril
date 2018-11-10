@@ -100,7 +100,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return of(null).pipe(mergeMap(() => {
 
         /* ************************************************************************
-         *                                LOGIN 
+         *                                LOGIN
          * ************************************************************************ */
             // authenticate
             if (request.url.endsWith('/apimock/usuario/login') && request.method === 'POST') {
@@ -124,7 +124,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
         /* ************************************************************************
-         *                                DESTINATARIO 
+         *                                DESTINATARIO
          * ************************************************************************ */
             // lista de destinatario
             if (request.url.endsWith('/apimock/destinatarios') && request.method === 'GET') {
@@ -235,7 +235,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     let matchedUsers = destinatarioLista.filter(destinatario => { return destinatario.id === id; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
-                    
+
                     respuesta = { status: 200, body: seleccion };
                     return of(new HttpResponse(respuesta));
                 } else {
@@ -245,11 +245,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // Editar destinatario
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'PUT') {
-                
+
                 let urlParts = request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length - 1]);
                 let estudios = [];
-                
+
                 // consigo el destinatario a editar en la respuesta
                 let editDestinatario = request.body;
                 // creo los estudios
@@ -337,10 +337,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
         /* ************************************************************************
-         *                            AMBIENTE DE TRABAJO 
+         *                            AMBIENTE DE TRABAJO
          * ************************************************************************ */
             // lista de ambientes de trabajos
             if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'GET') {
+                console.log('terminando');
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: ambienteLista }));
@@ -348,7 +349,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });
                 }
-            }            
+            }
 
             // Crear ambiente de trabajo
             if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'POST') {
@@ -390,7 +391,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let mensaje = 'No existe este ambiente';
                     // find user by id in users array
                     let urlParts = request.url.split('/');
-                    let id = parseInt(urlParts[urlParts.length - 1]);                    
+                    let id = parseInt(urlParts[urlParts.length - 1]);
                     let matchedUsers = ambientesAgregados.filter(ambiente => { return ambiente.ambiente.id === id; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
                     let resultado: any = [];
@@ -456,7 +457,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         /* ************************************************************************
          *                                  OFERTAS
          * ************************************************************************ */
-            
+
             // Buscar ofertas por ambiente
             if (request.url.endsWith('/apimock/ofertas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
@@ -483,7 +484,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // genero la lista de ofertas
                 newOfertas.id = generarId(ofertasAgregadas);
                 newOfertas.fecha_inicial = hoy();
-                
+
                 ofertasLista.push({
                     id: newOfertas.id,
                     ambienteid: newOfertas.ambienteid,
@@ -545,7 +546,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // consigo el destinatario a editar en la respuesta
                 let editOferta = request.body;
-                
+
                 // busco en el listado el destinatario
                 for (var i = 0; i < ofertasLista.length; i++) {
                     if (ofertasLista[i]['id'] == id) {
@@ -611,7 +612,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     if (seleccion != null) {
                         resultado.push({estado:true, resultado:[seleccion]});
                     }else{
-                        resultado.push({ estado: false, resultado: [], message:mensaje});                        
+                        resultado.push({ estado: false, resultado: [], message:mensaje});
                     }
 
                     return of(new HttpResponse({ status: 200, body: resultado[0] }));
@@ -713,7 +714,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
             .pipe(materialize())
-            .pipe(delay(500))
+            .pipe(delay(1000))
             .pipe(dematerialize());
     }
 }
