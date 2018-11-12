@@ -358,6 +358,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // save new user
                 // array de la tabla
                 newAmbiente.ambiente.id = generarId(ambienteLista);
+                let idAmbiente: number = newAmbiente.ambiente.id;
                 newAmbiente.persona.id = generarId(ambienteLista);
                 newAmbiente.ambiente.lugar.id = generarId(ambienteLista);
                 ambienteLista.push({
@@ -381,7 +382,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
 
                 // respond 200 OK
-                return of(new HttpResponse({ status: 200 }));
+                return of(new HttpResponse({ status: 200, body: { id: idAmbiente } }));
             }
 
             // conseguir AMBIENTE DE TRABAJO por id
