@@ -5,7 +5,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'area-entrenamiento-lista-destinatario',
     templateUrl: './lista-destinatario-area-entrenamiento.html',
-    //styleUrls: ['./lista-area-entrenamiento.css'],
+    styleUrls: ['./lista-destinatario-area-entrenamiento.css'],
     providers: [NgbTooltipConfig]
 })
 export class ListaDestinatarioAreaEntrenamientoComponent {
@@ -22,5 +22,16 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
 
     limpiar(){
         console.log('limpiar campos');
-    } 
+    }
+
+
+    getDireccion(lugar: Object) {
+      let dir = "";
+      dir += lugar['localidad'] + " - " + lugar['barrio'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+      dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
+      dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
+      dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
+
+      return dir;
+  }
 }

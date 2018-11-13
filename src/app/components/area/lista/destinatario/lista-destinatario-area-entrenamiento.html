@@ -17,35 +17,38 @@
         </div>
     </form>
 </div>
-
 <div class="col-md-12">
     <table class="table table-hover">
         <thead>
-            <tr>
-                <th scope="col">Apellido y nombre</th>
-                <th scope="col"></th>
-                <th scope="col">Nro. Documento</th>
-                <th scope="col">Oficio</th>
-                <th scope="col">Calificación</th>
-            </tr>
+          <tr>
+            <th scope="col">Nro. Documento</th>
+            <th scope="col">Apellido y nombre</th>
+            <th></th>
+            <th scope="col">Formación deseada</th>
+            <th scope="col">Oficio</th>
+            <th scope="col"></th>
+          </tr>
         </thead>
         <tbody>
             <tr *ngFor="let destinatario of destinatarios">
-                <th>{{destinatario.apellido}}, {{destinatario.nombre}}</th>
-                <td>
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.direccion}}">
-                        <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.telefono}}">
-                        <span class="fas fa-phone" title="Teléfono" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.celular}}">
-                        <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
-                    </button>
-                </td>
-                <td>{{destinatario.nro_documento}}</td>
-                <td>{{destinatario.oficio}}</td>
-                <td>{{destinatario.calificacion}}</td>
+              <td>{{destinatario.persona.nro_documento}}</td>
+              <th>{{destinatario.persona.apellido}}, {{destinatario.persona.nombre}}</th>
+              <td>
+                  <button type="button" class="btn btn-outline-secondary btn-margin-left" tooltipClass="tooltip-inner" ngbTooltip="{{getDireccion(destinatario.persona.lugar)}}">
+                      <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.email}}">
+                      <span class="oi oi-envelope-closed" title="Email" aria-hidden="true"></span>
+                  </button>
+                  <button *ngIf="(destinatario.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.telefono}}">
+                      <i class="fas fa-phone" title="Telefono"></i>
+                  </button>
+                  <button *ngIf="(destinatario.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.celular}}">
+                      <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
+                  </button>
+              </td>
+              <td>{{destinatario.deseo_actividad}}</td>
+              <td>{{destinatario.oficio}}</td>
             </tr>
         </tbody>
     </table>

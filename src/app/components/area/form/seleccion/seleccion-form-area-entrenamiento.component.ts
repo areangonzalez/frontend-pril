@@ -26,24 +26,25 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     ngOnInit() {
         this.breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] },{ label: 'Área de entrenamiento', url: 'area', params: [] },{ label: 'Crear', url: 'area/crear/seleccion', params: [] }]);
       this.listarOfertas();
+      this.listarDestinatario();
     }
 
     private listarOfertas(){
       this._ofertaService.listarOfertas('').subscribe(
         datos => {
-          console.log(datos)
           this.ofertas = datos['coleccion'];
         }, error => {
 
         });
-    }
+      }
 
-    private listarDestinatario(){
-      this._destinatarioService.listarDestinatario().subscribe(
-        datos => {
-          //this.destinatarios =
+      private listarDestinatario(){
+        this._destinatarioService.listarDestinatario().subscribe(
+          datos => {
+            console.log(datos)
+            this.destinatarios = datos['coleccion'];
         }, error => {
-
+          console.log(error);
         });
     }
 
