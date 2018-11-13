@@ -2,3 +2,6 @@
     align-content: flex-end;
     vertical-align: text-bottom;
 }
+.table th {
+  padding: .50rem !important;
+}

@@ -8,9 +8,13 @@ export class OfertaService {
 
     constructor(private _http: ApiService) { }
 
-    listarOfertas(idAmbiente) {
+    listarOfertas(idAmbiente = '') {
+      if (idAmbiente != ''){
         let params = new HttpParams().set('ambienteid', idAmbiente);
         return this._http.get('/ofertas', params);
+      }else{
+        return this._http.get('/ofertas');
+      }
     }
 
     getOfertaPorId(id: number) {
@@ -26,4 +30,4 @@ export class OfertaService {
     }
 
 
-}   
+}

@@ -1,16 +1,9 @@
-<h4 clas="mt-2">Ofertas</h4>
-<hr class="mb-2">
-
-<area-entrenamiento-lista-oferta [ofertas]="ofertas"></area-entrenamiento-lista-oferta>
-
-<hr class="mt-4 mb-2">
-
-<h4 clas="mt-2">Destinatario</h4>
-<hr class="mb-2">
-
+<h4>Destinatario</h4>
 <area-entrenamiento-lista-destinatario [destinatarios]="destinatarios"></area-entrenamiento-lista-destinatario>
 
-<hr class="my-4">
+<h4>Ofertas</h4>
+<area-entrenamiento-lista-oferta [ofertas]="ofertas"></area-entrenamiento-lista-oferta>
+
 <div class="float-right">
     <button class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
     <button class="btn btn-success" (click)="crearArea()">Siguiente <span class="oi oi-arrow-thick-right align-icon" title="siguiente" aria-hidden="true"></span></button>
