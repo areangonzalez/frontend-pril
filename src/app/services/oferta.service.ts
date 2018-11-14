@@ -29,5 +29,9 @@ export class OfertaService {
         }
     }
 
+    buscarOfertaPor(params: object) {
+      let parametros = new HttpParams(params);
+      return this._http.get('/ofertas', parametros);
+    }
 
 }

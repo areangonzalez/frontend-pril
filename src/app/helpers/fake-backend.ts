@@ -463,12 +463,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/ofertas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                  console.log(request.params);
+                  console.log(request.params.get('oficio'));
                     let ambienteId = request.params.get('ambienteid');
                     //let mensaje: string = 'Este ambiente no existe.';
                     console.log('respuesta con parametro: ', ambienteId);
 
-                    if (ambienteId != undefined) {
+                    if (ambienteId != null) {
                       console.log('con ambiente');
 
                       let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.ambienteid === ambienteId; });

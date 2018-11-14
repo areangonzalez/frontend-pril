@@ -4,6 +4,7 @@ import { BreadcrumbsService } from "../../../breadcrumbs/breadcrumbs.service";
 // services
 import { OfertaService } from '../../../../services/oferta.service'
 import { DestinatarioService } from '../../../../services/destinatario.service'
+import { MensajesService } from '../../../../services/mensajes.service'
 
 
 @Component({
@@ -20,7 +21,8 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
         private breadcrumbsService: BreadcrumbsService,
         private _router: Router,
         private _ofertaService: OfertaService,
-        private _destinatarioService: DestinatarioService
+        private _destinatarioService: DestinatarioService,
+        private _mensajesService: MensajesService
     ) {}
 
     ngOnInit() {
@@ -34,7 +36,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
         datos => {
           this.ofertas = datos['coleccion'];
         }, error => {
-
+          this._mensajesService.cancelado(error, [{name:''}]);
         });
       }
 
@@ -44,7 +46,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
             console.log(datos)
             this.destinatarios = datos['coleccion'];
         }, error => {
-          console.log(error);
+          this._mensajesService.cancelado(error, [{name:''}]);
         });
     }
 
@@ -56,5 +58,20 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
 
     crearArea(){
         this._router.navigate(['area', 'crear-plan']);
+    }
+
+    destinatarioElegido(destinatario){
+      if (destinatario != null) {
+        this._ofertaService.buscarOfertaPor(destinatario).subscribe(
+          datos => {
+            this.ofertas = datos['coleccion'];
+          }, error => {
+            this._mensajesService.cancelado(error, [{name:''}]);
+          });
+
+        console.log(destinatario);
+      } else {
+        console.log('no hace nada');
+      }
     }
 }

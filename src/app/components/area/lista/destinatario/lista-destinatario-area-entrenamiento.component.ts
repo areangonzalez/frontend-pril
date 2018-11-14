@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
 
 @Component({
     selector: 'area-entrenamiento-lista-destinatario',
@@ -10,7 +11,9 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListaDestinatarioAreaEntrenamientoComponent {
     @Input('destinatarios') destinatarios: Object;
-    //title = 'app';
+    @Output('destinatarioElegido') destinatarioElegido = new EventEmitter();
+
+    public selId = 0;
 
     constructor(
         private _router: Router,
@@ -33,5 +36,16 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
       dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
 
       return dir;
-  }
+    }
+
+    seleccionarDestinatario(id:number, formacionDeseada:string, oficio:string){
+      if (this.selId != id) {
+        this.selId = id;
+        this.destinatarioElegido.emit({ id:id, deseo_actividad: formacionDeseada, oficio:oficio });
+      }else{
+        this.selId = 0;
+        this.destinatarioElegido.emit(null);
+      }
+
+    }
 }
