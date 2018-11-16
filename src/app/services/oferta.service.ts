@@ -30,8 +30,11 @@ export class OfertaService {
     }
 
     buscarOfertaPor(params: object) {
-      let parametros = new HttpParams(params);
-      return this._http.get('/ofertas', parametros);
+      let httpParams = new HttpParams();
+      for (const key in params) {
+        httpParams = httpParams.append(key.toString(), params[key].toString());
+      }
+      return this._http.get('/ofertas', httpParams);
     }
 
 }

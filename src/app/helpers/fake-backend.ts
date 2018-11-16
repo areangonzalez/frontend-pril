@@ -465,21 +465,41 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   console.log(request.params.get('oficio'));
                     let ambienteId = request.params.get('ambienteid');
+                    let oficioNombre = request.params.get('oficio');
+                    let deseoActividad = request.params.get('deseo_actividad');
                     //let mensaje: string = 'Este ambiente no existe.';
-                    console.log('respuesta con parametro: ', ambienteId);
 
                     if (ambienteId != null) {
-                      console.log('con ambiente');
 
                       let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.ambienteid === ambienteId; });
                       let seleccion = matchedAmbiente.length ? matchedAmbiente : [];
 
                       return of(new HttpResponse({ status: 200, body: seleccion }));
-                    } else {
-                      console.log('entra lista ofertas');
-
+                    } else if ( (oficioNombre != null && oficioNombre != '') || deseoActividad != null && deseoActividad != '' ) {
+                      let seleccion:any;
+                      // coincidencia de oficios en listado oferta
+                      if (oficioNombre != null && oficioNombre != ''){
+                        let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.puesto === oficioNombre; });
+                        seleccion = matchedAmbiente.length ? matchedAmbiente : [];
+                      }
+                      // coincidencia en deseo actividad
+                      if (deseoActividad != null && deseoActividad != ''){
+                        let matchedAmbiente = ofertasLista.filter(ofertas => {
+                          let buscar = deseoActividad.indexOf(ofertas.puesto);
+                          return (buscar == -1)?false:true;
+                        });
+                        seleccion = matchedAmbiente.length ? matchedAmbiente : seleccion;
+                      }
+                      console.log("seleccion: ",seleccion);
+                      if (seleccion.length > 0) {
+                      console.log("seleccion");
+                      return of(new HttpResponse({ status: 200, body: { coleccion: seleccion } }));
+                      }else{
+                      console.log("ofertas");
                       return of(new HttpResponse({ status: 200, body: { coleccion: ofertasLista } }));
-
+                      }
+                    }else{
+                      return of(new HttpResponse({ status: 200, body: { coleccion: ofertasLista } }));
                     }
 
 

@@ -43,7 +43,6 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       private listarDestinatario(){
         this._destinatarioService.listarDestinatario().subscribe(
           datos => {
-            console.log(datos)
             this.destinatarios = datos['coleccion'];
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
@@ -68,10 +67,8 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
           }, error => {
             this._mensajesService.cancelado(error, [{name:''}]);
           });
-
-        console.log(destinatario);
       } else {
-        console.log('no hace nada');
+        this.listarOfertas();
       }
     }
 }
