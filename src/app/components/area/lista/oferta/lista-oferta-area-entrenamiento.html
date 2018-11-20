@@ -34,15 +34,15 @@
                 <th scope="col">Fecha de inicio</th>
                 <th scope="col">Ambiente trabajo</th>
                 <th scope="col">Puesto</th>
-                <th scope="col">Días y horarios</th>
+                <th class="text-center" scope="col">Días y horarios</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let oferta of ofertas">
+            <tr *ngFor="let oferta of ofertas" [ngClass]="{'table-success': (selId == oferta.id)}" (click)="seleccionarOferta(oferta.id)">
                 <td>{{oferta.fecha_inicial | date:'dd/MM/yyyy' }}</td>
                 <td>{{oferta.nombre_sucursal}}</td>
                 <td>{{oferta.puesto}}</td>
-                <td>{{oferta.dia_horario}}</td>
+                <td class="text-center">{{oferta.dia_horario}}</td>
             </tr>
         </tbody>
     </table>

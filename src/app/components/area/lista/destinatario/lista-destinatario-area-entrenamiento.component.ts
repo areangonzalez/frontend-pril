@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
 
 @Component({
     selector: 'area-entrenamiento-lista-destinatario',

@@ -1,12 +1,14 @@
-<h4>Destinatario</h4>
+<h4>Seleccionar un destinatario</h4>
 <area-entrenamiento-lista-destinatario [destinatarios]="destinatarios" (destinatarioElegido)="destinatarioElegido($event)"></area-entrenamiento-lista-destinatario>
 
-<h4>Ofertas</h4>
-<area-entrenamiento-lista-oferta [ofertas]="ofertas"></area-entrenamiento-lista-oferta>
+<h4>Seleccionar una oferta</h4>
+<area-entrenamiento-lista-oferta [ofertas]="ofertas" (ofertaElegida)="ofertaElegida($event)"></area-entrenamiento-lista-oferta>
 
 <div class="float-right">
     <button class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
-    <button class="btn btn-success" (click)="crearArea()">Siguiente <span class="oi oi-arrow-thick-right align-icon" title="siguiente" aria-hidden="true"></span></button>
+    <button class="btn btn-success" (click)="seguirCreando(destinatarioId, ofertaId)" (click)="crearArea()">Siguiente <span class="oi oi-arrow-thick-right align-icon" title="siguiente" aria-hidden="true"></span></button>
 </div>
+<p>oferta: {{ ofertaId }}</p>
+<p>destinatario: {{ destinatarioId }}</p>
 
 

@@ -16,6 +16,8 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     page = 1;
     public ofertas:any[];
     public destinatarios: any[];
+    public destinatarioId:number;
+    public ofertaId:number;
 
     constructor(
         private breadcrumbsService: BreadcrumbsService,
@@ -61,6 +63,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
 
     destinatarioElegido(destinatario){
       if (destinatario != null) {
+        this.destinatarioId = destinatario.id;
         this._ofertaService.buscarOfertaPor(destinatario).subscribe(
           datos => {
             this.ofertas = datos['coleccion'];
@@ -68,7 +71,24 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
             this._mensajesService.cancelado(error, [{name:''}]);
           });
       } else {
+        this.destinatarioId = 0;
         this.listarOfertas();
+      }
+    }
+
+    ofertaElegida(oferta){
+      if (oferta != null) {
+        this.ofertaId = oferta.id;
+      }else{
+        this.ofertaId = 0;
+      }
+    }
+
+    seguirCreando(){
+      if (this.destinatarioId != 0 && this.ofertaId != 0){
+        // ir a la otra pagina
+      }else{
+        // aviso si falta algo.
       }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,7 +10,8 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListaOfertaAreaEntrenamientoComponent {
     @Input('ofertas') ofertas: Object;
-    //title = 'app';
+    @Output('ofertaElegida') public ofertaElegida = new EventEmitter();
+    public selId = 0;
 
     constructor(
         private _router: Router,
@@ -22,5 +23,16 @@ export class ListaOfertaAreaEntrenamientoComponent {
 
     limpiar() {
         console.log('limpiar campos');
-    } 
+    }
+
+    seleccionarOferta(id) {
+      if (this.selId != id) {
+        this.selId = id;
+        this.ofertaElegida.emit({ id:id });
+      }else{
+        this.selId = 0;
+        this.ofertaElegida.emit(null);
+      }
+
+    }
 }
