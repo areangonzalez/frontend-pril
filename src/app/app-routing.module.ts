@@ -39,7 +39,7 @@ import { AuthGuard } from './guards/auth.guard'
 
             { path: 'area-entrenamiento', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },
             { path: 'area-entrenamiento/crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
-            { path: 'area-entrenamiento/crear-plan', component: PlanFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area-entrenamiento/crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
             { path: 'area-entrenamiento/vista', component: VistaAreaEntrenamientoComponent, data: { title: 'Ver área de entrenamiento' }, canActivate: [AuthGuard] },
 
 

@@ -28,7 +28,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] },{ label: 'Área de entrenamiento', url: 'area', params: [] },{ label: 'Crear', url: 'area/crear/seleccion', params: [] }]);
+        this.breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] },{ label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] },{ label: 'Crear', url: 'area/crear/seleccion', params: [] }]);
       this.listarOfertas();
       this.listarDestinatario();
     }
@@ -85,9 +85,8 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     }
 
     seguirCreando(){
-      console.log("destinatario: ",this.destinatarioId);
       if (this.destinatarioId != 0 && this.ofertaId != 0){
-        this._router.navigate(['area-entrenamiento', 'crear-plan']);
+        this._router.navigate(['area-entrenamiento', 'crear-plan', this.destinatarioId, this.ofertaId]);
       }else{
         this._mensajesService.cancelado('Por favor verifique los datos!!!', [{'name':''}]);
         // aviso si falta algo.

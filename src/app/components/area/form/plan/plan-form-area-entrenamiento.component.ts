@@ -28,7 +28,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
         private _router: Router,
         private _fb: FormBuilder,
         private _formatearFecha: FormatObjetoAFecha
-    ) { 
+    ) {
         this.areaEntrenamiento = _fb.group({
             id: '',
             tarea: ['', [Validators.required, Validators.minLength(5)]],
@@ -44,7 +44,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     ngOnInit() {
         this._breadcrumbsService.store([
             { label: 'Inicio', url: 'inicio', params: [] },
-            { label: 'Área de entrenamiento', url: 'area', params: [] },
+            { label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] },
             { label: 'Crear', url: 'area/crear-plan', params: [] }]);
     }
 

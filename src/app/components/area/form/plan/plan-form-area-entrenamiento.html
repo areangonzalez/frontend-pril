@@ -1,6 +1,13 @@
 <div class="row">
     <div class="col-md-12">
-        <ngb-accordion #acc="ngbAccordion" activeIds="plan2, plan3">
+      <div class="card">
+          <div class="card-body">
+              <area-entrenamiento-vista-destinatario></area-entrenamiento-vista-destinatario>
+          </div>
+      </div>
+
+
+        <!-- <ngb-accordion #acc="ngbAccordion" activeIds="plan2, plan3">
             <ngb-panel id="plan1" title="Ambiente de trabajo">
                 <ng-template ngbPanelContent>
                     <area-entrenamiento-vista-ambiente-trabajo></area-entrenamiento-vista-ambiente-trabajo>
@@ -16,12 +23,12 @@
                     <area-entrenamiento-vista-destinatario></area-entrenamiento-vista-destinatario>
                 </ng-template>
             </ngb-panel>
-        </ngb-accordion>
+        </ngb-accordion> -->
     </div>
 </div>
 <hr class="my-4">
 <h3>Área entrenamiento</h3>
-<form [formGroup]="areaEntrenamiento" >
+<!-- <form [formGroup]="areaEntrenamiento" >
     <div class="row">
         <div class="col-md-4">
             <div class="row">
@@ -31,14 +38,14 @@
                         <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #faed="ngbDatepicker" id="fecha_nacimiento"
                             (ngModelChange)="formatFechaInicial($event)" formControlName="fechaInicial">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-info" (click)="faed.toggle()" type="button" [ngClass]="{'btn-outline-danger': (areaEntrenamiento.controls.fechaInicial.invalid && (!areaEntrenamiento.controls.fechaInicial.pristine || areaEntrenamiento.controls.fechaInicial.touched))}"> 
+                            <button class="btn btn-outline-info" (click)="faed.toggle()" type="button" [ngClass]="{'btn-outline-danger': (areaEntrenamiento.controls.fechaInicial.invalid && (!areaEntrenamiento.controls.fechaInicial.pristine || areaEntrenamiento.controls.fechaInicial.touched))}">
                                 <span class="oi oi-calendar" title="fecha inicial" aria-hidden="true"></span>
                             </button>
                         </div>
                     </div>
                     <div *ngIf="areaEntrenamiento.controls.fechaInicial.invalid && (!areaEntrenamiento.controls.fechaInicial.pristine || areaEntrenamiento.controls.fechaInicial.touched)" class="text-danger">
                         <div *ngIf="areaEntrenamiento.controls.fechaInicial.errors.required">Este campo es requerido. </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="plan">Plan (<span>*</span>):</label>
@@ -50,7 +57,7 @@
                     </select>
                      <div *ngIf="areaEntrenamiento.controls.planid.invalid && (!areaEntrenamiento.controls.planid.pristine || areaEntrenamiento.controls.planid.touched)" class="text-danger">
                         <div *ngIf="areaEntrenamiento.controls.planid.errors.required">Este campo es requerido.</div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +67,7 @@
             <div *ngIf="areaEntrenamiento.controls.tarea.invalid && (areaEntrenamiento.controls.tarea.dirty || areaEntrenamiento.controls.tarea.touched)" class="text-danger">
                 <div *ngIf="areaEntrenamiento.controls.tarea.errors.required">Este campo es requerido.</div>
                 <div *ngIf="areaEntrenamiento.controls.tarea.errors.minlength">Por favor, describa la tarea.</div>
-            </div> 
+            </div>
         </div>
     </div>
     <div class="float-right">
@@ -68,4 +75,4 @@
         <button class="btn btn-primary" (click)="volver()"><span class="oi oi-arrow-thick-left align-icon" title="atras" aria-hidden="true"></span> Atras</button> &nbsp;
         <button class="btn btn-success"><span class="fas fa-save" title="atras" aria-hidden="true"></span> Crear</button>
     </div>
-</form>
+</form> -->

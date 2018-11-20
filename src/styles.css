@@ -6,8 +6,8 @@
   width: 100%;
   overflow-y: auto;
   top:73px;
-  bottom: 70px;
-} 
+  /* bottom: 70px; */
+}
 
 .modal-lg {
     max-width: 1200px !important;

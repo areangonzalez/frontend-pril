@@ -16,7 +16,7 @@ export class AreaEntrenamientoComponent implements OnInit {
     ngOnInit() {
         this.breadcrumbsService.store([
             { label: 'Inicio', url: 'inicio', params: [] },
-            { label: 'Área de entrenamiento', url: 'area', params: [] }]);
+            { label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] }]);
     }
 
     public areas = [
@@ -25,5 +25,5 @@ export class AreaEntrenamientoComponent implements OnInit {
         { fecha_inicial: '07/05/2018', fecha_final: '07/11/2018', tarea: 'Limpieza', destinatario: 'Gonzalez, Carlos', ambiente_trabajo: 'Panadería San Fernando', plan: '$1000 / 5hs', estado: 'activo', id: 3 },
         { fecha_inicial: '07/03/2018', fecha_final: '07/09/2018', tarea: 'Chofer', destinatario: 'Carrizo, Eliana', ambiente_trabajo: 'Coca cola', plan: '$2000 / 10hs', estado: 'activo', id: 4 },
         { fecha_inicial: '07/04/2018', fecha_final: '07/10/2018', tarea: 'Mantenimiento', destinatario: 'Gutierrez, Pablo', ambiente_trabajo: 'Cine gama', plan: '$5000 / 20hs', estado: 'activo',id: 5 }
-    ]; 
+    ];
 }
