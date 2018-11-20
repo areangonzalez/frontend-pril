@@ -24,26 +24,26 @@ import { AuthGuard } from './guards/auth.guard'
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
             { path: 'inicio', component: InicioComponent, data: { title: 'Bienvenido al Programa Rionegrino de Inclusión laboral' }, canActivate: [AuthGuard] },
-            
+
             { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', }, canActivate: [AuthGuard] },
             { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', }, canActivate: [AuthGuard]  },
             { path: 'destinatario/editar/:id', component: FormDestinatarioComponent, data: { title: 'Editar destinatario', }, canActivate: [AuthGuard] },
             { path: 'destinatario/vista/:id', component: VistaDestinatarioComponent, data: { title: 'Ver destinatario', }, canActivate: [AuthGuard] },
             { path: 'destinatario/estudio', component: EstudioComponent, data: { title: 'Estudio/s', }, canActivate: [AuthGuard] },
-            
+
             { path: 'ambiente', component: AmbienteTrabajoComponent, data: { title: 'Lista ambiente de Trabajo' }, canActivate: [AuthGuard]},
             { path: 'ambiente/vista/:id', component: VistaAmbienteTrabajoComponent, data: { title: 'Ver ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/agregar', component: FormAmbienteTrabajoComponent, data: { title: 'Agregar ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/editar/:id', component: FormAmbienteTrabajoComponent, data: { title: 'Editar ambiente de Trabajo' }, canActivate: [AuthGuard] },
             { path: 'ambiente/:id/ofertas', component: OfertaComponent, data: { title: 'Ofertas' }, canActivate: [AuthGuard] },
 
-            { path: 'area', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },
-            { path: 'area/crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
-            { path: 'area/crear-plan', component: PlanFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
-            { path: 'area/vista', component: VistaAreaEntrenamientoComponent, data: { title: 'Ver área de entrenamiento' }, canActivate: [AuthGuard] },
-            
-            
-            
+            { path: 'area-entrenamiento', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area-entrenamiento/crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area-entrenamiento/crear-plan', component: PlanFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area-entrenamiento/vista', component: VistaAreaEntrenamientoComponent, data: { title: 'Ver área de entrenamiento' }, canActivate: [AuthGuard] },
+
+
+
             /*{ path: 'inicio/vista-agente/:id', component: VistaAgenteComponent, data: { title: 'Ver Agente', breadcrumb: 'Ver agente' }, canActivate: [AuthGuard] }, */
 
             // otherside

@@ -16,8 +16,8 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     page = 1;
     public ofertas:any[];
     public destinatarios: any[];
-    public destinatarioId:number;
-    public ofertaId:number;
+    public destinatarioId:number = 0;
+    public ofertaId:number = 0;
 
     constructor(
         private breadcrumbsService: BreadcrumbsService,
@@ -85,9 +85,11 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     }
 
     seguirCreando(){
+      console.log("destinatario: ",this.destinatarioId);
       if (this.destinatarioId != 0 && this.ofertaId != 0){
-        // ir a la otra pagina
+        this._router.navigate(['area-entrenamiento', 'crear-plan']);
       }else{
+        this._mensajesService.cancelado('Por favor verifique los datos!!!', [{'name':''}]);
         // aviso si falta algo.
       }
     }

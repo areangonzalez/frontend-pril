@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-4 justify-content-center">
-        <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (mouseover)="hoverDes=true" (mouseleave)="hoverDes=false" 
+        <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (mouseover)="hoverDes=true" (mouseleave)="hoverDes=false"
         [ngClass]="{'bg-info':(!hoverDes), 'border-info':hoverDes}" (click)="irA('/destinatario')" >
             <div class="card-body" [ngClass]="{'text-white':(!hoverDes), 'text-info':hoverDes}">
                 <h5 class="card-title">Destinatario/s</h5>
@@ -21,7 +21,7 @@
     </div>
     <div class="col-md-4">
         <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (mouseover)="hoverAe=true" (mouseleave)="hoverAe=false"
-            [ngClass]="{'bg-info':(!hoverAe), 'border-info':hoverAe}" (click)="irA('/area')">
+            [ngClass]="{'bg-info':(!hoverAe), 'border-info':hoverAe}" (click)="irA('/area-entrenamiento')">
             <div class="card-body" [ngClass]="{'text-white':(!hoverAe), 'text-info':hoverAe}">
                 <h6 class="card-title">Área/s de entrenamiento</h6>
                 <p class="card-text"><i class="fas fa-people-carry" style="font-size: 72px;"></i></p>

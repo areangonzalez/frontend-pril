@@ -26,6 +26,7 @@
             <th></th>
             <th scope="col">Formación deseada</th>
             <th scope="col">Oficio</th>
+            <th scope="col" width="70"></th>
           </tr>
         </thead>
         <tbody>
@@ -48,6 +49,9 @@
               </td>
               <td>{{destinatario.deseo_actividad}}</td>
               <td>{{destinatario.oficio}}</td>
+              <td class="text-center">
+                  <i *ngIf="(selId == destinatario.id)" class="fas fa-check" title="seleccionar"></i>
+              </td>
             </tr>
         </tbody>
     </table>
