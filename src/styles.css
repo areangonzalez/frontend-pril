@@ -5,10 +5,12 @@
   position: absolute;
   width: 100%;
   overflow-y: auto;
-  top:73px;
+  top:70px;
   /* bottom: 70px; */
 }
-
+dl.row{
+  margin-bottom: 0 !important;
+}
 .modal-lg {
     max-width: 1200px !important;
 }
@@ -20,4 +22,9 @@
 }
 .modal-backdrop {
     z-index: 1030;
+}
+.tab-pane {
+  padding-top: 1rem !important;
+  border: 1px solid rgba(0,0,0,.125);
+  border-top: 0 !important;
 }

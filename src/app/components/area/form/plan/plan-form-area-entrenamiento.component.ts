@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BreadcrumbsService } from "../../../breadcrumbs/breadcrumbs.service";
-import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { FormatObjetoAFecha } from "../../../../shareds/fechas";
-
+// services
+import { MensajesService } from '../../../../services/mensajes.service';
+import { DestinatarioService } from '../../../../services/destinatario.service';
+import { OfertaService } from "../../../../services/oferta.service";
+import { AmbienteTrabajoService } from "../../../../services/ambiente-trabajo.service";
 
 @Component({
     selector: 'area-entrenamiento-form-plan',
@@ -15,7 +19,26 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     /**
      * @var areaEntrenamiento variable que contiene el objeto del formulario
      */
-    areaEntrenamiento: FormGroup;
+    public areaEntrenamiento: FormGroup;
+    public destinatarioId:string;
+    public ofertaId: string;
+    public destinatario = { id: 0, oficio: "", legajo: "", fecha_ingreso: "",
+      origen: "", deseo_lugar_entrenamiento: "", deseo_actividad: "", fecha_presentacion: "",
+      banco_cbu: "", banco_nombre: "", banco_alias: "", experiencia_laboral: 0,
+      conocimientos_basicos: "", profesion: "",
+      persona: { nombre: "", apellido: "", nro_documento: "",
+        cuil: "", telefono: "", celular: "", email: "", fecha_nacimiento: "",
+        sexo: "", genero: "", estado_civil: "",
+        estudios: [{ nivel_educativoid: 0, nivel_educativo: "", titulo: "",
+          completo: 0, en_curso: 0, anio: "" }],
+        lugar: { calle: "", altura: "", barrio: "", piso: "", depto: "",
+          escalera: "", localidad: "Viedma" }}};
+    public oferta = { id: 0, ambienteid: "", nombre_sucursal: "",
+      puesto: "", area: "", demanda_laboral: "", objetivo: "",
+      dia_horario: "", tarea: "", fecha_inicial: "",
+      lugar: { id: 0, localidadid: "", calle: "", altura: "",
+        barrio: "", piso: "", depto: "", escalera: "", localidad: ""
+      }};
 
     /**
      * Constructor
@@ -26,8 +49,13 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     constructor(
         private _breadcrumbsService: BreadcrumbsService,
         private _router: Router,
+        private _route: ActivatedRoute,
         private _fb: FormBuilder,
-        private _formatearFecha: FormatObjetoAFecha
+        private _formatearFecha: FormatObjetoAFecha,
+        private _mensajesService: MensajesService,
+        private _destinatarioService: DestinatarioService,
+        private _ofertaService: OfertaService,
+        private _ambienteTrabajoService: AmbienteTrabajoService
     ) {
         this.areaEntrenamiento = _fb.group({
             id: '',
@@ -46,6 +74,17 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
             { label: 'Inicio', url: 'inicio', params: [] },
             { label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] },
             { label: 'Crear', url: 'area/crear-plan', params: [] }]);
+        // obtener parametros
+        this.destinatarioId = this._route.snapshot.paramMap.get('destinatarioid');
+        this.ofertaId = this._route.snapshot.paramMap.get('ofertaid');
+
+        if (this.destinatarioId != undefined && this.ofertaId != undefined) {
+          this.destinatarioPorId(this.destinatarioId);
+          this.ofertaPorId(this.ofertaId);
+        }else{
+          this._router.navigate(['/']);
+        }
+
     }
 
     cancelar() {
@@ -58,5 +97,28 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
 
     formatFechaInicial(obj: any) {
         this.areaEntrenamiento.controls.fecha_inicial.setValue(this._formatearFecha.onChange(obj));
+    }
+
+    destinatarioPorId(id) {
+      this._destinatarioService.destinatarioPorId(id).subscribe(
+        datos => {
+          this.destinatario = datos;
+        }, error => {
+          this._mensajesService.cancelado(error, [{name:''}]);
+        });
+    }
+    ofertaPorId(id) {
+      this._ofertaService.getOfertaPorId(id).subscribe(
+        datos => {
+          for (const key in datos) {
+              this.oferta[key] = datos[key];
+          }
+        }, error => {
+          this._mensajesService.cancelado(error, [{name:''}]);
+        });
+    }
+
+    ambienteTrabajoPorId(id) {
+      console.log("ambiente trabajo");
     }
 }

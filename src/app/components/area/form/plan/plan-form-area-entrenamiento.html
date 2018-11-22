@@ -1,34 +1,239 @@
 <div class="row">
     <div class="col-md-12">
-      <div class="card">
-          <div class="card-body">
-              <area-entrenamiento-vista-destinatario></area-entrenamiento-vista-destinatario>
-          </div>
-      </div>
-
-
-        <!-- <ngb-accordion #acc="ngbAccordion" activeIds="plan2, plan3">
-            <ngb-panel id="plan1" title="Ambiente de trabajo">
-                <ng-template ngbPanelContent>
-                    <area-entrenamiento-vista-ambiente-trabajo></area-entrenamiento-vista-ambiente-trabajo>
-                </ng-template>
-            </ngb-panel>
-            <ngb-panel id="plan2" title="Oferta">
-                <ng-template ngbPanelContent>
-                     <area-entrenamiento-vista-oferta></area-entrenamiento-vista-oferta>
-                </ng-template>
-            </ngb-panel>
-            <ngb-panel id="plan3" title="Destinatario">
-                <ng-template ngbPanelContent>
-                    <area-entrenamiento-vista-destinatario></area-entrenamiento-vista-destinatario>
-                </ng-template>
-            </ngb-panel>
-        </ngb-accordion> -->
+      <ngb-tabset  [justify]="'justified'">
+        <ngb-tab title="Destinatario">
+          <ng-template ngbTabContent>
+              <div class="row">
+                  <div class="col-md-12 ">
+                    <div class="row">
+                        <div class="col-md-4 vista-detalle">
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Apellido y nombre:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.apellido}}, {{destinatario.persona.nombre}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.nro_documento}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha nacimiento:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.fecha_nacimiento | date:'dd/MM/yyyy'}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Sexo (Genero):</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.sexo}} ({{destinatario.persona.genero}})</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Estado civil:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.estado_civil}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6 vista-detalle">
+                                    <dl class="row">
+                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha presentación:</dt>
+                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.fecha_presentacion | date:'dd/MM/yyyy'}}</dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuil:</dt>
+                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.cuil}}</dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Formación deseada:</dt>
+                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.deseo_actividad}}</dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Conocimientos basicos:</dt>
+                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.conocimientos_basicos}}</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6 vista-detalle">
+                                    <dl class="row">
+                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Experiencia laboral:</dt>
+                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{(destinatario.experiencia_laboral)?'si':'no'}}</dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Profesión:</dt>
+                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.profesion}}</dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Oficio:</dt>
+                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.oficio}}</dd>
+                                    </dl>
+                                    <dl class="row">
+                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Lugar elegido:</dt>
+                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.deseo_lugar_entrenamiento}}</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-12 vista-detalle">
+                                    <dl class="row">
+                                        <dt class="col col-sm-6 col-md-3 col-lg-3">Origen de inscripción:</dt>
+                                        <dd class="col col-sm-6 col-md-9 col-lg-9">{{destinatario.origen}}</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <ul class="list-inline d-flex justify-content-center">
+                                <li class="list-inline-item">
+                                    <ng-template #direccionContent>
+                                        {{destinatario.persona.lugar.localidad}} <br>
+                                        {{destinatario.persona.lugar.barrio}} <br>
+                                        {{destinatario.persona.lugar.calle}} {{destinatario.persona.lugar.altura}}
+                                        <span *ngIf="(destinatario.persona.lugar.escalera != '' || destinatario.persona.lugar.depto != '' || destinatario.persona.lugar.piso != '')">
+                                            <br>
+                                            {{(destinatario.persona.lugar.escalera != "")?destinatario.persona.lugar.escalera:""}} {{(destinatario.persona.lugar.depto != "")?destinatario.persona.lugar.depto:""}} {{(destinatario.persona.lugar.piso != "")?destinatario.persona.lugar.piso:""}}
+                                        </span>
+                                    </ng-template>
+                                    <button type="button" class="btn btn-outline-secondary btn-margin-left" [ngbTooltip]="direccionContent">
+                                        <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                                    </button>
+                                </li>
+                                <li class="list-inline-item">
+                                    <button *ngIf="(destinatario.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.telefono}}">
+                                        <i class="fas fa-phone" title="Telefono"></i>
+                                    </button>
+                                </li>
+                                <li class="list-inline-item">
+                                    <button *ngIf="(destinatario.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.celular}}">
+                                        <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
+                                    </button>
+                                </li>
+                                <li class="list-inline-item">
+                                    <ng-template #bancoContent>{{destinatario.banco_nombre}} <br> <b>CBU:</b> {{destinatario.banco_cbu}} <br> <b>Alias:</b> {{destinatario.banco_alias}}</ng-template>
+                                    <button *ngIf="(destinatario.banco_nombre != '')" type="button" class="btn btn-outline-secondary btn-margin-left"
+                                      [ngbTooltip]="bancoContent">
+                                        <i class="fas fa-university"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <div class="col-md-12">
+                            <lista-estudio *ngIf="(destinatario.persona.estudios.length > 0)" [listaEstudios]="destinatario.persona.estudios" [tipo]="0" ></lista-estudio>
+                            <hr *ngIf="(destinatario.persona.estudios.length == 0)" class="mb-3">
+                            <div *ngIf="(destinatario.persona.estudios.length == 0)" class="d-flex justify-content-center alert alert-danger">
+                                    Destinatario sin  estudios.
+                            </div>
+                        </div> -->
+                    </div>
+                  </div>
+              </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Ambiente de trabajo / Oferta">
+          <ng-template ngbTabContent>
+              <div class="row">
+                  <div class="col-md-12 ">
+                      <div class="row">
+                        <div class="col-md-4 vista-detalle">
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Panadería San Fernando</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Actividad:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Panadería y pasteleria</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Rodriguez, Raul</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4 vista-detalle">
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Empleador privado</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuit:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">2033476724</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">078965/8</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4 vista-detalle">
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Direccion:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Rivadavia 123</dd>
+                            </dl>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4 vista-detalle">
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha incial:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.fecha_inicial}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre Sucursal:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.nombre_sucursal}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4 vista-detalle">
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Área:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.area}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Puesto:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.puesto}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4 vista-detalle">
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Días y horarios:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.dia_horario}}</dd>
+                            </dl>
+                            <dl class="row">
+                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Demanda Laboral:</dt>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.demanda_laboral}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <dl class="row">
+                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Tarea:</dt>
+                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">{{oferta.tarea}}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <dl class="row">
+                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Objetivo:</dt>
+                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">{{oferta.objetivo}}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <dl class="row">
+                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Dirección:</dt>
+                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        {{oferta.lugar.localidad}} - {{oferta.lugar.barrio}} - {{oferta.lugar.calle}} {{oferta.lugar.altura}}
+                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.escalera}}</span>
+                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.piso}}</span>
+                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.depto}}</span>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
     </div>
 </div>
-<hr class="my-4">
-<h3>Área entrenamiento</h3>
-<!-- <form [formGroup]="areaEntrenamiento" >
+<h3 class="mt-2">Área entrenamiento</h3>
+<form [formGroup]="areaEntrenamiento" >
     <div class="row">
         <div class="col-md-4">
             <div class="row">
@@ -75,4 +280,4 @@
         <button class="btn btn-primary" (click)="volver()"><span class="oi oi-arrow-thick-left align-icon" title="atras" aria-hidden="true"></span> Atras</button> &nbsp;
         <button class="btn btn-success"><span class="fas fa-save" title="atras" aria-hidden="true"></span> Crear</button>
     </div>
-</form> -->
+</form>

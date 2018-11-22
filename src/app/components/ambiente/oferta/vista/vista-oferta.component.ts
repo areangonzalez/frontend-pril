@@ -29,7 +29,8 @@ export class VistaOfertaComponent implements OnInit {
             barrio: "",
             piso: "",
             depto: "",
-            escalera: ""
+            escalera: "",
+            localidad: ""
         }
     };
 

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { AppCustomPreloader } from './app-routing-loader';
+
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/incio.component';
 import { FormDestinatarioComponent } from './components/destinatario/form/form-destinatario.component';
@@ -38,8 +40,8 @@ import { AuthGuard } from './guards/auth.guard'
             { path: 'ambiente/:id/ofertas', component: OfertaComponent, data: { title: 'Ofertas' }, canActivate: [AuthGuard] },
 
             { path: 'area-entrenamiento', component: AreaEntrenamientoComponent, data: { title: 'Lista área de entrenamiento' }, canActivate: [AuthGuard] },
-            { path: 'area-entrenamiento/crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
-            { path: 'area-entrenamiento/crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent, data: { title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area-entrenamiento/crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent, data: { preload: true, title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
+            { path: 'area-entrenamiento/crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent, data: { preload: true, title: 'Crear área de entrenamiento' }, canActivate: [AuthGuard] },
             { path: 'area-entrenamiento/vista', component: VistaAreaEntrenamientoComponent, data: { title: 'Ver área de entrenamiento' }, canActivate: [AuthGuard] },
 
 
@@ -48,12 +50,13 @@ import { AuthGuard } from './guards/auth.guard'
 
             // otherside
             { path: '**', redirectTo: 'login', pathMatch: 'full' }
-        ]/* , { preloadingStrategy: AppCustomPreloader } */)
+        ], { preloadingStrategy: AppCustomPreloader } )
     ],
     exports: [
         RouterModule
     ],
     providers: [
+      AppCustomPreloader
         /* AuthGuard,
         AppCustomPreloader */
     ]
