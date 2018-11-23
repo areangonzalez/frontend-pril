@@ -14,18 +14,15 @@ import { SeleccionFormAreaEntrenamientoComponent } from "./form/seleccion/selecc
 import { ListaOfertaAreaEntrenamientoComponent } from "./lista/oferta/lista-oferta-area-entrenamiento.component";
 import { ListaDestinatarioAreaEntrenamientoComponent } from "./lista/destinatario/lista-destinatario-area-entrenamiento.component";
 import { PlanFormAreaEntrenamientoComponent } from "./form/plan/plan-form-area-entrenamiento.component";
-import { VistaOfertaAreaEntrenamientoComponent } from "./vista/oferta/vista-oferta-area-entrenamiento.component";
-import { VistaDestinatarioAreaEntrenamientoComponent } from "./vista/destinatario/vista-destinatario-area-entrenamiento.component";
-import { VistaAmbienteTrabajoAreaEntrenamientoComponent } from "./vista/ambiente-trabajo/vista-ambiente-trabajo-area-entrenamiento.component";
 import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamiento.component";
 
 
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaOfertaAreaEntrenamientoComponent, VistaDestinatarioAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, VistaAmbienteTrabajoAreaEntrenamientoComponent],
+    declarations: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule.forRoot()],
-    exports: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaOfertaAreaEntrenamientoComponent, VistaDestinatarioAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, VistaAmbienteTrabajoAreaEntrenamientoComponent, ReactiveFormsModule],
+    exports: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, ReactiveFormsModule],
     entryComponents: [ListaOfertaComponent]
 })
 export class AreaEntrenamientoModule { }

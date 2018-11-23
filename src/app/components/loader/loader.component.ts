@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { debounce } from 'rxjs/operators';
 import { of, timer } from 'rxjs';
@@ -28,16 +28,9 @@ export class LoaderComponent implements OnInit {
         this.subscription = this.loaderService.loaderState
             .pipe(debounce(() => timer(300)))
             .subscribe((state: LoaderState) => {
-                console.log(state.show);
                 this.show = state.show;
             });
     }
-
-
-    /* ngAfterViewChecked(): void {
-        this.show = false;
-        this._cd.detectChanges();
-    } */
 
     ngOnDestroy() {
         this.subscription.unsubscribe();

@@ -87,6 +87,11 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
 
     }
 
+    /**
+     * @function entrenamiento se utiliza para controlar el objeto del formulario entrenamiento
+     */
+    get entrenamiento() { return this.areaEntrenamiento.controls; }
+
     cancelar() {
         this._router.navigate(['area']);
     }

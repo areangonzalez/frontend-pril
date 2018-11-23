@@ -6,7 +6,11 @@
   width: 100%;
   overflow-y: auto;
   top:70px;
-  /* bottom: 70px; */
+  height: 89%;
+}
+.container-fluid {
+  margin-bottom: 50px;
+  min-height: 80%;
 }
 dl.row{
   margin-bottom: 0 !important;
