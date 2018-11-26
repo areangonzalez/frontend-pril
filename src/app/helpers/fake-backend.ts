@@ -359,27 +359,47 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // array de la tabla
                 newAmbiente.ambiente.id = generarId(ambienteLista);
                 let idAmbiente: number = newAmbiente.ambiente.id;
-                newAmbiente.persona.id = generarId(ambienteLista);
+                newAmbiente.persona.id = generarId(personas);
                 newAmbiente.ambiente.lugar.id = generarId(ambienteLista);
                 ambienteLista.push({
                     id: newAmbiente.ambiente.id,
-                    nro_documento: newAmbiente.persona.nro_documento,
-                    apellido: newAmbiente.persona.apellido,
-                    nombre: newAmbiente.persona.nombre,
-                    direccion: newAmbiente.ambiente.lugar.calle + ' ' + newAmbiente.ambiente.lugar.altura,
-                    telefono: newAmbiente.persona.telefono,
-                    celular: newAmbiente.persona.celular,
-                    fax: newAmbiente.persona.fax,
-                    tipo: getNombreArray(newAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
-                    nombre_ambiente: newAmbiente.ambiente.nombre,
+                    nombre: newAmbiente.ambiente.nombre,
+                    personaid: newAmbiente.persona.id,
+                    tipo_ambiente_trabajoid: newAmbiente.ambiente.tipo_ambiente_trabajoid,
+                    tipo_ambiente_trabajo: getNombreArray(newAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
                     cuit: newAmbiente.ambiente.cuit,
-                    estado: 'Activo'
+                    legajo: newAmbiente.ambiente.legajo,
+                    observacion: newAmbiente.ambiente.observacion,
+                    estado: 'Activo',
+                    actividad: newAmbiente.ambiente.actividad,
+                    lugarid: idAmbiente,
+                    persona: {
+                      id: newAmbiente.persona.id,
+                      nro_documento: newAmbiente.persona.nro_documento,
+                      apellido: newAmbiente.persona.apellido,
+                      nombre: newAmbiente.persona.nombre,
+                      telefono: newAmbiente.persona.telefono,
+                      celular: newAmbiente.persona.celular,
+                      fax: newAmbiente.persona.fax,
+                      email: newAmbiente.persona.email
+                    },
+                    lugar: {
+                      calle: newAmbiente.ambiente.lugar.calle,
+                      altura: newAmbiente.ambiente.lugar.altura,
+                      id: idAmbiente,
+                      localidadid: 1,
+                      barrio: newAmbiente.ambiente.lugar.barrio,
+                      piso: newAmbiente.ambiente.lugar.piso,
+                      depto: newAmbiente.ambiente.lugar.depto,
+                      escalera: newAmbiente.ambiente.lugar.escalera,
+                      localidad: getNombreArray(newAmbiente.ambiente.lugar.localidadid, localidad)
+                    }
                 });
                 // datos a mostrar en la tabla
                 localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
                 // datos de usuarios agregados
-                ambientesAgregados.push(newAmbiente);
-                localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
+                //ambientesAgregados.push(newAmbiente);
+                //localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200, body: { id: idAmbiente } }));
@@ -422,37 +442,57 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 for (var i = 0; i < ambienteLista.length; i++) {
                     if (ambienteLista[i]['id'] == id) {
                         ambienteLista[i] = {
-                            id: editAmbiente.ambiente.id,
-                            nro_documento: editAmbiente.persona.nro_documento,
-                            apellido: editAmbiente.persona.apellido,
-                            nombre: editAmbiente.persona.nombre,
-                            direccion: editAmbiente.ambiente.lugar.calle + ' ' + editAmbiente.ambiente.lugar.altura,
-                            telefono: editAmbiente.persona.telefono,
-                            celular: editAmbiente.persona.celular,
-                            fax: editAmbiente.persona.fax,
-                            tipo: getNombreArray(editAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
-                            nombre_ambiente: editAmbiente.ambiente.nombre,
+                            id: id,
+                            nombre: editAmbiente.ambiente.nombre,
+                            personaid: editAmbiente.persona.id,
+                            tipo_ambiente_trabajoid: editAmbiente.ambiente.tipo_ambiente_trabajoid,
+                            tipo_ambiente_trabajo: getNombreArray(editAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
                             cuit: editAmbiente.ambiente.cuit,
-                            estado: 'Activo'
+                            legajo: editAmbiente.ambiente.legajo,
+                            observacion: editAmbiente.ambiente.observacion,
+                            estado: 'Activo',
+                            actividad: editAmbiente.ambiente.actividad,
+                            lugarid: id,
+                            persona: {
+                              id: editAmbiente.persona.id,
+                              nro_documento: editAmbiente.persona.nro_documento,
+                              apellido: editAmbiente.persona.apellido,
+                              nombre: editAmbiente.persona.nombre,
+                              telefono: editAmbiente.persona.telefono,
+                              celular: editAmbiente.persona.celular,
+                              fax: editAmbiente.persona.fax,
+                              email: editAmbiente.persona.email
+                            },
+                            lugar: {
+                              calle: editAmbiente.ambiente.lugar.calle,
+                              altura: editAmbiente.ambiente.lugar.altura,
+                              id: id,
+                              localidadid: 1,
+                              barrio: editAmbiente.ambiente.lugar.barrio,
+                              piso: editAmbiente.ambiente.lugar.piso,
+                              depto: editAmbiente.ambiente.lugar.depto,
+                              escalera: editAmbiente.ambiente.lugar.escalera,
+                              localidad: getNombreArray(editAmbiente.ambiente.lugar.localidadid, localidad)
+                            }
                         }
                     }
                 }
                 // verifico el array de usuarios agregados
-                for (var d = 0; d < ambientesAgregados.length; d++) {
-                    if (ambientesAgregados[d]['ambiente']['id'] == id) {
-                        // elimino 1 elemento desde el indice especificado y agrego el nuevo array
-                        editAmbiente.ambiente['id'] = id;
-                        ambientesAgregados.splice(d, 1, editAmbiente);
-                    }
-                }
+                  // for (var d = 0; d < ambientesAgregados.length; d++) {
+                  //     if (ambientesAgregados[d]['ambiente']['id'] == id) {
+                  //         //elimino 1 elemento desde el indice especificado y agrego el nuevo array
+                  //         editAmbiente.ambiente['id'] = id;
+                  //         ambientesAgregados.splice(d, 1, editAmbiente);
+                  //     }
+                  // }
 
                 // datos a mostrar en la tabla
                 localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
                 // datos de usuarios agregados
-                localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
+                //localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
 
                 // respond 200 OK
-                return of(new HttpResponse({ status: 200 }));
+                return of(new HttpResponse({ status: 200, body: { id: id } }));
             }
 
         /* ************************************************************************
