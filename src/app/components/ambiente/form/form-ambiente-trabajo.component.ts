@@ -75,7 +75,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                     escalera: ''
                 })
             })
-        }); 
+        });
     }
 
     ngOnInit() {
@@ -115,13 +115,14 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 if (id == '') {
                     id = datos['id'];
                 }
-                this._mensajeService.ofrecer('Se ha guardado correctamente el ambiente de trabajo.', [{ name: 'ambiente/' + id + '/ofertas', tipo: 'agregar' }, { name: 'ambiente/vista', tipo: 'vista' }]);
+                console.log("id al editar un AT: ",id);
+                this._mensajeService.ofrecer('Se ha guardado correctamente el ambiente de trabajo.', [{ name: 'ambiente/' + id + '/ofertas', tipo: 'agregar' }, { name: 'ambiente/vista/' + id, tipo: 'vista' }]);
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }
         );
     }
-    
+
     private prepararAmbienteTrabajo() {
         let lugar = new Lugar(0, 0, '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona.lugar);
         return new AmbienteTrabajo(0, '', '', '', '', '', 0, lugar).deserialize(this.ambienteForm.value.ambiente);
@@ -132,9 +133,22 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     }
 
     private ambientePorId(id) {
-        this._ambienteTrabajoService.ambientePorId(id).subscribe(
+        this._ambienteTrabajoService.ambientePorId(id)
+        .map(vAmbiente => {
+          let vDatos = {persona: {}, ambiente: {} };
+          // agrego persona dentro del objeto
+          vDatos.persona = vAmbiente.persona;
+          // elimino persona del objeto
+          delete(vAmbiente.persona);
+          // agrego ambiente al objeto
+          vDatos.ambiente = vAmbiente;
+
+          return vDatos;
+        })
+        .subscribe(
             datos => {
-                this.ambienteForm.setValue(datos);
+              this.ambienteForm.patchValue(datos);
+                //this.ambienteForm.setValue(datos);
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }
