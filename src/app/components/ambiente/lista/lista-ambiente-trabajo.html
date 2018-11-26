@@ -13,24 +13,24 @@
         </thead>
         <tbody>
             <tr *ngFor="let ambiente of ambientes">
-                <th>{{ambiente.nombre_ambiente}}</th>
+                <th>{{ambiente.nombre}}</th>
                 <td>{{ambiente.cuit}}</td>
-                <td>{{ambiente.apellido}}, {{ambiente.nombre}}</td>
+                <td>{{ambiente.persona.apellido}}, {{ambiente.persona.nombre}}</td>
                 <td>
                     <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.direccion}}">
                         <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                     </button>
-                    <button *ngIf="(ambiente.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.telefono}}">
+                    <button *ngIf="(ambiente.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.telefono}}">
                         <i class="fas fa-phone" title="Telefono"></i>
                     </button>
-                    <button *ngIf="(ambiente.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.celular}}">
+                    <button *ngIf="(ambiente.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.celular}}">
                         <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
                     </button>
-                    <button *ngIf="(ambiente.fax != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.fax}}">
+                    <button *ngIf="(ambiente.persona.fax != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.fax}}">
                         <i class="fas fa-fax" title="fax" aria-hidden="true"></i>
                     </button>
                 </td>
-                <td>{{ambiente.tipo}}</td>
+                <td>{{ambiente.tipo_ambiente_trabajo}}</td>
                 <td>{{ambiente.estado}}</td>
                 <td>
                     <button type="button" class="btn btn-info btn-sm" (click)="verAmbienteTrabajo(ambiente.id)">
