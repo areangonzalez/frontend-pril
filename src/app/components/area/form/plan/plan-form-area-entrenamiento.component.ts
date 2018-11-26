@@ -22,6 +22,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     public areaEntrenamiento: FormGroup;
     public destinatarioId:string;
     public ofertaId: string;
+    public submitted:boolean = false;
     public destinatario = { id: 0, oficio: "", legajo: "", fecha_ingreso: "",
       origen: "", deseo_lugar_entrenamiento: "", deseo_actividad: "", fecha_presentacion: "",
       banco_cbu: "", banco_nombre: "", banco_alias: "", experiencia_laboral: 0,
@@ -39,6 +40,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
       lugar: { id: 0, localidadid: "", calle: "", altura: "",
         barrio: "", piso: "", depto: "", escalera: "", localidad: ""
       }};
+      public ambienteTrabajo = {};
 
     /**
      * Constructor
@@ -115,6 +117,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     ofertaPorId(id) {
       this._ofertaService.getOfertaPorId(id).subscribe(
         datos => {
+          this.ambienteTrabajoPorId(datos.ambienteid);
           for (const key in datos) {
               this.oferta[key] = datos[key];
           }
@@ -124,6 +127,14 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     }
 
     ambienteTrabajoPorId(id) {
+      this._ambienteTrabajoService.ambientePorId(id).subscribe(
+        datos => {
+          console.log(datos);
+          this.ambienteTrabajo = datos;
+        }, error => {
+          this._mensajesService.cancelado(error, [{name:""}]);
+        }
+      );
       console.log("ambiente trabajo");
     }
 }

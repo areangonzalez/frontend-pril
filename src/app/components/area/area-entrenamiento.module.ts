@@ -1,9 +1,10 @@
 // Imports necesarios para crear módulos
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListaOfertaComponent } from "./../ambiente/oferta/lista/lista-oferta.component";
+import { DestinatarioModule } from "../destinatario/destinatario.module";
 //import { ChartsModule } from 'ng2-charts';
 
 //Importo los componentes
@@ -21,7 +22,8 @@ import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamient
 // Metadatos del módulo
 @NgModule({
     declarations: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule.forRoot()],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, DestinatarioModule, NgbModule.forRoot()],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, ReactiveFormsModule],
     entryComponents: [ListaOfertaComponent]
 })

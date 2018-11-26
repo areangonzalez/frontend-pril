@@ -1,3 +1,4 @@
+{{ ambienteTrabajo | json }}
 <div class="row">
     <div class="col-md-12">
       <ngb-tabset  [justify]="'justified'">
@@ -109,13 +110,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- <div class="col-md-12">
+                        <div class="col-md-12">
                             <lista-estudio *ngIf="(destinatario.persona.estudios.length > 0)" [listaEstudios]="destinatario.persona.estudios" [tipo]="0" ></lista-estudio>
                             <hr *ngIf="(destinatario.persona.estudios.length == 0)" class="mb-3">
                             <div *ngIf="(destinatario.persona.estudios.length == 0)" class="d-flex justify-content-center alert alert-danger">
                                     Destinatario sin  estudios.
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                   </div>
               </div>
@@ -129,35 +130,40 @@
                         <div class="col-md-4 vista-detalle">
                             <dl class="row">
                                 <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre del ambiente:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Panadería San Fernando</dd>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambienteTrabajo.ambiente.nombre}}</dd>
                             </dl>
                             <dl class="row">
                                 <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Actividad:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Panadería y pasteleria</dd>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambienteTrabajo.ambiente.actividad}}</dd>
                             </dl>
                             <dl class="row">
                                 <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Rodriguez, Raul</dd>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambienteTrabajo.persona.apellido}}, {{ambienteTrabajo.persona.nombre}}</dd>
                             </dl>
                         </div>
                         <div class="col-md-4 vista-detalle">
                             <dl class="row">
                                 <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo de ambiente:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Empleador privado</dd>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambienteTrabajo.ambiente.tipo_ambiente_trabajo}}</dd>
                             </dl>
                             <dl class="row">
                                 <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuit:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">2033476724</dd>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambienteTrabajo.ambiente.cuit}}</dd>
                             </dl>
                             <dl class="row">
                                 <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">078965/8</dd>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambienteTrabajo.ambiente.legajo}}</dd>
                             </dl>
                         </div>
                         <div class="col-md-4 vista-detalle">
                             <dl class="row">
                                 <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Direccion:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Rivadavia 123</dd>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">
+                                  {{ambienteTrabajo.ambiente.lugar.localidad}} - {{ambienteTrabajo.ambiente.lugar.barrio}} - {{ambienteTrabajo.ambiente.lugar.calle}} {{ambienteTrabajo.ambiente.lugar.altura}}
+                                  {{(ambienteTrabajo.ambiente.lugar.escalera != '')?" - " + ambienteTrabajo.ambiente.lugar.escalera:""}}
+                                  {{(ambienteTrabajo.ambiente.lugar.piso != '')?" - " + ambienteTrabajo.ambiente.lugar.piso:""}}
+                                  {{(ambienteTrabajo.ambiente.lugar.depto != '')?" - " + ambienteTrabajo.ambiente.lugar.depto:""}}
+                                </dd>
                             </dl>
                         </div>
                       </div>
@@ -240,39 +246,39 @@
                 <div class="form-group col-md-12">
                     <label for="fecha_inicial">Fecha Inicial (<span>*</span>):</label>
                     <div class="input-group">
-                        <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #faed="ngbDatepicker" id="fecha_nacimiento"
+                        <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #faed="ngbDatepicker" id="fecha_inicial"
                             (ngModelChange)="formatFechaInicial($event)" formControlName="fechaInicial">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-info" (click)="faed.toggle()" type="button" [ngClass]="{'btn-outline-danger': (entrenamiento.fechaInicial.invalid && (!entrenamiento.fechaInicial.pristine || entrenamiento.fechaInicial.touched))}">
+                            <button class="btn btn-outline-info" (click)="faed.toggle()" type="button" [ngClass]="{'btn-outline-danger': (entrenamiento.fechaInicial.invalid && submitted), 'is-invalid': (entrenamiento.fechaInicial.invalid && submitted)}">
                                 <span class="oi oi-calendar" title="fecha inicial" aria-hidden="true"></span>
                             </button>
                         </div>
                     </div>
-                    <!-- <div *ngIf="entrenamiento.fechaInicial.invalid && (!entrenamiento.fechaInicial.pristine || entrenamiento.fechaInicial.touched)" class="text-danger">
+                    <div *ngIf="(entrenamiento.fechaInicial.invalid && submitted)" class="text-danger">
                         <div *ngIf="entrenamiento.fechaInicial.errors.required">Este campo es requerido. </div>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="plan">Plan (<span>*</span>):</label>
-                    <select class="form-control" id="plan" formControlName="planid">
+                    <select class="form-control" id="plan" formControlName="planid" [ngClass]="{'is-invalid': (entrenamiento.planid.invalid && submitted)}">
                         <option value="">Seleccione plan</option>
                         <option value="1">$1000 / 10 hs</option>
                         <option value="1">$2000 / 15 hs</option>
                         <option value="1">$5000 / 20 hs</option>
                     </select>
-                     <!-- <div *ngIf="entrenamiento.planid.invalid && (!entrenamiento.planid.pristine || entrenamiento.planid.touched)" class="text-danger">
+                    <div *ngIf="(entrenamiento.planid.invalid && submitted)" class="text-danger">
                         <div *ngIf="entrenamiento.planid.errors.required">Este campo es requerido.</div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
             <label for="tarea">Tarea (<span>*</span>):</label>
             <textarea id="tarea" rows="5" class="form-control" formControlName="tarea"></textarea>
-            <!-- <div *ngIf="entrenamiento.tarea.invalid && (entrenamiento.tarea.dirty || entrenamiento.tarea.touched)" class="text-danger">
+            <div *ngIf="(entrenamiento.tarea.invalid && submitted)" class="text-danger">
                 <div *ngIf="entrenamiento.tarea.errors.required">Este campo es requerido.</div>
                 <div *ngIf="entrenamiento.tarea.errors.minlength">Por favor, describa la tarea.</div>
-            </div> -->
+            </div>
         </div>
     </div>
     <div class="float-right">
