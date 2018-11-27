@@ -34,13 +34,13 @@ import { OfertaService } from "../../../../services/oferta.service";
 export class ModalContentOferta implements OnInit {
     @Input('ambienteid') public ambienteid: number;
     @Input('ofertaid') public ofertaid: number;
-    
+
     public ofertaForm: FormGroup;
     public submitted = false;
 
      constructor(
-         public activeModal: NgbActiveModal, 
-         private _fb: FormBuilder, 
+         public activeModal: NgbActiveModal,
+         private _fb: FormBuilder,
          private _mensajeService: MensajesService,
          private _ofertaService: OfertaService,
         ) {
@@ -64,19 +64,19 @@ export class ModalContentOferta implements OnInit {
                  depto: '',
                  escalera: ''
              })
-         }); 
+         });
     }
 
     ngOnInit(): void {
         if (this.ofertaid != undefined) {
             this.getOferta(this.ofertaid);
         }
-        
+
     }
 
     guardarOferta() {
         this.ofertaForm.controls.ambienteid.setValue(this.ambienteid);
-        let lugar = new Lugar(0, 0, '', '', '', '', '', '').deserialize(this.ofertaForm.value.lugar.value);
+        let lugar = new Lugar(0, 0, '', '', '', '', '', '', '').deserialize(this.ofertaForm.value.lugar.value);
         let oferta = new Oferta(0,0,'','','','','','','', lugar).deserialize(this.ofertaForm.value);
 
         this.submitted = true;
@@ -94,14 +94,14 @@ export class ModalContentOferta implements OnInit {
                 datos => {
                     // borro atributos que no son utilizados en el formulario
                     delete datos['fecha_inicial'];
-                    this.ofertaForm.setValue(datos);
+                    this.ofertaForm.patchValue(datos);
                     /* this.ofertaDatos = datos; */
                 }, error => {
                     this._mensajeService.cancelado('Esta oferta no existe, Por favor verifique los datos.', [{ name: '' }]);
                 });
         }
     }
- 
+
 }
 
 @Component({
@@ -144,6 +144,6 @@ export class ModalOfertaComponent {
 
                 }
             }
-        ); 
+        );
     }
 }

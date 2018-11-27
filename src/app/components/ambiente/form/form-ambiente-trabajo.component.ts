@@ -21,7 +21,8 @@ export class FormAmbienteTrabajoComponent implements OnInit {
      * @var ambienteForm contiene el array del formulario
      * @var mostrarBtnBusqueda muestra el boton de busqueda por numero documento
      * @var submitted muestra los errores en el formulario
-     * @var id identificador del ambiente de trabajo
+     * @var id identificador del ambiente de trabajo privado
+     * @var idAmbiente identificador del ambiente de trabajo publico
      */
     public ambienteForm: FormGroup;
     public mostrarBtnBusqueda: boolean = true;
@@ -124,8 +125,9 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     }
 
     private prepararAmbienteTrabajo() {
-        let lugar = new Lugar(0, 0, '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona.lugar);
-        return new AmbienteTrabajo(0, '', '', '', '', '', 0, lugar).deserialize(this.ambienteForm.value.ambiente);
+        let lugar = new Lugar(0, 0, '', '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona.lugar);
+        let persona = new Representante(0, '', '', '', '', '', '', '');
+        return new AmbienteTrabajo(0, '', '', '', '', '', 0, lugar, persona, '').deserialize(this.ambienteForm.value.ambiente);
     }
 
     private prepararPersona() {
@@ -137,9 +139,9 @@ export class FormAmbienteTrabajoComponent implements OnInit {
         .map(vAmbiente => {
           let vDatos = {persona: {}, ambiente: {} };
           // agrego persona dentro del objeto
-          vDatos.persona = vAmbiente.persona;
+          vDatos.persona = vAmbiente['persona'];
           // elimino persona del objeto
-          delete(vAmbiente.persona);
+          delete(vAmbiente['persona']);
           // agrego ambiente al objeto
           vDatos.ambiente = vAmbiente;
 

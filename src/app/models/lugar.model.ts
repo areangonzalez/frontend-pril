@@ -7,7 +7,8 @@ export class Lugar {
         public barrio: string,
         public piso: string,
         public depto: string,
-        public escalera: string
+        public escalera: string,
+        public localidad: string
     ) { }
 
     deserialize(input: Lugar) {

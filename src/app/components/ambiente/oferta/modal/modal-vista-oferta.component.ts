@@ -1,8 +1,5 @@
 import { Component, Input, Injectable, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
-import { Oferta } from "../../../../models/oferta.model";
-import { Lugar } from "../../../../models/lugar.model";
 import { MensajesService } from "../../../../services/mensajes.service";
 import { OfertaService } from "../../../../services/oferta.service";
 
@@ -35,11 +32,9 @@ export class ModalContentOfertaVista implements OnInit {
     public oferta: object;
 
     constructor(
-        public activeModal: NgbActiveModal,
-        private _mensajeService: MensajesService,
-        private _ofertaService: OfertaService,
+        public activeModal: NgbActiveModal
     ) {
-        
+
     }
 
     ngOnInit(): void {}

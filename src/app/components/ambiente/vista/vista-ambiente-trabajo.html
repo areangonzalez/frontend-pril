@@ -66,6 +66,11 @@
                       </button>
                   </li>
                   <li class="list-inline-item">
+                      <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.email}}">
+                          <span class="oi oi-envelope-closed" title="Email" aria-hidden="true"></span>
+                      </button>
+                  </li>
+                  <li class="list-inline-item">
                       <button *ngIf="(ambiente.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.telefono}}">
                           <i class="fas fa-phone" title="Telefono"></i>
                       </button>

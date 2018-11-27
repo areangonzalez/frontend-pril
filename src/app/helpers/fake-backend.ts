@@ -558,7 +558,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 ofertasLista.push({
                     id: newOfertas.id,
                     ambienteid: newOfertas.ambienteid,
-                    ambiente: getNombreArray(newOfertas.ambienteid, ambientesAgregados),
+                    ambiente: getNombreArray(newOfertas.ambienteid, ambienteLista),
                     nombre_sucursal: newOfertas.nombre_sucursal,
                     puesto: newOfertas.puesto,
                     area: newOfertas.area,
@@ -583,9 +583,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // datos a mostrar en la tabla
                 localStorage.setItem('ofertasLista', JSON.stringify(ofertasLista));
                 // datos de usuarios agregados
-                console.log(newOfertas);
-                ofertasAgregadas.push(newOfertas);
-                localStorage.setItem('ofertasAgregadas', JSON.stringify(ofertasAgregadas));
+                // console.log(newOfertas);
+                // ofertasAgregadas.push(newOfertas);
+                // localStorage.setItem('ofertasAgregadas', JSON.stringify(ofertasAgregadas));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
@@ -598,7 +598,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // find user by id in users array
                     let urlParts = request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
-                    let matchedOferta = ofertasAgregadas.filter(oferta => { return oferta.id === id; });
+                    let matchedOferta = ofertasLista.filter(oferta => { return oferta.id === id; });
                     let seleccion = matchedOferta.length ? matchedOferta[0] : null;
 
                     return of(new HttpResponse({ status: 200, body: seleccion }));
@@ -616,14 +616,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // consigo el destinatario a editar en la respuesta
                 let editOferta = request.body;
-
+                console.log(editOferta.lugar.localidadid);
                 // busco en el listado el destinatario
                 for (var i = 0; i < ofertasLista.length; i++) {
                     if (ofertasLista[i]['id'] == id) {
                         ofertasLista[i] = {
                             id: editOferta.id,
                             ambienteid: editOferta.ambienteid,
-                            ambiente: getNombreArray(editOferta.ambienteid, ambientesAgregados),
+                            ambiente: getNombreArray(editOferta.ambienteid, ambienteLista),
                             nombre_sucursal: editOferta.nombre_sucursal,
                             puesto: editOferta.puesto,
                             area: editOferta.area,
@@ -635,14 +635,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                             estado: 'Vacante',
                             lugar: {
                                 id: editOferta.id,
-                                localidadid: editOferta.localidadid,
-                                localidad: getNombreArray(editOferta.localidadid, localidad),
-                                calle: editOferta.calle,
-                                altura: editOferta.altura,
-                                barrio: editOferta.barrio,
-                                piso: editOferta.piso,
-                                depto: editOferta.depto,
-                                escalera: editOferta.escalera
+                                localidadid: editOferta.lugar.localidadid,
+                                localidad: getNombreArray(editOferta.lugar.localidadid, localidad),
+                                calle: editOferta.lugar.calle,
+                                altura: editOferta.lugar.altura,
+                                barrio: editOferta.lugar.barrio,
+                                piso: editOferta.lugar.piso,
+                                depto: editOferta.lugar.depto,
+                                escalera: editOferta.lugar.escalera
                             }
                         }
                     }
@@ -660,7 +660,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // datos a mostrar en la tabla
                 localStorage.setItem('ofertasLista', JSON.stringify(ofertasLista));
                 // datos de usuarios agregados
-                localStorage.setItem('ofertasAgregadas', JSON.stringify(ofertasAgregadas));
+                //localStorage.setItem('ofertasAgregadas', JSON.stringify(ofertasAgregadas));
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));

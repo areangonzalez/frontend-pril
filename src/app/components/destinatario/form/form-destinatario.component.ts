@@ -9,7 +9,7 @@ import { MensajesService } from "../../../services/mensajes.service";
 import { Lugar } from "./../../../models/lugar.model";
 import { Estudio } from "../../../models/estudio.model";
 import { Persona } from "../../../models/persona.model";
-import { Destinatario } from "../../../models/destinatario.model"; 
+import { Destinatario } from "../../../models/destinatario.model";
 //modal
 import { ModalContentEstudio, ModalEstudioComponent } from "../form/modal-estudio/modal-estudio.component";
 // services
@@ -176,13 +176,13 @@ export class FormDestinatarioComponent implements OnInit {
             delete(vPersona.persona);
             vDatos.destinatario = vPersona;
             return vDatos;
-        }) 
+        })
         .subscribe(
-            datos => { 
+            datos => {
                 // variables para el documento, profesion y oficio
                 this.nroDoc = datos['persona']['nro_documento'];
                 this.profesionid = datos['destinatario']['profesionid'];
-                this.oficioid = datos['destinatario']['oficioid']; 
+                this.oficioid = datos['destinatario']['oficioid'];
                 // seteo los valores del objeto
                 this.destinatarioForm.patchValue(datos);
 
@@ -190,7 +190,7 @@ export class FormDestinatarioComponent implements OnInit {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }
         );
-        
+
     }
     /**
      * @function prepararDestinatario preparado de parametros para el objeto de destinatario
@@ -203,7 +203,7 @@ export class FormDestinatarioComponent implements OnInit {
      */
     private prepararPersona() {
 
-        let lugar = new Lugar(0,0,'','','','','','').deserialize(this.destinatarioForm.value.persona.lugar);
+        let lugar = new Lugar(0,0,'','','','','','','').deserialize(this.destinatarioForm.value.persona.lugar);
         return new Persona(0,'','','','','',0,0,0,'','','',lugar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
     }
     /**
@@ -219,7 +219,7 @@ export class FormDestinatarioComponent implements OnInit {
     /**
      * @function primerosDigitosCuil corta la cadena de cuil para obtener los dos primeros digitos
      * @param cuil cadena del numero de cuil
-     * @return devuelve un string 
+     * @return devuelve un string
      */
     private primerosDigitosCuil(cuil:string){
         let cuil_primero = cuil.substring(0, 2);
@@ -242,7 +242,7 @@ export class FormDestinatarioComponent implements OnInit {
 
     /* private setValuesForm(formGroup: FormGroup, asignarObjeto: Object){
         let control: AbstractControl = null;
-        
+
         Object.keys(formGroup.controls).forEach((name) => {
 
             for (var key in asignarObjeto) {
@@ -271,9 +271,9 @@ export class FormDestinatarioComponent implements OnInit {
                         control.setErrors(null);
                     }
                 }
-                    
+
             }
-            
+
 
         });
     } */

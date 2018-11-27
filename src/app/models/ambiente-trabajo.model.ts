@@ -1,4 +1,5 @@
 import { Lugar } from "./lugar.model";
+import { Representante } from "./representante.model";
 
 export interface IAmbienteTrabajo {
     id: number,
@@ -8,7 +9,10 @@ export interface IAmbienteTrabajo {
     cuit: string,
     actividad: string,
     tipo_ambiente_trabajoid: number,
-    lugar: Lugar
+    lugar: Lugar,
+    persona: Representante,
+    tipo_ambiente_trabajo: string
+
 }
 
 export class AmbienteTrabajo implements IAmbienteTrabajo {
@@ -21,12 +25,15 @@ export class AmbienteTrabajo implements IAmbienteTrabajo {
         public cuit: string,
         public actividad: string,
         public tipo_ambiente_trabajoid: number,
-        public lugar: Lugar
+        public lugar: Lugar,
+        public persona: Representante,
+        public tipo_ambiente_trabajo: string
     ){}
 
     deserialize(input: any) {
         Object.assign(this, input);
-        this.lugar = new Lugar(0, 0, '', '', '', '', '', '').deserialize(input.lugar);
+        this.lugar = new Lugar(0, 0, '', '', '', '', '', '', '').deserialize(input.lugar);
+        this.persona = new Representante(0,'','','','','','','').deserialize(input.representante);
         return this;
     }
 

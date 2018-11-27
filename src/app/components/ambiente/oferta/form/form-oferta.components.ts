@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { FormGroup } from "@angular/forms";
 
 @Component({
@@ -11,14 +10,9 @@ export class FormOfertaComponent implements OnInit {
     @Input("group") public datosOferta: FormGroup;
     @Input("submitted") public submitted: boolean;
 
-    constructor(
-        private _router: Router,
+    constructor() { }
 
-    ) { }
-
-    ngOnInit() {
-        // breadcrumbs Dinamico
-    }
+    ngOnInit() {}
 
     get oferta() { return this.datosOferta.controls; }
 
