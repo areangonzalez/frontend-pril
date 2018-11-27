@@ -16,7 +16,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
         // Agregados
         //let destinatarioAgregados: any[] = JSON.parse(localStorage.getItem('destinatariosAgregados')) || [];
-        let ambientesAgregados: any[] = JSON.parse(localStorage.getItem('ambientesAgregados')) || [];
+        //let ambientesAgregados: any[] = JSON.parse(localStorage.getItem('ambientesAgregados')) || [];
         let ofertasAgregadas: any[] = JSON.parse(localStorage.getItem('ofertasAgregadas')) || [];
         // listados globales
         let profesion: any[] = [{ id: 1, nombre: 'Abogado'},{ id: 3, nombre: 'Agrónomo'},{ id: 4, nombre: 'Bacteriólogo' },{ id: 5, nombre: 'Biofísico' },

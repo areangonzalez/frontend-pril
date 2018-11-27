@@ -1,62 +1,93 @@
 <div class="row botton-separate">
-    <div class="col-md-12 ">
-        <div class="d-flex justify-content-between"> 
-            <button class="btn btn-outline-danger btn-md" (click)="volver()">
-                <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
-            <button class="btn btn-outline-secondary btn-md" (click)="editarAmbiente(idAmbiente)">
-                <span class="oi oi-pencil"></span> Editar</button> &nbsp;
-            <button class="btn btn-outline-success btn-md" (click)="agregarOferta(idAmbiente)">
-                <span class="oi oi-plus"></span> Agregar oferta</button>
-        </div> 
-    </div> 
-</div> 
-<div class="row">
-    <div class="col-md-12 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <dl class="row">
-                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Panadería San Fernando</dd>
-                        </dl>
-                        <dl class="row">
-                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Actividad:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Panadería y pasteleria</dd>
-                        </dl>
-                        <dl class="row">
-                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Rodriguez, Raul</dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-4">
-                        <dl class="row">
-                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Empleador privado</dd>
-                        </dl>
-                        <dl class="row">
-                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuit:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">2033476724</dd>
-                        </dl>
-                        <dl class="row">
-                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">078965/8</dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-4">
-                        <dl class="row">
-                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Direccion:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">Rivadavia 123</dd>
-                        </dl>
-                        <!-- <dl class="row">
-                            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Calificación:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">4.0</dd>
-                        </dl> -->
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="col-md-12 ">
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-outline-danger btn-md" (click)="volver()">
+        <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
+      <button class="btn btn-outline-secondary btn-md" (click)="editarAmbiente(idAmbiente)">
+        <span class="oi oi-pencil"></span> Editar</button> &nbsp;
+      <button class="btn btn-outline-success btn-md" (click)="agregarOferta(idAmbiente)">
+        <span class="oi oi-plus"></span> Agregar oferta</button>
     </div>
+  </div>
 </div>
-<hr>
-<lista-oferta [listaOfertas]="listaOfertas" [nombreAmbiente]="'Carlos Perez'" [mostrarEdicion]="0"></lista-oferta>
+<div class="row">
+  <div class="col-md-12 ">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <dl class="row">
+              <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre:</dt>
+              <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.nombre}}</dd>
+            </dl>
+            <dl class="row">
+              <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
+              <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.apellido}}, {{ambiente.persona.nombre}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Actividad:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.actividad}}</dd>
+              </dl>
+          </div>
+          <div class="col-md-4">
+            <dl class="row">
+              <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuit:</dt>
+              <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.cuit}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.tipo_ambiente_trabajo}}</dd>
+              </dl>
+          </div>
+          <div class="col-md-4">
+            <dl class="row">
+              <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
+              <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.legajo}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Observación:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.observacion}}</dd>
+            </dl>
+          </div>
+          <div class="col-md-12">
+              <ul class="list-inline d-flex justify-content-center">
+                  <li class="list-inline-item">
+                      <ng-template #direccionContent>
+                          {{ambiente.lugar.localidad}} <br>
+                          {{ambiente.lugar.barrio}} <br>
+                          {{ambiente.lugar.calle}} {{ambiente.lugar.altura}}
+                          <span *ngIf="(ambiente.lugar.escalera != '' || ambiente.lugar.depto != '' || ambiente.lugar.piso != '')">
+                              <br>
+                              {{(ambiente.lugar.escalera != "")?ambiente.lugar.escalera:""}} {{(ambiente.lugar.depto != "")?ambiente.lugar.depto:""}} {{(ambiente.lugar.piso != "")?ambiente.lugar.piso:""}}
+                          </span>
+                      </ng-template>
+                      <button type="button" class="btn btn-outline-secondary btn-margin-left" [ngbTooltip]="direccionContent">
+                          <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                      </button>
+                  </li>
+                  <li class="list-inline-item">
+                      <button *ngIf="(ambiente.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.telefono}}">
+                          <i class="fas fa-phone" title="Telefono"></i>
+                      </button>
+                  </li>
+                  <li class="list-inline-item">
+                      <button *ngIf="(ambiente.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.celular}}">
+                          <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
+                      </button>
+                  </li>
+                  <li class="list-inline-item">
+                      <button *ngIf="(ambiente.persona.fax != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.fax}}">
+                          <i class="fas fa-fax" title="fax" aria-hidden="true"></i>
+                      </button>
+                  </li>
+              </ul>
+          </div>
+        </div>
+        <lista-oferta *ngIf="(listaOfertas.length != 0)" [listaOfertas]="listaOfertas" [mostrarEdicion]="0"></lista-oferta>
+        <div *ngIf="(listaOfertas.length == 0)" class="d-flex justify-content-center alert alert-danger">
+            Sin ofertas.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
