@@ -120,8 +120,6 @@ export class ModalOfertaComponent {
     @Input("ambienteid") ambienteid:number;
     @Input("ofertaid") ofertaid:number;
     @Output("guardarOferta") guardarOferta = new EventEmitter();
-    /*@Input("estudio") estudio;
-    @Input("id") id; */
 
 
     constructor(private modalService: NgbModal) { }
@@ -130,9 +128,6 @@ export class ModalOfertaComponent {
         const modalRef = this.modalService.open(ModalContentOferta, { size: 'lg' });
         modalRef.componentInstance.ambienteid = this.ambienteid;
         modalRef.componentInstance.ofertaid = this.ofertaid;
-        /* modalRef.componentInstance.estudio = this.estudio;
-        modalRef.componentInstance.tipo = this.tipo;
-        modalRef.componentInstance.id = this.id; */
         modalRef.result.then(
             (result) => {
                 if (result == 'close') {
