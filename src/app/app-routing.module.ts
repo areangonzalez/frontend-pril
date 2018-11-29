@@ -25,13 +25,13 @@ import { AuthGuard } from './guards/auth.guard'
     imports: [
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
-            { path: 'inicio', component: InicioComponent, data: { title: 'Bienvenido al Programa Rionegrino de Inclusión laboral' }, canActivate: [AuthGuard] },
+            { path: 'inicio', component: InicioComponent, data: { title: 'Bienvenido al Programa Rionegrino de Inclusión laboral', breadcrumb: 'Inicio' }, canActivate: [AuthGuard] },
 
-            { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', }, canActivate: [AuthGuard] },
-            { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', }, canActivate: [AuthGuard]  },
-            { path: 'destinatario/editar/:id', component: FormDestinatarioComponent, data: { title: 'Editar destinatario', }, canActivate: [AuthGuard] },
-            { path: 'destinatario/vista/:id', component: VistaDestinatarioComponent, data: { title: 'Ver destinatario', }, canActivate: [AuthGuard] },
-            { path: 'destinatario/estudio', component: EstudioComponent, data: { title: 'Estudio/s', }, canActivate: [AuthGuard] },
+            { path: 'destinatario', component: DestinatarioComponent, data: { title: 'Lista destinatarios', breadcrumb: 'Destinatario' }, canActivate: [AuthGuard] },
+            { path: 'destinatario/agregar', component: FormDestinatarioComponent, data: { title: 'Agregar destinatario', breadcrumb: 'Agregar' }, canActivate: [AuthGuard]  },
+            { path: 'destinatario/editar/:id', component: FormDestinatarioComponent, data: { title: 'Editar destinatario', breadcrumb: 'Editar' }, canActivate: [AuthGuard] },
+            { path: 'destinatario/vista/:id', component: VistaDestinatarioComponent, data: { title: 'Ver destinatario', breadcrumb: 'Vista' }, canActivate: [AuthGuard] },
+            { path: 'destinatario/estudio', component: EstudioComponent, data: { title: 'Estudio/s', breadcrumb: 'Estudio' }, canActivate: [AuthGuard] },
 
             { path: 'ambiente', component: AmbienteTrabajoComponent, data: { title: 'Lista ambiente de Trabajo' }, canActivate: [AuthGuard]},
             { path: 'ambiente/vista/:id', component: VistaAmbienteTrabajoComponent, data: { title: 'Ver ambiente de Trabajo' }, canActivate: [AuthGuard] },

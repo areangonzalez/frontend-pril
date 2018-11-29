@@ -58,7 +58,7 @@ export class BreadcrumbComponent implements OnInit {
       while (currentRoute.children.length > 0) {
         let childrenRoutes: ActivatedRoute[] = currentRoute.children;
         let breadCrumbLabel: string = "";
-        
+
 
         // iterate over each children
         childrenRoutes.forEach(route => {

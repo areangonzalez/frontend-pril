@@ -23,7 +23,7 @@ export class DestinatarioComponent implements OnInit {
             { label: 'Destinatario', url: 'destinatario', params: [] }]);
         // listar destinatarios
         this.listar();
-        
+
     }
 
     listar() {
