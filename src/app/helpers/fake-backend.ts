@@ -608,6 +608,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
+            // BORRAR OFERTA
+            if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'DELETE') {
+              // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  // find user by id in users array
+                  let urlParts = request.url.split('/');
+                  let id = parseInt(urlParts[urlParts.length - 1]);
+                  let matchedOferta = ofertasLista.filter(oferta => { return oferta.id === id; });
+                  let seleccion = matchedOferta.length ? matchedOferta[0] : null;
+
+                  return of(new HttpResponse({ status: 200, body: seleccion }));
+              } else {
+                  // return 401 not authorised if token is null or invalid
+                  return throwError({ error: { message: 'Unauthorised' } });
+              }
+          }
+
             // Editar Oferta
             if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'PUT') {
 
@@ -621,29 +638,29 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 for (var i = 0; i < ofertasLista.length; i++) {
                     if (ofertasLista[i]['id'] == id) {
                         ofertasLista[i] = {
-                            id: editOferta.id,
-                            ambienteid: editOferta.ambienteid,
-                            ambiente: getNombreArray(editOferta.ambienteid, ambienteLista),
-                            nombre_sucursal: editOferta.nombre_sucursal,
-                            puesto: editOferta.puesto,
-                            area: editOferta.area,
-                            demanda_laboral: editOferta.demanda_laboral,
-                            objetivo: editOferta.objetivo,
-                            dia_horario: editOferta.dia_horario,
-                            tarea: editOferta.tarea,
-                            fecha_inicial: hoy(),
-                            estado: 'Vacante',
-                            lugar: {
-                                id: editOferta.id,
-                                localidadid: editOferta.lugar.localidadid,
-                                localidad: getNombreArray(editOferta.lugar.localidadid, localidad),
-                                calle: editOferta.lugar.calle,
-                                altura: editOferta.lugar.altura,
-                                barrio: editOferta.lugar.barrio,
-                                piso: editOferta.lugar.piso,
-                                depto: editOferta.lugar.depto,
-                                escalera: editOferta.lugar.escalera
-                            }
+                          id: editOferta.id,
+                          ambiente_trabajoid: editOferta.ambiente_trabajoid,
+                          ambiente_trabajo: getNombreArray(editOferta.ambiente_trabajoid, ambienteLista),
+                          nombre_sucursal: editOferta.nombre_sucursal,
+                          puesto: editOferta.puesto,
+                          area: editOferta.area,
+                          demanda_laboral: editOferta.demanda_laboral,
+                          objetivo: editOferta.objetivo,
+                          dia_horario: editOferta.dia_horario,
+                          tarea: editOferta.tarea,
+                          fecha_inicial: ofertasLista[i]['fecha_inicial'],
+                          estado: ofertasLista[i]['estado'],
+                          lugar: {
+                              id: editOferta.id,
+                              localidadid: editOferta.lugar.localidadid,
+                              localidad: getNombreArray(editOferta.lugar.localidadid, localidad),
+                              calle: editOferta.lugar.calle,
+                              altura: editOferta.lugar.altura,
+                              barrio: editOferta.lugar.barrio,
+                              piso: editOferta.lugar.piso,
+                              depto: editOferta.lugar.depto,
+                              escalera: editOferta.lugar.escalera
+                          }
                         }
                     }
                 }

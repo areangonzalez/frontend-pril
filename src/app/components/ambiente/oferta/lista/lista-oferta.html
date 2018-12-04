@@ -17,7 +17,7 @@
                 <tr *ngFor="let oferta of listaOfertas">
                     <td>{{oferta.fecha_inicial | date:'dd/MM/yyyy' }}</td>
                     <td>{{oferta.nombre_sucursal}}</td>
-                    <td>{{oferta.localidad}}</td>
+                    <td>{{oferta.lugar.localidad}}</td>
                     <td>{{oferta.puesto}}</td>
                     <td>{{oferta.dia_horario}}</td>
                     <td>{{oferta.estado}}</td>
