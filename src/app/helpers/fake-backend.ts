@@ -503,14 +503,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/ofertas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    let ambienteId = request.params.get('ambienteid');
+                    let ambienteId = request.params.get('ambiente_trabajoid');
                     let oficioNombre = request.params.get('oficio');
                     let deseoActividad = request.params.get('deseo_actividad');
                     //let mensaje: string = 'Este ambiente no existe.';
 
                     if (ambienteId != null) {
 
-                      let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.ambienteid === ambienteId; });
+                      let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.ambiente_trabajoid === ambienteId; });
                       let seleccion = matchedAmbiente.length ? matchedAmbiente : [];
 
                       return of(new HttpResponse({ status: 200, body: seleccion }));
@@ -557,8 +557,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 ofertasLista.push({
                     id: newOfertas.id,
-                    ambienteid: newOfertas.ambienteid,
-                    ambiente: getNombreArray(newOfertas.ambienteid, ambienteLista),
+                    ambiente_trabajoid: newOfertas.ambiente_trabajoid,
+                    ambiente_trabajo: getNombreArray(newOfertas.ambiente_trabajoid, ambienteLista),
                     nombre_sucursal: newOfertas.nombre_sucursal,
                     puesto: newOfertas.puesto,
                     area: newOfertas.area,
@@ -570,14 +570,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     estado: 'Vacante',
                     lugar: {
                         id: newOfertas.id,
-                        localidadid: newOfertas.localidadid,
-                        localidad: getNombreArray(newOfertas.localidadid, localidad),
-                        calle: newOfertas.calle,
-                        altura: newOfertas.altura,
-                        barrio: newOfertas.barrio,
-                        piso: newOfertas.piso,
-                        depto: newOfertas.depto,
-                        escalera: newOfertas.escalera
+                        localidadid: newOfertas.lugar.localidadid,
+                        localidad: getNombreArray(newOfertas.lugar.localidadid, localidad),
+                        calle: newOfertas.lugar.calle,
+                        altura: newOfertas.lugar.altura,
+                        barrio: newOfertas.lugar.barrio,
+                        piso: newOfertas.lugar.piso,
+                        depto: newOfertas.lugar.depto,
+                        escalera: newOfertas.lugar.escalera
                     }
                 });
                 // datos a mostrar en la tabla

@@ -10,7 +10,7 @@ export class OfertaService {
 
     listarOfertas(idAmbiente = '') {
       if (idAmbiente != ''){
-        let params = new HttpParams().set('ambienteid', idAmbiente);
+        let params = new HttpParams().set('ambiente_trabajoid', idAmbiente);
         return this._http.get('/ofertas', params);
       }else{
         return this._http.get('/ofertas');

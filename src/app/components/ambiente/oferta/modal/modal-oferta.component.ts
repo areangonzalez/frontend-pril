@@ -46,7 +46,7 @@ export class ModalContentOferta implements OnInit {
         ) {
          this.ofertaForm = _fb.group({
              id: 0,
-             ambienteid: 0,
+             ambiente_trabajoid: 0,
              nombre_sucursal: ['', [Validators.required, Validators.minLength(3)]],
              puesto: ['', [Validators.required, Validators.minLength(3)]],
              area: ['', [Validators.required, Validators.minLength(3)]],
@@ -75,7 +75,7 @@ export class ModalContentOferta implements OnInit {
     }
 
     guardarOferta() {
-        this.ofertaForm.controls.ambienteid.setValue(this.ambienteid);
+        this.ofertaForm.controls.ambiente_trabajoid.setValue(this.ambienteid);
         let lugar = new Lugar(0, 0, '', '', '', '', '', '', '').deserialize(this.ofertaForm.value.lugar.value);
         let oferta = new Oferta(0,0,'','','','','','','', lugar).deserialize(this.ofertaForm.value);
 
@@ -92,10 +92,7 @@ export class ModalContentOferta implements OnInit {
         if (id != undefined) {
             this._ofertaService.getOfertaPorId(id).subscribe(
                 datos => {
-                    // borro atributos que no son utilizados en el formulario
-                    delete datos['fecha_inicial'];
                     this.ofertaForm.patchValue(datos);
-                    /* this.ofertaDatos = datos; */
                 }, error => {
                     this._mensajeService.cancelado('Esta oferta no existe, Por favor verifique los datos.', [{ name: '' }]);
                 });

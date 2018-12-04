@@ -5,6 +5,8 @@
             <thead>
                 <tr>
                     <th scope="col">Fecha de inicio</th>
+                    <th scope="col">Sucursal</th>
+                    <th scope="col">Localidad</th>
                     <th scope="col">Puesto</th>
                     <th scope="col">Días y horarios</th>
                     <th scope="col">Estado</th>
@@ -14,12 +16,14 @@
             <tbody>
                 <tr *ngFor="let oferta of listaOfertas">
                     <td>{{oferta.fecha_inicial | date:'dd/MM/yyyy' }}</td>
+                    <td>{{oferta.nombre_sucursal}}</td>
+                    <td>{{oferta.localidad}}</td>
                     <td>{{oferta.puesto}}</td>
                     <td>{{oferta.dia_horario}}</td>
                     <td>{{oferta.estado}}</td>
                     <td class="text-center">
                         <modal-vista-oferta [ofertaid]="oferta.id"></modal-vista-oferta>
-                        <modal-oferta *ngIf="!(mostrarEdicion == 0)" [tipo]="'editar'" [texto]="''" [ambienteid]="oferta.ambienteid"
+                        <modal-oferta *ngIf="!(mostrarEdicion == 0)" [tipo]="'editar'" [texto]="''" [ambienteid]="oferta.ambiente_trabajoid"
                          (guardarOferta)="obtenerParametrosOferta($event)" [ofertaid]="oferta.id" ></modal-oferta>
                     </td>
                 </tr>
