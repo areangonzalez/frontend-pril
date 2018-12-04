@@ -615,10 +615,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   // find user by id in users array
                   let urlParts = request.url.split('/');
                   let id = parseInt(urlParts[urlParts.length - 1]);
-                  let matchedOferta = ofertasLista.filter(oferta => { return oferta.id === id; });
-                  let seleccion = matchedOferta.length ? matchedOferta[0] : null;
+                  let mensaje = "";
 
-                  return of(new HttpResponse({ status: 200, body: seleccion }));
+                  for (let i = 0; i < ofertasLista.length; i++) {
+                    // busco la oferta con el id para borrar
+                    if (ofertasLista[i]['id'] == id) {
+                      ofertasLista.splice(i,1);
+                      mensaje = "Se a borrado con exito la oferta!!";
+                    }else{
+                      mensaje = "Esta oferta no existe, por favor verifique sus datos.";
+                    }
+                  }
+
+
+                  return of(new HttpResponse({ status: 200, body: {mensaje:mensaje} }));
               } else {
                   // return 401 not authorised if token is null or invalid
                   return throwError({ error: { message: 'Unauthorised' } });
