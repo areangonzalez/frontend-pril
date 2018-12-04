@@ -415,13 +415,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     let matchedUsers = ambienteLista.filter(ambiente => { return ambiente.id === id; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
-                    let resultado: any = [];
-                    if (seleccion != null) {
+                    //let resultado: any = [];
+
+                    /* if (seleccion != null) {
                         //delete seleccion.ambiente.lugar.usarLugarEncontrado;
                         resultado.push({ estado: true, resultado: [seleccion] });
                     } else {
                         resultado.push({ estado: false, resultado: [], message: mensaje });
-                    }
+                    } */
 
                     return of(new HttpResponse({ status: 200, body: seleccion }));
                 } else {

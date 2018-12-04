@@ -10,7 +10,8 @@ export interface IOferta {
     objetivo: string,
     dia_horario: string,
     tarea: string,
-    lugar: Lugar
+    lugar: Lugar,
+    fecha_inicial?:string
 }
 
 export class Oferta implements IOferta {
@@ -25,7 +26,8 @@ export class Oferta implements IOferta {
         public objetivo: string,
         public dia_horario: string,
         public tarea: string,
-        public lugar: Lugar
+        public lugar: Lugar,
+        public fecha_inicial: string
     ) { }
 
     deserialize(input: any) {

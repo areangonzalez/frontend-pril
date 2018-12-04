@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="form-group col-md-6">
-            <label for="deseo_actividad">Actividad en la que se desea formación y entrenamiento (<span>*</span>):</label>
+            <label for="deseo_actividad" class="prioridad">Actividad en la que se desea formación y entrenamiento (<span>*</span>):</label>
             <input type="text" id="deseo_actividad" placeholder="Actividad o formación que se desea" class="form-control" formControlName="deseo_actividad" [ngClass]="{'is-invalid': (destinatarioForm.deseo_actividad.invalid && submitted)}">
             <div *ngIf="(destinatarioForm.deseo_actividad.invalid && submitted)"
                 class="text-danger">
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group col-md-4">
             <auto-completar [listado]="listaProfesiones" [submitted]="submitted" [mensaje]="'Este campo es requerido.'" [titulo]="'Profesión'"
-                            [placeHolder]="'Seleccione una profesión'" [nombreValor]="getNombreListadoPorId(setProfesionid, listaProfesiones)" (seleccionaValor)="getProfesion($event)" ></auto-completar> 
+                            [placeHolder]="'Seleccione una profesión'" [nombreValor]="getNombreListadoPorId(setProfesionid, listaProfesiones)" (seleccionaValor)="getProfesion($event)" ></auto-completar>
         </div>
         <div class="form-group col-md-4">
             <auto-completar [listado]="listaOficios" [submitted]="submitted" [mensaje]="'Este campo es requerido.'" [titulo]="'Oficio'"
@@ -32,7 +32,7 @@
             <label class="form-check-label" for="experiencia_laboral">Experiencia laboral</label>
         </div>
         <div class="form-group col-md-12">
-            <label for="conocimientos_basicos">Conocimientos básicos sobre la actividad que desea recibir formación y entrenamiento (<span>*</span>):</label>
+            <label for="conocimientos_basicos" class="prioridad">Conocimientos básicos sobre la actividad que desea recibir formación y entrenamiento (<span>*</span>):</label>
             <input type="text" id="conocimientos_basicos" placeholder="Conocimientos básicos" class="form-control" formControlName="conocimientos_basicos"
              [ngClass]="{'is-invalid': (destinatarioForm.conocimientos_basicos.invalid && submitted)}">
             <div *ngIf="(destinatarioForm.conocimientos_basicos.invalid && submitted)"
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="form-group col-md-8">
-            <label for="Organismo_pril">Organismo donde se presento documentación y planilla de inscripción al PRIL (<span>*</span>):</label>
+            <label for="Organismo_pril" class="prioridad">Organismo donde se presento documentación y planilla de inscripción al PRIL (<span>*</span>):</label>
             <input type="text" id="organismo_pril" placeholder="Organismo donde se presento documentación o planilla de inscripción" class="form-control"
                 formControlName="origen" [ngClass]="{'is-invalid': (destinatarioForm.origen.invalid && submitted)}">
             <div *ngIf="(destinatarioForm.origen.invalid && submitted)"
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label for="fecha_presentacion">Fecha presentación (<span>*</span>):</label>
+            <label for="fecha_presentacion" class="prioridad">Fecha presentación (<span>*</span>):</label>
             <div class="input-group">
                 <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fd="ngbDatepicker" id="fecha_presentacion" formControlName="fechaPresentacion"
                     (ngModelChange)="formatFechapresentacion($event)" [ngClass]="{'is-invalid': (destinatarioForm.fechaPresentacion.invalid && submitted)}">
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <hr class="my-4">
+    <hr>
     <div class="row">
         <div class="form-group col-md-4">
             <label for="banco_nombre">Nombre de banco:</label>

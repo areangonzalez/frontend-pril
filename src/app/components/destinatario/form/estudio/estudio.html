@@ -1,7 +1,7 @@
 <fieldset [formGroup]="estudios">
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="nivel_educativo">Nivel educativo (<span>*</span>):</label>
+                <label for="nivel_educativo" class="prioridad">Nivel educativo (<span>*</span>):</label>
                 <select class="form-control" id="nivel_educativo" formControlName="nivel_educativoid" (change)="seleccionarNombre($event)" [ngClass]="{'is-invalid': ((estudiosForm.nivel_educativoid.invalid && submitted) || errorNivelEducativo)}">
                         <option value="">Seleccione Nivel educativo</option>
                         <option *ngFor="let nivel of listaNivelEducativo" value="{{nivel.id}}">{{nivel.nombre}}</option>
@@ -21,7 +21,7 @@
                 <label class="form-check-label" for="estudio_en_curso">En curso</label>
             </div>
             <div class="form-group col-md-9">
-                <label for="titulo">Título (<span>*</span>):</label>
+                <label for="titulo" class="prioridad">Título (<span>*</span>):</label>
                 <input type="text" id="titulo" placeholder="titulo" class="form-control" formControlName="titulo" [ngClass]="{'is-invalid': (estudiosForm.titulo.invalid && submitted)}">
                 <div *ngIf="(estudiosForm.titulo.invalid && submitted)"
                     class="text-danger">

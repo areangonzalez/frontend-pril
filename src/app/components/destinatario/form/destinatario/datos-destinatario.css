@@ -4,19 +4,19 @@ label > span {
     font-weight: 700;
 }
 label > span.opcional {
-    font-size: 13px; 
+    font-size: 13px;
     font-style: italic;
     color:red;
     font-weight: 700;
 }
 
 .form-check {
-    margin-top: 3.1%;
+    margin-top: 2.1%;
     text-align: center;
 }
 .is-invalid {
   border: 1px solid red;
 }
 .is-invalid:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.31);  
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.31);
 }

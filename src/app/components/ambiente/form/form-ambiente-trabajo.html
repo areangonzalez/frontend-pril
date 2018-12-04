@@ -1,9 +1,9 @@
 <form [formGroup]="ambienteForm">
     <datos-ambiente-trabajo-form [group]="ambienteForm.controls.ambiente" [submitted]="submitted"></datos-ambiente-trabajo-form>
-    <hr class="mb-4">
+    <hr>
     <datos-representante-form [group]="ambienteForm.controls.persona" [submitted]="submitted" [mostrarBtnBusqueda]="mostrarBtnBusqueda"></datos-representante-form>
 
-    <hr class="mb-4">
+    <hr>
     <div class="float-right">
         <button type="button" class="btn btn-danger" (click)="volver()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
         <button type="button" class="btn btn-success" (click)="GuardarAmbiente()"><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>

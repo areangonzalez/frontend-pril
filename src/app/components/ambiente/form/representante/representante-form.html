@@ -1,8 +1,8 @@
-<h3><small class="text-muted">Datos del representante</small></h3>
+<h3 style="margin-top:-1rem !important;"><small class="text-muted">Datos del representante</small></h3>
 <fieldset [formGroup]="datosPersona">
     <div class="row">
         <div class="form-group col-md-4">
-            <label for="nro_documento">Nro. documento (<span>*</span>):</label>
+            <label for="nro_documento" class="prioridad">Nro. documento (<span>*</span>):</label>
             <div class="input-group">
                 <input type="text" id="nro_documento" class="form-control" formControlName="nro_documento" (keyup)="esNumeroDocumento($event.target.value)"
                  minlength="7" maxlength="8" placeholder="Ej.: 23123987" [ngClass]="{'is-invalid': (representante.nro_documento.invalid && submitted)}"
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label for="apellido">Apellido (<span>*</span>):</label>
+            <label for="apellido" class="prioridad">Apellido (<span>*</span>):</label>
             <input type="text" id="apellido" class="form-control" formControlName="apellido" placeholder="Apellido" [ngClass]="{'is-invalid': (representante.apellido.invalid && submitted)}">
             <div *ngIf="(representante.apellido.invalid && submitted)"
                 class="text-danger">
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label for="nombre">Nombre (<span>*</span>):</label>
+            <label for="nombre" class="prioridad">Nombre (<span>*</span>):</label>
             <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre" [ngClass]="{'is-invalid': (representante.nombre.invalid && submitted)}">
             <div *ngIf="(representante.nombre.invalid && submitted)"
                 class="text-danger">
@@ -45,7 +45,7 @@
             <input type="text" id="fax" class="form-control" formControlName="fax" placeholder="Ej.: (2920) 456765">
         </div>
         <div class="form-group col-md-4">
-            <label for="email">Email (<span>*</span>):</label>
+            <label for="email" class="prioridad">Email (<span>*</span>):</label>
             <input type="text" id="email" class="form-control" formControlName="email" placeholder="Ej.: micorreo@mail.com" [ngClass]="{'is-invalid': (representante.email.invalid && submitted)}">
             <div *ngIf="(representante.email.invalid && submitted)"
                 class="text-danger">

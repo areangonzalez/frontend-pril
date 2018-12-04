@@ -32,3 +32,12 @@ dl.row{
   border: 1px solid rgba(0,0,0,.125);
   border-top: 0 !important;
 }
+.form-group {
+  margin-bottom: 0.3rem !important;
+}
+label {
+  margin-bottom: 0.2rem !important;
+}
+.prioridad {
+  margin-bottom: 1px !important;
+}

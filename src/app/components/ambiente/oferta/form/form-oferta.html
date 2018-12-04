@@ -1,7 +1,7 @@
 <fieldset [formGroup]="datosOferta">
     <div class="row">
         <div class="form-group col-md-6">
-            <label for="nombre_sucursal">Sucursal (<span>*</span>):</label>
+            <label for="nombre_sucursal" class="prioridad">Sucursal (<span>*</span>):</label>
             <input type="text" id="nombre_sucursal" class="form-control" formControlName="nombre_sucursal" [ngClass]="{'is-invalid': (oferta.nombre_sucursal.invalid && submitted)}">
             <div *ngIf="(oferta.nombre_sucursal.invalid && submitted)" class="text-danger">
                 <div *ngIf="oferta.nombre_sucursal.errors.required">Este campo es requerido.</div>
@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="form-group col-md-6">
-            <label for="tarea">Tarea (<span>*</span>):</label>
+            <label for="tarea" class="prioridad">Tarea (<span>*</span>):</label>
             <textarea class="form-control" id="tarea" rows="2" formControlName="tarea"
              [ngClass]="{'is-invalid': (oferta.tarea.invalid && submitted)}" ></textarea>
             <div *ngIf="(oferta.tarea.invalid && submitted)"
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="demanda_laboral">Demanda laboral (<span>*</span>):</label>
-            <textarea class="form-control" id="demanda_laboral" rows="2" formControlName="demanda_laboral" 
+            <textarea class="form-control" id="demanda_laboral" rows="2" formControlName="demanda_laboral"
              [ngClass]="{'is-invalid': (oferta.demanda_laboral.invalid && submitted)}"></textarea>
             <div *ngIf="(oferta.demanda_laboral.invalid && submitted)"
                 class="text-danger">
@@ -35,8 +35,8 @@
     </div>
     <div class="row">
         <div class="form-group col-md-4">
-            <label for="area">Área (<span>*</span>):</label>
-            <input type="text" id="area" class="form-control" formControlName="area" 
+            <label for="area" class="prioridad">Área (<span>*</span>):</label>
+            <input type="text" id="area" class="form-control" formControlName="area"
              [ngClass]="{'is-invalid': (oferta.area.invalid && submitted)}">
             <div *ngIf="(oferta.area.invalid && submitted)" class="text-danger">
                 <div *ngIf="oferta.area.errors.required">Este campo es requerido.</div>
@@ -44,21 +44,12 @@
             </div>
         </div>
         <div class="form-group col-md-4">
-            <label for="puesto">Puesto (<span>*</span>):</label>
-            <input type="text" id="puesto" class="form-control" formControlName="puesto" 
+            <label for="puesto" class="prioridad">Puesto (<span>*</span>):</label>
+            <input type="text" id="puesto" class="form-control" formControlName="puesto"
              [ngClass]="{'is-invalid': (oferta.puesto.invalid && submitted)}">
             <div *ngIf="(oferta.puesto.invalid && submitted)" class="text-danger">
                 <div *ngIf="oferta.puesto.errors.required">Este campo es requerido.</div>
                 <div *ngIf="oferta.puesto.errors.minlength">El texto es muy corto.</div>
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="dia_horario">Días y horarios (<span>*</span>):</label>
-            <input type="text" id="dia_horario" class="form-control" formControlName="dia_horario" 
-             [ngClass]="{'is-invalid': (oferta.dia_horario.invalid && submitted)}">
-            <div *ngIf="(oferta.dia_horario.invalid && submitted)" class="text-danger">
-                <div *ngIf="oferta.dia_horario.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.dia_horario.errors.minlength">Por favor, detalle bien el horario y los días.</div>
             </div>
         </div>
     </div>

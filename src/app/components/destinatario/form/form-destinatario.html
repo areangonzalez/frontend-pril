@@ -1,11 +1,11 @@
 <form [formGroup]="destinatarioForm" >
     <datos-persona-form [group]="destinatarioForm.controls.persona" [submitted]="submitted" [documento]="nroDoc" (setListaEstudios)="setListaEstudios($event)" [mostrarBtnBusqueda]="mostrarBoton" ></datos-persona-form>
-    <hr class="my-4">
+    <hr>
     <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'agregar'" [texto]="'Agregar estudio'"></modal-estudio>
     <lista-estudio *ngIf="(listaEstudios.length > 0)" [listaEstudios]="listaEstudios" [tipo]="1"></lista-estudio>
-    <hr class="my-4">
+    <hr>
     <datos-destinatario-form [group]="destinatarioForm.controls.destinatario" [submitted]="submitted" [setProfesion]="profesionid" [setOficio]="oficioid" ></datos-destinatario-form>
-    <hr class="my-4">
+    <hr>
     <div class="float-right">
         <button type="button" class="btn btn-danger" (click)="volver()"><span class="oi oi-ban" title="Guardar" aria-hidden="true"></span> Cancelar</button> &nbsp;
         <button type="button" class="btn btn-success" (click)="onSubmit()"><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>

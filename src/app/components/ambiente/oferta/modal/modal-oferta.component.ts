@@ -77,7 +77,7 @@ export class ModalContentOferta implements OnInit {
     guardarOferta() {
         this.ofertaForm.controls.ambiente_trabajoid.setValue(this.ambienteid);
         let lugar = new Lugar(0, 0, '', '', '', '', '', '', '').deserialize(this.ofertaForm.value.lugar.value);
-        let oferta = new Oferta(0,0,'','','','','','','', lugar).deserialize(this.ofertaForm.value);
+        let oferta = new Oferta(0,0,'','','','','','','', lugar,'').deserialize(this.ofertaForm.value);
 
         this.submitted = true;
         if (this.ofertaForm.invalid) {

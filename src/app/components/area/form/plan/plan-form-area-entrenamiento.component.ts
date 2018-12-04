@@ -8,6 +8,13 @@ import { MensajesService } from '../../../../services/mensajes.service';
 import { DestinatarioService } from '../../../../services/destinatario.service';
 import { OfertaService } from "../../../../services/oferta.service";
 import { AmbienteTrabajoService } from "../../../../services/ambiente-trabajo.service";
+// MOdels
+import { Destinatario } from "../../../../models/destinatario.model";
+import { AmbienteTrabajo } from "../../../../models/ambiente-trabajo.model";
+import { Oferta } from "../../../../models/oferta.model";
+import { Lugar } from "../../../../models/lugar.model";
+import { Representante } from 'src/app/models/representante.model';
+import { Persona } from 'src/app/models/persona.model';
 
 @Component({
     selector: 'area-entrenamiento-form-plan',
@@ -18,35 +25,41 @@ import { AmbienteTrabajoService } from "../../../../services/ambiente-trabajo.se
 export class PlanFormAreaEntrenamientoComponent implements OnInit {
     /**
      * @var areaEntrenamiento variable que contiene el objeto del formulario
+     * @var destinatarioId identificador del destinatario
+     * @var ofertaId identificador de la oferta
+     * @var submitted se utiliza para identificar la validacion de errores del formulario
+     * @var lugar modelo que instancia los datos de lugar
+     * @var representante modelo que instancia los datos del representante
+     * @var persona modelo que instancia los datos de persona
+     * @var oferta modelo que instancia los datos de oferta
+     * @var destinatario objeto queinstancia los datos de un destinatario
      */
     public areaEntrenamiento: FormGroup;
     public destinatarioId:string;
     public ofertaId: string;
     public submitted:boolean = false;
-    public destinatario = { id: 0, oficio: "", legajo: "", fecha_ingreso: "",
+    public lugar = new Lugar(0,0,'','','','','','','');
+    public representante = new Representante(0,'','','','','','','');
+    public persona = new Persona(0,'','','','','',0,0,0,'','','',this.lugar,[])
+    public oferta = new Oferta(0,0,'','','','','','','',this.lugar,'');
+    public ambienteTrabajo = new AmbienteTrabajo(0,'','','','','',0,this.lugar,this.representante,'');
+    public destinatario =  { id: 0, oficio: "", legajo: "", fecha_ingreso: "",
       origen: "", deseo_lugar_entrenamiento: "", deseo_actividad: "", fecha_presentacion: "",
       banco_cbu: "", banco_nombre: "", banco_alias: "", experiencia_laboral: 0,
       conocimientos_basicos: "", profesion: "",
-      persona: { nombre: "", apellido: "", nro_documento: "",
-        cuil: "", telefono: "", celular: "", email: "", fecha_nacimiento: "",
-        sexo: "", genero: "", estado_civil: "",
-        estudios: [{ nivel_educativoid: 0, nivel_educativo: "", titulo: "",
-          completo: 0, en_curso: 0, anio: "" }],
-        lugar: { calle: "", altura: "", barrio: "", piso: "", depto: "",
-          escalera: "", localidad: "Viedma" }}};
-    public oferta = { id: 0, ambienteid: "", nombre_sucursal: "",
-      puesto: "", area: "", demanda_laboral: "", objetivo: "",
-      dia_horario: "", tarea: "", fecha_inicial: "",
-      lugar: { id: 0, localidadid: "", calle: "", altura: "",
-        barrio: "", piso: "", depto: "", escalera: "", localidad: ""
-      }};
-      public ambienteTrabajo = {};
+      persona: this.persona};
 
     /**
      * Constructor
-     * @param breadcrumbsService servicio para el manejo de las paginas accedidas
+     * @param _breadcrumbsService servicio para el manejo de las paginas accedidas
      * @param _router servicio para el control de navegacion dentro del sistema
-     * @param _formatearFecha: funcion que otorga el formato de fecha.
+     * @param _route servicio para capturar los parametros de la url
+     * @param _fb servicio para construir el formulario del plan
+     * @param _formatearFecha funcion que otorga el formato de fecha.
+     * @param _mensajesService servicio para la utilizacion de mensajes para el cliente
+     * @param _destinatarioService servicio que otorga la conexion y funcionalidad con la api de destinatario
+     * @param _ofertaService servicio que otorga la conexion y funcionalidad con la api de oferta
+     * @param _ambienteTrabajoService servicio que otorga la conexion y funcionalidad con la api con ambiente de trabajo
      */
     constructor(
         private _breadcrumbsService: BreadcrumbsService,
@@ -94,18 +107,32 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      */
     get entrenamiento() { return this.areaEntrenamiento.controls; }
 
+    /**
+     * @function cancelar cancela el formulario y vuelve a la vista del listado.
+     */
     cancelar() {
         this._router.navigate(['area']);
     }
 
+    /**
+     * @function volver cancela el formulario y vuelve a la vista de seleccion de oferta y destinatario.
+     */
     volver() {
         this._router.navigate(['area', 'crear-seleccion']);
     }
 
+    /**
+     * @function formatFechaInicial setea el valor de fecha inicial convirtiendolo en string
+     * @param obj objeto que contiene una fecha
+     */
     formatFechaInicial(obj: any) {
         this.areaEntrenamiento.controls.fecha_inicial.setValue(this._formatearFecha.onChange(obj));
     }
 
+    /**
+     * @function destinatarioPorId pide los datos de un destinatario por su ID
+     * @param id identificador del destinatario
+     */
     destinatarioPorId(id) {
       this._destinatarioService.destinatarioPorId(id).subscribe(
         datos => {
@@ -114,27 +141,42 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
           this._mensajesService.cancelado(error, [{name:''}]);
         });
     }
+
+    /**
+     * @function ofertaPorId pide los datos de una oferta por su ID
+     * @param id identificador de una oferta
+     */
     ofertaPorId(id) {
       this._ofertaService.getOfertaPorId(id).subscribe(
         datos => {
-          this.ambienteTrabajoPorId(datos.ambienteid);
-          for (const key in datos) {
-              this.oferta[key] = datos[key];
-          }
+          this.ambienteTrabajoPorId(datos.ambiente_trabajoid);
+          this.oferta.deserialize(datos);
+          this.oferta.lugar.deserialize(datos['lugar']);
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
         });
     }
 
+    /**
+     * @function ambientePorId pide los datos de un ambiente de trabajo por su ID
+     * @param id identificador de ambiente de trabajo
+     */
     ambienteTrabajoPorId(id) {
       this._ambienteTrabajoService.ambientePorId(id).subscribe(
         datos => {
           console.log(datos);
-          this.ambienteTrabajo = datos;
+          this.ambienteTrabajo.deserialize(datos);
+          this.ambienteTrabajo.lugar.deserialize(datos['lugar']);
         }, error => {
           this._mensajesService.cancelado(error, [{name:""}]);
         }
       );
-      console.log("ambiente trabajo");
+    }
+
+    guardarPlan() {
+      this.areaEntrenamiento.controls.ofertaid.setValue(this.ofertaId);
+      this.areaEntrenamiento.controls.destinatarioid.setValue(this.destinatarioId);
+
+
     }
 }

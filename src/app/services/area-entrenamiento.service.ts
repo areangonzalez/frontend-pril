@@ -8,19 +8,19 @@ export class AmbienteTrabajoService {
 
     guardar(params: object, id: number) {
         if (id != 0) {
-            return this._apiServcie.put('/ambiente-trabajos/' + id, params);
+            return this._apiServcie.put('/area-entrenamientos/' + id, params);
         } else {
-            return this._apiServcie.post('/ambiente-trabajos', params);
+            return this._apiServcie.post('/area-entrenamientos', params);
         }
     }
     /**
      * @function listarAmbientesTrabajo conexion con api para obtener el listado de ambientes de trabajo
      */
-     listarAmbienteTrabajo() {
-        return this._apiServcie.get('/ambiente-trabajos');
+     listar() {
+        return this._apiServcie.get('/area-entrenamientos');
     }
 
-    ambientePorId(id){
-        return this._apiServcie.get('/ambiente-trabajos/' + id);
+    buscarPorId(id){
+        return this._apiServcie.get('/area-entrenamientos/' + id);
     }
 }
