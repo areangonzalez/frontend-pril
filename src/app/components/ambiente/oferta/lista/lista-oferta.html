@@ -8,7 +8,6 @@
                     <th scope="col">Sucursal</th>
                     <th scope="col">Localidad</th>
                     <th scope="col">Puesto</th>
-                    <th scope="col">Días y horarios</th>
                     <th scope="col">Estado</th>
                     <th class="text-center" scope="col">Acción</th>
                 </tr>
@@ -19,7 +18,6 @@
                     <td>{{oferta.nombre_sucursal}}</td>
                     <td>{{oferta.lugar.localidad}}</td>
                     <td>{{oferta.puesto}}</td>
-                    <td>{{oferta.dia_horario}}</td>
                     <td>{{oferta.estado}}</td>
                     <td class="text-center">
                         <modal-vista-oferta [ofertaid]="oferta.id"></modal-vista-oferta>

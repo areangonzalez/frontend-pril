@@ -34,7 +34,6 @@
                 <th scope="col">Fecha de inicio</th>
                 <th scope="col">Ambiente trabajo</th>
                 <th scope="col">Puesto</th>
-                <th class="text-center" scope="col">Días y horarios</th>
                 <th scope="col" width="70"></th>
             </tr>
         </thead>
@@ -43,7 +42,6 @@
                 <td>{{oferta.fecha_inicial | date:'dd/MM/yyyy' }}</td>
                 <td>{{oferta.nombre_sucursal}}</td>
                 <td>{{oferta.puesto}}</td>
-                <td class="text-center">{{oferta.dia_horario}}</td>
                 <td class="text-center">
                   <i *ngIf="(selId == oferta.id)" class="fas fa-check" title="seleccionar"></i>
               </td>

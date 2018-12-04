@@ -52,7 +52,6 @@ export class ModalContentOferta implements OnInit {
              area: ['', [Validators.required, Validators.minLength(3)]],
              demanda_laboral: ['', [Validators.required, Validators.minLength(8)]],
              objetivo: '',
-             dia_horario: ['', [Validators.required, Validators.minLength(5)]],
              tarea: ['', [Validators.required, Validators.minLength(8)]],
              lugar: _fb.group({
                  id: 0,

@@ -78,7 +78,6 @@ export class OfertaComponent implements OnInit {
     private buscarOfertas(idAmbiente) {
         this._ofertaService.listarOfertas(idAmbiente).subscribe(
             datos => {
-              console.log(datos);
                 this.listaOfertas = datos;
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
