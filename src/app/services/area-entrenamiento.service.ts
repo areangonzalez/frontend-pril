@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from "../services/api.service";
 
 @Injectable()
-export class AmbienteTrabajoService {
+export class AreaEntrenamientoService {
 
     constructor(private _apiServcie: ApiService ) { }
 

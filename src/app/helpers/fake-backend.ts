@@ -14,6 +14,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let destinatarioLista: any = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
         let ambienteLista: any[] = JSON.parse(localStorage.getItem('ambienteLista')) || [];
         let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
+        let areasLista: any[] = JSON.parse(localStorage.getItem('areasLista')) || [];
+
         // Agregados
         //let destinatarioAgregados: any[] = JSON.parse(localStorage.getItem('destinatariosAgregados')) || [];
         //let ambientesAgregados: any[] = JSON.parse(localStorage.getItem('ambientesAgregados')) || [];
@@ -553,7 +555,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // save new user
                 // array de la tabla
                 // genero la lista de ofertas
-                newOfertas.id = generarId(ofertasAgregadas);
+                newOfertas.id = generarId(ofertasLista);
                 newOfertas.fecha_inicial = hoy();
 
                 ofertasLista.push({
@@ -648,7 +650,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 for (var i = 0; i < ofertasLista.length; i++) {
                     if (ofertasLista[i]['id'] == id) {
                         ofertasLista[i] = {
-                          id: editOferta.id,
+                          id: id,
                           ambiente_trabajoid: editOferta.ambiente_trabajoid,
                           ambiente_trabajo: getNombreArray(editOferta.ambiente_trabajoid, ambienteLista),
                           nombre_sucursal: editOferta.nombre_sucursal,
@@ -691,6 +693,50 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
             }
+
+        /* ************************************************************************
+         *                          AREA DE ENTRENAMIENTO
+         * ************************************************************************ */
+
+            // Crear ofertas
+            if (request.url.endsWith('/apimock/area-entrenamientos') && request.method === 'POST') {
+              // get new user object from post body
+              let newArea = request.body;
+              // save new user
+              // array de la tabla
+              // genero la lista de ofertas
+              newArea.id = generarId(areasLista);
+              newArea.fecha_inicial = hoy();
+
+              ofertasLista.push({
+                id: newArea.id,
+                tarea: newArea.tarea,
+                planid: newArea.planid,
+                destinatarioid: newArea.destinatarioid,
+                fecha_inicial: newArea.fecha_inicial,
+                fecha_final: newArea.fecha_final,
+                descripcion_baja: newArea.descripcion_baja,
+                ofertaid: newArea.ofertaid,
+                jornada: newArea.jornada,
+                observacion: newArea.observacion,
+                plan: newArea.plan,
+                ambiente_trabajo: newArea.ambiente_trabajo,
+                destinatario: newArea.destinatario
+              });
+              // datos a mostrar en la tabla
+              localStorage.setItem('areasLista', JSON.stringify(ofertasLista));
+              // datos de usuarios agregados
+              // console.log(newOfertas);
+              // ofertasAgregadas.push(newOfertas);
+              // localStorage.setItem('ofertasAgregadas', JSON.stringify(ofertasAgregadas));
+
+              // respond 200 OK
+              return of(new HttpResponse({ status: 200 }));
+          }
+
+
+
+
 
         /* ************************************************************************
          *                                  PERSONAS

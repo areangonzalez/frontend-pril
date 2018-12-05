@@ -44,6 +44,7 @@ import { PersonaService } from "./services/persona.service";
 import { TipoAmbienteTrabajoService } from "./services/tipo-ambiente-trabajo.service";
 import { AmbienteTrabajoService } from "./services/ambiente-trabajo.service";
 import { OfertaService } from "./services/oferta.service";
+import { AreaEntrenamientoService } from "./services/area-entrenamiento.service";
 
 @NgModule({
   declarations: [
@@ -80,7 +81,7 @@ import { OfertaService } from "./services/oferta.service";
     ApiService,
     LoaderService,
     BreadcrumbsService,
-    DestinatarioService,    
+    DestinatarioService,
     MensajesService,
     ProfesionService,
     OficioService,
@@ -92,7 +93,8 @@ import { OfertaService } from "./services/oferta.service";
     PersonaService,
     TipoAmbienteTrabajoService,
     AmbienteTrabajoService,
-    OfertaService
+    OfertaService,
+    AreaEntrenamientoService
   ],
   bootstrap: [AppComponent]
 })

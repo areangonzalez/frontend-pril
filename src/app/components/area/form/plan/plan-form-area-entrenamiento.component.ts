@@ -8,13 +8,14 @@ import { MensajesService } from '../../../../services/mensajes.service';
 import { DestinatarioService } from '../../../../services/destinatario.service';
 import { OfertaService } from "../../../../services/oferta.service";
 import { AmbienteTrabajoService } from "../../../../services/ambiente-trabajo.service";
+import { AreaEntrenamientoService } from '../../../../services/area-entrenamiento.service';
 // MOdels
-import { Destinatario } from "../../../../models/destinatario.model";
 import { AmbienteTrabajo } from "../../../../models/ambiente-trabajo.model";
 import { Oferta } from "../../../../models/oferta.model";
 import { Lugar } from "../../../../models/lugar.model";
-import { Representante } from 'src/app/models/representante.model';
-import { Persona } from 'src/app/models/persona.model';
+import { Representante } from '../../../../models/representante.model';
+import { Persona } from '../../../../models/persona.model';
+import { AreaEntrenamiento } from '../../../../models/area-entrenamiento.models';
 
 @Component({
     selector: 'area-entrenamiento-form-plan',
@@ -34,7 +35,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @var oferta modelo que instancia los datos de oferta
      * @var destinatario objeto queinstancia los datos de un destinatario
      */
-    public areaEntrenamiento: FormGroup;
+    public areaEntrenamientoForm: FormGroup;
     public destinatarioId:string;
     public ofertaId: string;
     public submitted:boolean = false;
@@ -70,10 +71,11 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
         private _mensajesService: MensajesService,
         private _destinatarioService: DestinatarioService,
         private _ofertaService: OfertaService,
-        private _ambienteTrabajoService: AmbienteTrabajoService
+        private _ambienteTrabajoService: AmbienteTrabajoService,
+        private _areaEntrenamientoService: AreaEntrenamientoService
     ) {
-        this.areaEntrenamiento = _fb.group({
-            id: '',
+        this.areaEntrenamientoForm = _fb.group({
+            id: null,
             tarea: ['', [Validators.required, Validators.minLength(5)]],
             planid: ['', Validators.required],
             destinatarioid: '',
@@ -107,7 +109,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     /**
      * @function entrenamiento se utiliza para controlar el objeto del formulario entrenamiento
      */
-    get entrenamiento() { return this.areaEntrenamiento.controls; }
+    get entrenamiento() { return this.areaEntrenamientoForm.controls; }
 
     /**
      * @function cancelar cancela el formulario y vuelve a la vista del listado.
@@ -128,7 +130,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @param obj objeto que contiene una fecha
      */
     formatFechaInicial(obj: any) {
-        this.areaEntrenamiento.controls.fecha_inicial.setValue(this._formatearFecha.onChange(obj));
+        this.areaEntrenamientoForm.controls.fecha_inicial.setValue(this._formatearFecha.onChange(obj));
     }
 
     /**
@@ -176,9 +178,23 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     }
 
     guardarPlan() {
-      this.areaEntrenamiento.controls.ofertaid.setValue(this.ofertaId);
-      this.areaEntrenamiento.controls.destinatarioid.setValue(this.destinatarioId);
+
+      const areaEntrenamiento = this.prepareAreaEntrenamineto();
 
 
+      this._areaEntrenamientoService.guardar(areaEntrenamiento,0).subscribe(
+        respuesta => {
+          console.log(respuesta);
+          //this._mensajesService.exitoso(respuesta);
+        },error => {
+          this._mensajesService.cancelado(error, [{name:''}]);
+        });
+
+      }
+
+    private prepareAreaEntrenamineto(): AreaEntrenamiento {
+        this.areaEntrenamientoForm.controls.ofertaid.setValue(this.ofertaId);
+        this.areaEntrenamientoForm.controls.destinatarioid.setValue(this.destinatarioId);
+      return new AreaEntrenamiento(0,'',0,0,0,{},'','','','','','','','').deserialize(this.areaEntrenamientoForm.value);
     }
 }
