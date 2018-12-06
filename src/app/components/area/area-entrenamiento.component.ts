@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
+import { AreaEntrenamientoService } from 'src/app/services/area-entrenamiento.service';
+import { MensajesService } from 'src/app/services/mensajes.service';
+
 
 @Component({
     selector: 'app-area-entrenamiento',
@@ -8,22 +11,32 @@ import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
     // styleUrls: ['./lista.component.css']
 })
 export class AreaEntrenamientoComponent implements OnInit {
-    page = 1;
+    public areas = [];
+    public totalFiltrado = 0;
+    public page = 1;
 
-    constructor(private breadcrumbsService: BreadcrumbsService) {
+    constructor(private breadcrumbsService: BreadcrumbsService, private _areaEntrenamientoService: AreaEntrenamientoService, private _mensajesService: MensajesService) {
     }
 
     ngOnInit() {
         this.breadcrumbsService.store([
             { label: 'Inicio', url: 'inicio', params: [] },
             { label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] }]);
+      // Obtener listado de area de entrenamiento
+          this.obtenerAreasEntrenamiento();
     }
 
-    public areas = [
-        { fecha_inicial: '07/11/2018', fecha_final: '07/04/2019', tarea: 'Limpieza', destinatario: 'Gomez, Eduardo', ambiente_trabajo: 'Cooperativa obrera', plan: '$5000 / 20hs', estado: 'activo', id: 1 },
-        { fecha_inicial: '07/06/2018', fecha_final: '07/08/2018', tarea: 'Cajero', destinatario: 'Fernandez, Nicolas', ambiente_trabajo: 'Panadería Panonto', plan: '$2000 / 20hs', estado: 'Finalizado', id: 2 },
-        { fecha_inicial: '07/05/2018', fecha_final: '07/11/2018', tarea: 'Limpieza', destinatario: 'Gonzalez, Carlos', ambiente_trabajo: 'Panadería San Fernando', plan: '$1000 / 5hs', estado: 'activo', id: 3 },
-        { fecha_inicial: '07/03/2018', fecha_final: '07/09/2018', tarea: 'Chofer', destinatario: 'Carrizo, Eliana', ambiente_trabajo: 'Coca cola', plan: '$2000 / 10hs', estado: 'activo', id: 4 },
-        { fecha_inicial: '07/04/2018', fecha_final: '07/10/2018', tarea: 'Mantenimiento', destinatario: 'Gutierrez, Pablo', ambiente_trabajo: 'Cine gama', plan: '$5000 / 20hs', estado: 'activo',id: 5 }
-    ];
+
+    private obtenerAreasEntrenamiento(){
+      this._areaEntrenamientoService.listar().subscribe(
+        datos => {
+          console.log(datos);
+          if (datos['success']) {
+            this.areas = datos['coleccion'];
+          }
+          this.totalFiltrado = datos['total_filtrado'];
+        }, error => {
+          this._mensajesService.cancelado(error, [{name:''}]);
+        });
+    }
 }

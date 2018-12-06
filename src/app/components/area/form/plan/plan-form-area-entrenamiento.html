@@ -234,7 +234,7 @@
     </div>
 </div>
 <h3 class="mt-2">Área entrenamiento</h3>
-<form [formGroup]="areaEntrenamiento" >
+<form [formGroup]="areaEntrenamientoForm" >
     <div class="row">
         <div class="form-group col-md-4">
               <label for="fecha_inicial" class="prioridad">Fecha Inicial (<span>*</span>):</label>
@@ -283,6 +283,6 @@
     <div class="float-right" style="margin-top:5px;">
         <button class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
         <button class="btn btn-primary" (click)="volver()"><span class="oi oi-arrow-thick-left align-icon" title="atras" aria-hidden="true"></span> Atras</button> &nbsp;
-        <button class="btn btn-success"><span class="fas fa-save" title="atras" aria-hidden="true"></span> Crear</button>
+        <button class="btn btn-success" (click)="guardarEntrenamiento()"><span class="fas fa-save" title="atras" aria-hidden="true"></span> Crear</button>
     </div>
 </form>

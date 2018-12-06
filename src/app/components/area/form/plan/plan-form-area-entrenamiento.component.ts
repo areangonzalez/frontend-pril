@@ -34,6 +34,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @var persona modelo que instancia los datos de persona
      * @var oferta modelo que instancia los datos de oferta
      * @var destinatario objeto queinstancia los datos de un destinatario
+     * @var idArea identificador de area de entrenamiento
      */
     public areaEntrenamientoForm: FormGroup;
     public destinatarioId:string;
@@ -49,6 +50,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
       banco_cbu: "", banco_nombre: "", banco_alias: "", experiencia_laboral: 0,
       conocimientos_basicos: "", profesion: "",
       persona: this.persona};
+    private idArea = 0;
 
     /**
      * Constructor
@@ -177,21 +179,26 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
       );
     }
 
-    guardarPlan() {
+    /**
+     * @function guardarEntrenamiento guarda el formulario
+     */
+    guardarEntrenamiento() {
 
       const areaEntrenamiento = this.prepareAreaEntrenamineto();
-
-
-      this._areaEntrenamientoService.guardar(areaEntrenamiento,0).subscribe(
+      // guardo area de entrenamiento
+      this._areaEntrenamientoService.guardar(areaEntrenamiento,this.idArea).subscribe(
         respuesta => {
-          console.log(respuesta);
-          //this._mensajesService.exitoso(respuesta);
+          //console.log(respuesta);
+          this._mensajesService.exitoso('Guardado exitoso',[{name:'area-entrenamiento'}]);
         },error => {
           this._mensajesService.cancelado(error, [{name:''}]);
         });
 
       }
 
+    /**
+     * @function prepareAreaEntrenamineto organiza los parametros establecidos para la api.
+     */
     private prepareAreaEntrenamineto(): AreaEntrenamiento {
         this.areaEntrenamientoForm.controls.ofertaid.setValue(this.ofertaId);
         this.areaEntrenamientoForm.controls.destinatarioid.setValue(this.destinatarioId);

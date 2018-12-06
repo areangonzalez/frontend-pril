@@ -185,7 +185,6 @@ export class FormDestinatarioComponent implements OnInit {
                 this.oficioid = datos['destinatario']['oficioid'];
                 // seteo los valores del objeto
                 this.destinatarioForm.patchValue(datos);
-
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }
@@ -239,43 +238,4 @@ export class FormDestinatarioComponent implements OnInit {
         this.listaEstudios = e;
         return this.listaEstudios;
     }
-
-    /* private setValuesForm(formGroup: FormGroup, asignarObjeto: Object){
-        let control: AbstractControl = null;
-
-        Object.keys(formGroup.controls).forEach((name) => {
-
-            for (var key in asignarObjeto) {
-                if (name == 'fechaNacimiento') {
-                    control = formGroup.controls[name];
-                    control.setValue(this.formatFecha(asignarObjeto['fecha_nacimiento']));
-                    control.setErrors(null);
-                } else if (name == 'fechaPresentacion') {
-                    control = formGroup.controls[name];
-                    control.setValue(this.formatFecha(asignarObjeto['fecha_presentacion']));
-                    control.setErrors(null);
-                } else if (name == 'cuil_prin') {
-                    control = formGroup.controls[name];
-                    control.setValue(this.primerosDigitosCuil(asignarObjeto['cuil']));
-                    control.setErrors(null);
-                } else if (name == 'cuil_ult') {
-                    control = formGroup.controls[name];
-                    control.setValue(this.ultimoDigitoCuil(asignarObjeto['cuil']));
-                    control.setErrors(null);
-                } else if (key == name) {
-                    control = formGroup.controls[name];
-                    if (control instanceof FormGroup) {
-                      this.setValuesForm(control, asignarObjeto[key]);
-                    } else {
-                        control.setValue(asignarObjeto[key]);
-                        control.setErrors(null);
-                    }
-                }
-
-            }
-
-
-        });
-    } */
-
 }
