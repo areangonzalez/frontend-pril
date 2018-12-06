@@ -30,7 +30,6 @@ export class AreaEntrenamientoComponent implements OnInit {
     private obtenerAreasEntrenamiento(){
       this._areaEntrenamientoService.listar().subscribe(
         datos => {
-          console.log(datos);
           if (datos['success']) {
             this.areas = datos['coleccion'];
           }

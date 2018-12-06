@@ -12,7 +12,12 @@
                 <th scope="col">Acción</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="(totalFiltrado == 0)">
+            <tr colspan="8" rowspan="1">
+                <td class="text-center" colspan="8" rowspan="1">No se han encontrado resultados que mostrar.</td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="(totalFiltrado > 0)">
             <tr *ngFor="let area of areas">
                 <th>{{area.fecha_inicial}}</th>
                 <td>{{area.fecha_final}}</td>

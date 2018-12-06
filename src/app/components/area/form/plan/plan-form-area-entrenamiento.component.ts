@@ -172,7 +172,6 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     private obtenerPlanes() {
       this._planService.listar().subscribe(
         datos => {
-          console.log(datos);
           this.planLista = datos;
         }, error => {
 
@@ -187,7 +186,6 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     ambienteTrabajoPorId(id) {
       this._ambienteTrabajoService.ambientePorId(id).subscribe(
         datos => {
-          console.log(datos);
           this.ambienteTrabajo.deserialize(datos);
           this.ambienteTrabajo.lugar.deserialize(datos['lugar']);
         }, error => {
