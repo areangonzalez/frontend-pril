@@ -45,6 +45,7 @@ import { TipoAmbienteTrabajoService } from "./services/tipo-ambiente-trabajo.ser
 import { AmbienteTrabajoService } from "./services/ambiente-trabajo.service";
 import { OfertaService } from "./services/oferta.service";
 import { AreaEntrenamientoService } from "./services/area-entrenamiento.service";
+import { PlanService } from "./services/plan.service";
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { AreaEntrenamientoService } from "./services/area-entrenamiento.service"
     TipoAmbienteTrabajoService,
     AmbienteTrabajoService,
     OfertaService,
-    AreaEntrenamientoService
+    AreaEntrenamientoService,
+    PlanService
   ],
   bootstrap: [AppComponent]
 })
