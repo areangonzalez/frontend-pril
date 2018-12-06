@@ -255,9 +255,7 @@
             <label for="plan" class="prioridad">Plan (<span>*</span>):</label>
             <select class="form-control" id="plan" formControlName="planid" [ngClass]="{'is-invalid': (entrenamiento.planid.invalid && submitted)}">
                 <option value="">Seleccione plan</option>
-                <option value="1">$1000 / 10 hs</option>
-                <option value="1">$2000 / 15 hs</option>
-                <option value="1">$5000 / 20 hs</option>
+                <option *ngFor="let plan of planLista" value="{{plan.id}}">{{plan.nombre}}</option>
             </select>
             <div *ngIf="(entrenamiento.planid.invalid && submitted)" class="text-danger">
                 <div *ngIf="entrenamiento.planid.errors.required">Este campo es requerido.</div>

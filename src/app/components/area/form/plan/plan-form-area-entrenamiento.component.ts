@@ -16,6 +16,7 @@ import { Lugar } from "../../../../models/lugar.model";
 import { Representante } from '../../../../models/representante.model';
 import { Persona } from '../../../../models/persona.model';
 import { AreaEntrenamiento } from '../../../../models/area-entrenamiento.models';
+import { PlanService } from 'src/app/services/plan.service';
 
 @Component({
     selector: 'area-entrenamiento-form-plan',
@@ -35,6 +36,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @var oferta modelo que instancia los datos de oferta
      * @var destinatario objeto queinstancia los datos de un destinatario
      * @var idArea identificador de area de entrenamiento
+     * @var planLista listado de planes
      */
     public areaEntrenamientoForm: FormGroup;
     public destinatarioId:string;
@@ -51,6 +53,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
       conocimientos_basicos: "", profesion: "",
       persona: this.persona};
     private idArea = 0;
+    public planLista = [];
 
     /**
      * Constructor
@@ -74,7 +77,8 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
         private _destinatarioService: DestinatarioService,
         private _ofertaService: OfertaService,
         private _ambienteTrabajoService: AmbienteTrabajoService,
-        private _areaEntrenamientoService: AreaEntrenamientoService
+        private _areaEntrenamientoService: AreaEntrenamientoService,
+        private _planService: PlanService
     ) {
         this.areaEntrenamientoForm = _fb.group({
             id: null,
@@ -95,6 +99,8 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
             { label: 'Inicio', url: 'inicio', params: [] },
             { label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] },
             { label: 'Crear', url: 'area/crear-plan', params: [] }]);
+        // obtener lista
+        this.obtenerPlanes();
         // obtener parametros
         this.destinatarioId = this._route.snapshot.paramMap.get('destinatarioid');
         this.ofertaId = this._route.snapshot.paramMap.get('ofertaid');
@@ -139,7 +145,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @function destinatarioPorId pide los datos de un destinatario por su ID
      * @param id identificador del destinatario
      */
-    destinatarioPorId(id) {
+    private destinatarioPorId(id) {
       this._destinatarioService.destinatarioPorId(id).subscribe(
         datos => {
           this.destinatario = datos;
@@ -152,7 +158,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @function ofertaPorId pide los datos de una oferta por su ID
      * @param id identificador de una oferta
      */
-    ofertaPorId(id) {
+    private ofertaPorId(id) {
       this._ofertaService.getOfertaPorId(id).subscribe(
         datos => {
           this.ambienteTrabajoPorId(datos.ambiente_trabajoid);
@@ -161,6 +167,17 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
         });
+    }
+
+    private obtenerPlanes() {
+      this._planService.listar().subscribe(
+        datos => {
+          console.log(datos);
+          this.planLista = datos;
+        }, error => {
+
+        }
+      );
     }
 
     /**
