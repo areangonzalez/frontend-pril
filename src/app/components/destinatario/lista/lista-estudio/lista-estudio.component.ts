@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 @Component({
     selector: 'lista-estudio',
     templateUrl: './lista-estudio.html',
-    //styleUrls: ['./form-destinatario.css'],
+    styleUrls: ['./lista-estudio.css'],
 })
 @Injectable()
 export class ListaEstudioComponent implements OnInit {
@@ -16,7 +16,7 @@ export class ListaEstudioComponent implements OnInit {
      *           form: muestra todas las columnas para el formulario.
      */
     @Input("listaEstudios") public listaEstudios;
-    @Input("tipo") public tipo:any; 
+    @Input("tipo") public tipo:any;
 
     private respuestaMensaje: any;
 

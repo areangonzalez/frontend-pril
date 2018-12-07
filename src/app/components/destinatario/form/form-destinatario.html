@@ -1,9 +1,47 @@
 <form [formGroup]="destinatarioForm" >
+    <div class="d-flex justify-content-between">
+        <div class="col-5 pt-1">
+            <hr>
+        </div>
+        <div class="col-2 text center">
+          <h3 class="pl-2">
+            <small class="text-muted">Datos personales</small>
+          </h3>
+        </div>
+        <div class="col-5 pt-1">
+          <hr>
+        </div>
+    </div>
     <datos-persona-form [group]="destinatarioForm.controls.persona" [submitted]="submitted" [documento]="nroDoc" (setListaEstudios)="setListaEstudios($event)" [mostrarBtnBusqueda]="mostrarBoton" ></datos-persona-form>
-    <hr>
-    <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'agregar'" [texto]="'Agregar estudio'"></modal-estudio>
-    <lista-estudio *ngIf="(listaEstudios.length > 0)" [listaEstudios]="listaEstudios" [tipo]="1"></lista-estudio>
-    <hr>
+    <div class="d-flex justify-content-between">
+        <div class="col-5 pt-1">
+            <hr>
+          </div>
+      <div class="col-2 text-center">
+        <h3>
+          <small class="text-muted">Estudios</small>
+        </h3>
+      </div>
+      <div class="col-5 pt-1">
+        <hr>
+      </div>
+    </div>
+
+
+    <lista-estudio [listaEstudios]="listaEstudios" [tipo]="1"></lista-estudio>
+    <div class="d-flex justify-content-between">
+        <div class="col-5 pt-1">
+            <hr>
+        </div>
+      <div class="col-2">
+        <h3>
+          <small class="text-muted">Datos destinatario</small>
+        </h3>
+      </div>
+      <div class="col-5 pt-1">
+        <hr>
+      </div>
+    </div>
     <datos-destinatario-form [group]="destinatarioForm.controls.destinatario" [submitted]="submitted" [setProfesion]="profesionid" [setOficio]="oficioid" ></datos-destinatario-form>
     <hr>
     <div class="float-right">
