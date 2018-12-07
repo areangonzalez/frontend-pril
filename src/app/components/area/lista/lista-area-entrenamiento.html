@@ -5,7 +5,7 @@
                 <th scope="col">Fecha inicial</th>
                 <th scope="col">Fecha final</th>
                 <th scope="col">Tarea</th>
-                <th scope="col">Destinatario</th>
+                <th colspan="2" scope="col">Destinatario</th>
                 <th scope="col">Ambiente de trabajo</th>
                 <th scope="col">Plan</th>
                 <th scope="col">Estado</th>
@@ -19,11 +19,16 @@
         </tbody>
         <tbody *ngIf="(totalFiltrado > 0)">
             <tr *ngFor="let area of areas">
-                <th>{{area.fecha_inicial}}</th>
-                <td>{{area.fecha_final}}</td>
+                <th>{{area.fecha_inicial | date:'dd/MM/yyyy' }}</th>
+                <td>{{area.fecha_final | date:'dd/MM/yyyy'}}</td>
                 <td>{{area.tarea}}</td>
-                <td>{{area.destinatario}}</td>
-                <td>{{area.ambiente_trabajo}}</td>
+                <td>
+                    {{area.destinatario.nro_documento}}
+                </td>
+                <td>
+                    {{area.destinatario.apellido}}, {{area.destinatario.nombre}}
+                </td>
+                <td>{{area.ambiente_trabajo.nombre}}</td>
                 <td>{{area.plan}}</td>
                 <td>{{area.estado}}</td>
                 <td>

@@ -722,15 +722,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 id: newArea.id,
                 tarea: newArea.tarea,
                 planid: newArea.planid,
-                destinatarioid: newArea.destinatarioid,
+                destinatarioid: parseInt(newArea.destinatarioid),
                 fecha_inicial: (newArea.fecha_inicial != '') ? newArea.fecha_inicial + ' ' + hora_inicial : fecha_inicial,
                 fecha_final: plazo(),
                 descripcion_baja: newArea.descripcion_baja,
-                ofertaid: newArea.ofertaid,
+                ofertaid: parseInt(newArea.ofertaid),
                 jornada: newArea.jornada,
                 observacion: newArea.observacion,
-                plan: getNombreArray(newArea.plan)
-                ambiente_trabajo: newArea.ambiente_trabajo,
+                plan: getNombreArray(newArea.planid, planes),
+                ambiente_trabajo: "",
                 destinatario: newArea.destinatario
               });
               // datos a mostrar en la tabla
@@ -745,7 +745,45 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let totalF = areasLista.length;
-                return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, coleccion: areasLista  } }));
+                let areaColeccion: any[] = [];
+
+                if (areasLista.length > 0) {
+                  // recorro la lista de areas para armar el array de la coleccion
+                  for (let i = 0; i < areasLista.length; i++) {
+                    //areasLista[i];
+
+
+                    // selecciono la oferta que coincida con el area
+                    let matchedOferta = ofertasLista.filter(oferta => { return oferta.id === areasLista[i]['ofertaid']; });
+                    let ofertaElegida = matchedOferta.length ? matchedOferta[0] : [];
+                    // selecciono el ambiente de la oferta del area
+                    let matchedAmbiente = ambienteLista.filter(ambiente => { return ambiente.id === parseInt(ofertaElegida['ambiente_trabajoid']); });
+                    let ambienteElegido = matchedAmbiente.length ? matchedAmbiente[0] : [];
+                    // selecciono el destinatario que coincida con el area
+                    let matchedDestinatario = destinatarioLista.filter(destinatario => { return destinatario.id === areasLista[i]['destinatarioid']; });
+                    let destinatarioElegido = matchedDestinatario.length ? matchedDestinatario[0] : [];
+
+                    areaColeccion.push({
+                      fecha_inicial: areasLista[i]['fecha_inicial'],
+                      fecha_final: areasLista[i]['fecha_final'],
+                      tarea: areasLista[i]['tarea'],
+                      plan: areasLista[i]['plan'],
+                      estado: 'vigente',
+                      destinatario: {
+                        nro_documento: destinatarioElegido['persona']['nro_documento'],
+                        nombre: destinatarioElegido['persona']['nombre'],
+                        apellido: destinatarioElegido['persona']['apellido']
+                      },
+                      ambiente_trabajo: {
+                        nombre: (ofertaElegida['nombre_sucursal'] != '') ?  ambienteElegido['nombre'] + " (" + ofertaElegida['nombre_sucursal'] + ")" : ambienteElegido['nombre'] + "",
+                      }
+                    });
+
+                  }
+
+                }
+                console.log(areaColeccion);
+                return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, coleccion: areaColeccion  } }));
             } else {
                 // return 401 not authorised if token is null or invalid
                 return throwError({ error: { message: 'Unauthorised' } });
