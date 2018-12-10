@@ -1,6 +1,31 @@
 <form [formGroup]="ambienteForm">
+    <div class="d-flex justify-content-between">
+        <div class="col-4 pt-1">
+            <hr>
+        </div>
+        <div class="col-4">
+          <h3 class="text-center">
+            <small class="text-muted">Datos del ambiente de trabajo</small>
+          </h3>
+        </div>
+        <div class="col-4 pt-1">
+          <hr>
+        </div>
+    </div>
     <datos-ambiente-trabajo-form [group]="ambienteForm.controls.ambiente" [submitted]="submitted"></datos-ambiente-trabajo-form>
-    <hr>
+    <div class="d-flex justify-content-between">
+        <div class="col-4 pt-1">
+            <hr>
+        </div>
+        <div class="col-4">
+          <h3 class="text-center">
+            <small class="text-muted">Datos del representante</small>
+          </h3>
+        </div>
+        <div class="col-4 pt-1">
+          <hr>
+        </div>
+    </div>
     <datos-representante-form [group]="ambienteForm.controls.persona" [submitted]="submitted" [mostrarBtnBusqueda]="mostrarBtnBusqueda"></datos-representante-form>
 
     <hr>
