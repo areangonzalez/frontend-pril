@@ -68,6 +68,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     destinatarioElegido(destinatario){
       if (destinatario != null) {
         this.destinatarioId = destinatario.id;
+        this.ofertaId = 0;
         this._ofertaService.buscarOfertaPor(destinatario).subscribe(
           datos => {
             this.ofertas = datos['coleccion'];
