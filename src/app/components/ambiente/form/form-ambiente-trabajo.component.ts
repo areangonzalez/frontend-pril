@@ -70,7 +70,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                     localidadid: ['', Validators.required],
                     calle: ['', [Validators.required, Validators.minLength(3)]],
                     altura: ['', Validators.required],
-                    barrio: ['', [Validators.required, Validators.minLength(3)]],
+                    barrio: '',
                     piso: '',
                     depto: '',
                     escalera: ''

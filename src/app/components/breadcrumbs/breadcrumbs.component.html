@@ -1,4 +1,4 @@
-    <ol class="breadcrumb" style="margin-top:0.2rem;margin-bottom: 0;" *ngIf="estoyLogueado()">
+    <ol class="breadcrumb" style="margin-top:0.4rem;margin-bottom: 0;" *ngIf="estoyLogueado()">
       <li *ngFor="let breadcrumb of breadcrumbs; let last = last" class="breadcrumb-item" [ngClass]="{ 'list': true, 'active': last }">
         <a *ngIf="!last" [routerLink]="hasParams(breadcrumb)">
                             {{breadcrumb.label}}

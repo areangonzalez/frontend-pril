@@ -1,12 +1,15 @@
 /* @import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'; */
 @import './assets/css/bootstrap.min.css';
 /* You can add global styles to this file, and also import other style files */
+body {
+  overflow: hidden;
+}
 .app-container {
   position: absolute;
   width: 100%;
   overflow-y: auto;
-  top:70px;
-  height: 89%;
+  top:66px;
+  height: 90%;
 }
 .container-fluid {
   margin-bottom: 50px;

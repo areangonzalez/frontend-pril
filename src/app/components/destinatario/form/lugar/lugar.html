@@ -24,11 +24,8 @@
         </div>
     </div>
     <div class="form-group col-md-3">
-        <label for="barrio" class="prioridad">Barrio (<span>*</span>):</label>
-        <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio" [ngClass]="{'is-invalid': (lugar.barrio.invalid && submitted)}">
-        <div *ngIf="(lugar.barrio.invalid && submitted)" class="text-danger">
-            <div *ngIf="lugar.barrio.errors.required">Este campo es requerido. </div>
-        </div>
+        <label for="barrio" class="prioridad">Barrio:</label>
+        <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio">
     </div>
     <div class="form-group col-md-3">
         <label for="escalera">Escalera/Modulo:</label>
