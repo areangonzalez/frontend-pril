@@ -123,14 +123,14 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @function cancelar cancela el formulario y vuelve a la vista del listado.
      */
     cancelar() {
-        this._router.navigate(['area']);
+        this._router.navigate(['area-entrenamiento']);
     }
 
     /**
      * @function volver cancela el formulario y vuelve a la vista de seleccion de oferta y destinatario.
      */
     volver() {
-        this._router.navigate(['area', 'crear-seleccion']);
+        this._router.navigate(['area-entrenamiento', 'crear-seleccion']);
     }
 
     /**

@@ -18,6 +18,8 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     public destinatarios: any[];
     public destinatarioId:number = 0;
     public ofertaId:number = 0;
+    public totalOfertas: number = 0;
+    public totalDestinatarios: number = 0;
 
     constructor(
         private breadcrumbsService: BreadcrumbsService,
@@ -37,6 +39,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       this._ofertaService.listarOfertas('').subscribe(
         datos => {
           this.ofertas = datos['coleccion'];
+          this.totalOfertas = datos['total_filtrado'];
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
         });
@@ -46,6 +49,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
         this._destinatarioService.listarDestinatario().subscribe(
           datos => {
             this.destinatarios = datos['coleccion'];
+            this.totalDestinatarios = datos['total_filtrado'];
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
         });
@@ -67,6 +71,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
         this._ofertaService.buscarOfertaPor(destinatario).subscribe(
           datos => {
             this.ofertas = datos['coleccion'];
+            this.totalOfertas = datos['total_filtrado'];
           }, error => {
             this._mensajesService.cancelado(error, [{name:''}]);
           });

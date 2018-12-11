@@ -540,12 +540,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         seleccion = matchedAmbiente.length ? matchedAmbiente : seleccion;
                       }
                       if (seleccion.length > 0) {
-                        return of(new HttpResponse({ status: 200, body: { coleccion: seleccion } }));
+                        return of(new HttpResponse({ status: 200, body: { coleccion: seleccion, total_filtrado: seleccion.length } }));
                       }else{
-                        return of(new HttpResponse({ status: 200, body: { coleccion: ofertasLista } }));
+                        return of(new HttpResponse({ status: 200, body: { coleccion: ofertasLista, total_filtrado: ofertasLista.length } }));
                       }
                     }else{
-                      return of(new HttpResponse({ status: 200, body: { coleccion: ofertasLista } }));
+                      return of(new HttpResponse({ status: 200, body: { coleccion: ofertasLista, total_filtrado: ofertasLista.length } }));
                     }
 
 

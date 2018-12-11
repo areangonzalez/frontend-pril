@@ -1,51 +1,52 @@
-<div class="col-md-12">
-    <form>
-        <div class="row">
-            <div class="form-group col-md-3">
-              <div class="input-group">
-                <input class="form-control" placeholder="fecha de inicio: dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
-                    <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
-                  </button>
-                </div>
-              </div>
-            </div>
-              <div class="col-md-9">
+<div class="table-responsive">
+    <div class="col-md-12">
+      <form>
+          <div class="row">
+              <div class="form-group col-md-3">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Buscar: ambiente de trabajo, puesto, días y horarios" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                  <input class="form-control" placeholder="fecha de inicio: dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">
-                      <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
-                    </button>
-                    <button class="btn btn-outline-danger" type="button" (click)="limpiar()">
-                      <span class="oi oi-trash" title="Limpiar campos" aria-hidden="true"></span>
+                    <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
+                      <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
                     </button>
                   </div>
                 </div>
               </div>
-        </div>
-    </form>
-</div>
-<div class="col-md-12">
-    <table class="table table-hover table-sm">
+                <div class="col-md-9">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar: ambiente de trabajo, puesto, días y horarios" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button">
+                        <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
+                      </button>
+                      <button class="btn btn-outline-danger" type="button" (click)="limpiar()">
+                        <span class="oi oi-trash" title="Limpiar campos" aria-hidden="true"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+          </div>
+      </form>
+      <table class="table table-bordered table-hover table-sm">
         <thead>
-            <tr>
-                <th scope="col">Fecha de inicio</th>
-                <th scope="col">Ambiente trabajo</th>
+          <tr>
+            <th scope="col">Fecha de inicio</th>
+            <th scope="col">Ambiente trabajo</th>
                 <th scope="col">Puesto</th>
-                <th scope="col" width="70">Sel</th>
-            </tr>
+                <th scope="col" width="70">Selección</th>
+              </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let oferta of ofertas" [ngClass]="{'table-success': (selId == oferta.id)}" (click)="seleccionarOferta(oferta.id)">
-                <td>{{oferta.fecha_inicial | date:'dd/MM/yyyy' }}</td>
-                <td>{{oferta.nombre_sucursal}}</td>
-                <td>{{oferta.puesto}}</td>
-                <td class="text-center">
-                  <i *ngIf="(selId == oferta.id)" class="fas fa-check" title="seleccionar"></i>
+          <tr *ngFor="let oferta of ofertas" [ngClass]="{'table-success': (selId == oferta.id)}" (click)="seleccionarOferta(oferta.id)">
+            <td>{{oferta.fecha_inicial | date:'dd/MM/yyyy' }}</td>
+            <td>{{oferta.nombre_sucursal}}</td>
+            <td>{{oferta.puesto}}</td>
+            <td class="text-center" width="70">
+              <i *ngIf="(selId == oferta.id)" class="fas fa-check" title="seleccionar"></i>
               </td>
             </tr>
-        </tbody>
-    </table>
+          </tbody>
+        </table>
+    </div>
+    <ngb-pagination style="margin-top: -10px;" class="d-flex justify-content-center" [collectionSize]="totalFiltrado" [(page)]="pagina" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
 </div>

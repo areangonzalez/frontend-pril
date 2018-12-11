@@ -5,8 +5,7 @@
     </div>
     <div class="col-4 pt-1"><hr></div>
 </div>
-<area-entrenamiento-lista-destinatario [destinatarios]="destinatarios" (destinatarioElegido)="destinatarioElegido($event)"></area-entrenamiento-lista-destinatario>
-
+<area-entrenamiento-lista-destinatario [destinatarios]="destinatarios" [totalFiltrado]="totalDestinatarios" (destinatarioElegido)="destinatarioElegido($event)"></area-entrenamiento-lista-destinatario>
 <div class="d-flex justify-content-between">
     <div class="col-4 pt-1"><hr></div>
     <div class="col-4">
@@ -14,7 +13,7 @@
     </div>
     <div class="col-4 pt-1"><hr></div>
 </div>
-<area-entrenamiento-lista-oferta [ofertas]="ofertas" (ofertaElegida)="ofertaElegida($event)"></area-entrenamiento-lista-oferta>
+<area-entrenamiento-lista-oferta [ofertas]="ofertas" [totalFiltrado]="totalOfertas" (ofertaElegida)="ofertaElegida($event)"></area-entrenamiento-lista-oferta>
 
 <div class="float-right">
     <button class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
