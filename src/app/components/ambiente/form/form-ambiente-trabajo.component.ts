@@ -55,7 +55,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 telefono: '',
                 celular: '',
                 fax: '',
-                email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]]
+                email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]]
             }),
             ambiente: _fb.group({
                 id: 0,

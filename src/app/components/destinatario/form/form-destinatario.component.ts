@@ -74,7 +74,7 @@ export class FormDestinatarioComponent implements OnInit {
                 estado_civilid: ['', Validators.required],
                 telefono: '',
                 celular: '',
-                email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+                email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
                 lugar: _fb.group({
                     id: 0,
                     localidadid: ['', Validators.required],

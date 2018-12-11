@@ -104,10 +104,9 @@
             <input type="text" id="celular" placeholder="Ej.: (2920) 43 2423" class="form-control" formControlName="celular">
         </div>
         <div class="form-group col-md-4">
-            <label for="email" class="prioridad">Email (<span>*</span>):</label>
+            <label for="email" class="prioridad">Email:</label>
             <input type="email" id="email" placeholder="Ej.: nombre@mail.com.ar" class="form-control" formControlName="email" [ngClass]="{'is-invalid': (persona.email.invalid && submitted)}">
             <div *ngIf="(persona.email.invalid && submitted)" class="text-danger">
-                <div *ngIf="persona.email.errors.required">Este campo es requerido. </div>
                 <div *ngIf="persona.email.errors.pattern">El email es invalido.</div>
             </div>
         </div>
