@@ -11,15 +11,10 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 })
 export class AutoCompletarComponent {
     @Input("listado") listado;
-    @Input("submitted") submitted: boolean;
-    @Input("mensaje") mensaje: string;
     @Input("titulo") titulo:string;
     @Input("placeHolder") placeHolder:string;
     @Input("nombreValor") model:string;
     @Output("seleccionaValor") seleccionaValor = new EventEmitter();
-    //public model: string = (this.nombreValor != '')?this.nombreValor:'';
-    public validacion:boolean = true;
-    //public mensaje:string;
 
     @ViewChild('instance') instance: NgbTypeahead;
     focus$ = new Subject<string>();
@@ -54,15 +49,10 @@ export class AutoCompletarComponent {
         }
         // Reviso si hubo una selección
         if (seleccion != undefined) {
-            this.validacion = false;
-            this.submitted = false;
             this.seleccionaValor.emit(seleccion);
         }else{// sino hubo seleccion mando un mensaje de error
-            this.validacion = true;
-            this.submitted = false;
             this.seleccionaValor.emit({id:'',nombre:''});
-            this.mensaje = "Por favor seleccione un valor del listado.";
-        } 
+        }
 
 
     }

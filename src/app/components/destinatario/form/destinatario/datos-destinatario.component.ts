@@ -6,6 +6,7 @@ import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 
 import { ProfesionService } from '../../../../services/profesion.service';
 import { OficioService } from "../../../../services/oficio.service";
+import { MensajesService } from 'src/app/services/mensajes.service';
 
 @Component({
     selector: 'datos-destinatario-form',
@@ -26,7 +27,8 @@ export class DatosDestinatarioComponent implements OnInit {
         private _validarNumero: ValidarNumero,
         private _formatFecha: FormatObjetoAFecha,
         private _profesionService: ProfesionService,
-        private _oficioService: OficioService
+        private _oficioService: OficioService,
+        private _mensajeService: MensajesService
     ){
     }
 
@@ -34,7 +36,7 @@ export class DatosDestinatarioComponent implements OnInit {
          this.profesiones();
          this.oficios();
     }
-    
+
     get destinatarioForm() { return this.destinatario.controls; }
 
     formatFechapresentacion(obj: any) {
@@ -53,10 +55,10 @@ export class DatosDestinatarioComponent implements OnInit {
                return this.listaProfesiones = data;
             },
             error => {
-                console.log(<any>error);
+              this._mensajeService.cancelado(error, [{name:''}]);
             }
         );
-    } 
+    }
 
     oficios() {
         this._oficioService.listarOficios().subscribe(
@@ -64,7 +66,7 @@ export class DatosDestinatarioComponent implements OnInit {
                 return this.listaOficios = data;
             },
             error => {
-                console.log(<any>error);
+              this._mensajeService.cancelado(error, [{name:''}]);
             }
         );
     }

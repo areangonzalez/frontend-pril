@@ -20,11 +20,11 @@
             <input type="text" id="deseo_lugar_entrenamiento" placeholder="Lugar donde se desea el entrenamiento" class="form-control" formControlName="deseo_lugar_entrenamiento">
         </div>
         <div class="form-group col-md-4">
-            <auto-completar [listado]="listaProfesiones" [submitted]="submitted" [mensaje]="'Este campo es requerido.'" [titulo]="'Profesión'"
+            <auto-completar [listado]="listaProfesiones" [titulo]="'Profesión'"
                             [placeHolder]="'Seleccione una profesión'" [nombreValor]="getNombreListadoPorId(setProfesionid, listaProfesiones)" (seleccionaValor)="getProfesion($event)" ></auto-completar>
         </div>
         <div class="form-group col-md-4">
-            <auto-completar [listado]="listaOficios" [submitted]="submitted" [mensaje]="'Este campo es requerido.'" [titulo]="'Oficio'"
+            <auto-completar [listado]="listaOficios" [titulo]="'Oficio'"
                             [placeHolder]="'Seleccione un oficio'" [nombreValor]="getNombreListadoPorId(setOficioid, listaOficios)" (seleccionaValor)="getOficio($event)"></auto-completar>
         </div>
         <div class="form-group form-check col-md-4">

@@ -172,13 +172,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         anio: newDestinatario.persona.estudios[i].anio
                     }
                 }
+                // profesion y oficio
+                let profesionID = (newDestinatario.destinatario.profesionid) ? newDestinatario.destinatario.profesionid : '' ;
+                let profesionNombre = (newDestinatario.destinatario.profesionid) ? getNombreArray(newDestinatario.destinatario.profesionid, profesion) : '' ;
+                let oficioID = (newDestinatario.destinatario.oficioid) ? newDestinatario.destinatario.oficioid : '' ;
+                let oficioNombre = (newDestinatario.destinatario.oficioid) ? getNombreArray(newDestinatario.destinatario.oficioid, oficio) : '' ;
+
                 destinatarioLista.push({
                     id: newDestinatario.destinatario.id,
-                    oficioid: newDestinatario.destinatario.oficioid,
-                    oficio: getNombreArray(newDestinatario.destinatario.oficioid, oficio),
                     legajo: newDestinatario.destinatario.legajo,
                     calificacion: 1,
-                    profesionid: newDestinatario.destinatario.profesionid,
                     fecha_ingreso: hoy(),
                     origen: newDestinatario.destinatario.origen,
                     observacion: newDestinatario.destinatario.observacion,
@@ -191,7 +194,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     banco_alias: newDestinatario.destinatario.banco_alias,
                     experiencia_laboral: (newDestinatario.destinatario.experiencia_laboral == true)?1:0,
                     conocimientos_basicos: newDestinatario.destinatario.conocimientos_basicos,
-                    profesion: getNombreArray(newDestinatario.destinatario.profesionid, profesion),
+                    oficioid: oficioID,
+                    oficio: oficioNombre,
+                    profesionid: profesionID,
+                    profesion: profesionNombre,
                     persona: {
                         id: newDestinatario.persona.id,
                         nombre: newDestinatario.persona.nombre,
@@ -273,16 +279,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
 
                 }
+                // profesion y oficio
+                let profesionID = (editDestinatario.destinatario.profesionid) ? editDestinatario.destinatario.profesionid : '' ;
+                let profesionNombre = (editDestinatario.destinatario.profesionid) ? getNombreArray(editDestinatario.destinatario.profesionid, profesion) : '' ;
+                let oficioID = (editDestinatario.destinatario.oficioid) ? editDestinatario.destinatario.oficioid : '' ;
+                let oficioNombre = (editDestinatario.destinatario.oficioid) ? getNombreArray(editDestinatario.destinatario.oficioid, oficio) : '' ;
 
                 for (var i = 0; i < destinatarioLista.length; i++) {
                     if(destinatarioLista[i]['id'] == id){
                             destinatarioLista[i] = {
                                 id: editDestinatario.destinatario.id,
-                                oficioid: editDestinatario.destinatario.oficioid,
-                                oficio: getNombreArray(editDestinatario.destinatario.oficioid, oficio),
+                                oficioid: oficioID,
+                                oficio: oficioNombre,
                                 legajo: editDestinatario.destinatario.legajo,
                                 calificacion: 1,
-                                profesionid: editDestinatario.destinatario.profesionid,
+                                profesionid: profesionID,
                                 fecha_ingreso: hoy(),
                                 origen: editDestinatario.destinatario.origen,
                                 observacion: editDestinatario.destinatario.observacion,
@@ -295,7 +306,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                                 banco_alias: editDestinatario.destinatario.banco_alias,
                                 experiencia_laboral: (editDestinatario.destinatario.experiencia_laboral == true) ? 1 : 0,
                                 conocimientos_basicos: editDestinatario.destinatario.conocimientos_basicos,
-                                profesion: getNombreArray(editDestinatario.destinatario.profesionid, profesion),
+                                profesion: profesionNombre,
                                 persona: {
                                     id: editDestinatario.persona.id,
                                     nombre: editDestinatario.persona.nombre,
