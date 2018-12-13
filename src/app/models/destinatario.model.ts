@@ -1,3 +1,6 @@
+import { Persona } from "./persona.model";
+import { Lugar } from "./lugar.model";
+
 export interface IDestinatario {
     origen: string,
     fechaPresentacion: object,
@@ -11,11 +14,12 @@ export interface IDestinatario {
     banco_nombre: string,
     banco_cbu: string,
     banco_alias: string,
-    legajo: string
+    legajo: string,
+    persona: Persona
 }
 
 export class Destinatario implements IDestinatario {
-
+  public lugar: Lugar;
     constructor(
         public origen: string,
         public fechaPresentacion: object,
@@ -29,11 +33,14 @@ export class Destinatario implements IDestinatario {
         public banco_nombre: string,
         public banco_cbu: string,
         public banco_alias: string,
-        public legajo: string
+        public legajo: string,
+        public persona: Persona
     ){}
 
     deserialize(input: any) {
         Object.assign(this, input);
+        this.lugar = new Lugar(0,0,'','','','','','','').deserialize(input.lugar);
+        this.persona = new Persona(0,'','','','','',0,0,0,'','','',this.lugar, []).deserialize(input.persona);
         return this;
     }
 

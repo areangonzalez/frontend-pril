@@ -7,7 +7,6 @@ import { switchMap } from 'rxjs/operators';
 import { MensajesService } from "../../../services/mensajes.service";
 // models
 import { Lugar } from "./../../../models/lugar.model";
-import { Estudio } from "../../../models/estudio.model";
 import { Persona } from "../../../models/persona.model";
 import { Destinatario } from "../../../models/destinatario.model";
 //modal
@@ -129,7 +128,7 @@ export class FormDestinatarioComponent implements OnInit {
      * @function onSubmit funcion que llama al preparado del guardado de un destinatario
      */
     onSubmit() {
-        const params = { persona: this.prepararPersona(), destinatario: this.prepararDestinatario() };
+        const params = { destinatario: this.prepararDestinatario() };
         this.submitted = true;
         if (this.destinatarioForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.', [{ name: '' }]);
@@ -195,7 +194,7 @@ export class FormDestinatarioComponent implements OnInit {
      * @function prepararDestinatario preparado de parametros para el objeto de destinatario
      */
     private prepararDestinatario() {
-        return new Destinatario('',{},'','','',0,0,false,'','','','','').deserialize(this.destinatarioForm.value.destinatario);
+        return new Destinatario('',{},'','','',0,0,false,'','','','','', this.prepararPersona()).deserialize(this.destinatarioForm.value.destinatario);
     }
     /**
      * @function prepararPersona preparado de parametros para el objeto de Persona
