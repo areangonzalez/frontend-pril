@@ -194,7 +194,7 @@ export class FormDestinatarioComponent implements OnInit {
      * @function prepararDestinatario preparado de parametros para el objeto de destinatario
      */
     private prepararDestinatario() {
-        return new Destinatario('',{},'','','',0,0,false,'','','','','', this.prepararPersona()).deserialize(this.destinatarioForm.value.destinatario);
+        return new Destinatario('',{},'','','',0,0,false,'','','','','',this.prepararPersona()).deserialize(this.destinatarioForm.value.destinatario);
     }
     /**
      * @function prepararPersona preparado de parametros para el objeto de Persona

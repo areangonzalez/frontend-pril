@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BreadcrumbsService } from "./../../breadcrumbs/breadcrumbs.service";
+import { AreaEntrenamientoService } from 'src/app/services/area-entrenamiento.service';
+import { MensajesService } from 'src/app/services/mensajes.service';
+import { Persona } from 'src/app/models/persona.model';
+import { Lugar } from 'src/app/models/lugar.model';
+import { Representante } from 'src/app/models/representante.model';
+import { AmbienteTrabajo } from 'src/app/models/ambiente-trabajo.model';
+import { Destinatario } from 'src/app/models/destinatario.model';
 
 @Component({
     selector: 'area-entrenamiento-vista',
@@ -8,9 +15,22 @@ import { BreadcrumbsService } from "./../../breadcrumbs/breadcrumbs.service";
     styleUrls: ['./vista-area-entrenamiento.css']
 })
 export class VistaAreaEntrenamientoComponent implements OnInit {
-    page = 1;
 
-    constructor(private breadcrumbsService: BreadcrumbsService, private _router: Router) {
+    public areaId:any;
+    public lugar = new Lugar(0,0,'','','','','','','');
+    public persona = new Persona(0,'','','','','',0,0,0,'','','',this.lugar,[]);
+    public representante = new Representante(0,'','','','','','','');
+    public ambienteTrabajo = new AmbienteTrabajo(0,'','','','','',0,this.lugar,this.representante,'');
+    public destinatario = new Destinatario('',{},'','','',0,0,false,'','','','','', this.persona);
+    public area:object = {};
+
+    constructor(
+      private breadcrumbsService: BreadcrumbsService,
+      private _router: Router,
+      private _route: ActivatedRoute,
+      private _areaEntrenamientoService: AreaEntrenamientoService,
+      private _mensajesService: MensajesService
+      ) {
     }
 
     ngOnInit() {
@@ -18,6 +38,14 @@ export class VistaAreaEntrenamientoComponent implements OnInit {
             { label: 'Inicio', url: 'inicio', params: [] },
             { label: 'Área de entrenamiento', url: 'area', params: [] },
             { label: 'Vista', url: 'area/vista', params: [] }]);
+        // obtener parametro
+        this.areaId = this._route.snapshot.paramMap.get('id');
+
+        if (this.areaId != undefined) {
+          this.areaEntrenamientoPorId(this.areaId);
+        }else{
+          this._router.navigate(['/']);
+        }
     }
 
     public areas = [
@@ -30,5 +58,14 @@ export class VistaAreaEntrenamientoComponent implements OnInit {
 
     volver() {
         this._router.navigate(['area']);
+    }
+
+    private areaEntrenamientoPorId(id) {
+      this._areaEntrenamientoService.buscarPorId(id).subscribe(
+        datos => {
+          this.area = datos;
+        }, error => {
+          this._mensajesService.cancelado(error, [{name:''}]);
+        })
     }
 }
