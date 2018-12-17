@@ -268,14 +268,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // consigo el destinatario a editar en la respuesta
                 let editDestinatario = request.body;
                 // creo los estudios
-                for (var i = 0; i < editDestinatario.persona.estudios.length; i++) {
+                for (var i = 0; i < editDestinatario.destinatario.persona.estudios.length; i++) {
                     estudios[i] = {
-                        nivel_educativoid: editDestinatario.persona.estudios[i].nivel_educativoid,
-                        nivel_educativo: getNombreArray(editDestinatario.persona.estudios[i].nivel_educativoid, nivelEducativo),
-                        titulo: editDestinatario.persona.estudios[i].titulo,
-                        completo: (editDestinatario.persona.estudios[i].completo == true) ? 1 : 0,
-                        en_curso: (editDestinatario.persona.estudios[i].en_curso == true) ? 1 : 0,
-                        anio: editDestinatario.persona.estudios[i].anio
+                        nivel_educativoid: editDestinatario.destinatario.persona.estudios[i].nivel_educativoid,
+                        nivel_educativo: getNombreArray(editDestinatario.destinatario.persona.estudios[i].nivel_educativoid, nivelEducativo),
+                        titulo: editDestinatario.destinatario.persona.estudios[i].titulo,
+                        completo: (editDestinatario.destinatario.persona.estudios[i].completo == true) ? 1 : 0,
+                        en_curso: (editDestinatario.destinatario.persona.estudios[i].en_curso == true) ? 1 : 0,
+                        anio: editDestinatario.destinatario.persona.estudios[i].anio
                     }
 
                 }
@@ -300,7 +300,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                                 deseo_lugar_entrenamiento: editDestinatario.destinatario.deseo_lugar_entrenamiento,
                                 deseo_actividad: editDestinatario.destinatario.deseo_actividad,
                                 fecha_presentacion: editDestinatario.destinatario.fecha_presentacion,
-                                personaid: editDestinatario.persona.id,
+                                personaid: editDestinatario.destinatario.persona.id,
                                 banco_cbu: editDestinatario.destinatario.banco_cbu,
                                 banco_nombre: editDestinatario.destinatario.banco_nombre,
                                 banco_alias: editDestinatario.destinatario.banco_alias,
@@ -308,39 +308,39 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                                 conocimientos_basicos: editDestinatario.destinatario.conocimientos_basicos,
                                 profesion: profesionNombre,
                                 persona: {
-                                    id: editDestinatario.persona.id,
-                                    nombre: editDestinatario.persona.nombre,
-                                    apellido: editDestinatario.persona.apellido,
+                                    id: editDestinatario.destinatario.persona.id,
+                                    nombre: editDestinatario.destinatario.persona.nombre,
+                                    apellido: editDestinatario.destinatario.persona.apellido,
                                     apodo: null,
-                                    nro_documento: editDestinatario.persona.nro_documento,
-                                    cuil: editDestinatario.persona.cuil,
-                                    telefono: editDestinatario.persona.telefono,
-                                    celular: editDestinatario.persona.celular,
-                                    email: editDestinatario.persona.email,
-                                    fecha_nacimiento: editDestinatario.persona.fecha_nacimiento,
-                                    estado_civilid: editDestinatario.persona.estado_civilid,
-                                    sexoid: editDestinatario.persona.sexoid,
+                                    nro_documento: editDestinatario.destinatario.persona.nro_documento,
+                                    cuil: editDestinatario.destinatario.persona.cuil,
+                                    telefono: editDestinatario.destinatario.persona.telefono,
+                                    celular: editDestinatario.destinatario.persona.celular,
+                                    email: editDestinatario.destinatario.persona.email,
+                                    fecha_nacimiento: editDestinatario.destinatario.persona.fecha_nacimiento,
+                                    estado_civilid: editDestinatario.destinatario.persona.estado_civilid,
+                                    sexoid: editDestinatario.destinatario.persona.sexoid,
                                     tipo_documentoid: null,
                                     nucleoid: null,
                                     situacion_laboralid: null,
-                                    generoid: editDestinatario.persona.generoid,
+                                    generoid: editDestinatario.destinatario.persona.generoid,
                                     estudios: estudios,
-                                    sexo: getNombreArray(editDestinatario.persona.sexoid, sexo),
-                                    genero: getNombreArray(editDestinatario.persona.generoid, genero),
-                                    estado_civil: getNombreArray(editDestinatario.persona.estado_civilid, estadoCivil),
+                                    sexo: getNombreArray(editDestinatario.destinatario.persona.sexoid, sexo),
+                                    genero: getNombreArray(editDestinatario.destinatario.persona.generoid, genero),
+                                    estado_civil: getNombreArray(editDestinatario.destinatario.persona.estado_civilid, estadoCivil),
                                     lugar: {
-                                        id: editDestinatario.persona.lugar.id,
+                                        id: editDestinatario.destinatario.persona.lugar.id,
                                         nombre: null,
-                                        calle: editDestinatario.persona.lugar.calle,
-                                        altura: editDestinatario.persona.lugar.altura,
-                                        localidadid: editDestinatario.persona.lugar.localidadid,
+                                        calle: editDestinatario.destinatario.persona.lugar.calle,
+                                        altura: editDestinatario.destinatario.persona.lugar.altura,
+                                        localidadid: editDestinatario.destinatario.persona.lugar.localidadid,
                                         latitud: null,
                                         longitud: null,
-                                        barrio: editDestinatario.persona.lugar.barrio,
-                                        piso: editDestinatario.persona.lugar.piso,
-                                        depto: editDestinatario.persona.lugar.depto,
-                                        escalera: editDestinatario.persona.lugar.escalera,
-                                        localidad: getNombreArray(editDestinatario.persona.lugar.localidadid, localidad)
+                                        barrio: editDestinatario.destinatario.persona.lugar.barrio,
+                                        piso: editDestinatario.destinatario.persona.lugar.piso,
+                                        depto: editDestinatario.destinatario.persona.lugar.depto,
+                                        escalera: editDestinatario.destinatario.persona.lugar.escalera,
+                                        localidad: getNombreArray(editDestinatario.destinatario.persona.lugar.localidadid, localidad)
                                     }
                                 }
                             }
