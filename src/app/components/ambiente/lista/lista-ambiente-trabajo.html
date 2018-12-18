@@ -11,7 +11,12 @@
                 <th scope="col">Acción</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="(totalFiltrado == 0)">
+            <tr>
+                <td class="text-center" colspan="7" rowspan="1">No se han encontrado resultados que mostrar.</td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="(totalFiltrado > 0)" >
             <tr *ngFor="let ambiente of ambientes">
                 <th>{{ambiente.nombre}}</th>
                 <td>{{ambiente.cuit}}</td>

@@ -13,6 +13,7 @@ import { MensajesService } from "../../services/mensajes.service";
 export class AmbienteTrabajoComponent implements OnInit {
     public ambientes:any;
     public page = 1;
+    public totalFiltrado:number = 0;
 
     /**
      * Inicializacion de servicios utiles para el componente
@@ -38,7 +39,8 @@ export class AmbienteTrabajoComponent implements OnInit {
     private listaAmbientes() {
         this._ambienteTrabajoService.listarAmbienteTrabajo().subscribe(
             datos => {
-                this.ambientes = datos;
+                this.ambientes = datos['coleccion'];
+                this.totalFiltrado = datos['total_filtrado'];
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }

@@ -10,7 +10,8 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListaAmbienteTrabajoComponent {
     @Input('ambientes') ambientes: Object;
-    
+    @Input('totalFiltrado') public totalFiltrado:number;
+
     constructor(
         private _router: Router,
         config: NgbTooltipConfig
@@ -22,7 +23,7 @@ export class ListaAmbienteTrabajoComponent {
     verAmbienteTrabajo(id) {
         this._router.navigate(['ambiente', 'vista', id]);
     }
-    
+
     editarAmbienteTrabajo(id) {
         this._router.navigate(['ambiente/editar', id]);
     }
