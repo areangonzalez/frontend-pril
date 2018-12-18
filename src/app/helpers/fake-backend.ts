@@ -721,7 +721,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let newArea = request.body;
 
               // genero id de area de entrenamiento
-              newArea.id = generarId(areasLista);
+              let id = generarId(areasLista);
 
               // genero la fecha inicial
               let fecha = new Date();
@@ -729,7 +729,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let hora_inicial = fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
 
               areasLista.push({
-                id: newArea.id,
+                id: id,
                 tarea: newArea.tarea,
                 planid: newArea.planid,
                 destinatarioid: parseInt(newArea.destinatarioid),
@@ -774,6 +774,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let destinatarioElegido = matchedDestinatario.length ? matchedDestinatario[0] : [];
 
                     areaColeccion.push({
+                      id: areasLista[i]['id'],
                       fecha_inicial: areasLista[i]['fecha_inicial'],
                       fecha_final: areasLista[i]['fecha_final'],
                       tarea: areasLista[i]['tarea'],
@@ -792,7 +793,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   }
 
                 }
-                console.log(areaColeccion);
                 return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, coleccion: areaColeccion  } }));
             } else {
                 // return 401 not authorised if token is null or invalid
