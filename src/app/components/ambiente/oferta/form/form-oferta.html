@@ -1,28 +1,50 @@
 <fieldset [formGroup]="datosOferta">
     <div class="row">
-        <div class="form-group col-md-6">
-            <label for="nombre_sucursal" class="prioridad">Sucursal (<span>*</span>):</label>
-            <input type="text" id="nombre_sucursal" class="form-control" formControlName="nombre_sucursal" [ngClass]="{'is-invalid': (oferta.nombre_sucursal.invalid && submitted)}">
-            <div *ngIf="(oferta.nombre_sucursal.invalid && submitted)" class="text-danger">
-                <div *ngIf="oferta.nombre_sucursal.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.nombre_sucursal.errors.minlength">El texto es muy corto.</div>
-            </div>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="demanda_laboral">Demanda laboral (<span>*</span>):</label>
-            <textarea class="form-control" id="demanda_laboral" rows="2" formControlName="demanda_laboral"
-             [ngClass]="{'is-invalid': (oferta.demanda_laboral.invalid && submitted)}"></textarea>
-            <div *ngIf="(oferta.demanda_laboral.invalid && submitted)"
-                class="text-danger">
-                <div *ngIf="oferta.demanda_laboral.errors.required">Este campo es requerido.</div>
-                <div *ngIf="oferta.demanda_laboral.errors.minlength">Por favor, describa la demanda laboral.</div>
-            </div>
-        </div>
-        <div class="form-group col-md-6 align-no-input-validate">
-            <label for="objetivo">objetivo:</label>
-            <textarea class="form-control" id="objetivo" rows="2" formControlName="objetivo" ></textarea>
+        <div class="col-md-6">
+          <div class="form-group">
+              <label for="nombre_sucursal" class="prioridad">Sucursal (<span>*</span>):</label>
+              <input type="text" id="nombre_sucursal" class="form-control" formControlName="nombre_sucursal" [ngClass]="{'is-invalid': (oferta.nombre_sucursal.invalid && submitted)}">
+              <div *ngIf="(oferta.nombre_sucursal.invalid && submitted)" class="text-danger">
+                  <div *ngIf="oferta.nombre_sucursal.errors.required">Este campo es requerido.</div>
+                  <div *ngIf="oferta.nombre_sucursal.errors.minlength">El texto es muy corto.</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="area" class="prioridad">Área (<span>*</span>):</label>
+              <input type="text" id="area" class="form-control" formControlName="area"
+               [ngClass]="{'is-invalid': (oferta.area.invalid && submitted)}">
+              <div *ngIf="(oferta.area.invalid && submitted)" class="text-danger">
+                  <div *ngIf="oferta.area.errors.required">Este campo es requerido.</div>
+                  <div *ngIf="oferta.area.errors.minlength">El texto es muy corto.</div>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="puesto" class="prioridad">Puesto (<span>*</span>):</label>
+              <input type="text" id="puesto" class="form-control" formControlName="puesto"
+               [ngClass]="{'is-invalid': (oferta.puesto.invalid && submitted)}">
+              <div *ngIf="(oferta.puesto.invalid && submitted)" class="text-danger">
+                  <div *ngIf="oferta.puesto.errors.required">Este campo es requerido.</div>
+                  <div *ngIf="oferta.puesto.errors.minlength">El texto es muy corto.</div>
+              </div>
+          </div>
         </div>
         <div class="col-md-6">
+          <div class="form-group">
+              <label for="demanda_laboral">Demanda laboral (<span>*</span>):</label>
+              <textarea class="form-control" id="demanda_laboral" rows="2" formControlName="demanda_laboral"
+              [ngClass]="{'is-invalid': (oferta.demanda_laboral.invalid && submitted)}"></textarea>
+              <div *ngIf="(oferta.demanda_laboral.invalid && submitted)"
+                  class="text-danger">
+                  <div *ngIf="oferta.demanda_laboral.errors.required">Este campo es requerido.</div>
+                  <div *ngIf="oferta.demanda_laboral.errors.minlength">Por favor, describa la demanda laboral.</div>
+              </div>
+          </div>
+          <div class="form-group align-no-input-validate">
+              <label for="objetivo">objetivo:</label>
+              <textarea class="form-control" id="objetivo" rows="3" formControlName="objetivo" ></textarea>
+          </div>
+        </div>
+      <!-- <div class="col-md-6">
           <div class="row">
               <div class="form-group col-md-6">
                   <label for="area" class="prioridad">Área (<span>*</span>):</label>
@@ -43,7 +65,7 @@
                   </div>
               </div>
           </div>
-        </div>
+        </div> -->
     </div>
     <lugar-form [group]="oferta.lugar" [submitted]="submitted"></lugar-form>
 </fieldset>
