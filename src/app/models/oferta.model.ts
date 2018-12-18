@@ -8,7 +8,6 @@ export interface IOferta {
     area: string,
     demanda_laboral: string,
     objetivo: string,
-    tarea: string,
     lugar: Lugar,
     fecha_inicial?:string
 }
@@ -23,7 +22,6 @@ export class Oferta implements IOferta {
         public area: string,
         public demanda_laboral: string,
         public objetivo: string,
-        public tarea: string,
         public lugar: Lugar,
         public fecha_inicial: string
     ) { }

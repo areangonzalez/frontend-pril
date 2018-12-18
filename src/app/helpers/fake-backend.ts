@@ -586,7 +586,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     area: newOfertas.area,
                     demanda_laboral: newOfertas.demanda_laboral,
                     objetivo: newOfertas.objetivo,
-                    tarea: newOfertas.tarea,
                     fecha_inicial: newOfertas.fecha_inicial,
                     estado: 'Vacante',
                     lugar: {
@@ -677,7 +676,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                           area: editOferta.area,
                           demanda_laboral: editOferta.demanda_laboral,
                           objetivo: editOferta.objetivo,
-                          tarea: editOferta.tarea,
                           fecha_inicial: ofertasLista[i]['fecha_inicial'],
                           estado: ofertasLista[i]['estado'],
                           lugar: {

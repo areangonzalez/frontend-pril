@@ -1,7 +1,5 @@
-import { Component, Input, Injectable, Output, EventEmitter, OnInit } from '@angular/core';
-import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { MensajesService } from "../../../../services/mensajes.service";
-import { OfertaService } from "../../../../services/oferta.service";
+import { Component, Input, Injectable, OnInit } from '@angular/core';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'modal-content-oferta',

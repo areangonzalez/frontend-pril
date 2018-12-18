@@ -214,8 +214,13 @@
                         <div class="col-md-6">
                             <div class="col-md-12">
                                 <dl class="row">
-                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Tarea:</dt>
-                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">{{oferta.tarea}}</dd>
+                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Dirección:</dt>
+                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        {{oferta.lugar.localidad}} - {{oferta.lugar.barrio}} - {{oferta.lugar.calle}} {{oferta.lugar.altura}}
+                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.escalera}}</span>
+                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.piso}}</span>
+                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.depto}}</span>
+                                    </dd>
                                 </dl>
                             </div>
                         </div>
@@ -224,19 +229,6 @@
                                 <dl class="row">
                                     <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Objetivo:</dt>
                                     <dd class="col-12 col-sm-12 col-md-12 col-lg-12">{{oferta.objetivo}}</dd>
-                                </dl>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="col-md-12">
-                                <dl class="row">
-                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Dirección:</dt>
-                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                        {{oferta.lugar.localidad}} - {{oferta.lugar.barrio}} - {{oferta.lugar.calle}} {{oferta.lugar.altura}}
-                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.escalera}}</span>
-                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.piso}}</span>
-                                        <span *ngIf="(oferta.lugar.escalera != '')"> - {{oferta.lugar.depto}}</span>
-                                    </dd>
                                 </dl>
                             </div>
                         </div>
