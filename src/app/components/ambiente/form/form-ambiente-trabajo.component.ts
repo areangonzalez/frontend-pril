@@ -54,10 +54,9 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 nombre: ['', [Validators.required, Validators.minLength(3)]],
                 telefono: '',
                 celular: '',
-                fax: '',
                 email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]]
-            }),
-            ambiente: _fb.group({
+              }),
+              ambiente: _fb.group({
                 id: 0,
                 nombre: ['', [Validators.required, Validators.minLength(3)]],
                 legajo: ['', Validators.required],
@@ -65,6 +64,11 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 cuit: ['', [Validators.required, Validators.minLength(3)]],
                 actividad: ['', [Validators.required, Validators.minLength(5)]],
                 tipo_ambiente_trabajoid: ['', Validators.required],
+                telefono1: '',
+                telefono2: '',
+                telefono3: '',
+                fax: '',
+                email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
                 lugar: _fb.group({
                     id: 0,
                     localidadid: ['', Validators.required],
@@ -126,12 +130,12 @@ export class FormAmbienteTrabajoComponent implements OnInit {
 
     private prepararAmbienteTrabajo() {
         let lugar = new Lugar(0, 0, '', '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona.lugar);
-        let persona = new Representante(0, '', '', '', '', '', '', '');
-        return new AmbienteTrabajo(0, '', '', '', '', '', 0, lugar, persona, '').deserialize(this.ambienteForm.value.ambiente);
+        let persona = new Representante(0, '', '', '', '', '', '');
+        return new AmbienteTrabajo(0, '', '', '', '', '', 0, lugar, persona, '', '', '', '', '','').deserialize(this.ambienteForm.value.ambiente);
     }
 
     private prepararPersona() {
-        return new Representante(0, '', '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona)
+        return new Representante(0, '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona)
     }
 
     private ambientePorId(id) {

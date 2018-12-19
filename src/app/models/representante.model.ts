@@ -5,7 +5,6 @@ export interface IRepresentante {
     nombre: string,
     telefono: string,
     celular: string,
-    fax: string,
     email: string
 }
 
@@ -18,7 +17,6 @@ export class Representante {
         public nombre: string,
         public telefono: string,
         public celular: string,
-        public fax: string,
         public email: string,
     ){}
 

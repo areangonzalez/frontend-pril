@@ -55,19 +55,44 @@
             <label for="observacion">Observación:</label>
             <textarea class="form-control" id="observacion" rows="2" formControlName="observacion" placeholder="Observación o detalle del ambiente de trabajo..."></textarea>
         </div>
+        <div class="form-group col-md-4">
+            <label for="telefono1" class="prioridad">Telefono:</label>
+            <input type="text" id="telefono1" class="form-control" formControlName="telefono1"
+             placeholder="Ej.: (2920) 412356">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="telefono2" class="prioridad">Telefono 2:</label>
+            <input type="text" id="telefono2" class="form-control" formControlName="telefono2"
+             placeholder="Ej.: (2920) 412356">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="telefono3" class="prioridad">Telefono 3:</label>
+            <input type="text" id="telefono3" class="form-control" formControlName="telefono3"
+             placeholder="Ej.: (2920) 412356">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="fax" class="prioridad">Fax:</label>
+            <input type="text" id="fax" class="form-control" formControlName="fax"
+             placeholder="Ej.: (2920) 412356">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="email" class="prioridad">Email:</label>
+            <input type="text" id="email" class="form-control" formControlName="email"
+             placeholder="Ej.: mi_correo@correo.com.ar" [ngClass]="{'is-invalid': (ambiente.email.invalid && submitted)}">
+             <div *ngIf="(ambiente.email.invalid && submitted)"
+                class="text-danger">
+                <div *ngIf="ambiente.email.errors.pattern">El email es invalido.</div>
+            </div>
+        </div>
     </div>
     <div class="d-flex justify-content-between">
-        <div class="col-5 pt-1">
-            <hr>
-        </div>
+        <div class="col-5 pt-1"><hr></div>
         <div class="col-2">
           <h3 class="text-center">
             <small class="text-muted">Dirección</small>
           </h3>
         </div>
-        <div class="col-5 pt-1">
-          <hr>
-        </div>
+        <div class="col-5 pt-1"><hr></div>
     </div>
     <lugar-form [group]="ambiente.lugar" [submitted]="submitted"></lugar-form>
 </fieldset>

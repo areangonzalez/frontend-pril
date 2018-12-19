@@ -750,7 +750,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return of(new HttpResponse({ status: 200 }));
           }
 
-          // Listar ofertas
+          // Listar Areas de entrenamientos
           if (request.url.endsWith('/apimock/area-entrenamientos') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
@@ -800,7 +800,54 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
         }
 
+        // conseguir Area de entrenamiento por id
+        if (request.url.match(/\/area\-entrenamientos\/\d+$/) && request.method === 'GET') {
+          // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+          if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+              // find user by id in users array
+              let urlParts = request.url.split('/');
+              let id = parseInt(urlParts[urlParts.length - 1]);
+              let areaVista: object = {};
 
+              // selecciono el area de entrenamiento por el id
+              let matchedArea = areasLista.filter(areas => { return areas.id === id; });
+              let seleccionArea = matchedArea.length ? matchedArea[0] : null;
+
+              // selecciono la oferta que coincida con el area
+              let matchedOferta = ofertasLista.filter(oferta => { return oferta.id === seleccionArea['ofertaid']; });
+              let ofertaElegida = matchedOferta.length ? matchedOferta[0] : [];
+              // selecciono el ambiente de la oferta del area
+              let matchedAmbiente = ambienteLista.filter(ambiente => { return ambiente.id === parseInt(ofertaElegida['ambiente_trabajoid']); });
+              let ambienteElegido = matchedAmbiente.length ? matchedAmbiente[0] : [];
+              // selecciono el destinatario que coincida con el area
+              let matchedDestinatario = destinatarioLista.filter(destinatario => { return destinatario.id === seleccionArea['destinatarioid']; });
+              let destinatarioElegido = matchedDestinatario.length ? matchedDestinatario[0] : [];
+
+              ofertaElegida['ambiente_trabajo'] = ambienteElegido;
+
+              areaVista = {
+                id: seleccionArea['id'],
+                tarea: seleccionArea['tarea'],
+                planid: seleccionArea['plan'],
+                destinatarioid: seleccionArea['destinatarioid'],
+                fecha_inicial: seleccionArea['fecha_inicial'],
+                fecha_final: seleccionArea['fecha_final'],
+                descripcion_baja: seleccionArea['descripcion_baja'],
+                ofertaid: seleccionArea['ofertaid'],
+                jornada: seleccionArea['jornada'],
+                observacion: seleccionArea['observacion'],
+                plan: seleccionArea['plan'],
+                estado: 'vigente',
+                destinatario: destinatarioElegido,
+                oferta: ofertaElegida
+              };
+
+              return of(new HttpResponse({ status: 200, body: areaVista }));
+          } else {
+              // return 401 not authorised if token is null or invalid
+              return throwError({ error: { message: 'Unauthorised' } });
+          }
+      }
 
 
 

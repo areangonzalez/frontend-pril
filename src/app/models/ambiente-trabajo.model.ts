@@ -11,8 +11,12 @@ export interface IAmbienteTrabajo {
     tipo_ambiente_trabajoid: number,
     lugar: Lugar,
     persona: Representante,
-    tipo_ambiente_trabajo: string
-
+    tipo_ambiente_trabajo: string,
+    telefono1: string,
+    telefono2: string,
+    telefono3: string,
+    fax: string,
+    email: string
 }
 
 export class AmbienteTrabajo implements IAmbienteTrabajo {
@@ -27,13 +31,18 @@ export class AmbienteTrabajo implements IAmbienteTrabajo {
         public tipo_ambiente_trabajoid: number,
         public lugar: Lugar,
         public persona: Representante,
-        public tipo_ambiente_trabajo: string
+        public tipo_ambiente_trabajo: string,
+        public telefono1: string,
+        public telefono2: string,
+        public telefono3: string,
+        public fax: string,
+        public email: string
     ){}
 
     deserialize(input: any) {
         Object.assign(this, input);
         this.lugar = new Lugar(0, 0, '', '', '', '', '', '', '').deserialize(input.lugar);
-        this.persona = new Representante(0,'','','','','','','').deserialize(input.representante);
+        this.persona = new Representante(0,'','','','','','').deserialize(input.representante);
         return this;
     }
 
