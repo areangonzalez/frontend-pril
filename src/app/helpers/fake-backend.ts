@@ -394,6 +394,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     estado: 'Activo',
                     actividad: newAmbiente.ambiente.actividad,
                     lugarid: idAmbiente,
+                    telefono1: newAmbiente.ambiente.telefono1,
+                    telefono2: newAmbiente.ambiente.telefono2,
+                    telefono3: newAmbiente.ambiente.telefono3,
+                    email: newAmbiente.ambiente.email,
+                    fax: newAmbiente.ambiente.fax,
                     persona: {
                       id: newAmbiente.persona.id,
                       nro_documento: newAmbiente.persona.nro_documento,
@@ -401,7 +406,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       nombre: newAmbiente.persona.nombre,
                       telefono: newAmbiente.persona.telefono,
                       celular: newAmbiente.persona.celular,
-                      fax: newAmbiente.persona.fax,
                       email: newAmbiente.persona.email
                     },
                     lugar: {
@@ -436,14 +440,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     let matchedUsers = ambienteLista.filter(ambiente => { return ambiente.id === id; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
-                    //let resultado: any = [];
-
-                    /* if (seleccion != null) {
-                        //delete seleccion.ambiente.lugar.usarLugarEncontrado;
-                        resultado.push({ estado: true, resultado: [seleccion] });
-                    } else {
-                        resultado.push({ estado: false, resultado: [], message: mensaje });
-                    } */
 
                     return of(new HttpResponse({ status: 200, body: seleccion }));
                 } else {
@@ -475,6 +471,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                             estado: 'Activo',
                             actividad: editAmbiente.ambiente.actividad,
                             lugarid: id,
+                            telefono1: editAmbiente.ambiente.telefono1,
+                            telefono2: editAmbiente.ambiente.telefono2,
+                            telefono3: editAmbiente.ambiente.telefono3,
+                            email: editAmbiente.ambiente.email,
+                            fax: editAmbiente.ambiente.fax,
                             persona: {
                               id: editAmbiente.persona.id,
                               nro_documento: editAmbiente.persona.nro_documento,
@@ -482,7 +483,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                               nombre: editAmbiente.persona.nombre,
                               telefono: editAmbiente.persona.telefono,
                               celular: editAmbiente.persona.celular,
-                              fax: editAmbiente.persona.fax,
                               email: editAmbiente.persona.email
                             },
                             lugar: {
@@ -499,15 +499,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         }
                     }
                 }
-                // verifico el array de usuarios agregados
-                  // for (var d = 0; d < ambientesAgregados.length; d++) {
-                  //     if (ambientesAgregados[d]['ambiente']['id'] == id) {
-                  //         //elimino 1 elemento desde el indice especificado y agrego el nuevo array
-                  //         editAmbiente.ambiente['id'] = id;
-                  //         ambientesAgregados.splice(d, 1, editAmbiente);
-                  //     }
-                  // }
-
                 // datos a mostrar en la tabla
                 localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
                 // datos de usuarios agregados
