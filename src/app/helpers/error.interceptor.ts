@@ -11,7 +11,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService, private _loadService: LoaderService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this._loadService.show();
+        ///this._loadService.show();
         return next.handle(request).pipe(
             catchError(err => {
                 if (err.status === 401) {

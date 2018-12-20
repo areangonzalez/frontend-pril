@@ -32,7 +32,6 @@ export class AreaEntrenamientoComponent implements OnInit {
         datos => {
           if (datos['success']) {
             this.areas = datos['coleccion'];
-            console.log(this.areas);
           }
           this.totalFiltrado = datos['total_filtrado'];
         }, error => {

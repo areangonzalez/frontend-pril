@@ -28,8 +28,8 @@ export class VistaAmbienteTrabajoComponent {
     private id:any;
     public idAmbiente:number;
     public lugar = new Lugar(0,0,'','','','','','','');
-    public persona = new Representante(0,'','','','','','','');
-    public ambiente = new AmbienteTrabajo(0, '', '', '', '', '', 0, this.lugar, this.persona, '');
+    public persona = new Representante(0,'','','','','','');
+    public ambiente = new AmbienteTrabajo(0, '', '', '', '', '', 0, this.lugar, this.persona, '', '', '', '', '', '');
 
     /**
      *
