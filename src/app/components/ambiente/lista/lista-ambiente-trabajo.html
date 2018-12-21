@@ -3,6 +3,7 @@
         <thead>
             <tr>
                 <th scope="col">Nombre</th>
+                <th scope="col"></th>
                 <th scope="col">Cuit</th>
                 <th scope="col">Representante</th>
                 <th scope="col"></th>
@@ -17,22 +18,34 @@
             </tr>
         </tbody>
         <tbody *ngIf="(totalFiltrado > 0)" >
-            <tr *ngFor="let ambiente of ambientes">
+            <tr *ngFor="let ambiente of ambientes; let i = index;">
                 <th>{{ambiente.nombre}}</th>
-                <td>{{ambiente.cuit}}</td>
-                <td>{{ambiente.persona.apellido}}, {{ambiente.persona.nombre}}</td>
                 <td>
                     <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.direccion}}">
                         <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                     </button>
-                    <button *ngIf="(ambiente.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.telefono}}">
+                    <button *ngIf="(ambiente.telefonos != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.telefonos}}">
                         <i class="fas fa-phone" title="Telefono"></i>
                     </button>
-                    <button *ngIf="(ambiente.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.celular}}">
-                        <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
-                    </button>
-                    <button *ngIf="(ambiente.persona.fax != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.persona.fax}}">
+                    <button *ngIf="(ambiente.fax != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.fax}}">
                         <i class="fas fa-fax" title="fax" aria-hidden="true"></i>
+                    </button>
+                    <button *ngIf="(ambiente.email != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.email}}">
+                        <i class="fas fa-fax" title="fax" aria-hidden="true"></i>
+                    </button>
+                </td>
+                <td>{{ambiente.cuit}}</td>
+                <td>{{ambiente.representante}}</td>
+                <td>
+
+                    <button *ngIf="(ambiente.rep_telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.rep_telefono}}">
+                        <i class="fas fa-phone" title="Teléfono representante"></i>
+                    </button>
+                    <button *ngIf="(ambiente.rep_celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.rep_celular}}">
+                        <span class="oi oi-phone" title="Celular representante" aria-hidden="true"></span>
+                    </button>
+                    <button *ngIf="(ambiente.rep_email != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.rep_email}}">
+                        <i class="fas fa-envelope" title="email representante" aria-hidden="true"></i>
                     </button>
                 </td>
                 <td>{{ambiente.tipo_ambiente_trabajo}}</td>
