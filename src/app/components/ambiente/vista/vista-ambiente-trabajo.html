@@ -15,75 +15,62 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-md-4">
-            <dl class="row">
-              <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre:</dt>
-              <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.nombre}}</dd>
-            </dl>
-            <dl class="row">
-                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo:</dt>
-                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.tipo_ambiente_trabajo}}</dd>
-            </dl>
-          </div>
-          <div class="col-md-4">
-              <dl class="row">
-                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuit:</dt>
-                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.cuit}}</dd>
-              </dl>
-              <dl class="row">
-                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
-                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.apellido}}, {{ambiente.persona.nombre}}</dd>
-              </dl>
-            </div>
-            <div class="col-md-4">
-              <dl class="row">
-                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
-                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.legajo}}</dd>
-              </dl>
-              <dl class="row">
-                  <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
-                  <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.nro_documento}}</dd>
-              </dl>
-            </div>
-        </div>
-        <div class="row">
           <div class="col-md-8">
             <div class="row">
-                <!-- <div class="col-md-4">
+              <div class="col-md-6">
+                <dl class="row">
+                  <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre:</dt>
+                  <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.nombre}}</dd>
+                </dl>
+                <dl class="row">
+                    <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo:</dt>
+                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.tipo_ambiente_trabajo}}</dd>
+                </dl>
+              </div>
+              <div class="col-md-6">
+                  <dl class="row">
+                      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
+                      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.legajo}}</dd>
+                    </dl>
                   <dl class="row">
                     <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuit:</dt>
                     <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.cuit}}</dd>
                   </dl>
-                  <dl class="row">
-                    <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
-                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.apellido}}, {{ambiente.persona.nombre}}</dd>
-                  </dl>
                 </div>
-                <div class="col-md-4">
-                  <dl class="row">
-                    <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
-                    <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.legajo}}</dd>
-                  </dl>
-                  <dl class="row">
-                      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
-                      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.nro_documento}}</dd>
-                  </dl>
-                </div> -->
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <dl class="row">
                         <dt class="col-3 col-sm-3 col-md-3 col-lg-3">Actividad:</dt>
-                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.actividad}}</dd>
+                        <dd class="col-9 col-sm-9 col-md-9 col-lg-9">{{ambiente.actividad}}</dd>
                     </dl>
                     <dl class="row">
                         <dt class="col-3 col-sm-3 col-md-3 col-lg-3">Observación:</dt>
-                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.observacion}}</dd>
+                        <dd class="col-9 col-sm-9 col-md-9 col-lg-9">{{ambiente.observacion}}</dd>
                     </dl>
-                  </div>
+                </div>
             </div>
           </div>
+          <div class="col-md-4">
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.apellido}}, {{ambiente.persona.nombre}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.nro_documento}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Teléfono / celular:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.telefono}} <span *ngIf="(ambiente.persona.telefono != '' && ambiente.persona.celular != '')">/</span> {{ambiente.persona.celular}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Email:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.email}}</dd>
+            </dl>
+          </div>
         </div>
+
         <div class="row">
           <div class="col-md-12">
               <ul class="list-inline d-flex justify-content-center">
