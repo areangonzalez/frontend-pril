@@ -19,8 +19,8 @@ export class VistaAreaEntrenamientoComponent implements OnInit {
     public areaId:any;
     public lugar = new Lugar(0,0,'','','','','','','');
     public persona = new Persona(0,'','','','','',0,0,0,'','','',this.lugar,[]);
-    public representante = new Representante(0,'','','','','','','');
-    public ambienteTrabajo = new AmbienteTrabajo(0,'','','','','',0,this.lugar,this.representante,'');
+    public representante = new Representante(0,'','','','','','');
+    public ambienteTrabajo = new AmbienteTrabajo(0,'','','','','',0,this.lugar,this.representante,'','','','','','');
     public destinatario = new Destinatario('',{},'','','',0,0,false,'','','','','', this.persona);
     public area:object = {};
 

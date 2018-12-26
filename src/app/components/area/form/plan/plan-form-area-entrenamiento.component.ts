@@ -43,10 +43,10 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     public ofertaId: string;
     public submitted:boolean = false;
     public lugar = new Lugar(0,0,'','','','','','','');
-    public representante = new Representante(0,'','','','','','','');
+    public representante = new Representante(0,'','','','','','');
     public persona = new Persona(0,'','','','','',0,0,0,'','','',this.lugar,[])
     public oferta = new Oferta(0,0,'','','','','',this.lugar,'');
-    public ambienteTrabajo = new AmbienteTrabajo(0,'','','','','',0,this.lugar,this.representante,'');
+    public ambienteTrabajo = new AmbienteTrabajo(0,'','','','','',0,this.lugar,this.representante,'', '','','','','');
     public destinatario =  { id: 0, oficio: "", legajo: "", fecha_ingreso: "",
       origen: "", deseo_lugar_entrenamiento: "", deseo_actividad: "", fecha_presentacion: "",
       banco_cbu: "", banco_nombre: "", banco_alias: "", experiencia_laboral: 0,
