@@ -13,6 +13,7 @@ export class ListaOfertaAreaEntrenamientoComponent {
     @Input('totalFiltrado') public totalFiltrado: number;
     @Output('ofertaElegida') public ofertaElegida = new EventEmitter();
     public selId = 0;
+    public pagina: number = 1;
 
     constructor(
         private _router: Router,

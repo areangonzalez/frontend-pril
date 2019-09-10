@@ -15,7 +15,7 @@ export class OfertaComponent implements OnInit {
     public listaOfertas: Object;
     private id:any;
     public idAmbiente = '';
-    public ambiente: Object;
+    public ambiente: any;
 
     constructor(
         private breadcrumbsService: BreadcrumbsService,
