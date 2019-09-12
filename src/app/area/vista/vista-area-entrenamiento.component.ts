@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { BreadcrumbsService } from "../../shared/breadcrumbs";
 import { AreaEntrenamientoService, MensajesService } from 'src/app/core/services';
 import { Persona, Lugar, Representante, AmbienteTrabajo, Destinatario } from 'src/app/core/models';
 
@@ -20,7 +19,6 @@ export class VistaAreaEntrenamientoComponent implements OnInit {
     public area:object = {};
 
     constructor(
-      private breadcrumbsService: BreadcrumbsService,
       private _router: Router,
       private _route: ActivatedRoute,
       private _areaEntrenamientoService: AreaEntrenamientoService,
@@ -29,10 +27,6 @@ export class VistaAreaEntrenamientoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.breadcrumbsService.store([
-            { label: 'Inicio', url: 'inicio', params: [] },
-            { label: 'Área de entrenamiento', url: 'area', params: [] },
-            { label: 'Vista', url: 'area/vista', params: [] }]);
         // obtener parametro
         this.areaId = this._route.snapshot.paramMap.get('id');
 

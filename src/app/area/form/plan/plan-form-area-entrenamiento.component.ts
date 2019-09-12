@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BreadcrumbsService } from "../../../shared/breadcrumbs";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // services
 import { MensajesService, DestinatarioService, OfertaService, AmbienteTrabajoService, AreaEntrenamientoService, PlanService } from '../../../core/services';
@@ -46,7 +45,6 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
 
     /**
      * Constructor
-     * @param _breadcrumbsService servicio para el manejo de las paginas accedidas
      * @param _router servicio para el control de navegacion dentro del sistema
      * @param _route servicio para capturar los parametros de la url
      * @param _fb servicio para construir el formulario del plan
@@ -57,7 +55,6 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @param _ambienteTrabajoService servicio que otorga la conexion y funcionalidad con la api con ambiente de trabajo
      */
     constructor(
-        private _breadcrumbsService: BreadcrumbsService,
         private _router: Router,
         private _route: ActivatedRoute,
         private _fb: FormBuilder,
@@ -84,10 +81,6 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._breadcrumbsService.store([
-            { label: 'Inicio', url: 'inicio', params: [] },
-            { label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] },
-            { label: 'Crear', url: 'area/crear-plan', params: [] }]);
         // obtener lista
         this.obtenerPlanes();
         // obtener parametros

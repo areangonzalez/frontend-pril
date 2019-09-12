@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET } from "@angular/router";
-import "rxjs/add/operator/filter";
+import { filter } from 'rxjs/operators';
 import { IBreadcrumb } from "./breadcrumbs.model";
 import { BreadcrumbsService } from "./breadcrumbs.service";
 
@@ -8,6 +8,7 @@ import { BreadcrumbsService } from "./breadcrumbs.service";
 @Component({
   selector: "breadcrumb",
   templateUrl: './breadcrumbs.component.html',
+  styleUrls: ['./breadcrumbs.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 
@@ -42,14 +43,13 @@ export class BreadcrumbComponent implements OnInit {
     const PREFIX_BREADCRUMB: string = "prefixBreadcrumb";
 
     // subscribe to the NavigationEnd event
-    this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+    //this.router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+    this.router.events.subscribe(event => {
       // reset currentBreadcrumbs
       this.currentBreadcrumbs = [];
 
-
       // get the root of the current route
       let currentRoute: ActivatedRoute = this.activatedRoute.root;
-
 
       // set the url to an empty string
       let url: string = "";
@@ -64,6 +64,7 @@ export class BreadcrumbComponent implements OnInit {
         childrenRoutes.forEach(route => {
           // Set currentRoute to this route
           currentRoute = route;
+
           // Verify this is the primary route
           if (route.outlet !== PRIMARY_OUTLET) {
             return;
@@ -71,7 +72,7 @@ export class BreadcrumbComponent implements OnInit {
 
           const hasData = (route.routeConfig && route.routeConfig.data);
           const hasDynamicBreadcrumb: boolean = route.snapshot.params.hasOwnProperty(ROUTE_PARAM_BREADCRUMB);
-
+          // console.log("hasDynamicBreadcrumb: ", hasDynamicBreadcrumb);
           if (hasData || hasDynamicBreadcrumb) {
 
 
@@ -101,7 +102,7 @@ export class BreadcrumbComponent implements OnInit {
             // Add breadcrumb
             let breadcrumb: IBreadcrumb = {
               label: breadCrumbLabel,
-              params: route.snapshot.params,
+              params: {},
               url: url
             };
 
@@ -116,7 +117,6 @@ export class BreadcrumbComponent implements OnInit {
           }
 
         });
-
         this.breadcrumbService.store(this.currentBreadcrumbs);
       }
     });

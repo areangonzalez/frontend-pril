@@ -1,7 +1,6 @@
 
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../../shared/breadcrumbs/breadcrumbs.service";
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 //services
 import { DestinatarioService } from "../../core/services/destinatario.service";
@@ -23,7 +22,6 @@ export class VistaDestinatarioComponent {
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
-        private _breadcrumbsService: BreadcrumbsService,
         private _mensajesService: MensajesService,
         private _destinatarioService: DestinatarioService,
         config: NgbTooltipConfig
@@ -33,8 +31,6 @@ export class VistaDestinatarioComponent {
     }
 
     ngOnInit() {
-        // breadcrumbs Dinamico
-        this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Destinatario', url: 'destinatario', params: [] }, { label: 'Ver', url: 'destinatario/vista', params: [] }]);
         this.id = this._route.snapshot.paramMap.get('id');
         if (this.id != undefined) {
             this.idDestinatario = this.id;

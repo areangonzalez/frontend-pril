@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { BreadcrumbsService } from "../../shared/breadcrumbs/breadcrumbs.service";
 // servicios
 import { OfertaService } from "../../core/services/oferta.service";
 import { AmbienteTrabajoService } from "../../core/services/ambiente-trabajo.service";
@@ -18,7 +17,6 @@ export class OfertaComponent implements OnInit {
     public ambiente: any;
 
     constructor(
-        private breadcrumbsService: BreadcrumbsService,
         private _router: Router,
         private _route: ActivatedRoute,
         private _ofertaService: OfertaService,
@@ -59,11 +57,6 @@ export class OfertaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.breadcrumbsService.store([
-            { label: 'Inicio', url: 'inicio', params: [] },
-            { label: 'Ambiente de trabajo', url: 'ambiente', params: [] },
-            { label: 'Agregar oferta', url: 'ambiente/oferta/agregar', params: [] }
-        ]);
         this.id = this._route.snapshot.paramMap.get('id');
         if (this.id != undefined) {
             this.idAmbiente = this.id;

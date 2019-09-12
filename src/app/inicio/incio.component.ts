@@ -1,7 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../shared/breadcrumbs/breadcrumbs.service";
-import { LoaderService } from '../shared/loader';
 
 
 @Component({
@@ -9,25 +7,19 @@ import { LoaderService } from '../shared/loader';
     templateUrl: './inicio.component.html',
     styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent implements OnInit, AfterViewInit {
+export class InicioComponent implements OnInit {
 
     public hoverDes = false;
     public hoverAt = false;
     public hoverAe = false;
 
-    constructor(private breadcrumbsService: BreadcrumbsService, private _router: Router, private _loaderService: LoaderService) {
+    constructor(
+        private _router: Router,
+      ) {
     }
 
     ngOnInit() {
-        this.breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }]);
     }
-
-    ngAfterViewInit(){
-      setTimeout(() => {
-        this._loaderService.hide();
-      }, 500);
-    }
-
 
     irA(url){
         this._router.navigate([url]);

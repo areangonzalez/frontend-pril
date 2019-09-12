@@ -11,24 +11,25 @@ import { AuthenticationService } from '../core/services/authentication.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
-    loading = false;
-    submitted = false;
-    returnUrl: string;
-    error = '';
+    public loginForm: FormGroup;
+    public loading = false;
+    public submitted = false;
+    public returnUrl: string;
+    public error = '';
 
     constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
-        private authenticationService: AuthenticationService) { }
+      private router: Router,
+      private _fb: FormBuilder,
+      private route: ActivatedRoute,
+      private authenticationService: AuthenticationService)
+      {
+        this.loginForm = this._fb.group({
+          username: ['', Validators.required],
+          password: ['', Validators.required]
+        });
+      }
 
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-
         // reset login status
         this.authenticationService.logout();
 

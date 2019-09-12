@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -52,6 +52,8 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
+    Title,
+    BreadcrumbsService,
 
     // provider used to create fake backend
     fakeBackendProvider

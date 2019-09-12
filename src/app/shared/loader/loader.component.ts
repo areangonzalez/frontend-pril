@@ -27,7 +27,8 @@ export class LoaderComponent implements OnInit {
       const ROUTE_PARAM_LOADING: string = "loading";
       const ROUTE_DATA_LOADING: string = "loading";
       // subscribe to the NavigationEnd event
-    this._router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+    //this._router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
+    this._router.events.subscribe(event => {
       let currentRoute: ActivatedRoute = this._activateRoute.root;
       let childrenRoutes: ActivatedRoute[] = currentRoute.children;
 

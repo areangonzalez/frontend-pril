@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../shared/breadcrumbs/breadcrumbs.service";
 import { AreaEntrenamientoService } from 'src/app/core/services/area-entrenamiento.service';
 import { MensajesService } from 'src/app/core/services/mensajes.service';
 
@@ -15,13 +14,10 @@ export class AreaEntrenamientoComponent implements OnInit {
     public totalFiltrado = 0;
     public page = 1;
 
-    constructor(private breadcrumbsService: BreadcrumbsService, private _areaEntrenamientoService: AreaEntrenamientoService, private _mensajesService: MensajesService) {
+    constructor(private _areaEntrenamientoService: AreaEntrenamientoService, private _mensajesService: MensajesService) {
     }
 
     ngOnInit() {
-        this.breadcrumbsService.store([
-            { label: 'Inicio', url: 'inicio', params: [] },
-            { label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] }]);
       // Obtener listado de area de entrenamiento
           this.obtenerAreasEntrenamiento();
     }

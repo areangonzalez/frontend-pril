@@ -1,6 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { BreadcrumbsService } from '../../shared/breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from "@angular/forms";
 import { switchMap } from 'rxjs/operators';
 // services
@@ -38,7 +37,6 @@ export class FormDestinatarioComponent implements OnInit {
 
 
     /**
-     * @param _breadcrumbsService Servicio que maneja el camino de las paginas accedidas.
      * @param _router Servicio para la navegacion dentro del sistema
      * @param _route Servicio para obtener el parametro del ruteo
      * @param _fb servicio para la construccion de un formulario customizado
@@ -46,7 +44,6 @@ export class FormDestinatarioComponent implements OnInit {
      * @param _destinatarioService Servicio que otorga la conexión con el servidor para las llamadas ajax
      */
     constructor(
-        private _breadcrumbsService: BreadcrumbsService,
         private _router:Router,
         private _route: ActivatedRoute,
         private _fb: FormBuilder,
@@ -101,15 +98,12 @@ export class FormDestinatarioComponent implements OnInit {
     }
 
     ngOnInit() {
-        // breadcrumbs Dinamico
-        this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Destinatario', url: 'destinatario', params: [] }, { label: 'Agregar', url: 'destinatario/agregar', params: [] }]);
         // obtener parametro
         this.id = this._route.snapshot.paramMap.get('id');
         if (this.id != undefined) {
             this.idDestinatario = this.id;
             this.destinatarioPorId(this.id);
             this.mostrarBoton = false;
-            this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Destinatario', url: 'destinatario', params: [] }, { label: 'Editar', url: 'destinatario/agregar', params: [] }]);
         }
     }
     /**

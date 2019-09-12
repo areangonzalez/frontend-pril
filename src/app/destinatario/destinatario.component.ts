@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../shared/breadcrumbs/breadcrumbs.service";
 import { DestinatarioService } from "../core/services/destinatario.service";
 import { MensajesService } from "../core/services/mensajes.service";
 
 @Component({
     selector: 'app-destinatario',
     templateUrl: './destinatario.html',
-    // styleUrls: ['./lista.component.css']
 })
 export class DestinatarioComponent implements OnInit {
     page = 1;
     destinatarios: any;
     totalFiltrado: number = 0;
 
-    constructor(private breadcrumbsService: BreadcrumbsService, private _destinatarioService: DestinatarioService, private _mensajeService: MensajesService) {
+    constructor(
+      private _destinatarioService: DestinatarioService,
+      private _mensajeService: MensajesService
+      ) {
     }
 
     ngOnInit(){
-        this.breadcrumbsService.store([
-            { label: 'Inicio', url: 'inicio', params: [] },
-            { label: 'Destinatario', url: 'destinatario', params: [] }]);
         // listar destinatarios
         this.listar();
 

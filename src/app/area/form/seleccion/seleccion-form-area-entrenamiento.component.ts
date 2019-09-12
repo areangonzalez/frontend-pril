@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../../../shared/breadcrumbs/breadcrumbs.service";
 // services
 import { OfertaService } from '../../../core/services/oferta.service'
 import { DestinatarioService } from '../../../core/services/destinatario.service'
@@ -22,7 +21,6 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     public totalDestinatarios: number = 0;
 
     constructor(
-        private breadcrumbsService: BreadcrumbsService,
         private _router: Router,
         private _ofertaService: OfertaService,
         private _destinatarioService: DestinatarioService,
@@ -30,7 +28,6 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] },{ label: 'Área de entrenamiento', url: 'area-entrenamiento', params: [] },{ label: 'Crear', url: 'area/crear/seleccion', params: [] }]);
       this.listarOfertas();
       this.listarDestinatario();
     }

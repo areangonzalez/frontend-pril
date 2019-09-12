@@ -14,27 +14,28 @@ const routes: Routes = [
 //  { path: 'login', component: LoginComponent },
   {
     path: 'inicio',
-    data: { title: 'Bienvenido al Programa Rionegrino de Inclusión laboral', breadcrumb: 'Inicio', loading: true },
+    data: { title: 'Inicio', breadcrumb: 'Inicio', loading: true },
     component: AppLayoutComponent,
     children: [
       { path: '',
         canActivate: [AuthGuard],
         loadChildren: './inicio/inicio.module#InicioModule'
       },
-      /* { path: 'destinatario',
+      { path: 'destinatario',
         loadChildren: './destinatario/destinatario.module#DestinatarioModule',
         canActivate: [AuthGuard],
-        //data: { loading: true, title: 'Lista destinatarios', breadcrumb: 'Destinatario' },
+        data: { loading: true, title: 'Lista destinatarios', breadcrumb: 'Destinatarios' }
       },
       { path: 'ambiente',
         loadChildren: './ambiente/ambiente-trabajo.module#AmbienteTrabajoModule',
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { loading: true, title: 'Lista de ambientes de trabajos', breadcrumb: 'Ambientes de Trabajos' }
       },
       { path: 'area-entrenamiento',
         loadChildren: './area/area-entrenamiento.module#AreaEntrenamientoModule',
-        canActivate: [AuthGuard]
-
-      } */
+        canActivate: [AuthGuard],
+        data: { loading: true, title: 'Lista de áreas de entrenamientos', breadcrumb: 'Área de entrenamiento' }
+      }
     ]
   },
   { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
