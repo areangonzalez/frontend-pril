@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ListaOfertaComponent } from "./../ambiente/oferta/lista/lista-oferta.component";
 import { DestinatarioModule } from "../destinatario/destinatario.module";
-//import { ChartsModule } from 'ng2-charts';
+import { AreaEntrenamientoRoutingModule } from "./area-entrenamiento-routing.module";
 
 //Importo los componentes
 import { AreaEntrenamientoComponent } from './area-entrenamiento.component';
@@ -22,7 +22,7 @@ import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamient
 // Metadatos del módulo
 @NgModule({
     declarations: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, DestinatarioModule, NgbModule.forRoot()],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, DestinatarioModule, NgbModule, AreaEntrenamientoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, ReactiveFormsModule],
     entryComponents: [ListaOfertaComponent]

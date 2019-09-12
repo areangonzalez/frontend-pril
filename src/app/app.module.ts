@@ -4,36 +4,41 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// used to create fake backend
-import { fakeBackendProvider } from './helpers/fake-backend';
+
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
-/* layout */
-import { CabeceraComponent } from "./layout/cabecera/cabecera.component";
-import { PieComponent } from "./layout/pie/pie.component";
-/* Shareds */
-import { CustomDatepickerI18n } from "./shareds/i18n-values";
+
+// used to create fake backend
+import { fakeBackendProvider } from './shared/helpers/fake-backend';
+/* import { CabeceraComponent } from "./shared/layout/cabecera/cabecera.component";
+import { PieComponent } from "./shared/layout/pie/pie.component"; */
+
 /* Modulos */
 import { CoreModule } from "./core/core.module";
-/* Componentes */
-import { JwtInterceptor } from "./helpers/jwt.interceptor";
-import { ErrorInterceptor } from './helpers/error.interceptor';
-import { LoaderComponent } from "./components/loader/loader.component";
-import { AppComponent } from './app.component';
+import {
+  MensajesComponent,
+  BreadcrumbComponent, BreadcrumbsService,
+  CustomDatepickerI18n,
+  LoaderComponent,
+  SharedModule
+} from "./shared";
+/* import { LoaderComponent } from "./components/loader/loader.component";
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/incio.component';
 import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { MensajesComponent } from "./components/mensajes/mensajes.component";
+ */
+
+import { AppComponent } from './app.component';
+// import { HttpClient } from 'selenium-webdriver/http';
+import { JwtInterceptor } from "./shared/helpers/jwt.interceptor";
+import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoaderComponent,
-    CabeceraComponent,
-    PieComponent,
-    LoginComponent,
-    InicioComponent,
     BreadcrumbComponent,
     MensajesComponent
   ],
@@ -46,12 +51,14 @@ import { MensajesComponent } from "./components/mensajes/mensajes.component";
     NgbCollapseModule,
     NgbModule.forRoot(),
     CoreModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
+
     // provider used to create fake backend
     fakeBackendProvider
   ],

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
-import { AreaEntrenamientoService } from 'src/app/services/area-entrenamiento.service';
-import { MensajesService } from 'src/app/services/mensajes.service';
+import { BreadcrumbsService } from "../shared/breadcrumbs/breadcrumbs.service";
+import { AreaEntrenamientoService } from 'src/app/core/services/area-entrenamiento.service';
+import { MensajesService } from 'src/app/core/services/mensajes.service';
 
 
 @Component({

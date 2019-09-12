@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 import { Router } from '@angular/router';
 // services
-import { LocalidadService } from "../../../../services/localidad.service";
+import { LocalidadService } from "../../../core/services/localidad.service";
 
 @Component({
     selector: 'lugar-form',
@@ -45,5 +45,5 @@ export class LugarComponent implements OnInit {
         }, error => { return console.log("Error del sistema"); });
     }
 
-    
+
 }

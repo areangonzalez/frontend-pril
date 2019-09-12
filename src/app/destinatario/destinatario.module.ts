@@ -3,8 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { ChartsModule } from 'ng2-charts';
-
+import { DestinatarioRoutingModule } from './destinatario-routing.module'
 //Importo los componentes
 import { DestinatarioComponent } from './destinatario.component';
 import { FormDestinatarioComponent } from './form/form-destinatario.component';
@@ -23,7 +22,7 @@ import { LugarComponent } from "./form/lugar/lugar.component";
 // Metadatos del módulo
 @NgModule({
     declarations: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent, AutoCompletarComponent, LugarComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule.forRoot()],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule, DestinatarioRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [DestinatarioComponent, FormDestinatarioComponent, ListaDestinatarioComponent, VistaDestinatarioComponent, BusquedaDestinatarioComponent, DatosPersonaComponent, DatosDestinatarioComponent, EstudioComponent, ListaEstudioComponent, ModalContentEstudio, ModalEstudioComponent, ModalContentConfirmacion, ModalConfirmacionComponent, AutoCompletarComponent, LugarComponent, ReactiveFormsModule],
     entryComponents: [ModalContentEstudio, ModalContentConfirmacion]

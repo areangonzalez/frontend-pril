@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
-import { DestinatarioService } from "../../services/destinatario.service";
-import { MensajesService } from "../../services/mensajes.service";
+import { BreadcrumbsService } from "../shared/breadcrumbs/breadcrumbs.service";
+import { DestinatarioService } from "../core/services/destinatario.service";
+import { MensajesService } from "../core/services/mensajes.service";
 
 @Component({
     selector: 'app-destinatario',

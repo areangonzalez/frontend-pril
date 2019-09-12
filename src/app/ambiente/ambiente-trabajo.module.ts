@@ -3,6 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AmbienteTrabajoRoutingModule } from "./ambiente-trabajo-routing.module";
 import { DestinatarioModule } from "../destinatario/destinatario.module";
 
 //Importo los componentes
@@ -23,7 +24,7 @@ import { ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, Moda
 // Metadatos del módulo
 @NgModule({
     declarations: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, ListaOfertaComponent, FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, DestinatarioModule, NgbModule.forRoot()],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, DestinatarioModule, NgbModule, AmbienteTrabajoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, ListaOfertaComponent, FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent, ReactiveFormsModule],
     entryComponents: [ModalContentOferta, ModalContentOfertaVista]

@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
+import { BreadcrumbsService } from "../../shared/breadcrumbs/breadcrumbs.service";
 // servicios
-import { OfertaService } from "../../../services/oferta.service";
-import { AmbienteTrabajoService } from "../../../services/ambiente-trabajo.service";
-import { MensajesService } from "../../../services//mensajes.service";
+import { OfertaService } from "../../core/services/oferta.service";
+import { AmbienteTrabajoService } from "../../core/services/ambiente-trabajo.service";
+import { MensajesService } from "../../core/services/mensajes.service";
 
 @Component({
     selector: 'ambiente-trabajo-oferta',
