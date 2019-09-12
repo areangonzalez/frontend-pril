@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { MensajesService } from "../../../../services/mensajes.service";
-import { OfertaService } from "../../../../services/oferta.service";
+import { MensajesService } from "../../../core/services/mensajes.service";
+import { OfertaService } from "../../../core/services/oferta.service";
 
 @Component({
     selector: 'oferta-vista',

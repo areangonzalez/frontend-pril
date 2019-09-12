@@ -5,7 +5,6 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'area-entrenamiento-lista-oferta',
     templateUrl: './lista-oferta-area-entrenamiento.html',
-    //styleUrls: ['./lista-area-entrenamiento.css'],
     providers: [NgbTooltipConfig]
 })
 export class ListaOfertaAreaEntrenamientoComponent {

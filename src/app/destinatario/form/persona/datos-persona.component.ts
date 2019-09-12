@@ -1,20 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from "@angular/forms";
 import { Router } from '@angular/router';
-import { ValidarNumero } from "../../../../shareds/validar-numero";
-import { FormatObjetoAFecha } from "../../../../shareds/fechas";
+import { UtilService } from "../../../core/utils";
 // services
-import { SexoService } from "../../../../services/sexo.service";
-import { GeneroService } from "../../../../services/genero.service";
-import { EstadoCivilService } from "../../../../services/estado-civil.service";
-import { PersonaService } from "../../../../services/persona.service";
-import { MensajesService } from "../../../../services/mensajes.service";
+import { SexoService, GeneroService, EstadoCivilService, PersonaService, MensajesService } from "../../../core/services";
 
 @Component({
     selector: 'datos-persona-form',
     templateUrl: './datos-persona.html',
-    styleUrls: ['./datos-persona.css'],
-    providers: [ValidarNumero, FormatObjetoAFecha]
+    styleUrls: ['./datos-persona.css']
 })
 export class DatosPersonaComponent implements OnInit {
     /**
@@ -27,7 +21,7 @@ export class DatosPersonaComponent implements OnInit {
     @Input("documento") public setDocumento: string;
     @Input("mostrarBtnBusqueda") public mostrarBtnBusqueda: boolean;
     @Output("setListaEstudios") public setListaEstudios = new EventEmitter();
-    
+
     /**
      * @var cuil_medio String que guarda el documento para el numero de cuil
      * @var sexoLista Object listado de sexo
@@ -41,21 +35,18 @@ export class DatosPersonaComponent implements OnInit {
     nroDocumentoBusqueda:string = '';
 
     /**
-     * 
-     * @param _validarNumero funcion que verifica si los datos ingresado son números
-     * @param _formatFecha funcion que formatea la fecha a un string
+     *
      * @param _sexoService servicio para obtener las funciones de sexo
      * @param _generoService servicio para obtener las funciones par del genero
      * @param _estadoCivilService servicio para obtener las funciones de estado civil
      */
     constructor(
-        private _validarNumero: ValidarNumero,
-        private _formatFecha: FormatObjetoAFecha,
-        private _sexoService: SexoService,
-        private _generoService: GeneroService,
-        private _estadoCivilService: EstadoCivilService,
-        private _personaService: PersonaService,
-        private _mensajeService: MensajesService
+      private _sexoService: SexoService,
+      private _generoService: GeneroService,
+      private _estadoCivilService: EstadoCivilService,
+      private _personaService: PersonaService,
+      private _mensajeService: MensajesService,
+      private _utilService: UtilService
     ){}
 
     ngOnInit(){
@@ -111,16 +102,16 @@ export class DatosPersonaComponent implements OnInit {
      * @param obj la fecha viene en formato objeto
      */
     formatFechaNacimiento(obj:any){
-        this.datosPersona.controls.fecha_nacimiento.setValue(this._formatFecha.onChange(obj));
+        this.datosPersona.controls.fecha_nacimiento.setValue(this._utilService.formatObjetoAFecha(obj));
     }
     /**
      * @function esNumero valida si el valor del objeto es de tipo numero
      * @param obj objeto que contiene los valores del input.
      */
     esNumero(obj:any) {
-        if (!this._validarNumero.onKey(obj.value)) {
+        if (!this._utilService.validarNumero(obj.value)) {
             obj.value = obj.value.substring(0,obj.value.length - 1);
-        } 
+        }
     }
     /**
      * @function validarCuil verifica la validación de cuil, si el cuil tiene 7 digitos los rellena con ceros
@@ -204,7 +195,7 @@ export class DatosPersonaComponent implements OnInit {
     /**
      * @function primerosDigitosCuil corta la cadena de cuil para obtener los dos primeros digitos
      * @param cuil cadena del numero de cuil
-     * @return devuelve un string 
+     * @return devuelve un string
      */
     private primerosDigitosCuil(cuil: string) {
         let cuil_primero = cuil.substring(0, 2);

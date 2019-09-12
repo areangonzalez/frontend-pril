@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
-import { LoaderService } from '../loader/loader.service';
+import { BreadcrumbsService } from "../shared/breadcrumbs/breadcrumbs.service";
+import { LoaderService } from '../shared/loader';
 
 
 @Component({

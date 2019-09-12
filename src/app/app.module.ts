@@ -10,24 +10,17 @@ import { AppRoutingModule } from './app-routing.module';
 
 // used to create fake backend
 import { fakeBackendProvider } from './shared/helpers/fake-backend';
-/* import { CabeceraComponent } from "./shared/layout/cabecera/cabecera.component";
-import { PieComponent } from "./shared/layout/pie/pie.component"; */
 
 /* Modulos */
 import { CoreModule } from "./core/core.module";
 import {
+  AppLayoutComponent,
   MensajesComponent,
   BreadcrumbComponent, BreadcrumbsService,
   CustomDatepickerI18n,
   LoaderComponent,
   SharedModule
 } from "./shared";
-/* import { LoaderComponent } from "./components/loader/loader.component";
-import { LoginComponent } from './components/login/login.component';
-import { InicioComponent } from './components/inicio/incio.component';
-import { BreadcrumbComponent } from './components/breadcrumbs/breadcrumbs.component';
-import { MensajesComponent } from "./components/mensajes/mensajes.component";
- */
 
 import { AppComponent } from './app.component';
 // import { HttpClient } from 'selenium-webdriver/http';
@@ -38,6 +31,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
+    AppLayoutComponent,
     LoaderComponent,
     BreadcrumbComponent,
     MensajesComponent

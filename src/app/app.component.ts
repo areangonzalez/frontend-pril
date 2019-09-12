@@ -8,7 +8,7 @@ import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Observable } from "rxjs";
 import { NgbDatepickerConfig, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
-import { NgbDateARParserFormatter } from "./shareds/ngb-date-ar-parser-formatter";
+import { NgbDateARParserFormatter } from "./shared/helpers/ngb-date-ar-parser-formatter";
 import 'rxjs/add/operator/map';
 
 @Component({

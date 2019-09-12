@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../../../breadcrumbs/breadcrumbs.service";
+import { BreadcrumbsService } from "../../../shared/breadcrumbs/breadcrumbs.service";
 // services
-import { OfertaService } from '../../../../services/oferta.service'
-import { DestinatarioService } from '../../../../services/destinatario.service'
-import { MensajesService } from '../../../../services/mensajes.service'
+import { OfertaService } from '../../../core/services/oferta.service'
+import { DestinatarioService } from '../../../core/services/destinatario.service'
+import { MensajesService } from '../../../core/services/mensajes.service'
 
 
 @Component({

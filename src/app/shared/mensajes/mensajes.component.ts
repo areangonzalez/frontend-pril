@@ -1,8 +1,8 @@
 import { Component, OnInit, Injectable, Output, EventEmitter } from '@angular/core';
 import { Subscription } from "rxjs";
 import { Router } from '@angular/router';
-import { Alert, AlertType } from "../../models/alert.model";
-import { MensajesService } from "../../services/mensajes.service";
+import { Alert, AlertType } from "../../core/models";
+import { MensajesService } from "../../core/services";
 
 @Component({
     selector: 'mensajes-alert',
@@ -82,7 +82,7 @@ export class MensajesComponent implements OnInit {
                             this._router.navigate([this.url[i].name, param]);
                         }else{
                             this._mensajeService.clearMessage();
-                            this._router.navigate([this.url[i].name]);        
+                            this._router.navigate([this.url[i].name]);
                         }
                     }
                 }else{

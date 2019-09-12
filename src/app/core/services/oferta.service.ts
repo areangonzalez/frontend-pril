@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { ApiService } from "../services/api.service";
+import { ApiService } from "./api.service";
 
 
 @Injectable()

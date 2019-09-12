@@ -1,28 +1,25 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 import { Router } from '@angular/router';
-import { ValidarNumero } from "../../../../shareds/validar-numero";
-import { FormatObjetoAFecha } from "../../../../shareds/fechas";
+import { UtilService } from "../../../core/utils";
 // services
-import { TipoAmbienteTrabajoService } from "../../../../services/tipo-ambiente-trabajo.service";
-import { MensajesService } from "../../../../services/mensajes.service";
+import { TipoAmbienteTrabajoService } from "../../../core/services/tipo-ambiente-trabajo.service";
+import { MensajesService } from "../../../core/services/mensajes.service";
 
 @Component({
     selector: 'datos-ambiente-trabajo-form',
     templateUrl: './ambiente-trabajo-form.html',
-    styleUrls: ['./ambiente-trabajo-form.css'],
-    providers: [ValidarNumero, FormatObjetoAFecha]
+    styleUrls: ['./ambiente-trabajo-form.css']
 })
 export class AmbienteTrabajoFormComponent implements OnInit {
     @Input("group") public datosAmbienteTrabajo: FormGroup;
     @Input("submitted") public submitted: boolean;
-    
+
     public tipoAt = '';
     public tipoAmbienteTrabajoListado:any = [];
 
     constructor(
-        private _validarNumero: ValidarNumero,
-        private _formatFecha: FormatObjetoAFecha,
+        private _utilService: UtilService,
         private _mensajeService: MensajesService,
         private _tipoAmbienteTrabajoService: TipoAmbienteTrabajoService
     ) { }
@@ -48,7 +45,7 @@ export class AmbienteTrabajoFormComponent implements OnInit {
      */
     esCuit(event: any) {
         let nro_docuemnto = this.datosAmbienteTrabajo.controls.cuit.value;
-        if (!this._validarNumero.onKey(event)) {
+        if (!this._utilService.validarNumero(event)) {
             this.datosAmbienteTrabajo.controls.cuit.setValue(nro_docuemnto.substring(0, nro_docuemnto.length - 1));
         }
     }

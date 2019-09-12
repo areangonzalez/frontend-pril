@@ -1,6 +1,6 @@
 import { Component, Input, Injectable, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoaderService } from 'src/app/components/loader/loader.service';
+import { LoaderService } from 'src/app/shared/loader';
 
 @Component({
     selector: 'modal-content-oferta',

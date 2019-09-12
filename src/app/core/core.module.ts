@@ -22,7 +22,8 @@ import {
   ProfesionService,
   SexoService,
   TipoAmbienteTrabajoService,
-  UserService
+  UserService,
+  TitleService
 } from './services';
 
 @NgModule({
@@ -49,7 +50,8 @@ import {
     ProfesionService,
     SexoService,
     TipoAmbienteTrabajoService,
-    UserService
+    UserService,
+    TitleService
   ],
   declarations: []
 })

@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable, Input, Output, EventEmitter } from '@ang
 import { Router } from '@angular/router';
 import { FormGroup } from "@angular/forms";
 // services
-import { NivelEducativoService } from "../../../../services/nivel-educativo.service";
+import { NivelEducativoService } from "../../../core/services/nivel-educativo.service";
 
 @Component({
     selector: 'estudio-form',
@@ -26,8 +26,8 @@ export class EstudioComponent implements OnInit {
     constructor(
         private _router: Router,
         private _nivelEducativoService: NivelEducativoService
-    ) { 
-        
+    ) {
+
     }
     /**
      * @function estudiosForm función que controla el objeto del formulario de estudios
@@ -42,7 +42,7 @@ export class EstudioComponent implements OnInit {
         }
     }
     /**
-     * @function estaCheckeado función que administra los checkbox del formulario 
+     * @function estaCheckeado función que administra los checkbox del formulario
      * @param e objeto que trae los valores del checkbox
      */
     estaCheckeado(e){
@@ -56,7 +56,7 @@ export class EstudioComponent implements OnInit {
             this.estudiosForm.anio.setValue('');
             this.estudioCompleto = false;
         }
-    } 
+    }
     /**
      * @function geNivelEsducativo función que obtiene el listado de nivel educativo
      */

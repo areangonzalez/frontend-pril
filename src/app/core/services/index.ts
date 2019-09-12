@@ -17,3 +17,4 @@ export * from './profesion.service';
 export * from './sexo.service';
 export * from './tipo-ambiente-trabajo.service';
 export * from './user.service';
+export * from './title.service';

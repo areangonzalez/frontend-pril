@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from "../../environments/environment";
-import { httpOptions } from "../services/http-options.service";
+import { environment } from "../../../environments/environment";
+import { httpOptions } from "./http-options.service";
 
 @Injectable()
 export class TipoAmbienteTrabajoService {

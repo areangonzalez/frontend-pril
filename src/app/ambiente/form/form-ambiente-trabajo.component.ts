@@ -1,14 +1,14 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
+import { BreadcrumbsService } from '../../shared/breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // services
-import { MensajesService } from "../../../services/mensajes.service";
-import { AmbienteTrabajoService } from "../../../services/ambiente-trabajo.service";
+import { MensajesService } from "../../core/services/mensajes.service";
+import { AmbienteTrabajoService } from "../../core/services/ambiente-trabajo.service";
 // modelos
-import { AmbienteTrabajo } from "../../../models/ambiente-trabajo.model";
-import { Representante } from "../../../models/representante.model";
-import { Lugar } from "../../../models/lugar.model";
+import { AmbienteTrabajo } from "../../core/models/ambiente-trabajo.model";
+import { Representante } from "../../core/models/representante.model";
+import { Lugar } from "../../core/models/lugar.model";
 
 @Component({
     selector: 'destinatario-form',

@@ -1,18 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, AbstractControl } from "@angular/forms";
 import { Router } from '@angular/router';
-import { ValidarNumero } from "../../../../shareds/validar-numero";
-import { FormatObjetoAFecha } from "../../../../shareds/fechas";
+import { UtilService } from "../../../core/utils";
 // services
-import { LocalidadService } from "../../../../services/localidad.service";
-import { MensajesService } from "../../../../services/mensajes.service";
-import { PersonaService } from "../../../../services/persona.service";
+import { LocalidadService } from "../../../core/services/localidad.service";
+import { MensajesService } from "../../../core/services/mensajes.service";
+import { PersonaService } from "../../../core/services/persona.service";
 
 @Component({
     selector: 'datos-representante-form',
     templateUrl: './representante-form.html',
-    styleUrls: ['./representante-form.css'],
-    providers: [ValidarNumero, FormatObjetoAFecha]
+    styleUrls: ['./representante-form.css']
 })
 export class RepresentanteFormComponent implements OnInit {
     /**
@@ -28,14 +26,11 @@ export class RepresentanteFormComponent implements OnInit {
 
     /**
      * Inicializacion de servicios para el componente
-     * @param _validarNumero 
-     * @param _formatFecha 
-     * @param _personaService 
-     * @param _mensajeService 
+     * @param _personaService
+     * @param _mensajeService
      */
     constructor(
-        private _validarNumero: ValidarNumero,
-        private _formatFecha: FormatObjetoAFecha,
+        private _utilService: UtilService,
         private _localidadService: LocalidadService,
         private _personaService: PersonaService,
         private _mensajeService: MensajesService
@@ -52,7 +47,7 @@ export class RepresentanteFormComponent implements OnInit {
      */
     esNumeroDocumento(event: any) {
         let nro_docuemnto = this.datosPersona.controls.nro_documento.value;
-        if (!this._validarNumero.onKey(event)) {
+        if (!this._utilService.validarNumero(event)) {
             this.datosPersona.controls.nro_documento.setValue(nro_docuemnto.substring(0, nro_docuemnto.length - 1));
         }
     }

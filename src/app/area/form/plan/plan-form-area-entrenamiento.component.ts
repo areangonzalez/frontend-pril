@@ -1,28 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BreadcrumbsService } from "../../../breadcrumbs/breadcrumbs.service";
+import { BreadcrumbsService } from "../../../shared/breadcrumbs";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { FormatObjetoAFecha } from "../../../../shareds/fechas";
 // services
-import { MensajesService } from '../../../../services/mensajes.service';
-import { DestinatarioService } from '../../../../services/destinatario.service';
-import { OfertaService } from "../../../../services/oferta.service";
-import { AmbienteTrabajoService } from "../../../../services/ambiente-trabajo.service";
-import { AreaEntrenamientoService } from '../../../../services/area-entrenamiento.service';
+import { MensajesService, DestinatarioService, OfertaService, AmbienteTrabajoService, AreaEntrenamientoService, PlanService } from '../../../core/services';
 // MOdels
-import { AmbienteTrabajo } from "../../../../models/ambiente-trabajo.model";
-import { Oferta } from "../../../../models/oferta.model";
-import { Lugar } from "../../../../models/lugar.model";
-import { Representante } from '../../../../models/representante.model';
-import { Persona } from '../../../../models/persona.model';
-import { AreaEntrenamiento } from '../../../../models/area-entrenamiento.models';
-import { PlanService } from 'src/app/services/plan.service';
+import { AmbienteTrabajo, Oferta, Lugar, Representante, Persona, AreaEntrenamiento } from "../../../core/models";
+import { UtilService } from 'src/app/core/utils';
 
 @Component({
     selector: 'area-entrenamiento-form-plan',
     templateUrl: './plan-form-area-entrenamiento.html',
     styleUrls: ['./plan-form-area-entrenamiento.css'],
-    providers: [FormatObjetoAFecha]
 })
 export class PlanFormAreaEntrenamientoComponent implements OnInit {
     /**
@@ -72,13 +61,13 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
         private _router: Router,
         private _route: ActivatedRoute,
         private _fb: FormBuilder,
-        private _formatearFecha: FormatObjetoAFecha,
         private _mensajesService: MensajesService,
         private _destinatarioService: DestinatarioService,
         private _ofertaService: OfertaService,
         private _ambienteTrabajoService: AmbienteTrabajoService,
         private _areaEntrenamientoService: AreaEntrenamientoService,
-        private _planService: PlanService
+        private _planService: PlanService,
+        private _utilService: UtilService
     ) {
         this.areaEntrenamientoForm = _fb.group({
             id: null,
@@ -138,7 +127,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
      * @param obj objeto que contiene una fecha
      */
     formatFechaInicial(obj: any) {
-        this.areaEntrenamientoForm.controls.fecha_inicial.setValue(this._formatearFecha.onChange(obj));
+        this.areaEntrenamientoForm.controls.fecha_inicial.setValue(this._utilService.formatObjetoAFecha(obj));
     }
 
     /**

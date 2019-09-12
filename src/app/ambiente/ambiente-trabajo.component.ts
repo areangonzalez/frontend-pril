@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../breadcrumbs/breadcrumbs.service";
+import { BreadcrumbsService } from "../shared/breadcrumbs/breadcrumbs.service";
 // services
-import { AmbienteTrabajoService } from "../../services/ambiente-trabajo.service";
-import { MensajesService } from "../../services/mensajes.service";
+import { AmbienteTrabajoService } from "../core/services/ambiente-trabajo.service";
+import { MensajesService } from "../core/services/mensajes.service";
 
 @Component({
     selector: 'app-ambiente-trabajo',

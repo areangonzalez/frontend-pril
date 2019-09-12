@@ -1,18 +1,14 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { BreadcrumbsService } from '../../breadcrumbs/breadcrumbs.service';
+import { BreadcrumbsService } from '../../shared/breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from "@angular/forms";
 import { switchMap } from 'rxjs/operators';
 // services
-import { MensajesService } from "../../../services/mensajes.service";
+import { MensajesService, DestinatarioService } from "../../core/services";
 // models
-import { Lugar } from "./../../../models/lugar.model";
-import { Persona } from "../../../models/persona.model";
-import { Destinatario } from "../../../models/destinatario.model";
+import { Lugar, Persona, Destinatario } from "../../core/models";
 //modal
-import { ModalContentEstudio, ModalEstudioComponent } from "../form/modal-estudio/modal-estudio.component";
-// services
-import { DestinatarioService } from "../../../services/destinatario.service";
+import { ModalContentEstudio, ModalEstudioComponent } from "./modal-estudio/modal-estudio.component";
 
 @Component({
     selector: 'destinatario-form',

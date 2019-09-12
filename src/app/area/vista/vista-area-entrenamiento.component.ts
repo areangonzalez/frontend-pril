@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { BreadcrumbsService } from "./../../breadcrumbs/breadcrumbs.service";
-import { AreaEntrenamientoService } from 'src/app/services/area-entrenamiento.service';
-import { MensajesService } from 'src/app/services/mensajes.service';
-import { Persona } from 'src/app/models/persona.model';
-import { Lugar } from 'src/app/models/lugar.model';
-import { Representante } from 'src/app/models/representante.model';
-import { AmbienteTrabajo } from 'src/app/models/ambiente-trabajo.model';
-import { Destinatario } from 'src/app/models/destinatario.model';
+import { BreadcrumbsService } from "../../shared/breadcrumbs";
+import { AreaEntrenamientoService, MensajesService } from 'src/app/core/services';
+import { Persona, Lugar, Representante, AmbienteTrabajo, Destinatario } from 'src/app/core/models';
 
 @Component({
     selector: 'area-entrenamiento-vista',

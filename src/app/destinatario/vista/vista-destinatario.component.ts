@@ -1,11 +1,11 @@
 
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
+import { BreadcrumbsService } from "../../shared/breadcrumbs/breadcrumbs.service";
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 //services
-import { DestinatarioService } from "../../../services/destinatario.service";
-import { MensajesService } from "../../../services/mensajes.service";
+import { DestinatarioService } from "../../core/services/destinatario.service";
+import { MensajesService } from "../../core/services/mensajes.service";
 
 @Component({
     selector: 'destinatario-vista',

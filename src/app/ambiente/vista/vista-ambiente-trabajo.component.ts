@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { BreadcrumbsService } from "../../breadcrumbs/breadcrumbs.service";
+import { BreadcrumbsService } from "../../shared/breadcrumbs/breadcrumbs.service";
 // services
-import { AmbienteTrabajoService } from "../../../services/ambiente-trabajo.service";
-import { OfertaService } from "../../../services/oferta.service";
-import { MensajesService } from "../../../services/mensajes.service";
+import { AmbienteTrabajoService } from "../../core/services/ambiente-trabajo.service";
+import { OfertaService } from "../../core/services/oferta.service";
+import { MensajesService } from "../../core/services/mensajes.service";
 // models
-import { Representante } from "../../../models/representante.model";
-import { Lugar } from "../../../models/lugar.model";
-import { AmbienteTrabajo } from "../../../models/ambiente-trabajo.model";
+import { Representante } from "../../core/models/representante.model";
+import { Lugar } from "../../core/models/lugar.model";
+import { AmbienteTrabajo } from "../../core/models/ambiente-trabajo.model";
 
 @Component({
     selector: 'ambiente-trabajo-vista',

@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { MensajesService } from "../../../../services/mensajes.service";
+import { MensajesService } from "../../../core/services/mensajes.service";
 import { Observable } from "rxjs";
 
 @Component({

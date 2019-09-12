@@ -7,7 +7,7 @@ export class MensajesService {
     private subject = new Subject<any>();
     // variables para los alert de confirmación
     private respuestaConfirmacion = new Subject<any>();
-    
+
 
 
     sendMessage(message: string) {
