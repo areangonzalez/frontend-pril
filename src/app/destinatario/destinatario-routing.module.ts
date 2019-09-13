@@ -8,16 +8,16 @@ import { EstudioComponent } from "../shared/formulario/estudio/estudio.component
 const routes: Routes = [
     {
       path: '', component: DestinatarioComponent,
-      data: { loading: true, title: 'Lista destinatarios', breadcrumb: 'Destinatario' }
+      data: { loading: true, title: 'Lista destinatarios', breadcrumb: 'Lista' }
       /* resolve: { programas: ProgramaService, tipoRecursos: TipoRecursoService } */
     },
     {
       path: 'agregar', component: FormDestinatarioComponent,
       data: { loading: true, title: 'Agregar destinatario', breadcrumb: 'Agregar' }
-    },{
+    /*},{
       path: 'editar/:id', component: FormDestinatarioComponent,
       data: { loading: true, title: 'Editar destinatario', breadcrumb: 'Editar' }
-    /* },{
+    },{
       path: 'vista/:id', component: VistaDestinatarioComponent,
       data: { loading: true, title: 'Ver destinatario', breadcrumb: 'Vista' }
     },{

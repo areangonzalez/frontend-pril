@@ -13,9 +13,10 @@
                         <button class="btn btn-outline-secondary" type="button">
                             <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
                         </button>
-                        <button class="btn btn-outline-success" type="button" (click)="agregarDestinatario()">
+                        <a class="btn btn-outline-success" [routerLink]="['agregar']" ><span class="oi oi-plus" title="Agregar" aria-hidden="true"></span></a>
+                        <!-- <button class="btn btn-outline-success" type="button" (click)="agregarDestinatario()">
                             <span class="oi oi-plus" title="Agregar" aria-hidden="true"></span>
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>

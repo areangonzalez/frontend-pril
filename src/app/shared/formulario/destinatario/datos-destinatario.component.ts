@@ -7,7 +7,8 @@ import { UtilService } from 'src/app/core/utils';
 @Component({
     selector: 'datos-destinatario-form',
     templateUrl: './datos-destinatario.html',
-    styleUrls: ['./datos-destinatario.css']
+    styleUrls: ['./datos-destinatario.css'],
+    providers: [UtilService]
 })
 export class DatosDestinatarioComponent implements OnInit {
     @Input("group") public destinatario: FormGroup;
@@ -23,8 +24,7 @@ export class DatosDestinatarioComponent implements OnInit {
         private _oficioService: OficioService,
         private _mensajeService: MensajesService,
         private _utilService: UtilService
-    ){
-    }
+    ){}
 
     ngOnInit() {
          this.profesiones();

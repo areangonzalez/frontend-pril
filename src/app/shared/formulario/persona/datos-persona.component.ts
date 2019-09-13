@@ -8,7 +8,8 @@ import { SexoService, GeneroService, EstadoCivilService, PersonaService, Mensaje
 @Component({
     selector: 'datos-persona-form',
     templateUrl: './datos-persona.html',
-    styleUrls: ['./datos-persona.css']
+    styleUrls: ['./datos-persona.css'],
+    providers: [PersonaService, UtilService]
 })
 export class DatosPersonaComponent implements OnInit {
     /**
@@ -17,7 +18,7 @@ export class DatosPersonaComponent implements OnInit {
      * @var documento setea el documento cuando el formulario esta en modo edición
      */
     @Input("group") public datosPersona: FormGroup;
-    @Input("submitted") public submitted;
+    @Input("submitted") public submitted: boolean;
     @Input("documento") public setDocumento: string;
     @Input("mostrarBtnBusqueda") public mostrarBtnBusqueda: boolean;
     @Output("setListaEstudios") public setListaEstudios = new EventEmitter();

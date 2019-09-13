@@ -6,14 +6,11 @@ import { switchMap } from 'rxjs/operators';
 import { MensajesService, DestinatarioService } from "../../core/services";
 // models
 import { Lugar, Persona, Destinatario } from "../../core/models";
-//modal
-import { ModalContentEstudio, ModalEstudioComponent } from "../../shared/modal/modal-estudio.component";
 
 @Component({
     selector: 'destinatario-form',
     templateUrl: './form-destinatario.html',
-    styleUrls: ['./form-destinatario.css'],
-    entryComponents: [ModalContentEstudio]
+    styleUrls: ['./form-destinatario.css']
 })
 @Injectable()
 export class FormDestinatarioComponent implements OnInit {

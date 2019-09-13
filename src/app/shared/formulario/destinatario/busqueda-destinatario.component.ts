@@ -19,7 +19,7 @@ export class BusquedaDestinatarioComponent {
     //model: NgbDateStruct;
     //date: { year: number, month: number };
 
-    agregarDestinatario(){
-        this._router.navigate(['destinatario','agregar']);
-    }
+    /* agregarDestinatario(){
+        this._router.navigate(['./agregar']);
+    } */
 }
