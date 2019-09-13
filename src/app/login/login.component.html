@@ -16,7 +16,7 @@
                     <button [disabled]="loading" class="btn btn-lg btn-primary btn-block">Ingresar</button>
                 </div>
                 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-                <div *ngIf="submitted && (f.username.errors || f.password.errors)" class="alert alert-danger">Los campos no pueden estar en blanco.</div>
+                <div *ngIf="submitted" class="alert alert-danger">Los campos no pueden estar en blanco.</div>
             </fieldset>
         </form>
     </div>

@@ -1,8 +1,17 @@
-    <ol class="breadcrumb" style="margin-top:0.4rem;margin-bottom: 0;" *ngIf="estoyLogueado()">
+<ol class="breadcrumb breadcrum-top bg-breadcrumbs-rn mb-3" >
+    <li *ngFor="let breadcrumb of breadcrumbs; let last = last" class="breadcrumb-item" [ngClass]="{ 'list': true, 'active': last }">
+      <a *ngIf="!last" [routerLink]="hasParams(breadcrumb)">
+                          {{breadcrumb.label}}
+                      </a>
+      <span *ngIf="last">{{ breadcrumb.label }}</span>
+    </li>
+  </ol>
+
+<!--     <ol class="breadcrumb" style="margin-top:0.4rem;margin-bottom: 0;" *ngIf="estoyLogueado()">
       <li *ngFor="let breadcrumb of breadcrumbs; let last = last" class="breadcrumb-item" [ngClass]="{ 'list': true, 'active': last }">
         <a *ngIf="!last" [routerLink]="hasParams(breadcrumb)">
                             {{breadcrumb.label}}
                         </a>
         <span *ngIf="last">{{ breadcrumb.label }}</span>
       </li>
-    </ol>
+    </ol> -->

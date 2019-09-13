@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
 
         // stop here if form is invalid
         if (this.loginForm.invalid) {
+            this.error = "Por favor verifique sus datos.";
             return;
         }
 

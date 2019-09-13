@@ -3,8 +3,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 //services
-import { DestinatarioService } from "../../core/services/destinatario.service";
-import { MensajesService } from "../../core/services/mensajes.service";
+import { DestinatarioService, MensajesService } from "../../core/services";
 
 @Component({
     selector: 'destinatario-vista',

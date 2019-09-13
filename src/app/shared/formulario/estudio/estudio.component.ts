@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable, Input, Output, EventEmitter } from '@ang
 import { Router } from '@angular/router';
 import { FormGroup } from "@angular/forms";
 // services
-import { NivelEducativoService } from "../../../core/services/nivel-educativo.service";
+import { NivelEducativoService } from "../../../core/services";
 
 @Component({
     selector: 'estudio-form',

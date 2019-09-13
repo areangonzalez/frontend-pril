@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DestinatarioComponent } from "./destinatario.component";
 import { FormDestinatarioComponent } from './form/form-destinatario.component';
-import { VistaDestinatarioComponent } from "./vista/vista-destinatario.component";
-import { EstudioComponent } from "./form/estudio/estudio.component";
+/* import { VistaDestinatarioComponent } from "../shared/vista/vista-destinatario.component";
+import { EstudioComponent } from "../shared/formulario/estudio/estudio.component"; */
 
 const routes: Routes = [
     {
@@ -17,12 +17,12 @@ const routes: Routes = [
     },{
       path: 'editar/:id', component: FormDestinatarioComponent,
       data: { loading: true, title: 'Editar destinatario', breadcrumb: 'Editar' }
-    },{
+    /* },{
       path: 'vista/:id', component: VistaDestinatarioComponent,
       data: { loading: true, title: 'Ver destinatario', breadcrumb: 'Vista' }
     },{
       path: 'destinatario/estudio', component: EstudioComponent,
-      data: { loading: true, title: 'Estudio/s', breadcrumb: 'Estudio' }
+      data: { loading: true, title: 'Estudio/s', breadcrumb: 'Estudio' } */
     }
 ];
 

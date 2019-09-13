@@ -6,6 +6,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 
 import { CabeceraComponent, PieComponent } from "./layout";
+import { ListaDestinatarioComponent, ListaEstudioComponent } from "./lista";
+import { LugarComponent } from "./formulario/lugar";
+import { DatosPersonaComponent } from "./formulario/persona";
+import { DatosDestinatarioComponent, BusquedaDestinatarioComponent } from "./formulario/destinatario";
+import { EstudioComponent } from "./formulario/estudio";
+import { AutoCompletarComponent } from "./formulario/auto-completar";
+
+import { VistaDestinatarioComponent } from "./vista";
+
+import {
+  ModalConfirmacionComponent, ModalContentConfirmacion,
+  ModalEstudioComponent, ModalContentEstudio
+} from './modal'
 
 @NgModule({
   imports: [
@@ -17,11 +30,33 @@ import { CabeceraComponent, PieComponent } from "./layout";
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
-    CabeceraComponent, PieComponent
+    CabeceraComponent, PieComponent,
+    ListaDestinatarioComponent, ListaEstudioComponent,
+    LugarComponent,
+    DatosPersonaComponent,
+    DatosDestinatarioComponent, BusquedaDestinatarioComponent,
+    EstudioComponent,
+    AutoCompletarComponent,
+    VistaDestinatarioComponent,
+    ModalConfirmacionComponent, ModalContentConfirmacion,
+    ModalEstudioComponent, ModalContentEstudio
   ],
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule,
-    CabeceraComponent, PieComponent
+    CabeceraComponent, PieComponent,
+    ListaDestinatarioComponent, ListaEstudioComponent,
+    LugarComponent,
+    DatosPersonaComponent,
+    DatosDestinatarioComponent, BusquedaDestinatarioComponent,
+    EstudioComponent,
+    AutoCompletarComponent,
+    VistaDestinatarioComponent,
+    ModalConfirmacionComponent, ModalContentConfirmacion,
+    ModalEstudioComponent, ModalContentEstudio
+  ],
+  entryComponents:[
+    ModalConfirmacionComponent, ModalContentConfirmacion,
+    ModalEstudioComponent, ModalContentEstudio
   ]
 })
 export class SharedModule {}

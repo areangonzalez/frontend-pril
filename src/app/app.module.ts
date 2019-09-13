@@ -2,7 +2,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 /* Routing */
@@ -50,7 +49,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    //{ provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
     Title,
     BreadcrumbsService,

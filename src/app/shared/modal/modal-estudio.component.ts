@@ -1,6 +1,6 @@
-import { Component, Input, Injectable, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Injectable } from '@angular/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 
 @Component({
@@ -60,7 +60,7 @@ export class ModalContentEstudio {
                     if (!this.validarNivelEducativo(this.estudiosForm.value.nivel_educativoid)) {
                         this.errorNivelEducativo = false;
                         this.activeModal.close(this.estudiosForm.value);
-                    } else {// si existe coincidencia aviso al usuario con un error 
+                    } else {// si existe coincidencia aviso al usuario con un error
                         this.errorNivelEducativo = true;
                         return;
                     }
@@ -68,8 +68,8 @@ export class ModalContentEstudio {
                     // valido nivel educativo
                     if (!this.validarNivelEducativo(this.estudiosForm.value.nivel_educativoid)) {
                         this.errorNivelEducativo = false;
-                        this.activeModal.close(this.estudiosForm.value);    
-                    }else{// si existe coincidencia aviso al usuario con un error 
+                        this.activeModal.close(this.estudiosForm.value);
+                    }else{// si existe coincidencia aviso al usuario con un error
                         this.errorNivelEducativo = true;
                         return;
                     }
@@ -125,10 +125,10 @@ export class ModalEstudioComponent {
                 }
             }, (reason) => {
                 if (reason === ModalDismissReasons.ESC) {
-                    
+
                 }
             }
         );
     }
-    
+
 }

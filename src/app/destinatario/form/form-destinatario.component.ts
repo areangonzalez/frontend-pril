@@ -7,7 +7,7 @@ import { MensajesService, DestinatarioService } from "../../core/services";
 // models
 import { Lugar, Persona, Destinatario } from "../../core/models";
 //modal
-import { ModalContentEstudio, ModalEstudioComponent } from "./modal-estudio/modal-estudio.component";
+import { ModalContentEstudio, ModalEstudioComponent } from "../../shared/modal/modal-estudio.component";
 
 @Component({
     selector: 'destinatario-form',

@@ -1,13 +1,12 @@
 // Imports necesarios para crear módulos
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ListaOfertaComponent } from "./../ambiente/oferta/lista/lista-oferta.component";
-import { DestinatarioModule } from "../destinatario/destinatario.module";
+import { SharedModule } from "../shared";
 import { AreaEntrenamientoRoutingModule } from "./area-entrenamiento-routing.module";
 
 //Importo los componentes
+//import { ListaOfertaComponent } from "./../ambiente/oferta/lista/lista-oferta.component";
 import { AreaEntrenamientoComponent } from './area-entrenamiento.component';
 import { ListaAreaEntrenamientoComponent } from './lista/lista-area-entrenamiento.component';
 import { BusquedaAreaEntrenamientoComponent } from "./busqueda/busqueda-area-entrenamiento.component";
@@ -22,9 +21,8 @@ import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamient
 // Metadatos del módulo
 @NgModule({
     declarations: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, DestinatarioModule, NgbModule, AreaEntrenamientoRoutingModule],
+    imports: [CommonModule, NgbModule, SharedModule,  AreaEntrenamientoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, ReactiveFormsModule],
-    entryComponents: [ListaOfertaComponent]
+    exports: [AreaEntrenamientoComponent, ListaAreaEntrenamientoComponent, BusquedaAreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent, ListaDestinatarioAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent]
 })
 export class AreaEntrenamientoModule { }
