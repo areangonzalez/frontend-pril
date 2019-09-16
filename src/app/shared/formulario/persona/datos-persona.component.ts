@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from "@angular/forms";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UtilService } from "../../../core/utils";
 // services
 import { SexoService, GeneroService, EstadoCivilService, PersonaService, MensajesService } from "../../../core/services";
@@ -30,9 +30,9 @@ export class DatosPersonaComponent implements OnInit {
      * @var estadoCivilLista Object listado de estado civil
      */
     public cuil_medio = '';
-    public sexoLista:Object = [];
-    public generoLista:Object = [];
-    public estadoCivilLista:Object = [];
+    public sexoLista:any = [];
+    public generoLista:any = [];
+    public estadoCivilLista:any = [];
     nroDocumentoBusqueda:string = '';
 
     /**
@@ -42,59 +42,21 @@ export class DatosPersonaComponent implements OnInit {
      * @param _estadoCivilService servicio para obtener las funciones de estado civil
      */
     constructor(
-      private _sexoService: SexoService,
-      private _generoService: GeneroService,
-      private _estadoCivilService: EstadoCivilService,
+      private _route: ActivatedRoute,
       private _personaService: PersonaService,
       private _mensajeService: MensajesService,
       private _utilService: UtilService
     ){}
 
     ngOnInit(){
-        this.listarSexo();
-        this.listarGenero();
-        this.listarEstadoCivil();
+      this.sexoLista = this._route.snapshot.data['sexo'];
+      this.generoLista = this._route.snapshot.data['genero'];
+      this.estadoCivilLista = this._route.snapshot.data['estadoCivil'];
     }
     /**
      * @function persona se utiliza para controlar el objeto del formulario de persona
      */
     get persona() { return this.datosPersona.controls; }
-
-    /*** Listas para el compoente  ***/
-
-    /**
-     * @function listarSexo obtiene el listado de sexo
-     */
-    listarSexo(){
-        this._sexoService.listado().subscribe(
-            datos => {
-                this.sexoLista = datos;
-        }, error => {
-            console.log("error del sistema");
-        });
-    }
-    /**
-     * @function listarGenero obtiene el listado de genero
-     */
-    listarGenero() {
-        this._generoService.listado().subscribe(
-            datos => {
-                this.generoLista = datos;
-            }, error => {
-                console.log("error del sistema");
-            });
-    }
-    /**
-     * @function listarGenero obtiene el listado de genero
-     */
-    listarEstadoCivil() {
-        this._estadoCivilService.listado().subscribe(
-            datos => {
-                this.estadoCivilLista = datos;
-            }, error => {
-                console.log("error del sistema");
-            });
-    }
 
     /*** Funciones para el compoente  ***/
 
@@ -166,7 +128,13 @@ export class DatosPersonaComponent implements OnInit {
     validarPersonaPorNroDocumento(nro_documento){
         if (nro_documento != '') {
             this.nroDocumentoBusqueda = nro_documento;
-            this._personaService.personaPorNroDocumento(nro_documento).subscribe(
+            this._personaService.personaPorNroDocumento(nro_documento)
+            .map(datos => {
+              console.log(datos);
+
+              return datos;
+            })
+            .subscribe(
                 respuesta => {
                     if (respuesta['estado']){
                         let persona = respuesta['resultado'][0];

@@ -125,12 +125,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // get users
             if (request.url.endsWith('/apimock/users') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: [testUser] }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
         /* ************************************************************************
          *                                DESTINATARIO
@@ -138,13 +138,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // lista de destinatario
             if (request.url.endsWith('/apimock/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let totalF = destinatarioLista.length;
                     return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, coleccion: destinatarioLista  } }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
             // Agregar destinatario
             if (request.url.endsWith('/apimock/destinatarios') && request.method === 'POST') {
@@ -243,7 +243,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // conseguir destinatario por id
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let respuesta = {};
                     // find user by id in users array
                     let urlParts = request.url.split('/');
@@ -253,10 +253,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                     respuesta = { status: 200, body: seleccion };
                     return of(new HttpResponse(respuesta));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
             // Editar destinatario
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'PUT') {
@@ -363,13 +363,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'GET') {
                 console.log('terminando');
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   let totalF = ambienteLista.length;
                     return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, coleccion: ambienteLista  } }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
 
             // Crear ambiente de trabajo
@@ -433,7 +433,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // conseguir AMBIENTE DE TRABAJO por id
             if (request.url.match(/\/ambiente\-trabajos\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let mensaje = 'No existe este ambiente';
                     // find user by id in users array
                     let urlParts = request.url.split('/');
@@ -442,10 +442,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
 
                     return of(new HttpResponse({ status: 200, body: seleccion }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
 
             // Editar ambiente trabajo
@@ -515,7 +515,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // Buscar ofertas por ambiente
             if (request.url.endsWith('/apimock/ofertas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let ambienteId = request.params.get('ambiente_trabajoid');
                     let oficioNombre = request.params.get('oficio');
                     let deseoActividad = request.params.get('deseo_actividad');
@@ -552,10 +552,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
 
 
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
 
             // Crear ofertas
@@ -605,7 +605,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // conseguir OFERTA por id
             if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     // find user by id in users array
                     let urlParts = request.url.split('/');
                     let id = parseInt(urlParts[urlParts.length - 1]);
@@ -613,16 +613,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let seleccion = matchedOferta.length ? matchedOferta[0] : null;
 
                     return of(new HttpResponse({ status: 200, body: seleccion }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
 
             // BORRAR OFERTA
             if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'DELETE') {
               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+              // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   // find user by id in users array
                   let urlParts = request.url.split('/');
                   let id = parseInt(urlParts[urlParts.length - 1]);
@@ -640,10 +640,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
                   return of(new HttpResponse({ status: 200, body: {mensaje:mensaje} }));
-              } else {
+              /* } else {
                   // return 401 not authorised if token is null or invalid
                   return throwError({ error: { message: 'Unauthorised' } });
-              }
+              } */
           }
 
             // Editar Oferta
@@ -744,7 +744,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           // Listar Areas de entrenamientos
           if (request.url.endsWith('/apimock/area-entrenamientos') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+              // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let totalF = areasLista.length;
                 let areaColeccion: any[] = [];
 
@@ -785,16 +785,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 }
                 return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, coleccion: areaColeccion  } }));
-            } else {
-                // return 401 not authorised if token is null or invalid
-                return throwError({ error: { message: 'Unauthorised' } });
-            }
+            // } else {
+            //     // return 401 not authorised if token is null or invalid
+            //     return throwError({ error: { message: 'Unauthorised' } });
+            // }
         }
 
         // conseguir Area de entrenamiento por id
         if (request.url.match(/\/area\-entrenamientos\/\d+$/) && request.method === 'GET') {
           // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-          if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+          // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
               // find user by id in users array
               let urlParts = request.url.split('/');
               let id = parseInt(urlParts[urlParts.length - 1]);
@@ -834,10 +834,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               };
 
               return of(new HttpResponse({ status: 200, body: areaVista }));
-          } else {
-              // return 401 not authorised if token is null or invalid
-              return throwError({ error: { message: 'Unauthorised' } });
-          }
+          // } else {
+          //     // return 401 not authorised if token is null or invalid
+          //     return throwError({ error: { message: 'Unauthorised' } });
+          // }
       }
 
 
@@ -848,7 +848,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // Buscar personas
             if (request.url.endsWith('/apimock/personas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                console.log(request.params);
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let nro_documento = request.params.get('nro_documento');
                     let mensaje:string = 'Esta persona no existe.';
 
@@ -862,10 +863,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
 
                     return of(new HttpResponse({ status: 200, body: resultado[0] }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
 
         /* ************************************************************************
@@ -875,93 +876,93 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // lista tipos de ambientes de trabajos
             if (request.url.endsWith('/apimock/tipo-ambiente-trabajos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: tipoAmbienteTrabajoLista }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
             // profesiones
             if (request.url.endsWith('/apimock/profesions') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: profesion }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
             // oficios
             if (request.url.endsWith('/apimock/oficios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // /* if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') { */
                     return of(new HttpResponse({ status: 200, body: oficio }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // /* } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // } */
             }
             //sexo
             if (request.url.endsWith('/apimock/sexos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // /* if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') { */
                     return of(new HttpResponse({ status: 200, body: sexo }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // /* } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // } */
             }
             // genero
             if (request.url.endsWith('/apimock/generos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // /* if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') { */
                     return of(new HttpResponse({ status: 200, body: genero }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // /* } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // } */
             }
             // Estado Civil
             if (request.url.endsWith('/apimock/estado-civils') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // /* if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') { */
                     return of(new HttpResponse({ status: 200, body: estadoCivil }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // /* } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // } */
             }
             //localidades
             if (request.url.endsWith('/apimock/localidads') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: localidad }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
             //Nivel educativo
             if (request.url.endsWith('/apimock/nivel-educativos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: nivelEducativo }));
-                } else {
-                    // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
-                }
+                // } else {
+                //     // return 401 not authorised if token is null or invalid
+                //     return throwError({ error: { message: 'Unauthorised' } });
+                // }
             }
 
             //Planes
             if (request.url.endsWith('/apimock/plans') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-              if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+              // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   return of(new HttpResponse({ status: 200, body: planes }));
-              } else {
-                  // return 401 not authorised if token is null or invalid
-                  return throwError({ error: { message: 'Unauthorised' } });
-              }
+              // } else {
+              //     // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
           }
 
             // pass through any requests not handled above

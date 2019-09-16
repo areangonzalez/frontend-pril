@@ -35,7 +35,6 @@ export class DestinatarioComponent implements OnInit {
             },
             error => {
                 this._mensajeService.cancelado(error, [{name:''}]);
-                console.log(<any>error);
             }
         );
     }
