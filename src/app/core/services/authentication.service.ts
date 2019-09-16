@@ -1,26 +1,45 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { environment } from "../../../environments/environment";
+import { ApiService } from './api.service';
+import { JwtService } from "./jwt.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    url: string = environment.baseUrl + '/usuario/login';
-    constructor(private http: HttpClient) { }
+    constructor(
+      private _apiService: ApiService,
+      private _jwtService: JwtService
+    ) { }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(this.url, { username: username, password_hash: password })
+    login(params) {
+        return this._apiService.post('/usuario/login', { username: params.username, password_hash: params.password })
             .pipe(map((res: any) => {
                 // login successful if there's a jwt token in the response
                 if (res && res.access_token) {
-                    // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('token-pril', JSON.stringify({ username, token: res.access_token }));
+                  let data = { username: '', token:'' };
+                  data.username = res.username;
+                  data.token = res.access_token;
+                  this._jwtService.saveToken(data);
                 }
             }));
     }
 
     logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('token-pril');
+      // remove user from local storage to log user out
+      this._jwtService.destroyToken();
+  }
+
+    loggedIn() {
+      let userLogin = this._jwtService.getToken();
+      if(userLogin && userLogin.datosToken) {
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    getUserName() {
+      let userLogin = this._jwtService.getToken();
+
+      return userLogin.datosToken.username;
     }
 }

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AuthenticationService } from '../core/services/authentication.service';
+import { AuthenticationService } from '../core/services';
 
 @Component({
     selector: 'app-login',
@@ -11,55 +11,49 @@ import { AuthenticationService } from '../core/services/authentication.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    public loginForm: FormGroup;
-    public loading = false;
-    public submitted = false;
-    public returnUrl: string;
-    public error = '';
+  public loginForm: FormGroup;
+  public logueado: boolean = false;
+  public huboError: boolean = false;
+  public mensaje: string = "";
+  public returnUrl: string;
 
-    constructor(
-      private router: Router,
-      private _fb: FormBuilder,
-      private route: ActivatedRoute,
-      private authenticationService: AuthenticationService)
-      {
-        this.loginForm = this._fb.group({
-          username: ['', Validators.required],
-          password: ['', Validators.required]
-        });
-      }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private _auth: AuthenticationService,
+    private _fb: FormBuilder
+  ){
+    this.loginForm = _fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
-    ngOnInit() {
-        // reset login status
-        this.authenticationService.logout();
 
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/inicio';
-    }
+  ngOnInit() {
+    this.isLogin();
 
-    // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/inicio';
+  }
 
-    onSubmit() {
-        this.submitted = true;
+  public ingresar() {
 
-        // stop here if form is invalid
-        if (this.loginForm.invalid) {
-            this.error = "Por favor verifique sus datos.";
-            return;
-        }
-
-        this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this._auth.login(this.loginForm.value)
             .pipe(first())
             .subscribe(
             data => {
                 this.router.navigate([this.returnUrl]);
             },
             error => {
-                this.error = error;
-                this.loading = false;
+              this.huboError = true;
+              this.mensaje = "Por favor verifique sus datos.";
             });
+  }
+
+  private isLogin(){
+    if (localStorage.getItem('token-rrss') != null) {
+       this.router.navigate(['/inicio']);
     }
+  }
 }
 
