@@ -16,7 +16,7 @@ export class EstadoCivilService {
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot,
       ): Observable<any>|Promise<any>|any {
-          return this._apiService.get('/sexos');
+          return this._apiService.get('/estado-civils');
       }
 
 }

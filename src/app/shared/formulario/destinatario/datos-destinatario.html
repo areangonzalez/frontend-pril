@@ -8,20 +8,16 @@
     <div class="row">
         <div class="form-group col-md-6">
             <label for="deseo_actividad" class="prioridad">Actividad en la que se desea formación y entrenamiento (<span>*</span>):</label>
-            <input type="text" id="deseo_actividad" placeholder="Actividad o formación que se desea" class="form-control" formControlName="deseo_actividad" [ngClass]="{'is-invalid': (destinatarioForm.deseo_actividad.invalid && submitted)}">
-            <div *ngIf="(destinatarioForm.deseo_actividad.invalid && submitted)"
+            <input type="text" id="deseo_actividad" placeholder="Actividad o formación que se desea" class="form-control" formControlName="deseo_actividad" [ngClass]="{'is-invalid': (destinatario.get('deseo_actividad').invalid && submitted)}">
+            <div *ngIf="(destinatario.get('deseo_actividad').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatarioForm.deseo_actividad.errors.required">Este campo es requerido. </div>
-                <div *ngIf="destinatarioForm.deseo_actividad.errors.minlength">Por favor, escriba una actividad valida.</div>
+                <div *ngIf="destinatario.get('deseo_actividad').hasError('required')">Este campo es requerido. </div>
+                <div *ngIf="destinatario.get('deseo_actividad').hasError('minlength')">Por favor, escriba una actividad valida.</div>
             </div>
         </div>
         <div class="form-group col-md-6">
             <label for="deseo_lugar_entrenamiento">Lugar donde se pretende adquirir entrenamiento (<span class="opcional">Opcional</span>):</label>
             <input type="text" id="deseo_lugar_entrenamiento" placeholder="Lugar donde se desea el entrenamiento" class="form-control" formControlName="deseo_lugar_entrenamiento">
-        </div>
-        <div class="form-group col-md-4">
-            <auto-completar [listado]="listaProfesiones" [titulo]="'Profesión'"
-                            [placeHolder]="'Seleccione una profesión'" [nombreValor]="getNombreListadoPorId(setProfesionid, listaProfesiones)" (seleccionaValor)="getProfesion($event)" ></auto-completar>
         </div>
         <div class="form-group col-md-4">
             <auto-completar [listado]="listaOficios" [titulo]="'Oficio'"
@@ -34,36 +30,36 @@
         <div class="form-group col-md-12">
             <label for="conocimientos_basicos" class="prioridad">Conocimientos básicos sobre la actividad que desea recibir formación y entrenamiento (<span>*</span>):</label>
             <input type="text" id="conocimientos_basicos" placeholder="Conocimientos básicos" class="form-control" formControlName="conocimientos_basicos"
-             [ngClass]="{'is-invalid': (destinatarioForm.conocimientos_basicos.invalid && submitted)}">
-            <div *ngIf="(destinatarioForm.conocimientos_basicos.invalid && submitted)"
+             [ngClass]="{'is-invalid': (destinatario.get('conocimientos_basicos').invalid && submitted)}">
+            <div *ngIf="(destinatario.get('conocimientos_basicos').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatarioForm.conocimientos_basicos.errors.required">Este campo es requerido. </div>
-                <div *ngIf="destinatarioForm.conocimientos_basicos.errors.minlength">El texto es muy corto.</div>
+                <div *ngIf="destinatario.get('conocimientos_basicos').hasError('required')">Este campo es requerido. </div>
+                <div *ngIf="destinatario.get('conocimientos_basicos').hasError('minlength')">El texto es muy corto.</div>
             </div>
         </div>
         <div class="form-group col-md-8">
             <label for="Organismo_pril" class="prioridad">Organismo donde se presento documentación y planilla de inscripción al PRIL (<span>*</span>):</label>
             <input type="text" id="organismo_pril" placeholder="Organismo donde se presento documentación o planilla de inscripción" class="form-control"
-                formControlName="origen" [ngClass]="{'is-invalid': (destinatarioForm.origen.invalid && submitted)}">
-            <div *ngIf="(destinatarioForm.origen.invalid && submitted)"
+                formControlName="origen" [ngClass]="{'is-invalid': (destinatario.get('origen').invalid && submitted)}">
+            <div *ngIf="(destinatario.get('origen').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatarioForm.origen.errors.required">Este campo es requerido. </div>
+                <div *ngIf="destinatario.get('origen').hasError('required')">Este campo es requerido. </div>
             </div>
         </div>
         <div class="form-group col-md-4">
             <label for="fecha_presentacion" class="prioridad">Fecha presentación (<span>*</span>):</label>
             <div class="input-group">
                 <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #fd="ngbDatepicker" id="fecha_presentacion" formControlName="fechaPresentacion"
-                    (ngModelChange)="formatFechapresentacion($event)" [ngClass]="{'is-invalid': (destinatarioForm.fechaPresentacion.invalid && submitted)}">
+                    (ngModelChange)="formatFechapresentacion($event)" [ngClass]="{'is-invalid': (destinatario.get('fechaPresentacion').invalid && submitted)}">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-info" (click)="fd.toggle()" type="button" [ngClass]="{'btn-outline-danger': (destinatarioForm.fechaPresentacion.invalid && submitted)}">
+                    <button class="btn btn-outline-info" (click)="fd.toggle()" type="button" [ngClass]="{'btn-outline-danger': (destinatario.get('fechaPresentacion').invalid && submitted)}">
                         <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
                     </button>
                 </div>
             </div>
-            <div *ngIf="(destinatarioForm.fechaPresentacion.invalid && submitted)"
+            <div *ngIf="(destinatario.get('fechaPresentacion').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="destinatarioForm.fechaPresentacion.errors.required">Este campo es requerido. </div>
+                <div *ngIf="destinatario.get('fechaPresentacion').hasError('required')">Este campo es requerido. </div>
             </div>
         </div>
     </div>

@@ -16,6 +16,6 @@ export class GeneroService {
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot,
       ): Observable<any>|Promise<any>|any {
-          return this._apiService.get('/sexos');
+          return this._apiService.get('/generos');
       }
 }

@@ -2,14 +2,14 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="nivel_educativo" class="prioridad">Nivel educativo (<span>*</span>):</label>
-                <select class="form-control" id="nivel_educativo" formControlName="nivel_educativoid" (change)="seleccionarNombre($event)" [ngClass]="{'is-invalid': ((estudiosForm.nivel_educativoid.invalid && submitted) || errorNivelEducativo)}">
+                <select class="form-control" id="nivel_educativo" formControlName="nivel_educativoid" (change)="seleccionarNombre($event)" [ngClass]="{'is-invalid': ((estudios.nivel_educativoid.invalid && submitted) || errorNivelEducativo)}">
                         <option value="">Seleccione Nivel educativo</option>
                         <option *ngFor="let nivel of listaNivelEducativo" value="{{nivel.id}}">{{nivel.nombre}}</option>
                     </select>
                 <div *ngIf="errorNivelEducativo" class="text-danger">Por favor seleccione otro nivel educativo!!</div>
-                <div *ngIf="(estudiosForm.nivel_educativoid.invalid && submitted)"
+                <div *ngIf="(estudios.get('nivel_educativoid').invalid && submitted)"
                     class="text-danger">
-                    <div *ngIf="estudiosForm.nivel_educativoid.errors.required">Por favor Seleccione nivel educativo. </div>
+                    <div *ngIf="estudios.get('nivel_educativoid').hasError('required')">Por favor Seleccione nivel educativo. </div>
                 </div>
             </div>
             <div class="form-group form-check col-md-3">
@@ -22,10 +22,10 @@
             </div>
             <div class="form-group col-md-9">
                 <label for="titulo" class="prioridad">Título (<span>*</span>):</label>
-                <input type="text" id="titulo" placeholder="titulo" class="form-control" formControlName="titulo" [ngClass]="{'is-invalid': (estudiosForm.titulo.invalid && submitted)}">
-                <div *ngIf="(estudiosForm.titulo.invalid && submitted)"
+                <input type="text" id="titulo" placeholder="titulo" class="form-control" formControlName="titulo" [ngClass]="{'is-invalid': (estudios.get('titulo').invalid && submitted)}">
+                <div *ngIf="(estudios.get('titulo').invalid && submitted)"
                     class="text-danger">
-                    <div *ngIf="estudiosForm.titulo.errors.required">Este campo es requerido. </div>
+                    <div *ngIf="estudios.get('titulo').hasError('required')">Este campo es requerido. </div>
                 </div>
             </div>
             <div *ngIf="estudioCompleto" class="form-group col-md-3" style="margin-top:4px;">
@@ -34,6 +34,10 @@
                         <option value="">Seleccione año</option>
                         <option *ngFor="let anio of listaAnios" value="{{anio}}">{{anio}}</option>
                 </select>
+            </div>
+            <div class="form-group col-md-6">
+                <auto-completar [listado]="listaProfesiones" [titulo]="'Profesión'"
+                                [placeHolder]="'Seleccione una profesión'" [nombreValor]="getNombreListadoPorId(setProfesionid, listaProfesiones)" (seleccionaValor)="getProfesion($event)" ></auto-completar>
             </div>
         </div>
 </fieldset>

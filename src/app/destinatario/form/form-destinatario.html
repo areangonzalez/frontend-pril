@@ -12,7 +12,7 @@
     </div>
   </div>
   <form [formGroup]="destinatarioForm" >
-    <datos-persona-form [group]="destinatarioForm.get('persona')" [submitted]="submitted" [documento]="nroDoc" (setListaEstudios)="setListaEstudios($event)" [mostrarBtnBusqueda]="mostrarBoton" ></datos-persona-form>
+    <datos-persona-form [group]="destinatarioForm.get('persona')" [submitted]="submitted" [documento]="nroDoc" (setListaEstudios)="setListaEstudios($event)" [sexoLista]="sexoLista" [generoLista]="generoLista" [estadoCivilLista]="estadoCivilLista" [mostrarBtnBusqueda]="mostrarBoton" ></datos-persona-form>
     <div class="d-flex justify-content-between">
         <div class="col-5 pt-1">
             <hr>
@@ -28,7 +28,7 @@
     </div>
 
 
-    <lista-estudio [listaEstudios]="listaEstudios" [tipo]="1"></lista-estudio>
+    <lista-estudio [listaEstudios]="listaEstudios" [setProfesion]="profesionid" [tipo]="1"></lista-estudio>
     <div class="d-flex justify-content-between">
         <div class="col-5 pt-1">
             <hr>
@@ -42,7 +42,7 @@
         <hr>
       </div>
     </div>
-    <datos-destinatario-form [group]="destinatarioForm.get('destinatario')" [submitted]="submitted" [setProfesion]="profesionid" [setOficio]="oficioid" ></datos-destinatario-form>
+    <datos-destinatario-form [group]="destinatarioForm.get('destinatario')" [submitted]="submitted" [setOficio]="oficioid" ></datos-destinatario-form>
     <hr>
     <div class="float-right">
         <button type="button" class="btn btn-danger" (click)="volver()"><span class="oi oi-ban" title="Guardar" aria-hidden="true"></span> Cancelar</button> &nbsp;

@@ -31,6 +31,9 @@ export class FormDestinatarioComponent implements OnInit {
     oficioid: number = 0;
     id: any;
     mostrarBoton: boolean = true;
+    public sexoLista: any;
+    public generoLista: any;
+    public estadoCivilLista: any;
 
 
     /**
@@ -64,6 +67,8 @@ export class FormDestinatarioComponent implements OnInit {
                 telefono: '',
                 celular: '',
                 email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+                profesionid: null,
+                //oficioid: null,
                 lugar: _fb.group({
                     id: 0,
                     localidadid: ['', Validators.required],
@@ -82,10 +87,9 @@ export class FormDestinatarioComponent implements OnInit {
                 fecha_presentacion: '',
                 deseo_actividad: ['', [Validators.required, Validators.minLength(3)]],
                 deseo_lugar_entrenamiento: '',
-                profesionid: null,
-                oficioid: null,
                 experiencia_laboral: [false, Validators.required],
                 conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]],
+                oficioid: null,
                 banco_cbu: '',
                 banco_nombre: '',
                 banco_alias: '',
@@ -95,6 +99,9 @@ export class FormDestinatarioComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.sexoLista = this._route.snapshot.data['sexo'];
+      this.generoLista = this._route.snapshot.data['genero'];
+      this.estadoCivilLista = this._route.snapshot.data['estadoCivil'];
         // obtener parametro
         this.id = this._route.snapshot.paramMap.get('id');
         if (this.id != undefined) {

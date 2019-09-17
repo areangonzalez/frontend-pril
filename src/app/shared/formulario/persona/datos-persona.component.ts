@@ -20,6 +20,9 @@ export class DatosPersonaComponent implements OnInit {
     @Input("group") public datosPersona: FormGroup;
     @Input("submitted") public submitted: boolean;
     @Input("documento") public setDocumento: string;
+    @Input("sexoLista") public sexoLista: any;
+    @Input("generoLista") public generoLista: any;
+    @Input("estadoCivilLista") public estadoCivilLista: any;
     @Input("mostrarBtnBusqueda") public mostrarBtnBusqueda: boolean;
     @Output("setListaEstudios") public setListaEstudios = new EventEmitter();
 
@@ -30,9 +33,6 @@ export class DatosPersonaComponent implements OnInit {
      * @var estadoCivilLista Object listado de estado civil
      */
     public cuil_medio = '';
-    public sexoLista:any = [];
-    public generoLista:any = [];
-    public estadoCivilLista:any = [];
     nroDocumentoBusqueda:string = '';
 
     /**
@@ -48,15 +48,7 @@ export class DatosPersonaComponent implements OnInit {
       private _utilService: UtilService
     ){}
 
-    ngOnInit(){
-      this.sexoLista = this._route.snapshot.data['sexo'];
-      this.generoLista = this._route.snapshot.data['genero'];
-      this.estadoCivilLista = this._route.snapshot.data['estadoCivil'];
-    }
-    /**
-     * @function persona se utiliza para controlar el objeto del formulario de persona
-     */
-    get persona() { return this.datosPersona.controls; }
+    ngOnInit(){}
 
     /*** Funciones para el compoente  ***/
 
@@ -129,27 +121,35 @@ export class DatosPersonaComponent implements OnInit {
         if (nro_documento != '') {
             this.nroDocumentoBusqueda = nro_documento;
             this._personaService.personaPorNroDocumento(nro_documento)
-            .map(datos => {
-              console.log(datos);
+            .map(vDatos => {
+              let vPersona = {};
+              if (vDatos.estado) {
+                // seteo listado de estudio
+                this.setListaEstudios.emit(vDatos.resultado[0]['estudios']);
+                // borro datos que no sirven
+                delete vDatos.resultado[0]['estudios'];
+                delete vDatos.resultado[0]['fax'];
 
-              return datos;
+                // agrego los datos de persona
+                vPersona = vDatos.resultado[0];
+                // ingreso el estado
+                vPersona['estado'] = vDatos.estado;
+                // configuro las variables del formulario
+                vPersona['cuil_prin'] = this.primerosDigitosCuil(vDatos.resultado[0]['cuil']);
+                vPersona['cuil_ult'] = this.ultimoDigitoCuil(vDatos.resultado[0]['cuil']);
+                vPersona['fechaNacimiento'] = this.fechaAObjeto(vDatos.resultado[0]['fecha_nacimiento']);
+              }else{
+                vPersona['estado'] = vDatos.estado;
+                vPersona['message'] = vDatos.message;
+              }
+              // returno el array pre-armado
+              return vPersona;
             })
             .subscribe(
                 respuesta => {
-                    if (respuesta['estado']){
-                        let persona = respuesta['resultado'][0];
-                        // actualizo la lista de estudio enviandolo al componente padre.
-                        this.setListaEstudios.emit(persona.estudios);
-                        // borro los estudios y fax del objeto
-                        delete persona.estudios;
-                        delete persona.fax;
-                        // Agrego parametros que son representativos en el formulario.
-                        persona['cuil_prin'] = this.primerosDigitosCuil(persona.cuil);
-                        persona['cuil_ult'] = this.ultimoDigitoCuil(persona.cuil);
-                        persona['fechaNacimiento'] = this.fechaAObjeto(persona.fecha_nacimiento);
-                        // seteo los valores al formularios con los datos de persona
-                        this.datosPersona.setValue(persona);
-                    }else{
+                  if (respuesta['estado']){
+                    this.datosPersona.patchValue(respuesta);
+                  }else{
                         this.resetForm(this.datosPersona);
                         this._mensajeService.cancelado(respuesta['message'], [{ name: '' }]);
                         this.datosPersona.controls.nro_documento.setValue(nro_documento);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Alert, AlertType, IUrl } from "../models/alert.model";
+import { Alert, AlertType, IUrl } from "../models";
 
 @Injectable()
 export class MensajesService {

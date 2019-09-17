@@ -21,7 +21,7 @@
                 </td>
                 <td class="text-center">{{lista.anio}}</td>
                 <td class="text-center" *ngIf="!(tipo == 0)">
-                    <modal-estudio [listaEstudios]="listaEstudios" [tipo]="'editar'" [estudio]="lista" [id]="i"></modal-estudio>
+                    <modal-estudio [setProfesionId]="setProfesionid" [listaEstudios]="listaEstudios" [tipo]="'editar'" [estudio]="lista" [id]="i"></modal-estudio>
                     <modal-confirmacion [listaEstudios]="listaEstudios" [id]="i" ></modal-confirmacion>
                 </td>
             </tr>
