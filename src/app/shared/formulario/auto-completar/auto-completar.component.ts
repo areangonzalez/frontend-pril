@@ -38,16 +38,17 @@ export class AutoCompletarComponent {
         return element;
     }
 
-    seleccionaElemento(listado, valor){
+    seleccionaElemento(){
         let seleccion: any;
         // busco el elemento en la lista
-        for (var key in listado) {
+        for (var key in this.listado) {
             // verifico que exista el elemento
-            if (listado[key].nombre == valor) {
-                seleccion = listado[key];
+            if (this.listado[key].nombre == this.model) {
+                seleccion = this.listado[key];
             }
         }
         // Reviso si hubo una selección
+        console.log(seleccion);
         if (seleccion != undefined) {
             this.seleccionaValor.emit(seleccion);
         }else{// sino hubo seleccion mando un mensaje de error

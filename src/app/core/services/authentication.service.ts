@@ -30,7 +30,7 @@ export class AuthenticationService {
 
     loggedIn() {
       let userLogin = this._jwtService.getToken();
-      if(userLogin && userLogin.datosToken) {
+      if(userLogin && userLogin['datosToken']) {
         return true;
       }else{
         return false;
@@ -40,6 +40,6 @@ export class AuthenticationService {
     getUserName() {
       let userLogin = this._jwtService.getToken();
 
-      return userLogin.datosToken.username;
+      return userLogin['datosToken'].username;
     }
 }

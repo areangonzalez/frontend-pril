@@ -13,7 +13,6 @@ import { UtilService } from 'src/app/core/utils';
 export class DatosDestinatarioComponent implements OnInit {
     @Input("group") public destinatario: FormGroup;
     @Input("submitted") public submitted;
-    @Input("setOficio") public setOficioid;
 
 
     public listaOficios:object;
@@ -24,10 +23,7 @@ export class DatosDestinatarioComponent implements OnInit {
         private _utilService: UtilService
     ){}
 
-    ngOnInit() {
-
-         this.oficios();
-    }
+    ngOnInit() {}
 
     formatFechapresentacion(obj: any) {
         this.destinatario.controls.fecha_presentacion.setValue(this._utilService.formatObjetoAFecha(obj));
@@ -38,29 +34,4 @@ export class DatosDestinatarioComponent implements OnInit {
             obj.value = obj.value.substring(0, obj.value.length - 1);
         }
     }
-
-    oficios() {
-        this._oficioService.listarOficios().subscribe(
-            data => {
-                return this.listaOficios = data;
-            },
-            error => {
-              this._mensajeService.cancelado(error, [{name:''}]);
-            }
-        );
-    }
-
-    getOficio(oficio){
-        this.destinatario.controls.oficioid.setValue(oficio.id);
-    }
-
-    getNombreListadoPorId(id, listado){
-      let seleccion = "";
-      for (var key in listado) {
-          if(listado[key].id == id ){
-              seleccion = listado[key].nombre;
-          }
-      }
-      return seleccion;
-  }
 }

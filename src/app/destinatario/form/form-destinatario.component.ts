@@ -68,7 +68,6 @@ export class FormDestinatarioComponent implements OnInit {
                 celular: '',
                 email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
                 profesionid: null,
-                //oficioid: null,
                 lugar: _fb.group({
                     id: 0,
                     localidadid: ['', Validators.required],
@@ -89,7 +88,6 @@ export class FormDestinatarioComponent implements OnInit {
                 deseo_lugar_entrenamiento: '',
                 experiencia_laboral: [false, Validators.required],
                 conocimientos_basicos: ['', [Validators.required, Validators.minLength(3)]],
-                oficioid: null,
                 banco_cbu: '',
                 banco_nombre: '',
                 banco_alias: '',

@@ -1,0 +1,9 @@
+<div class="form-group col-md-4">
+    <auto-completar [listado]="listaOficios" [titulo]="'Oficio'"
+                    [placeHolder]="'Seleccione un oficio'" [nombreValor]="getNombreListadoPorId(setOficioid, listaOficios)" (seleccionaValor)="getOficio($event)"></auto-completar>
+</div>
+<div class="col-12">
+  <ul>
+    <li *ngFor="let oficio of oficiosSeleccionados">{{oficio.nombre}}</li>
+  </ul>
+</div>
