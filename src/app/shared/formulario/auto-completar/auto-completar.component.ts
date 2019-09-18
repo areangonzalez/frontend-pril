@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 
@@ -38,24 +38,32 @@ export class AutoCompletarComponent {
         return element;
     }
 
-    seleccionaElemento(){
+    seleccionaElemento(valor: NgbTypeaheadSelectItemEvent){
         let seleccion: any;
         // busco el elemento en la lista
         for (var key in this.listado) {
             // verifico que exista el elemento
-            if (this.listado[key].nombre == this.model) {
+            if (this.listado[key].nombre == valor.item) {
                 seleccion = this.listado[key];
             }
         }
         // Reviso si hubo una selección
-        console.log(seleccion);
         if (seleccion != undefined) {
-            this.seleccionaValor.emit(seleccion);
+          this.seleccionaValor.emit(seleccion);
         }else{// sino hubo seleccion mando un mensaje de error
-            this.seleccionaValor.emit({id:'',nombre:''});
+          this.seleccionaValor.emit({id:'',nombre:''});
         }
 
 
-    }
+      }
+
+      /* public autoFill(): void {
+        //event.preventDefault();
+        console.log("selecciono: ",event.item);
+
+        // this.jobForm.controls[group].patchValue({'name': event.item.name});
+      } */
+
+
 
 }

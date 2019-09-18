@@ -2,7 +2,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="nivel_educativo" class="prioridad">Nivel educativo (<span>*</span>):</label>
-                <select class="form-control" id="nivel_educativo" formControlName="nivel_educativoid" (change)="seleccionarNombre($event)" [ngClass]="{'is-invalid': ((estudios.nivel_educativoid.invalid && submitted) || errorNivelEducativo)}">
+                <select class="form-control" id="nivel_educativo" formControlName="nivel_educativoid" (change)="seleccionarNombre($event)" [ngClass]="{'is-invalid': ((estudios.get('nivel_educativoid').invalid && submitted) || errorNivelEducativo)}">
                         <option value="">Seleccione Nivel educativo</option>
                         <option *ngFor="let nivel of listaNivelEducativo" value="{{nivel.id}}">{{nivel.nombre}}</option>
                     </select>
