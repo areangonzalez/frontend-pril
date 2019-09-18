@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-4">
+      <auto-completar [listado]="listaTags" [titulo]="titulo"
+                      [placeHolder]="placeHolder" (seleccionaValor)="getTags($event)"></auto-completar>
+  </div>
+  <div class="col-md-8 pt-3">
+    <ul *ngIf="(tagsSeleccionados.length > 0)" class="list-inline">
+      <li class="border-left border-info shadow list-inline-item p-2 m-2 rounded" *ngFor="let tag of tagsSeleccionados; let i = index;">
+        <strong class="">{{tag.nombre}}</strong>
+        <button class="close ml-2"><span aria-hidden="true" (click)="removerTag(i)">&times;</span></button>
+      </li>
+    </ul>
+  </div>
+</div>

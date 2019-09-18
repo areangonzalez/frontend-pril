@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from "@angular/forms";
 import { switchMap } from 'rxjs/operators';
 // services
-import { MensajesService, DestinatarioService } from "../../core/services";
+import { MensajesService, DestinatarioService, OficioService } from "../../core/services";
 // models
 import { Lugar, Persona, Destinatario } from "../../core/models";
 
@@ -34,6 +34,7 @@ export class FormDestinatarioComponent implements OnInit {
     public sexoLista: any;
     public generoLista: any;
     public estadoCivilLista: any;
+    public listaOficios: any = [];
 
 
     /**
@@ -48,7 +49,8 @@ export class FormDestinatarioComponent implements OnInit {
         private _route: ActivatedRoute,
         private _fb: FormBuilder,
         private _mensajeService: MensajesService,
-        private _destinatarioService: DestinatarioService
+        private _destinatarioService: DestinatarioService,
+        private _oficioService: OficioService
     ){
         this.destinatarioForm = _fb.group({
             persona: _fb.group({
@@ -100,6 +102,7 @@ export class FormDestinatarioComponent implements OnInit {
       this.sexoLista = this._route.snapshot.data['sexo'];
       this.generoLista = this._route.snapshot.data['genero'];
       this.estadoCivilLista = this._route.snapshot.data['estadoCivil'];
+      this.getListaOficios();
         // obtener parametro
         this.id = this._route.snapshot.paramMap.get('id');
         if (this.id != undefined) {
@@ -108,6 +111,19 @@ export class FormDestinatarioComponent implements OnInit {
             this.mostrarBoton = false;
         }
     }
+    /**
+     * Listado de oficios
+     */
+    getListaOficios(){
+
+      this._oficioService.listarOficios().subscribe(
+        resultado => {
+          this.listaOficios = resultado;
+        }, error => {
+          this._mensajeService.cancelado(error, [{name:''}]);
+        });
+    }
+
     /**
      * @function volver regresa a la vista del listado de destinatario
      */

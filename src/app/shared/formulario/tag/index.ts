@@ -1,1 +1,1 @@
-export * from './tag-oficio.component';
+export * from './tag.component';
