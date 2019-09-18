@@ -2,6 +2,9 @@
   <div class="col-md-4">
       <auto-completar [listado]="listaTags" [titulo]="titulo"
                       [placeHolder]="placeHolder" (seleccionaValor)="getTags($event)"></auto-completar>
+      <div *ngIf="mostrarError" class="ml-2 p-2" >
+        <span class="text-danger"><strong>{{textMsjError}}</strong></span>
+      </div>
   </div>
   <div class="col-md-8 pt-3">
     <ul *ngIf="(tagsSeleccionados.length > 0)" class="list-inline">
