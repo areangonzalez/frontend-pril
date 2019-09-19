@@ -25,6 +25,7 @@ export class DatosPersonaComponent implements OnInit {
     @Input("estadoCivilLista") public estadoCivilLista: any;
     @Input("mostrarBtnBusqueda") public mostrarBtnBusqueda: boolean;
     @Output("setListaEstudios") public setListaEstudios = new EventEmitter();
+    @Output("setListaOficios") public setListaOficios = new EventEmitter();
 
     /**
      * @var cuil_medio String que guarda el documento para el numero de cuil
@@ -126,6 +127,7 @@ export class DatosPersonaComponent implements OnInit {
               if (vDatos.estado) {
                 // seteo listado de estudio
                 this.setListaEstudios.emit(vDatos.resultado[0]['estudios']);
+                this.setListaOficios.emit(vDatos.resultado[0]['lista_oficio']);
                 // borro datos que no sirven
                 delete vDatos.resultado[0]['estudios'];
                 delete vDatos.resultado[0]['fax'];

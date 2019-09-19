@@ -12,7 +12,7 @@
     </div>
   </div>
   <form [formGroup]="destinatarioForm" >
-    <datos-persona-form [group]="destinatarioForm.get('persona')" [submitted]="submitted" [documento]="nroDoc" (setListaEstudios)="setListaEstudios($event)" [sexoLista]="sexoLista" [generoLista]="generoLista" [estadoCivilLista]="estadoCivilLista" [mostrarBtnBusqueda]="mostrarBoton" ></datos-persona-form>
+    <datos-persona-form [group]="destinatarioForm.get('persona')" [submitted]="submitted" [documento]="nroDoc" (setListaEstudios)="setListaEstudios($event)" (setListaOficios)="setListaOficios($event)" [sexoLista]="sexoLista" [generoLista]="generoLista" [estadoCivilLista]="estadoCivilLista" [mostrarBtnBusqueda]="mostrarBoton" ></datos-persona-form>
     <div class="d-flex justify-content-between">
         <div class="col-5 pt-1">
             <hr>
@@ -40,7 +40,7 @@
         <hr>
       </div>
     </div>
-    <tag-component [listaTags]="oficioLista" [tituloComponente]="'Seleccionar oficio/s'" [placeHolderComponente]="'Seleccione un oficio'" [textMsjError]="'Este oficio ya fue seleccionado'" (obtenerTags)="getListaOficios($event)"></tag-component>
+    <tag-component [listaTags]="oficioLista" [tituloComponente]="'Seleccionar oficio/s'" [placeHolderComponente]="'Seleccione un oficio'" [textMsjError]="'Este oficio ya fue seleccionado'" [setListaTags]="listaOficios" (obtenerTags)="getListaOficios($event)"></tag-component>
     <div class="d-flex justify-content-between">
         <div class="col-5 pt-1">
             <hr>

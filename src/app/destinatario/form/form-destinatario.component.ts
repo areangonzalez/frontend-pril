@@ -163,6 +163,7 @@ export class FormDestinatarioComponent implements OnInit {
             let vDatos = {destinatario:{}, persona:{}};
             // agrego los estudios a la lista
             this.listaEstudios = (vPersona.persona.estudios.length > 0) ? vPersona.persona.estudios : [];
+            this.listaOficios = (vPersona.persona.lista_oficio.length > 0) ? vPersona.persona.lista_oficio : [];
             vPersona.persona.fechaNacimiento = this.formatFecha(vPersona.persona.fecha_nacimiento);
             vPersona.fechaPresentacion = this.formatFecha(vPersona.fecha_presentacion);
             vPersona.persona.cuil_prin = this.primerosDigitosCuil(vPersona.persona.cuil);
@@ -229,9 +230,20 @@ export class FormDestinatarioComponent implements OnInit {
         let cuil_ult = cuil.substring(10);
         return cuil_ult;
     }
-
-    public setListaEstudios(e){
-        this.listaEstudios = e;
+    /**
+     * Obtengo el listado de estudios del componente de datos persona
+     * @param estudios listado de estudios
+     */
+    public setListaEstudios(estudios){
+        this.listaEstudios = estudios;
         return this.listaEstudios;
+    }
+    /**
+     * Obtengo el listado de oficios del componente datos persona
+     * @param oficios listado de oficios
+     */
+    public setListaOficios(oficios){
+      this.listaOficios = oficios;
+      return this.listaOficios;
     }
 }
