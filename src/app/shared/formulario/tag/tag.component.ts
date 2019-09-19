@@ -1,4 +1,4 @@
-import { Component, Injectable, Input } from "@angular/core";
+import { Component, Injectable, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: 'tag-component',
@@ -7,13 +7,15 @@ import { Component, Injectable, Input } from "@angular/core";
 })
 @Injectable()
 export class TagComponent {
-  @Input("setTagid") public setTagid:number;
-  @Input("listaTags") public listaTags: any;
-  @Input("tituloComponente") public titulo: string;
-  @Input("placeHolderComponente") public placeHolder: string;
-  @Input("textMsjError") public textMsjError: string;
-  public mostrarError: boolean = false;
-  public tagsSeleccionados: any = [];
+  @Input("setTagid") public setTagid:number; // seteo tag por id
+  @Input("setListaTags") public setListaTags: any; // seteo listado de tags
+  @Input("listaTags") public listaTags: any; // listado de tags a seleccionar
+  @Input("tituloComponente") public titulo: string; // Titulo del input
+  @Input("placeHolderComponente") public placeHolder: string; // leyenda del input
+  @Input("textMsjError") public textMsjError: string; // mensaje de error a mostrar
+  @Output("obtenerTags") public obtenerTags = new EventEmitter(); // funcion que obtiene los tags seleccionados
+  public mostrarError: boolean = false; // Muestra error
+  public tagsSeleccionados: any = []; // listado de los tags seleccionados
 
   constructor(){}
   /**
@@ -29,6 +31,7 @@ export class TagComponent {
         this.mostrarError = true;
       }
     }
+    this.obtenerTags.emit(this.tagsSeleccionados);
   }
   /**
    * Se remueve un tag del listado
@@ -36,6 +39,7 @@ export class TagComponent {
    */
   removerTag(index:number) {
     this.tagsSeleccionados.splice(index, 1);
+    this.obtenerTags.emit(this.tagsSeleccionados);
   }
   /**
    * Se valida a traves del listado de seleccion el id del tag seleccionado.

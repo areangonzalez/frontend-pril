@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DestinatarioComponent } from "./destinatario.component";
 import { FormDestinatarioComponent } from './form/form-destinatario.component';
 
-import { SexoService, GeneroService, EstadoCivilService } from "../core/services";
+import { SexoService, GeneroService, EstadoCivilService, OficioService } from "../core/services";
 /* import { VistaDestinatarioComponent } from "../shared/vista/vista-destinatario.component";
 import { EstudioComponent } from "../shared/formulario/estudio/estudio.component"; */
 
@@ -16,7 +16,7 @@ const routes: Routes = [
     {
       path: 'agregar', component: FormDestinatarioComponent,
       data: { loading: true, title: 'Agregar destinatario', breadcrumb: 'Agregar' },
-      resolve: { sexo: SexoService, genero: GeneroService, estadoCivil: EstadoCivilService }
+      resolve: { sexo: SexoService, genero: GeneroService, estadoCivil: EstadoCivilService, oficio: OficioService }
     /*},{
       path: 'editar/:id', component: FormDestinatarioComponent,
       data: { loading: true, title: 'Editar destinatario', breadcrumb: 'Editar' }
@@ -32,6 +32,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [SexoService, GeneroService, EstadoCivilService]
+    providers: [SexoService, GeneroService, EstadoCivilService, OficioService]
 })
 export class DestinatarioRoutingModule { }

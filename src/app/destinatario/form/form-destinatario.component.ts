@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from "@angular/forms";
 import { switchMap } from 'rxjs/operators';
 // services
-import { MensajesService, DestinatarioService, OficioService } from "../../core/services";
+import { MensajesService, DestinatarioService } from "../../core/services";
 // models
 import { Lugar, Persona, Destinatario } from "../../core/models";
 
@@ -14,27 +14,18 @@ import { Lugar, Persona, Destinatario } from "../../core/models";
 })
 @Injectable()
 export class FormDestinatarioComponent implements OnInit {
-    /**
-     * @var destinatarioForm variable que obtiene el formulario.
-     * @var listaEstudios listado de los estudios ingresados.
-     * @var idDestinatario guarda el parametro id del destinatario a editar
-     * @var nroDoc guarda el numero de documento para reutilización en otros componentes
-     * @var profesionid id de profesion
-     * @var oficioid id de oficio
-     * @var id identificador del destinatario
-     */
-    destinatarioForm: FormGroup;
-    listaEstudios = [];
-    idDestinatario = '';
-    nroDoc: string = '';
-    profesionid: number = 0;
-    oficioid: number = 0;
-    id: any;
-    mostrarBoton: boolean = true;
-    public sexoLista: any;
-    public generoLista: any;
-    public estadoCivilLista: any;
-    public listaOficios: any = [];
+    public destinatarioForm: FormGroup; // variable que obtiene el formulario.
+    public listaEstudios = []; // listado de los estudios ingresados.
+    public listaOficios = [];
+    private idDestinatario = ''; // guarda el parametro id del destinatario a editar
+    public nroDoc: string = ''; // guarda el numero de documento para reutilización en otros componentes
+    public profesionid: number = 0; // id de profesion
+    public id: any; // identificador del destinatario
+    public mostrarBoton: boolean = true; // muestra el boton de la busqueda por documento
+    public sexoLista: any; // lista para la seleccion de sexo
+    public generoLista: any; // lista para la seleccion de genero
+    public estadoCivilLista: any; // lista para la seleccion de estado civil
+    public oficioLista: any; // lista para la seleccion de oficio
 
 
     /**
@@ -49,8 +40,7 @@ export class FormDestinatarioComponent implements OnInit {
         private _route: ActivatedRoute,
         private _fb: FormBuilder,
         private _mensajeService: MensajesService,
-        private _destinatarioService: DestinatarioService,
-        private _oficioService: OficioService
+        private _destinatarioService: DestinatarioService
     ){
         this.destinatarioForm = _fb.group({
             persona: _fb.group({
@@ -102,7 +92,8 @@ export class FormDestinatarioComponent implements OnInit {
       this.sexoLista = this._route.snapshot.data['sexo'];
       this.generoLista = this._route.snapshot.data['genero'];
       this.estadoCivilLista = this._route.snapshot.data['estadoCivil'];
-      this.getListaOficios();
+      this.oficioLista = this._route.snapshot.data['oficio'];
+      //this.getListaOficios();
         // obtener parametro
         this.id = this._route.snapshot.paramMap.get('id');
         if (this.id != undefined) {
@@ -112,16 +103,11 @@ export class FormDestinatarioComponent implements OnInit {
         }
     }
     /**
-     * Listado de oficios
+     * Obtengo el listad de oficios del componente de tags.
+     * @param oficios listado de oficios
      */
-    getListaOficios(){
-
-      this._oficioService.listarOficios().subscribe(
-        resultado => {
-          this.listaOficios = resultado;
-        }, error => {
-          this._mensajeService.cancelado(error, [{name:''}]);
-        });
+    getListaOficios(oficios:any){
+      this.listaOficios = oficios;
     }
 
     /**
@@ -137,7 +123,10 @@ export class FormDestinatarioComponent implements OnInit {
      */
     onSubmit() {
         const params = { destinatario: this.prepararDestinatario() };
+        params.destinatario.persona['lista_oficio'] = this.listaOficios;
         this.submitted = true;
+
+        console.log(params);
         if (this.destinatarioForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.', [{ name: '' }]);
             return;
@@ -189,7 +178,7 @@ export class FormDestinatarioComponent implements OnInit {
                 // variables para el documento, profesion y oficio
                 this.nroDoc = datos['persona']['nro_documento'];
                 this.profesionid = datos['destinatario']['profesionid'];
-                this.oficioid = datos['destinatario']['oficioid'];
+                //this.oficioid = datos['destinatario']['oficioid'];
                 // seteo los valores del objeto
                 this.destinatarioForm.patchValue(datos);
             }, error => {
