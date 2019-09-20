@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup } from "@angular/forms";
-import { OficioService, MensajesService } from '../../../core/services';
+import { MensajesService } from '../../../core/services';
 import { UtilService } from 'src/app/core/utils';
 
 @Component({
@@ -18,7 +18,6 @@ export class DatosDestinatarioComponent implements OnInit {
     public listaOficios:object;
 
     constructor(
-        private _oficioService: OficioService,
         private _mensajeService: MensajesService,
         private _utilService: UtilService
     ){}
@@ -26,7 +25,7 @@ export class DatosDestinatarioComponent implements OnInit {
     ngOnInit() {}
 
     formatFechapresentacion(obj: any) {
-        this.destinatario.controls.fecha_presentacion.setValue(this._utilService.formatObjetoAFecha(obj));
+        this.destinatario.get('fecha_presentacion').setValue(this._utilService.formatObjetoAFecha(obj));
     }
 
     esNumero(obj: any) {

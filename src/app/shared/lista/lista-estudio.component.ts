@@ -17,7 +17,6 @@ export class ListaEstudioComponent implements OnInit {
      */
     @Input("listaEstudios") public listaEstudios;
     @Input("tipo") public tipo:any;
-    @Input("setProfesionId") public setProfesionid: number;
 
     private respuestaMensaje: any;
 

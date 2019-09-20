@@ -13,7 +13,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
       </button>
     </div>
     <div class="modal-body">
-      <estudio-form [submitted]="submitted" [errorNivelEducativo]="errorNivelEducativo" [group]="estudiosForm" [datosEstudio]="estudio" [setProfesionId]="setProfesionid"></estudio-form>
+      <estudio-form [submitted]="submitted" [errorNivelEducativo]="errorNivelEducativo" [group]="estudiosForm" [datosEstudio]="estudio"></estudio-form>
     </div>
     <div class="modal-footer">
         <button class="btn btn-danger" type="button" (click)="activeModal.close('close')">
@@ -31,7 +31,6 @@ export class ModalContentEstudio {
     @Input('estudio') estudio;
     @Input('tipo') tipo;
     @Input('id') id;
-    @Input("setProfesionId") public setProfesionid:number;
 
     submitted = false;
     errorNivelEducativo = false;
@@ -46,6 +45,7 @@ export class ModalContentEstudio {
             titulo: ['', [Validators.required, Validators.minLength(3)]],
             anio: '',
             profesionid: '',
+            profesion: '',
         });
      }
 
@@ -110,7 +110,6 @@ export class ModalEstudioComponent {
     @Input("tipo") tipo;
     @Input("estudio") estudio;
     @Input("id") id;
-    @Input("setProfesionId") public setProfesionid:number;
 
     constructor(private modalService: NgbModal) { }
 
@@ -120,7 +119,6 @@ export class ModalEstudioComponent {
         modalRef.componentInstance.estudio = this.estudio;
         modalRef.componentInstance.tipo = this.tipo;
         modalRef.componentInstance.id = this.id;
-        modalRef.componentInstance.setProfesionId = this.setProfesionid;
         modalRef.result.then(
             (result) => {
                 if (result == 'close'){

@@ -15,7 +15,6 @@ export class EstudioComponent implements OnInit {
     @Input("submitted") public submitted: boolean;
     @Input("errorNivelEducativo") public errorNivelEducativo;
     @Input("datosEstudio") public datosEstudio;
-    @Input("setProfesionId") public setProfesionid:number;
 
     listaNivelEducativo: Object = [];
     listaAnios: any = [];
@@ -39,7 +38,7 @@ export class EstudioComponent implements OnInit {
         this.obtenerAnios();
         this.profesiones();
         if (this.datosEstudio) {
-            this.estudios.setValue(this.datosEstudio);
+            this.estudios.patchValue(this.datosEstudio);
         }
     }
     /**
@@ -48,13 +47,13 @@ export class EstudioComponent implements OnInit {
      */
     estaCheckeado(e){
         if(e.target.id == 'estudio_completo') {
-            this.estudios.get('completo').setValue(e.target.checked);
-            this.estudios.get('en_curso').setValue(!e.target.checked);
+            this.estudios.get('completo').patchValue(e.target.checked);
+            this.estudios.get('en_curso').patchValue(!e.target.checked);
             this.estudioCompleto = true;
         }else{
-            this.estudios.get('completo').setValue(!e.target.checked);
-            this.estudios.get('en_curso').setValue(e.target.checked);
-            this.estudios.get('anio').setValue('');
+            this.estudios.get('completo').patchValue(!e.target.checked);
+            this.estudios.get('en_curso').patchValue(e.target.checked);
+            this.estudios.get('anio').patchValue('');
             this.estudioCompleto = false;
         }
     }
@@ -105,7 +104,8 @@ export class EstudioComponent implements OnInit {
    * @param profesion
    */
   getProfesion(profesion){
-    this.estudios.controls.profesionid.setValue(profesion.id);
+    this.estudios.get('profesionid').setValue(profesion.id);
+    this.estudios.get('profesion').setValue(profesion.nombre);
   }
 
   getNombreListadoPorId(id, listado){

@@ -19,7 +19,6 @@ export class FormDestinatarioComponent implements OnInit {
     public listaOficios = [];
     private idDestinatario = ''; // guarda el parametro id del destinatario a editar
     public nroDoc: string = ''; // guarda el numero de documento para reutilización en otros componentes
-    public profesionid: number = 0; // id de profesion
     public id: any; // identificador del destinatario
     public mostrarBoton: boolean = true; // muestra el boton de la busqueda por documento
     public sexoLista: any; // lista para la seleccion de sexo
@@ -59,7 +58,6 @@ export class FormDestinatarioComponent implements OnInit {
                 telefono: '',
                 celular: '',
                 email: ['', [Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-                profesionid: null,
                 lugar: _fb.group({
                     id: 0,
                     localidadid: ['', Validators.required],
@@ -178,8 +176,6 @@ export class FormDestinatarioComponent implements OnInit {
             datos => {
                 // variables para el documento, profesion y oficio
                 this.nroDoc = datos['persona']['nro_documento'];
-                this.profesionid = datos['destinatario']['profesionid'];
-                //this.oficioid = datos['destinatario']['oficioid'];
                 // seteo los valores del objeto
                 this.destinatarioForm.patchValue(datos);
             }, error => {
