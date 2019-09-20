@@ -23,7 +23,6 @@ export class TagComponent {
    * @param tag [any] contiene el los valores del tag
    */
   getTags(tag:any){
-    console.log(this.tagsSeleccionados);
     if (tag !== undefined || tag.id != ''){
       if (!this.tagDuplicado(tag.id, this.tagsSeleccionados)){
         this.tagsSeleccionados.push(tag);
