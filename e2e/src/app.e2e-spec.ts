@@ -1,14 +1,16 @@
-import { AppPage } from './app.po';
+import { by, element, browser } from 'protractor';
+import { AppLogin } from './po/login.po';
 
 describe('workspace-project App', () => {
-  let page: AppPage;
+  let page: AppLogin;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new AppLogin();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to desarrolloPRILFront!');
+  it('Muestro titulo de Login', () => {
+    page.irAlogin();
+    browser.waitForAngular();
+    expect(element(by.css("app-login h1")).getText()).toEqual('Iniciar Sesión');
   });
 });

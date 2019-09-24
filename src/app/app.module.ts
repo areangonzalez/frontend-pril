@@ -25,6 +25,7 @@ import { AppComponent } from './app.component';
 // import { HttpClient } from 'selenium-webdriver/http';
 import { JwtInterceptor } from "./shared/helpers/jwt.interceptor";
 import { ErrorInterceptor } from './shared/helpers/error.interceptor';
+import { HttpClient } from 'selenium-webdriver/http';
 
 
 @NgModule({

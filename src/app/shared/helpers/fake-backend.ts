@@ -9,7 +9,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let testUser = { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
+        let testUser = { id: 1, username: 'admin', password: 'admins', firstName: 'Admin', lastName: 'Super' };
         // listados de datos agregados
         let destinatarioLista: any = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
         let ambienteLista: any[] = JSON.parse(localStorage.getItem('ambienteLista')) || [];
