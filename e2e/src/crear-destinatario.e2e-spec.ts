@@ -103,7 +103,27 @@ describe('Crear Destinatario',  () => {
 
   });
 
-  //it('')
+  it('se agregan oficios', () => {
+    // agrego y selecciono un oficio
+    oficio.agregarTag('Electricista');
+    oficio.seleccionarTag();
+    browser.waitForAngular();
+    // limpio el campo
+    oficio.formTagComp().element(by.tagName('auto-completar')).element(by.tagName('input')).clear();
+
+    oficio.agregarTag('Albañil');
+    oficio.seleccionarTag();
+    browser.waitForAngular();
+
+    oficio.listaTagComp().all(by.tagName('li')).then(function(items) {
+      expect(items.length).toBe(3);
+    });
+
+  });
+
+
+
+
    // Cierre de sesion al finalizar las tareas
    afterAll(() => {
     let cabecera = new AppCabecera();

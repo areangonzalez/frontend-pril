@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, protractor } from 'protractor';
 
 export class AppTagComp {
   /**
@@ -9,10 +9,14 @@ export class AppTagComp {
   }
 
   agregarTag(dato:string) {
-    return this.formTagComp().element(by.id('auto-completar')).element(by.tagName('input')).sendKeys(dato);
+    return this.formTagComp().element(by.tagName('auto-completar')).element(by.tagName('input')).sendKeys(dato);
+  }
+
+  seleccionarTag() {
+    return this.formTagComp().element(by.tagName('auto-completar')).element(by.tagName('input')).sendKeys(protractor.Key.ENTER);
   }
 
   listaTagComp() {
-    element(by.tagName("ul"));
+    return element(by.tagName("ul"));
   }
 }
