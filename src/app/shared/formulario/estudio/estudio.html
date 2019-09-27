@@ -29,8 +29,8 @@
                 </div>
             </div>
             <div *ngIf="estudioCompleto" class="form-group col-md-3" style="margin-top:4px;">
-                <label for="nivel_educativo">Año egreso:</label>
-                <select class="form-control" id="año_estudio" formControlName="anio" placeholder="Ej: 2013">
+                <label for="anio_egreso">Año egreso:</label>
+                <select class="form-control" id="anio_egreso" formControlName="anio" placeholder="Ej: 2013">
                         <option value="">Seleccione año</option>
                         <option *ngFor="let anio of listaAnios" value="{{anio}}">{{anio}}</option>
                 </select>

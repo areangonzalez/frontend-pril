@@ -18,6 +18,6 @@ export class AppLogin {
   }
 
   btnIngresar() {
-    return this.loginComp().element(by.css("button.btn-prymary"));
+    return this.loginComp().element(by.css("div.form-group")).element(by.css("button.btn-primary"));
   }
 }

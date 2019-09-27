@@ -19,7 +19,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
         <button class="btn btn-danger" type="button" (click)="activeModal.close('close')">
                 Cancelar
         </button>&nbsp;
-        <button class="btn btn-success" type="button" (click)="agregarEstudio()">
+        <button class="btn btn-success" id="agregar-estudio" type="button" (click)="agregarEstudio()">
                 Agregar
         </button>
     </div>

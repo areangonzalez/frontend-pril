@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="form-group col-md-8">
-            <label for="Organismo_pril" class="prioridad">Organismo donde se presento documentación y planilla de inscripción al PRIL (<span>*</span>):</label>
+            <label for="organismo_pril" class="prioridad">Organismo donde se presento documentación y planilla de inscripción al PRIL (<span>*</span>):</label>
             <input type="text" id="organismo_pril" placeholder="Organismo donde se presento documentación o planilla de inscripción" class="form-control"
                 formControlName="origen" [ngClass]="{'is-invalid': (destinatario.get('origen').invalid && submitted)}">
             <div *ngIf="(destinatario.get('origen').invalid && submitted)"
