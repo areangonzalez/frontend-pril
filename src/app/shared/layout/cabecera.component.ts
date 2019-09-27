@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { AuthenticationService } from 'src/app/core/services';
 
 @Component({
     selector: 'app-cabecera',
@@ -10,17 +11,20 @@ export class CabeceraComponent implements OnInit {
     public isCollapsed = true;
 
     constructor(
-       private _router: Router
+       private _router: Router,
+       private _authentication: AuthenticationService
+
     ){}
 
     ngOnInit(){
     }
 
     cerrarSesion(){
-        localStorage.removeItem('token-pril');
-    }
-
-    estoyLogueado(){
-        return (localStorage.getItem('token-pril')) ? true : false;
+      //this._loaderService.show();
+      //setTimeout(() => {
+        this._authentication.logout();
+        //this._loaderService.hide();
+        this._router.navigate(['/login']);
+        //}, 1000);
     }
 }

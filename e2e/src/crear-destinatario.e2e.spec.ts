@@ -1,12 +1,15 @@
 import { browser } from "protractor";
 import { AppLogin } from "./po/login.po";
+import { AppCabecera } from "./po/cabecera.po";
+import { AppPersona } from "./po/persona.po";
+import { AppLugar } from "./po/lugar.po";
 
 
-describe('Crear prestación',  () => {
+describe('Crear Destinatario',  () => {
   let login: AppLogin;
-  //let cabecera: AppCabeceraPage;
-  // let prestacion: AppRecursoPage;
-  // let contacto: AppContactoPage;
+  let cabecera: AppCabecera;
+  let persona: AppPersona;
+  let lugar: AppLugar;
   // let redSocial: AppRedSocialPage;
   // Inicio de session para realizar tareas de testing
   beforeAll(() => {
@@ -23,9 +26,14 @@ describe('Crear prestación',  () => {
   });
 
   beforeEach(() => {
-    // prestacion = new AppRecursoPage();
-    // contacto = new AppContactoPage();
+    persona = new AppPersona();
+    lugar = new AppLugar();
     // redSocial = new AppRedSocialPage();
+  });
+
+
+  it('Ingreso al formulario para agregar un destinatario', () => {
+
   });
 
    // Cierre de sesion al finalizar las tareas
@@ -34,7 +42,7 @@ describe('Crear prestación',  () => {
 
     // cabecera.abrirMenu().click()
     // browser.waitForAngular();
-    // cabecera.cerrarSesion().click();
-    // browser.waitForAngular();
+    cabecera.cerrarSesion();
+    browser.waitForAngular();
   });
 });

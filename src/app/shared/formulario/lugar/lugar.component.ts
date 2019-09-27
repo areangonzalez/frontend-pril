@@ -30,10 +30,6 @@ export class LugarComponent implements OnInit {
     ngOnInit() {
         this.listarLocalidades();
     }
-    /**
-     * @function lugar maneja el objeto del formulario de hogar
-     */
-    get lugar() { return this.datosLugar.controls; }
 
     /**
      * @function listarLocalidades función que obtiene el listado de localidades

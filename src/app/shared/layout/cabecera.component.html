@@ -7,7 +7,7 @@
         <img src="../../../assets/img/logomarcarn.png" width="60" height="40" alt="Ministerio desarrollo social">
     </a>
     <!-- <a class="navbar-brand" href="#">PRIL</a> -->
-    <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed" *ngIf="estoyLogueado()">
+    <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav mr-auto">
             <!-- <li class="nav-item" [routerLinkActive]="['active']" (click)="isCollapsed = !isCollapsed">
                 <a class="nav-link" [routerLink]="['inicio']"><i class="fas fa-home"></i> Inicio</a>
@@ -22,7 +22,7 @@
                 <a class="nav-link" [routerLink]="['area-entrenamiento']"><i class="fas fa-people-carry"></i> Área de entrenamiento</a>
             </li>
         </ul>
-        <ul class="navbar-nav flex-row ml-md-auto d-md-flex" *ngIf="estoyLogueado()">
+        <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['login']" (click)="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
             </li>
