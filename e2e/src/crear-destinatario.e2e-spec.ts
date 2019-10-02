@@ -114,15 +114,32 @@ describe('Crear Destinatario',  () => {
     oficio.agregarTag('Albañil');
     oficio.seleccionarTag();
     browser.waitForAngular();
-
+    // agrego dos pero cuenta 3 ¿? xD
     oficio.listaTagComp().all(by.tagName('li')).then(function(items) {
       expect(items.length).toBe(3);
     });
-
   });
 
+  it('completo datos destinatario', () => {
+    destinatario.legajo('123456');
+    destinatario.deseoActividad('panadero');
+    destinatario.conocimientosBasicos('panadero, limpieza');
+    destinatario.organismoPril('Ministerio de Desarrollo social');
+    destinatario.fechaPresentacion('01/10/2019');
 
+    let formGeneral = element(by.tagName('destinatario-form'));
+    formGeneral.element(by.css('div.float-right')).element(by.css('button.btn-success')).click();
+    browser.waitForAngular();
+    expect(element(by.tagName('mensajes-alert')).element(by.tagName('p')).getText()).toEqual('Guardado exitoso.');
+  });
 
+  it ('Verifico redireccionamiento a vista', () => {
+    element(by.tagName('mensajes-alert')).element(by.css('div.float-right')).element(by.css('button.btn-success')).click();
+
+    browser.waitForAngular();
+
+    expect(element(by.tagName('datos-destinatario-vista')).isPresent()).toBeTruthy();
+  });
 
    // Cierre de sesion al finalizar las tareas
    afterAll(() => {

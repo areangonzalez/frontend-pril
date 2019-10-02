@@ -6,12 +6,12 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DestinatarioService, MensajesService } from "../../core/services";
 
 @Component({
-    selector: 'destinatario-vista',
-    templateUrl: './vista-destinatario.html',
-    styleUrls: ['./vista-destinatario.css'],
+    selector: 'datos-destinatario-vista',
+    templateUrl: './datos-destinatario-vista.component.html',
+    styleUrls: ['./datos-destinatario-vista.component.css'],
     providers: [NgbTooltipConfig]
 })
-export class VistaDestinatarioComponent {
+export class DatosDestinatarioVistaComponent {
     //title = 'app';
     private id: any;
     private idDestinatario = '';

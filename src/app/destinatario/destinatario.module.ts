@@ -6,18 +6,19 @@ import { SharedModule } from "../shared";
 import { DestinatarioRoutingModule } from './destinatario-routing.module'
 //Importo los componentes
 import { DestinatarioComponent } from './destinatario.component';
-import { FormDestinatarioComponent } from './form/form-destinatario.component';
+import { FormDestinatarioComponent } from './form';
+import { VistaDestinatarioComponent } from "./vista";
 
 // Metadatos del módulo
 @NgModule({
     declarations: [
-      DestinatarioComponent, FormDestinatarioComponent
+      DestinatarioComponent, FormDestinatarioComponent, VistaDestinatarioComponent
     ],
     imports: [
       CommonModule, NgbModule, SharedModule, DestinatarioRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
-      DestinatarioComponent, FormDestinatarioComponent
+      DestinatarioComponent, FormDestinatarioComponent, VistaDestinatarioComponent
     ]
 
 })

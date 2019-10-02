@@ -13,7 +13,7 @@ import { DatosDestinatarioComponent, BusquedaDestinatarioComponent } from "./for
 import { EstudioComponent } from "./formulario/estudio";
 import { AutoCompletarComponent } from "./formulario/auto-completar";
 
-import { VistaDestinatarioComponent } from "./vista";
+import { DatosDestinatarioVistaComponent } from "./vista";
 import { TagComponent } from "./formulario/tag";
 
 import {
@@ -38,7 +38,7 @@ import {
     DatosDestinatarioComponent, BusquedaDestinatarioComponent,
     EstudioComponent,
     AutoCompletarComponent,
-    VistaDestinatarioComponent,
+    DatosDestinatarioVistaComponent,
     TagComponent,
     ModalConfirmacionComponent, ModalContentConfirmacion,
     ModalEstudioComponent, ModalContentEstudio
@@ -52,7 +52,7 @@ import {
     DatosDestinatarioComponent, BusquedaDestinatarioComponent,
     EstudioComponent,
     AutoCompletarComponent,
-    VistaDestinatarioComponent,
+    DatosDestinatarioVistaComponent,
     TagComponent,
     ModalConfirmacionComponent, ModalContentConfirmacion,
     ModalEstudioComponent, ModalContentEstudio

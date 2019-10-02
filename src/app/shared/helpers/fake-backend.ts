@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import { Destinatario } from 'src/app/core/models';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -148,97 +149,46 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // Agregar destinatario
             if (request.url.endsWith('/apimock/destinatarios') && request.method === 'POST') {
+
                 // get new user object from post body
                 let newDestinatario = request.body;
+                console.log('recibo respuesta: ', newDestinatario );
                 let estudios = [];
                 // validation
                 let duplicateUser = destinatarioLista.filter(destinatario => { return destinatario.persona.nro_documento === newDestinatario.destinatario.persona.nro_documento; }).length;
                 if (duplicateUser) {
-                    return throwError({ error: { message: 'El destinatario con el nro documento:  "' + newDestinatario.destinatario.persona.nro_documento + '" ya existe' } });
+                    return throwError({ error: { message: 'El destinatario con el nro documento:  "' + newDestinatario.destinatario.persona.nro_documento + '" ya existe' } })
+                    ;
                 }
-                // array de la tabla Listado de la tabla
-                newDestinatario.destinatario.id = (destinatarioLista.length > 0)?generarId(destinatarioLista):1;
-                newDestinatario.destinatario.persona.lugar.id = (destinatarioLista.length > 0) ? generarId(destinatarioLista) : 1;
-                newDestinatario.destinatario.persona.id = generarId(personas);
-                personas.push(newDestinatario.destinatario.persona);
-                // listado de estudios
-                for (var i = 0; i < newDestinatario.destinatario.persona.estudios.length; i++) {
-                    estudios[i] = {
-                        nivel_educativoid: newDestinatario.destinatario.persona.estudios[i].nivel_educativoid,
-                        nivel_educativo: getNombreArray(newDestinatario.destinatario.persona.estudios[i].nivel_educativoid, nivelEducativo),
-                        titulo: newDestinatario.destinatario.persona.estudios[i].titulo,
-                        completo: (newDestinatario.destinatario.persona.estudios[i].completo == true) ? 1 : 0,
-                        en_curso: (newDestinatario.destinatario.persona.estudios[i].en_curso == true) ? 1 : 0,
-                        anio: newDestinatario.destinatario.persona.estudios[i].anio
-                    }
+                // id destinatario
+                newDestinatario['destinatario']['id'] = (destinatarioLista.length > 0)?generarId(destinatarioLista):1;
+                // seteo experiencia laboral
+                newDestinatario.destinatario.experiencia_laboral = (newDestinatario.destinatario.experiencia_laboral == true)?1:0;
+                // seteo sexo
+                newDestinatario.destinatario.persona["sexo"] = getNombreArray(newDestinatario.destinatario.persona.sexoid, sexo);
+                // seteo genero
+                newDestinatario.destinatario.persona["genero"] = getNombreArray(newDestinatario.destinatario.persona.generoid, genero);
+                // seteo estado civil
+                newDestinatario.destinatario.persona["estado_civil"] = getNombreArray(newDestinatario.destinatario.persona.estado_civilid, estadoCivil);
+                // verifico si la persona existe
+                let personaExiste = personas.filter(persona => {
+                  return newDestinatario.destinatario.persona.id === persona.id;
+                }).length;
+                if (personaExiste === 0) {
+                  newDestinatario.destinatario.persona.id = generarId(personas);
                 }
-                // profesion y oficio
-                let profesionID = (newDestinatario.destinatario.profesionid) ? newDestinatario.destinatario.profesionid : '' ;
-                let profesionNombre = (newDestinatario.destinatario.profesionid) ? getNombreArray(newDestinatario.destinatario.profesionid, profesion) : '' ;
-                let oficioID = (newDestinatario.destinatario.oficioid) ? newDestinatario.destinatario.oficioid : '' ;
-                let oficioNombre = (newDestinatario.destinatario.oficioid) ? getNombreArray(newDestinatario.destinatario.oficioid, oficio) : '' ;
 
-                destinatarioLista.push({
-                    id: newDestinatario.destinatario.id,
-                    legajo: newDestinatario.destinatario.legajo,
-                    calificacion: 1,
-                    fecha_ingreso: hoy(),
-                    origen: newDestinatario.destinatario.origen,
-                    observacion: newDestinatario.destinatario.observacion,
-                    deseo_lugar_entrenamiento: newDestinatario.destinatario.deseo_lugar_entrenamiento,
-                    deseo_actividad: newDestinatario.destinatario.deseo_actividad,
-                    fecha_presentacion: newDestinatario.destinatario.fecha_presentacion,
-                    personaid: newDestinatario.destinatario.persona.id,
-                    banco_cbu: newDestinatario.destinatario.banco_cbu,
-                    banco_nombre: newDestinatario.destinatario.banco_nombre,
-                    banco_alias: newDestinatario.destinatario.banco_alias,
-                    experiencia_laboral: (newDestinatario.destinatario.experiencia_laboral == true)?1:0,
-                    conocimientos_basicos: newDestinatario.destinatario.conocimientos_basicos,
-                    oficioid: oficioID,
-                    oficio: oficioNombre,
-                    profesionid: profesionID,
-                    profesion: profesionNombre,
-                    persona: {
-                        id: newDestinatario.destinatario.persona.id,
-                        nombre: newDestinatario.destinatario.persona.nombre,
-                        apellido: newDestinatario.destinatario.persona.apellido,
-                        apodo: null,
-                        nro_documento: newDestinatario.destinatario.persona.nro_documento,
-                        cuil: newDestinatario.destinatario.persona.cuil,
-                        telefono: newDestinatario.destinatario.persona.telefono,
-                        celular: newDestinatario.destinatario.persona.celular,
-                        email: newDestinatario.destinatario.persona.email,
-                        fecha_nacimiento: newDestinatario.destinatario.persona.fecha_nacimiento,
-                        estado_civilid: newDestinatario.destinatario.persona.estado_civilid,
-                        sexoid: newDestinatario.destinatario.persona.sexoid,
-                        tipo_documentoid: null,
-                        nucleoid: null,
-                        situacion_laboralid: null,
-                        generoid: newDestinatario.destinatario.persona.generoid,
-                        estudios: estudios,
-                        sexo: getNombreArray(newDestinatario.destinatario.persona.sexoid, sexo),
-                        genero: getNombreArray(newDestinatario.destinatario.persona.generoid, genero),
-                        estado_civil: getNombreArray(newDestinatario.destinatario.persona.estado_civilid, estadoCivil),
-                        lugar: {
-                            id: newDestinatario.destinatario.persona.lugar.id,
-                            nombre: null,
-                            calle: newDestinatario.destinatario.persona.lugar.calle,
-                            altura: newDestinatario.destinatario.persona.lugar.altura,
-                            localidadid: newDestinatario.destinatario.persona.lugar.localidadid,
-                            latitud: null,
-                            longitud: null,
-                            barrio: newDestinatario.destinatario.persona.lugar.barrio,
-                            piso: newDestinatario.destinatario.persona.lugar.piso,
-                            depto: newDestinatario.destinatario.persona.lugar.depto,
-                            escalera: newDestinatario.destinatario.persona.lugar.escalera,
-                            localidad: getNombreArray(newDestinatario.destinatario.persona.lugar.localidadid, localidad)
-                        }
-                    }
-                });
+                // id lugar
+                newDestinatario.destinatario.persona.lugar.id = (destinatarioLista.length > 0) ? generarId(destinatarioLista) : 1;
+                newDestinatario.destinatario.persona.lugar["localidad"] = getNombreArray(newDestinatario.destinatario.persona.lugar.localidadid, localidad);
+
+                // array de datos
+                personas.push(newDestinatario.destinatario.persona);
+                destinatarioLista.push(newDestinatario.destinatario);
                 // datos a mostrar en la tabla
                 localStorage.setItem('destinatarioLista', JSON.stringify(destinatarioLista));
                 // respond 200 OK
-                return of(new HttpResponse({ status: 200 }));
+                return of(new HttpResponse({ status: 200, body: { id: newDestinatario.destinatario.id } }));
             }
             // conseguir destinatario por id
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'GET') {

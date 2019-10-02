@@ -22,7 +22,7 @@ export class ListaDestinatarioComponent {
     }
 
     verDestinatario(id){
-        this._router.navigate(['destinatario/vista', id ]);
+        this._router.navigate(['inicio','destinatario','vista', id ]);
     }
 
     editarDestinatario(id){
@@ -35,7 +35,7 @@ export class ListaDestinatarioComponent {
         dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
         dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
         dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
-     
-        return dir;   
+
+        return dir;
     }
 }

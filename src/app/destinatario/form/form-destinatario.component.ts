@@ -4,8 +4,6 @@ import { FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from "
 import { switchMap } from 'rxjs/operators';
 // services
 import { MensajesService, DestinatarioService } from "../../core/services";
-// models
-import { Lugar, Persona, Destinatario } from "../../core/models";
 
 @Component({
     selector: 'destinatario-form',
@@ -70,7 +68,6 @@ export class FormDestinatarioComponent implements OnInit {
                 })
             }),
             destinatario: _fb.group({
-                id: null,
                 origen: ['', [Validators.required]],
                 fechaPresentacion: ['', Validators.required],
                 fecha_presentacion: '',
@@ -120,11 +117,11 @@ export class FormDestinatarioComponent implements OnInit {
      * @function onSubmit funcion que llama al preparado del guardado de un destinatario
      */
     onSubmit() {
-        const params = { destinatario: this.prepararDestinatario() };
-        params.destinatario.persona['lista_oficio'] = this.listaOficios;
+        const params = { destinatario: this.destinatarioForm.value.destinatario };
+        params.destinatario['persona'] = this.destinatarioForm.value.persona;
+        params.destinatario['persona']['lista_oficio'] = this.listaOficios;
+        params.destinatario['persona']['estudios'] = this.listaEstudios;
         this.submitted = true;
-
-        console.log(params);
         if (this.destinatarioForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.', [{ name: '' }]);
             return;
@@ -145,7 +142,7 @@ export class FormDestinatarioComponent implements OnInit {
     private guardarDestinatario(params:object, id:number){
         this._destinatarioService.guardar(params,id).subscribe(
             datos => {
-                this._mensajeService.exitoso('guardado Exitoso.', [{ name: 'destinatario' }]);
+                this._mensajeService.exitoso('Guardado exitoso.', [{ name: 'inicio/destinatario/vista/' + datos.id }]);
         },error => {
             this._mensajeService.cancelado(error, [{ name: '' }]);
         })
@@ -183,20 +180,6 @@ export class FormDestinatarioComponent implements OnInit {
             }
         );
 
-    }
-    /**
-     * @function prepararDestinatario preparado de parametros para el objeto de destinatario
-     */
-    private prepararDestinatario() {
-        return new Destinatario('',{},'','','',0,0,false,'','','','','',this.prepararPersona()).deserialize(this.destinatarioForm.value.destinatario);
-    }
-    /**
-     * @function prepararPersona preparado de parametros para el objeto de Persona
-     */
-    private prepararPersona() {
-
-        let lugar = new Lugar(0,0,'','','','','','','').deserialize(this.destinatarioForm.value.persona.lugar);
-        return new Persona(0,'','','','','',0,0,0,'','','',lugar, this.listaEstudios ).deserialize(this.destinatarioForm.value.persona);
     }
     /**
      * @function formatFecha formatea la fecha de string a un objeto para los input de fecha

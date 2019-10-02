@@ -1,1 +1,1 @@
-export * from './vista-destinatario.component';
+export * from './datos-destinatario-vista.component';
