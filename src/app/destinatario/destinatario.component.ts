@@ -28,8 +28,8 @@ export class DestinatarioComponent implements OnInit {
         this._destinatarioService.listarDestinatario().subscribe(
             datos => {
                 if (datos['success']) {
-                    this.destinatarios = datos['coleccion'];
-                    this.totalFiltrado = datos['coleccion'].length;
+                    this.destinatarios = datos['resultado'];
+                    this.totalFiltrado = datos['total_filtrado'];
                     //this.totalFiltrado = datos['total_filtrado'];
                 }
             },
