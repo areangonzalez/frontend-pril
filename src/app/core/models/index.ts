@@ -8,3 +8,4 @@ export * from './oferta.model';
 export * from './persona.model';
 export * from './representante.model';
 export * from './user';
+export * from './loader';

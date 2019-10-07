@@ -1,8 +1,9 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbDatepickerI18n, NgbDateStruct, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SelfBuildingSquareSpinnerModule } from "angular-epic-spinners";
 
 /* Routing */
 import { AppRoutingModule } from './app-routing.module';
@@ -22,10 +23,8 @@ import {
 } from "./shared";
 
 import { AppComponent } from './app.component';
-// import { HttpClient } from 'selenium-webdriver/http';
 import { JwtInterceptor } from "./shared/helpers/jwt.interceptor";
 import { ErrorInterceptor } from './shared/helpers/error.interceptor';
-import { HttpClient } from 'selenium-webdriver/http';
 
 
 @NgModule({
@@ -41,6 +40,7 @@ import { HttpClient } from 'selenium-webdriver/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    SelfBuildingSquareSpinnerModule,
     HttpClientModule,
     NgbCollapseModule,
     NgbModule.forRoot(),
@@ -58,6 +58,7 @@ import { HttpClient } from 'selenium-webdriver/http';
     // provider used to create fake backend
     fakeBackendProvider
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

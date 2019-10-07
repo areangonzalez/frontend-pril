@@ -1,6 +1,5 @@
 import { Component, Input, Injectable, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoaderService } from 'src/app/shared/loader';
 
 @Component({
     selector: 'modal-content-oferta',
@@ -51,10 +50,9 @@ export class ModalVistaOfertaComponent {
     @Input("ofertaid") ofertaid: number;
 
 
-    constructor(public _loaderService: LoaderService, private modalService: NgbModal) { }
+    constructor(private modalService: NgbModal) { }
 
     open() {
-        this._loaderService.show();
         const modalRef = this.modalService.open(ModalContentOfertaVista, { size: 'lg' });
         modalRef.componentInstance.ofertaid = this.ofertaid;
     }

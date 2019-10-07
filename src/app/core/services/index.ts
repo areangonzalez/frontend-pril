@@ -18,3 +18,4 @@ export * from './sexo.service';
 export * from './tipo-ambiente-trabajo.service';
 export * from './user.service';
 export * from './title.service';
+export * from './loader.service';

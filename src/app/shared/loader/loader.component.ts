@@ -1,17 +1,16 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription, of, timer } from 'rxjs';
 import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET } from "@angular/router";
-
-
-import { LoaderService } from './loader.service';
-import { LoaderState } from './loader';
+import { LoaderService } from '../../core/services';
+import { LoaderState } from '../../core/models';
+import { debounce } from 'rxjs/operators';
 
 @Component({
     selector: 'angular-loader',
     templateUrl: 'loader.component.html',
     styleUrls: ['loader.component.css']
 })
-export class LoaderComponent implements OnInit {
+export class LoaderComponent implements OnInit, OnDestroy {
 
     show:boolean = false;
 
@@ -28,7 +27,7 @@ export class LoaderComponent implements OnInit {
       const ROUTE_DATA_LOADING: string = "loading";
       // subscribe to the NavigationEnd event
     //this._router.events.filter(event => event instanceof NavigationEnd).subscribe(event => {
-    this._router.events.subscribe(event => {
+      this._router.events.subscribe(event => {
       let currentRoute: ActivatedRoute = this._activateRoute.root;
       let childrenRoutes: ActivatedRoute[] = currentRoute.children;
 
@@ -56,12 +55,15 @@ export class LoaderComponent implements OnInit {
     });
 
         this.subscription = this.loaderService.loaderState
+        .pipe(debounce(() => timer(50)))
             .subscribe((state: LoaderState) => {
                 this.show = state.show;
             });
     }
 
     ngOnDestroy() {
+      if (this.subscription){
         this.subscription.unsubscribe();
+      }
     }
 }

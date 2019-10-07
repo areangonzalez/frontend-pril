@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AuthGuard } from "./guards/auth.guard";
 
@@ -23,7 +22,8 @@ import {
   SexoService,
   TipoAmbienteTrabajoService,
   UserService,
-  TitleService
+  TitleService,
+  LoaderService
 } from './services';
 
 @NgModule({
@@ -31,7 +31,6 @@ import {
     CommonModule,
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     AuthGuard,
     AmbienteTrabajoService,
     ApiService,
@@ -51,7 +50,8 @@ import {
     SexoService,
     TipoAmbienteTrabajoService,
     UserService,
-    TitleService
+    TitleService,
+    LoaderService
   ],
   declarations: []
 })

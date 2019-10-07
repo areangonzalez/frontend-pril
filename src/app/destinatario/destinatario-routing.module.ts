@@ -11,7 +11,7 @@ import { EstudioComponent } from "../shared/formulario/estudio/estudio.component
 const routes: Routes = [
     {
       path: '', component: DestinatarioComponent,
-      data: { loading: true, title: 'Lista destinatarios', breadcrumb: 'Lista' }
+      data: { loading: true, title: 'Lista destinatarios', breadcrumb: 'Lista' },
       /* resolve: { programas: ProgramaService, tipoRecursos: TipoRecursoService } */
     },
     {
