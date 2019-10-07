@@ -34,15 +34,16 @@ export class ErrorInterceptor implements HttpInterceptor {
           }
         }),
         catchError(err => {
+          console.log("error: ", err);
           // verifico si existe el acceso del usuario
-          let accessUser = this._jwtService.getToken();
-          if (accessUser && accessUser['datosToken']){
+          let accessUser: any = this._jwtService.getToken();
+          if (accessUser && accessUser.datosToken){
             this.recibidos++;
           }
           // error de inahutorizado
           if (err.status === 401) {
             // auto logout if 401 response returned from api
-            this.authenticationService.logout();
+            //this.authenticationService.logout();
             location.reload(true);
             //this._loadService.hide();
           }
