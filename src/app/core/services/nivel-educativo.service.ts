@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from "../../../environments/environment";
-import { httpOptions } from "./http-options.service";
+import { ApiService } from './api.service';
+
 
 @Injectable()
 export class NivelEducativoService {
-    private url: string = environment.baseUrl;
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _apiService: ApiService) { }
 
     listado() {
-        return this._http.get(this.url + '/nivel-educativos');
+        return this._apiService.get('/nivel-educativos');
     }
 
 

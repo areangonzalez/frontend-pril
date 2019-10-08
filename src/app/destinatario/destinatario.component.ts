@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { DestinatarioService } from "../core/services/destinatario.service";
-import { MensajesService } from "../core/services/mensajes.service";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-destinatario',
@@ -13,29 +11,15 @@ export class DestinatarioComponent implements OnInit {
     totalFiltrado: number = 0;
 
     constructor(
-      private _destinatarioService: DestinatarioService,
-      private _mensajeService: MensajesService
+      private _route: ActivatedRoute,
       ) {
     }
 
     ngOnInit(){
-        // listar destinatarios
-        this.listar();
-
+      //obtengo lista de destinatarios
+      console.log(this._route.snapshot);
+      this.destinatarios = this._route.snapshot.data['destinatarios'];
     }
 
-    listar() {
-        this._destinatarioService.listarDestinatario().subscribe(
-            datos => {
-                if (datos['success']) {
-                    this.destinatarios = datos['resultado'];
-                    this.totalFiltrado = datos['total_filtrado'];
-                    //this.totalFiltrado = datos['total_filtrado'];
-                }
-            },
-            error => {
-                this._mensajeService.cancelado(error, [{name:''}]);
-            }
-        );
-    }
+
 }

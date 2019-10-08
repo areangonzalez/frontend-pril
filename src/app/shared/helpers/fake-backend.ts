@@ -139,6 +139,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // lista de destinatario
             if (request.url.endsWith('/apimock/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+                console.log("fake-bakcend: ", request);
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let totalF = destinatarioLista.length;
                     return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: destinatarioLista  } }));

@@ -1,27 +1,34 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class DestinatarioService {
 
-    constructor(private _apiServcie: ApiService ) { }
+    constructor(private _apiService: ApiService ) { }
 
     guardar(params:object,id:number) {
         if (id != 0) {
-            return this._apiServcie.put('/destinatarios/' + id, params);
+            return this._apiService.put('/destinatarios/' + id, params);
         }else{
-            return this._apiServcie.post('/destinatarios', params);
+            return this._apiService.post('/destinatarios', params);
         }
     }
 
     listarDestinatario() {
-        return this._apiServcie.get('/destinatarios');
+        return this._apiService.get('/destinatarios');
     }
 
     destinatarioPorId(id){
-        return this._apiServcie.get('/destinatarios/' + id);
+        return this._apiService.get('/destinatarios/' + id);
     }
 
-
+    resolve(
+      route: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot,
+      ): Observable<any>|Promise<any>|any {
+          return this._apiService.get('/destinatarios');
+      }
 
 }

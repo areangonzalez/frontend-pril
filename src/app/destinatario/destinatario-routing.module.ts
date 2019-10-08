@@ -4,7 +4,7 @@ import { DestinatarioComponent } from "./destinatario.component";
 import { FormDestinatarioComponent } from './form/form-destinatario.component';
 import { VistaDestinatarioComponent } from './vista';
 
-import { SexoService, GeneroService, EstadoCivilService, OficioService } from "../core/services";
+import { SexoService, GeneroService, EstadoCivilService, OficioService, DestinatarioService } from "../core/services";
 /* import { VistaDestinatarioComponent } from "../shared/vista/vista-destinatario.component";
 import { EstudioComponent } from "../shared/formulario/estudio/estudio.component"; */
 
@@ -12,7 +12,7 @@ const routes: Routes = [
     {
       path: '', component: DestinatarioComponent,
       data: { loading: true, title: 'Lista destinatarios', breadcrumb: 'Lista' },
-      /* resolve: { programas: ProgramaService, tipoRecursos: TipoRecursoService } */
+      resolve: { destinatarios: DestinatarioService }
     },
     {
       path: 'agregar', component: FormDestinatarioComponent,
@@ -33,6 +33,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [SexoService, GeneroService, EstadoCivilService, OficioService]
+    providers: [SexoService, GeneroService, EstadoCivilService, OficioService, DestinatarioService]
 })
 export class DestinatarioRoutingModule { }

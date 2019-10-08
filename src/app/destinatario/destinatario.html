@@ -1,5 +1,5 @@
 <destinatario-busqueda></destinatario-busqueda>
 
-<destinatario-lista [destinatarios]="destinatarios" [totalFiltrado]="totalFiltrado"></destinatario-lista>
+<destinatario-lista [destinatarios]="destinatarios.resultado" [totalFiltrado]="destinatarios.total_filtrado"></destinatario-lista>
 
 <ngb-pagination class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
