@@ -5,8 +5,6 @@ import { FormDestinatarioComponent } from './form/form-destinatario.component';
 import { VistaDestinatarioComponent } from './vista';
 
 import { SexoService, GeneroService, EstadoCivilService, OficioService, DestinatarioService } from "../core/services";
-/* import { VistaDestinatarioComponent } from "../shared/vista/vista-destinatario.component";
-import { EstudioComponent } from "../shared/formulario/estudio/estudio.component"; */
 
 const routes: Routes = [
     {
