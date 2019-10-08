@@ -39,4 +39,5 @@ export class ListaDestinatarioComponent {
 
         return dir;
     }
+
 }

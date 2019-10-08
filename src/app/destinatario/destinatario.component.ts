@@ -6,9 +6,9 @@ import { Router, ActivatedRoute } from '@angular/router';
     templateUrl: './destinatario.html',
 })
 export class DestinatarioComponent implements OnInit {
-    page = 1;
-    destinatarios: any;
-    totalFiltrado: number = 0;
+    public page = 1;
+    public destinatarios: any;
+    public totalFiltrado: number = 0;
 
     constructor(
       private _route: ActivatedRoute,
@@ -17,7 +17,6 @@ export class DestinatarioComponent implements OnInit {
 
     ngOnInit(){
       //obtengo lista de destinatarios
-      console.log(this._route.snapshot);
       this.destinatarios = this._route.snapshot.data['destinatarios'];
     }
 

@@ -25,10 +25,10 @@ dl.row{
     margin-bottom: 10px;
 }
 .modal {
-    z-index: 1031;
+    z-index: 1031 !important;
 }
 .modal-backdrop {
-    z-index: 1030;
+    z-index: 1030 !important;
 }
 .tab-pane {
   padding-top: 1rem !important;
