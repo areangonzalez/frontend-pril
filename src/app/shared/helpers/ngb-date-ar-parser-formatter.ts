@@ -1,6 +1,21 @@
 import { Injectable } from "@angular/core";
-import { padNumber, toInteger, isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { NgbDateParserFormatter, NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
+
+export function toInteger(value: any): number {
+  return parseInt(`${value}`, 10);
+}
+
+export function isNumber(value: any): value is number {
+  return !isNaN(toInteger(value));
+}
+
+export function padNumber(value: number) {
+  if (isNumber(value)) {
+    return `0${value}`.slice(-2);
+  } else {
+    return '';
+  }
+}
 
 @Injectable()
 export class NgbDateARParserFormatter extends NgbDateParserFormatter {

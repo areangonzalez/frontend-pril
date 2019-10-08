@@ -11,7 +11,6 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 export class ListaDestinatarioComponent {
     @Input('destinatarios') public destinatarios:any;
     @Input('totalFiltrado') public totalFiltrado:number;
-    //title = 'app';
 
     constructor(
         private _router: Router,
@@ -19,6 +18,7 @@ export class ListaDestinatarioComponent {
     ){
         config.placement = 'top';
         config.triggers = 'click';
+        config.autoClose = 'outside';
     }
 
     verDestinatario(id){
@@ -31,7 +31,8 @@ export class ListaDestinatarioComponent {
 
     getDireccion(lugar: Object) {
         let dir = "";
-        dir += lugar['localidad'] + " - " + lugar['barrio'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+        dir += lugar['localidad'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+        dir += (lugar['barrio'] != '') ? " - " + lugar['barrio'] : '';
         dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
         dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
         dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
