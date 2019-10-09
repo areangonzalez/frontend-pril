@@ -1,9 +1,7 @@
 
-import { Component } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
-//services
-import { DestinatarioService, MensajesService } from "../../core/services";
 
 @Component({
     selector: 'datos-destinatario-vista',
@@ -12,46 +10,32 @@ import { DestinatarioService, MensajesService } from "../../core/services";
     providers: [NgbTooltipConfig]
 })
 export class DatosDestinatarioVistaComponent {
+    @Input("destinatario") public destinatario:any;
     //title = 'app';
     private id: any;
     private idDestinatario = '';
-    public destinatario: any = { persona: { lugar: {}, estudios: [] }, destinatario: {} };
-
 
     constructor(
         private _router: Router,
-        private _route: ActivatedRoute,
-        private _mensajesService: MensajesService,
-        private _destinatarioService: DestinatarioService,
         config: NgbTooltipConfig
     ) {
         config.placement = 'top';
         config.triggers = 'click';
     }
 
-    ngOnInit() {
-        this.id = this._route.snapshot.paramMap.get('id');
-        if (this.id != undefined) {
-            this.idDestinatario = this.id;
-            this.destinatarioPorId(this.id);
-        }
-    }
+    ngOnInit() {}
 
+    /**
+     * vuelve al listado de destinatario
+     */
     volver() {
-        this._router.navigate(['destinatario']);
+        this._router.navigate(['inicio','destinatario']);
     }
 
+    /**
+     * se dirige al formulario de edición
+     */
     editar() {
-        this._router.navigate(['destinatario/editar', this.idDestinatario]);
+        this._router.navigate(['/inicio/destinatario/editar', this.idDestinatario]);
     }
-
-    private destinatarioPorId(id) {
-        this._destinatarioService.destinatarioPorId(id).subscribe(
-            datos => {
-                this.destinatario = datos;
-            }, error => {
-                this._mensajesService.cancelado(error, [{ name: '' }]);
-            });
-    }
-
 }

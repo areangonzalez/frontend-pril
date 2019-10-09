@@ -18,7 +18,8 @@ const routes: Routes = [
       resolve: { sexo: SexoService, genero: GeneroService, estadoCivil: EstadoCivilService, oficio: OficioService }
     },{
       path: 'vista/:id', component: VistaDestinatarioComponent,
-      data: { loading: true, title: 'Ver destinatario', breadcrumb: 'Vista' }
+      data: { loading: true, title: 'Ver destinatario', breadcrumb: 'Vista' },
+      resolve: { destinatario: DestinatarioService }
     /*},{
       path: 'editar/:id', component: FormDestinatarioComponent,
       data: { loading: true, title: 'Editar destinatario', breadcrumb: 'Editar' }

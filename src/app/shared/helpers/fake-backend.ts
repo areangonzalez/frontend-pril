@@ -139,7 +139,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // lista de destinatario
             if (request.url.endsWith('/apimock/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                console.log("fake-bakcend: ", request);
+
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let totalF = destinatarioLista.length;
                     return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: destinatarioLista  } }));
@@ -193,8 +193,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // conseguir destinatario por id
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'GET') {
+                console.log("llega fake backend");
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
-                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let respuesta = {};
                     // find user by id in users array
                     let urlParts = request.url.split('/');
@@ -203,11 +204,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
 
                     respuesta = { status: 200, body: seleccion };
+                    console.log("FB - devuelvo valor",respuesta);
                     return of(new HttpResponse(respuesta));
-                // } else {
+                } else {
                 //     // return 401 not authorised if token is null or invalid
-                //     return throwError({ error: { message: 'Unauthorised' } });
-                // }
+                     return throwError({ error: { message: 'Unauthorised' } });
+                }
             }
             // Editar destinatario
             if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'PUT') {

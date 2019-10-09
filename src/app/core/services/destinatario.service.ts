@@ -28,7 +28,12 @@ export class DestinatarioService {
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot,
       ): Observable<any>|Promise<any>|any {
+        let destinatarioId = route.params.id;
+        if(destinatarioId){
+          return this._apiService.get('/destinatarios/' + parseInt(destinatarioId));
+        }else{
           return this._apiService.get('/destinatarios');
+        }
       }
 
 }

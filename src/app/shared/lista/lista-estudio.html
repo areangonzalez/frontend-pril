@@ -4,7 +4,7 @@
             <tr>
                 <th scope="col">Nivel educativo</th>
                 <th scope="col">Título</th>
-                <th scope="col">Profesión</th>
+                <th class="text-center" scope="col">Profesión</th>
                 <th class="text-center" scope="col">Estado</th>
                 <th class="text-center" scope="col">Año egreso</th>
                 <th scope="col" *ngIf="!(tipo == 0)" class="boton-agregar-tabla">
@@ -16,7 +16,10 @@
             <tr *ngFor="let lista of listaEstudios; index as i;">
                 <td>{{lista.nivel_educativo}}</td>
                 <td>{{lista.titulo}}</td>
-                <td>{{lista.profesion}}</td>
+                <td class="text-center">
+                  <span *ngIf="(lista.profesion != '')">{{lista.profesion}}</span>
+                  <span *ngIf="(lista.profesion == '')">N/A</span>
+                  </td>
                 <td class="text-center">
                     <span *ngIf="(lista.completo)">Completo</span>
                     <span *ngIf="(lista.en_curso)">En curso</span>
