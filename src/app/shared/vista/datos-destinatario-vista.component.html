@@ -56,17 +56,13 @@
                             <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.estado_civil}}</dd>
                         </dl>
                     </div>
-                    <!-- oficios -->
-                    <div class="col-md-12" *ngIf="(destinatario.persona.lista_oficio.length > 0)">
-                      <div class="row">
-                        <div class="col-md-2 d-flex justify-content-end pt-3">
-                          <h5 class="font-weight-bold">Oficio/s:</h5>
-                          <!-- <span class="font-weight-bold">Oficio/s:</span> -->
-                        </div>
-                        <div class="col-md-10">
-                          <vista-tag-component [listaTags]="destinatario.persona.lista_oficio"></vista-tag-component>
-                        </div>
-                      </div>
+                    <div class="col-md-12">
+                        <dl class="row">
+                            <dt class="col-2 col-sm-2 col-md-2 col-lg-2">Oficio/s:</dt>
+                            <dd class="col-10 col-sm-10 col-md-10 col-lg-10">
+                                <vista-tag-component [listaTags]="destinatario.persona.lista_oficio"></vista-tag-component>
+                            </dd>
+                        </dl>
                     </div>
                     <!-- datos de contacto -->
                     <div class="col-md-12 mt-2">
