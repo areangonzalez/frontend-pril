@@ -192,7 +192,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return of(new HttpResponse({ status: 200, body: { id: newDestinatario.destinatario.id } }));
             }
             // conseguir destinatario por id
-            if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/destinatarios\/\d+$/) && request.method === 'GET') {
                 console.log("llega fake backend");
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
@@ -212,7 +212,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
             // Editar destinatario
-            if (request.url.match(/\/destinatarios\/\d+$/) && request.method === 'PUT') {
+            if (request.url.match(/\/apimock\/destinatarios\/\d+$/) && request.method === 'PUT') {
 
                 let urlParts = request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length - 1]);
@@ -384,7 +384,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // conseguir AMBIENTE DE TRABAJO por id
-            if (request.url.match(/\/ambiente\-trabajos\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/ambiente\-trabajos\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let mensaje = 'No existe este ambiente';
@@ -402,7 +402,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // Editar ambiente trabajo
-            if (request.url.match(/\/ambiente\-trabajos\/\d+$/) && request.method === 'PUT') {
+            if (request.url.match(/\/apimock\/ambiente\-trabajos\/\d+$/) && request.method === 'PUT') {
 
                 let urlParts = request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length - 1]);
@@ -556,7 +556,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // conseguir OFERTA por id
-            if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/ofertas\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     // find user by id in users array
@@ -573,7 +573,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             // BORRAR OFERTA
-            if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'DELETE') {
+            if (request.url.match(/\/apimock\/ofertas\/\d+$/) && request.method === 'DELETE') {
               // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
               // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   // find user by id in users array
@@ -600,7 +600,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }
 
             // Editar Oferta
-            if (request.url.match(/\/ofertas\/\d+$/) && request.method === 'PUT') {
+            if (request.url.match(/\/apimock\/ofertas\/\d+$/) && request.method === 'PUT') {
 
                 let urlParts = request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length - 1]);
@@ -745,7 +745,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         // conseguir Area de entrenamiento por id
-        if (request.url.match(/\/area\-entrenamientos\/\d+$/) && request.method === 'GET') {
+        if (request.url.match(/\/apimock\/area\-entrenamientos\/\d+$/) && request.method === 'GET') {
           // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
           // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
               // find user by id in users array

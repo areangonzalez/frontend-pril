@@ -56,7 +56,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
     BreadcrumbsService,
 
     // provider used to create fake backend
-    // fakeBackendProvider
+    fakeBackendProvider
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

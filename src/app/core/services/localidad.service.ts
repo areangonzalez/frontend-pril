@@ -13,6 +13,4 @@ export class LocalidadService {
 
         return this._http.get('/localidads', params);
     }
-
-
 }
