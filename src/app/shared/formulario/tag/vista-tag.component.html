@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <ul *ngIf="(listaTags.length > 0)" class="list-inline">
-      <li class="border-left border-info shadow list-inline-item p-2 m-2 rounded" *ngFor="let tag of listaTags; let i = index;">
+      <li class="badge badge-pill badge-success mr-2" *ngFor="let tag of listaTags; let i = index;">
         <strong class="">{{tag.nombre}}</strong>
       </li>
     </ul>
