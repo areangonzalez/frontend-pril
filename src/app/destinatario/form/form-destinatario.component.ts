@@ -109,7 +109,7 @@ export class FormDestinatarioComponent implements OnInit {
      * @function volver regresa a la vista del listado de destinatario
      */
     volver() {
-        this._router.navigate(['destinatario']);
+        this._router.navigate(['inicio','destinatario']);
     }
 
     submitted = false;

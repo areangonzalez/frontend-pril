@@ -203,7 +203,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 if (personaExiste === 0) {
                   newDestinatario.destinatario.persona.id = generarId(personas);
                 }
-
                 // id lugar
                 newDestinatario.destinatario.persona.lugar.id = (destinatarioLista.length > 0) ? generarId(destinatarioLista) : 1;
                 newDestinatario.destinatario.persona.lugar["localidad"] = getNombreArray(newDestinatario.destinatario.persona.lugar.localidadid, localidad);
@@ -266,60 +265,52 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 for (var i = 0; i < destinatarioLista.length; i++) {
                     if(destinatarioLista[i]['id'] == id){
                             destinatarioLista[i] = {
-                                id: editDestinatario.destinatario.id,
-                                oficioid: oficioID,
-                                oficio: oficioNombre,
-                                legajo: editDestinatario.destinatario.legajo,
-                                calificacion: 1,
-                                profesionid: profesionID,
-                                fecha_ingreso: hoy(),
-                                origen: editDestinatario.destinatario.origen,
-                                observacion: editDestinatario.destinatario.observacion,
-                                deseo_lugar_entrenamiento: editDestinatario.destinatario.deseo_lugar_entrenamiento,
-                                deseo_actividad: editDestinatario.destinatario.deseo_actividad,
-                                fecha_presentacion: editDestinatario.destinatario.fecha_presentacion,
-                                personaid: editDestinatario.destinatario.persona.id,
-                                banco_cbu: editDestinatario.destinatario.banco_cbu,
-                                banco_nombre: editDestinatario.destinatario.banco_nombre,
-                                banco_alias: editDestinatario.destinatario.banco_alias,
-                                experiencia_laboral: (editDestinatario.destinatario.experiencia_laboral == true) ? 1 : 0,
-                                conocimientos_basicos: editDestinatario.destinatario.conocimientos_basicos,
-                                profesion: profesionNombre,
-                                persona: {
-                                    id: editDestinatario.destinatario.persona.id,
-                                    nombre: editDestinatario.destinatario.persona.nombre,
-                                    apellido: editDestinatario.destinatario.persona.apellido,
-                                    apodo: null,
-                                    nro_documento: editDestinatario.destinatario.persona.nro_documento,
-                                    cuil: editDestinatario.destinatario.persona.cuil,
-                                    telefono: editDestinatario.destinatario.persona.telefono,
-                                    celular: editDestinatario.destinatario.persona.celular,
-                                    email: editDestinatario.destinatario.persona.email,
-                                    fecha_nacimiento: editDestinatario.destinatario.persona.fecha_nacimiento,
-                                    estado_civilid: editDestinatario.destinatario.persona.estado_civilid,
-                                    sexoid: editDestinatario.destinatario.persona.sexoid,
-                                    tipo_documentoid: null,
-                                    nucleoid: null,
-                                    situacion_laboralid: null,
-                                    generoid: editDestinatario.destinatario.persona.generoid,
-                                    estudios: estudios,
-                                    sexo: getNombreArray(editDestinatario.destinatario.persona.sexoid, sexo),
-                                    genero: getNombreArray(editDestinatario.destinatario.persona.generoid, genero),
-                                    estado_civil: getNombreArray(editDestinatario.destinatario.persona.estado_civilid, estadoCivil),
-                                    lugar: {
-                                        id: editDestinatario.destinatario.persona.lugar.id,
-                                        nombre: null,
-                                        calle: editDestinatario.destinatario.persona.lugar.calle,
-                                        altura: editDestinatario.destinatario.persona.lugar.altura,
-                                        localidadid: editDestinatario.destinatario.persona.lugar.localidadid,
-                                        latitud: null,
-                                        longitud: null,
-                                        barrio: editDestinatario.destinatario.persona.lugar.barrio,
-                                        piso: editDestinatario.destinatario.persona.lugar.piso,
-                                        depto: editDestinatario.destinatario.persona.lugar.depto,
-                                        escalera: editDestinatario.destinatario.persona.lugar.escalera,
-                                        localidad: getNombreArray(editDestinatario.destinatario.persona.lugar.localidadid, localidad)
-                                    }
+                              banco_alias: editDestinatario.destinatario.banco_alias,
+                              banco_cbu: editDestinatario.destinatario.banco_cbu,
+                              banco_nombre: editDestinatario.destinatario.banco_nombre,
+                              conocimientos_basicos: editDestinatario.destinatario.conocimientos_basicos,
+                              deseo_actividad: editDestinatario.destinatario.deseo_actividad,
+                              deseo_lugar_entrenamiento: editDestinatario.destinatario.deseo_lugar_entrenamiento,
+                              experiencia_laboral: (editDestinatario.destinatario.experiencia_laboral == true) ? 1 : 0,
+                              fechaPresentacion: editDestinatario.destinatario.fechaPresentacion,
+                              fecha_presentacion: editDestinatario.destinatario.fecha_presentacion,
+                              id: id,
+                              legajo: editDestinatario.destinatario.legajo,
+                              origen: editDestinatario.destinatario.origen,
+                              fecha_ingreso: hoy(),
+                              observacion: editDestinatario.destinatario.observacion,
+                              persona: {
+                                apellido: editDestinatario.destinatario.persona.apellido,
+                                celular: editDestinatario.destinatario.persona.celular,
+                                cuil: editDestinatario.destinatario.persona.cuil,
+                                cuil_prin: editDestinatario.destinatario.persona.cuil_prin,
+                                cuil_ult: editDestinatario.destinatario.persona.cuil_ult,
+                                email: editDestinatario.destinatario.persona.email,
+                                estado_civil: getNombreArray(editDestinatario.destinatario.persona.estado_civilid, estadoCivil),
+                                estado_civilid: editDestinatario.destinatario.persona.estado_civilid,
+                                estudios: estudios,
+                                fecha_nacimiento: editDestinatario.destinatario.persona.fecha_nacimiento,
+                                fechaNacimiento: editDestinatario.destinatario.persona.fechaNacimiento,
+                                genero: getNombreArray(editDestinatario.destinatario.persona.generoid, genero),
+                                generoid: editDestinatario.destinatario.persona.generoid,
+                                id: editDestinatario.destinatario.persona.id,
+                                lista_oficio: editDestinatario.destinatario.persona.lista_oficio,
+                                lugar: {
+                                  altura: editDestinatario.destinatario.persona.lugar.altura,
+                                  barrio: editDestinatario.destinatario.persona.lugar.barrio,
+                                  calle: editDestinatario.destinatario.persona.lugar.calle,
+                                  depto: editDestinatario.destinatario.persona.lugar.depto,
+                                  escalera: editDestinatario.destinatario.persona.lugar.escalera,
+                                  id: editDestinatario.destinatario.persona.lugar.id,
+                                  localidad: getNombreArray(editDestinatario.destinatario.persona.lugar.localidadid, localidad),
+                                  localidadid: editDestinatario.destinatario.persona.lugar.localidadid,
+                                  piso: editDestinatario.destinatario.persona.lugar.piso
+                                },
+                                nombre: editDestinatario.destinatario.persona.nombre,
+                                nro_documento: editDestinatario.destinatario.persona.nro_documento,
+                                sexo: getNombreArray(editDestinatario.destinatario.persona.sexoid, sexo),
+                                sexoid: editDestinatario.destinatario.persona.sexoid,
+                                telefono: editDestinatario.destinatario.persona.telefono,
                                 }
                             }
                     }
@@ -331,7 +322,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 //localStorage.setItem('destinatariosAgregados', JSON.stringify(destinatarioLista));
 
                 // respond 200 OK
-                return of(new HttpResponse({ status: 200 }));
+                return of(new HttpResponse({ status: 200, body: { id: id } }));
             }
 
         /* ************************************************************************

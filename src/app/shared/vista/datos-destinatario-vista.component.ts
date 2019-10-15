@@ -35,7 +35,7 @@ export class DatosDestinatarioVistaComponent {
     /**
      * se dirige al formulario de edición
      */
-    editar() {
-        this._router.navigate(['inicio','destinatario', 'editar', this.idDestinatario]);
+    editar(id:number) {
+        this._router.navigate(['inicio','destinatario', 'editar', id]);
     }
 }
