@@ -7,7 +7,6 @@ import { AmbienteTrabajoRoutingModule } from "./ambiente-trabajo-routing.module"
 
 //Importo los componentes
 import { AmbienteTrabajoComponent } from './ambiente-trabajo.component';
-import { ListaAmbienteTrabajoComponent } from './lista/lista-ambiente-trabajo.component';
 import { BusquedaAmbienteTrabajoComponent } from './busqueda/busqueda-ambiente-trabajo.component';
 import { VistaAmbienteTrabajoComponent } from "./vista/vista-ambiente-trabajo.component";
 import { FormAmbienteTrabajoComponent } from "./form/form-ambiente-trabajo.component";
@@ -22,10 +21,10 @@ import { ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, Moda
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
+    declarations: [AmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
     imports: [CommonModule, NgbModule, SharedModule, AmbienteTrabajoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [AmbienteTrabajoComponent, ListaAmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
+    exports: [AmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
     entryComponents: [ModalContentOferta, ModalContentOfertaVista]
 })
 export class AmbienteTrabajoModule { }
