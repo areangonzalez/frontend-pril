@@ -20,10 +20,11 @@ const routes: Routes = [
       path: 'vista/:id', component: VistaDestinatarioComponent,
       data: { loading: true, title: 'Ver destinatario', breadcrumb: 'Vista' },
       resolve: { destinatario: DestinatarioService }
-    /*},{
-      path: 'editar/:id', component: FormDestinatarioComponent,
-      data: { loading: true, title: 'Editar destinatario', breadcrumb: 'Editar' }
     },{
+      path: 'editar/:id', component: FormDestinatarioComponent,
+      data: { loading: true, title: 'Editar destinatario', breadcrumb: 'Editar' },
+      resolve: { sexo: SexoService, genero: GeneroService, estadoCivil: EstadoCivilService, oficio: OficioService }
+    /*} ,{
       path: 'destinatario/estudio', component: EstudioComponent,
       data: { loading: true, title: 'Estudio/s', breadcrumb: 'Estudio' } */
     }

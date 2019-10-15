@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { Destinatario } from 'src/app/core/models';
+// datos JSON
+import * as data from '../../../assets/data/data.json';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -10,10 +11,34 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+      function getAmientes(){
+        let ambienteLista = (<any>data).ambienteLista;
+        let existe = false;
+        if(localStorage.getItem("ambienteLista")) {
+          let ambienteStorage: any[] = JSON.parse(localStorage.getItem("ambienteLista"));
+          for (let i = 0; i < ambienteStorage.length; i++) {
+            for (let j = 0; j < ambienteLista.length; j++) {
+              if (ambienteStorage[i].id === ambienteLista[j].id){
+                ambienteLista[j] = ambienteStorage[i]; // si se edito
+                existe = true;
+              }
+            }
+            if (!existe) {
+              ambienteLista.push(ambienteStorage[i]);
+            }
+          }
+        }
+
+        return ambienteLista;
+      }
+
+
+
         let testUser = { id: 1, username: 'admin', password: 'admins', firstName: 'Admin', lastName: 'Super' };
         // listados de datos agregados
         let destinatarioLista: any = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
-        let ambienteLista: any[] = JSON.parse(localStorage.getItem('ambienteLista')) || [];
+        let ambienteLista = getAmientes();
         let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
         let areasLista: any[] = JSON.parse(localStorage.getItem('areasLista')) || [];
 
@@ -318,7 +343,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   let totalF = ambienteLista.length;
-                    return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, coleccion: ambienteLista  } }));
+                    return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: ambienteLista  } }));
                 // } else {
                 //     // return 401 not authorised if token is null or invalid
                 //     return throwError({ error: { message: 'Unauthorised' } });
@@ -607,7 +632,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // consigo el destinatario a editar en la respuesta
                 let editOferta = request.body;
-                console.log(editOferta.lugar.localidadid);
                 // busco en el listado el destinatario
                 for (var i = 0; i < ofertasLista.length; i++) {
                     if (ofertasLista[i]['id'] == id) {
