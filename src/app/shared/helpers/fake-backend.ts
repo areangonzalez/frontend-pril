@@ -13,7 +13,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
       function getAmientes(){
-        let ambienteLista = (<any>data).ambienteLista;
+        let ambienteLista = (<any>data).ambientes;
         let existe = false;
         if(localStorage.getItem("ambienteLista")) {
           let ambienteStorage: any[] = JSON.parse(localStorage.getItem("ambienteLista"));
@@ -339,7 +339,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          * ************************************************************************ */
             // lista de ambientes de trabajos
             if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'GET') {
-                console.log('terminando');
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   let totalF = ambienteLista.length;
