@@ -1,35 +1,31 @@
 <div class="col-md-12">
     <form>
         <div class="row">
-            <div class="col-md-3">
-                <select class="form-control">
-                    <option>Seleccionar estado</option>
-                </select>
-            </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Buscar por nombre, apellido o número documento" aria-label="buscador destinatario" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
-                            <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
+                            <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
                         </button>
                         <a class="btn btn-success" [routerLink]="['agregar']" ><span class="oi oi-plus" title="Agregar" aria-hidden="true"></span></a>
-                        <!-- <button class="btn btn-outline-success" type="button" (click)="agregarDestinatario()">
-                            <span class="oi oi-plus" title="Agregar" aria-hidden="true"></span>
-                        </button> -->
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12 inner" >
+                <!-- <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                    aria-controls="collapseExample">
+                    Busqueda avanzada
+                </button> -->
                 <p>
-                    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
-                        aria-controls="collapseExample">
-                        Busqueda avanzada
-                    </button>
+                  <button type="button" class="btn btn-outline-primary" (click)="abrirCerrarBusquedaAvanzada()">
+                      Busqueda avanzada
+                  </button>
                 </p>
-                <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                <!-- <div id="collapseExample" [ngbCollapse]="isCollapsed"> -->
+                <div [@abrirCerrar]="state" id="busqueda_avanzada_destinatario" >
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -53,7 +49,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="dd/mm/yyyy (Desde)" ngbDatepicker #d="ngbDatepicker">
+                                            <input class="form-control"  placeholder="dd/mm/yyyy (Desde)" ngbDatepicker #d="ngbDatepicker" [container]="'body'">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
                                                     <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
@@ -65,7 +61,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" ngbDatepicker #d2="ngbDatepicker">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" ngbDatepicker #d2="ngbDatepicker" [container]="'body'">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-info" (click)="d2.toggle()" type="button">
                                                     <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
