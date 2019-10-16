@@ -1,5 +1,3 @@
 <destinatario-busqueda></destinatario-busqueda>
 
-<destinatario-lista [destinatarios]="destinatarios.resultado" [totalFiltrado]="destinatarios.total_filtrado"></destinatario-lista>
-
-<ngb-pagination class="d-flex justify-content-center" [collectionSize]="destinatarios.resultado.length" [(page)]="page" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+<destinatario-lista [destinatarios]="destinatariosLista" [configPaginacion]="configPaginacion" (cambioDePagina)="cambiarPagina($event)"></destinatario-lista>

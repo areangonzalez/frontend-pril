@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,7 +10,8 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListaDestinatarioComponent {
     @Input('destinatarios') public destinatarios:any;
-    @Input('totalFiltrado') public totalFiltrado:number;
+    @Input("configPaginacion") public configPaginacion:any;
+    @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
 
     constructor(
         private _router: Router,
@@ -38,6 +39,10 @@ export class ListaDestinatarioComponent {
         dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
 
         return dir;
+    }
+
+    cambioPagina(page:number){
+      this.cambioDePagina.emit(page);
     }
 
 }

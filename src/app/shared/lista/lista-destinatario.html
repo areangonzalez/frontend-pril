@@ -1,3 +1,12 @@
+<div class="d-flex justify-content-between mt-2 border-top">
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <span *ngIf="configPaginacion.totalRegistros > 0">Destinatarios: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+    <span *ngIf="configPaginacion.totalRegistros == 0">Destinatarios: {{configPaginacion.cantRegistros}}</span>
+  </div>
+  <div class="d-flex align-items-center p-2 font-weight-bold">
+    <ngb-pagination *ngIf="(configPaginacion.page > 1)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
+  </div>
+</div>
 <div class="col-md-12">
     <table class="table table-hover">
         <thead>
@@ -10,12 +19,12 @@
                 <th scope="col">Acción</th>
             </tr>
         </thead>
-        <tbody *ngIf="(totalFiltrado == 0)">
+        <tbody *ngIf="(destinatarios.length == 0)">
             <tr>
                 <td class="text-center" colspan="6" rowspan="1">No se han encontrado resultados que mostrar.</td>
             </tr>
         </tbody>
-        <tbody *ngIf="(totalFiltrado > 0)">
+        <tbody *ngIf="(destinatarios.length > 0)">
             <tr *ngFor="let destinatario of destinatarios; let i = index;">
                 <td>{{destinatario.persona.nro_documento}}</td>
                 <th>{{destinatario.persona.apellido}}, {{destinatario.persona.nombre}}</th>
@@ -44,4 +53,7 @@
             </tr>
         </tbody>
     </table>
+</div>
+<div class=" d-flex justify-content-center">
+    <ngb-pagination *ngIf="(configPaginacion.page > 1)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)"></ngb-pagination>
 </div>
