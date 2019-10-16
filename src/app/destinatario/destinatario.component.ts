@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DestinatarioService } from '../core/services';
 
 @Component({
     selector: 'app-destinatario',
     templateUrl: './destinatario.html',
 })
+@Injectable()
 export class DestinatarioComponent implements OnInit {
     public destinatariosLista: any[] = [];
     public totalFiltrado: number = 0;
     public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
 
     constructor(
-      private _route: ActivatedRoute,
+      private _route: ActivatedRoute, private _destinatarioService: DestinatarioService
       ) {
     }
 
@@ -19,12 +21,16 @@ export class DestinatarioComponent implements OnInit {
       //obtengo lista de destinatarios
       this.configDestinatario(this._route.snapshot.data['destinatarios']);
     }
-
+    /**
+     * Solicito el cambio de pagina
+     * @param pagina [number] numero de pagina
+     */
     cambiarPagina(pagina: any) {
       console.log("nro pagina:", pagina);
     }
     /**
-     * Configuracion de Destinatario
+     * Se configura paginacion y listado de destinatario
+     * @param destinatarios [Object] objeto que contiene los valores de paginacion y listado de destinatario
      */
     public configDestinatario(destinatarios:any) {
       this.configPaginacion.colleccionSize = destinatarios.total_filtrado;
@@ -63,9 +69,16 @@ export class DestinatarioComponent implements OnInit {
       return rangoFinal;
     }
 
-    /* Busqueda avanzada */
+    /**
+     * Configurar busqueda avanzada para mostrar listado
+     * @param params [object] parametros que se filtraran en la busqueda
+     */
+    buscar(params:any) {
+      console.log(params);
 
-    configurarBusqueda(busqueda:any) {
-      console.log(busqueda);
+      this._destinatarioService.buscar(params).subscribe(
+        respuesta => {
+          console.log(respuesta);
+      }, error => { /* this._mensajeService.cancelar() */ });
     }
 }

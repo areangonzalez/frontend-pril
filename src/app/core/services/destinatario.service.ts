@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class DestinatarioService {
@@ -22,6 +23,13 @@ export class DestinatarioService {
 
     destinatarioPorId(id){
         return this._apiService.get('/destinatarios/' + id);
+    }
+
+    buscar(params:any) {
+      let httpParams = new HttpParams();
+      httpParams = this._apiService.formatParams(httpParams, params);
+
+      return this._apiService.get('/destinatarios', params);
     }
 
     resolve(

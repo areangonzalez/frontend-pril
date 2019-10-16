@@ -9,6 +9,12 @@ const routes: Routes = [
     {
       path: '', component: AmbienteTrabajoComponent,
       data: { loading: true, title: 'Lista ambiente de Trabajo' }
+      /**
+       *
+       * Aqui tenes que aplicar el resolve el de abajo es un ejemplo esta comentado porque esos servicios no funcionan en este sistema.
+       * Declara el resolve en el path donde vas a utilizar la pre-carga de datos.
+       *
+       */
       /* resolve: { programas: ProgramaService, tipoRecursos: TipoRecursoService } */
     },
     {
@@ -29,6 +35,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-  //  providers: [ProgramaService, TipoRecursoService]
+  //  providers: [ProgramaService, TipoRecursoService] // <-- aca tenes que decirle al routing los servicios que vas a utilizar
 })
 export class AmbienteTrabajoRoutingModule { }

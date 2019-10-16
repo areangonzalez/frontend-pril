@@ -19,7 +19,7 @@ export class AmbienteTrabajoService {
      * @function listarAmbientesTrabajo conexion con api para obtener el listado de ambientes de trabajo
      */
      listarAmbienteTrabajo() {
-        return this._apiServcie.get('/ambiente-trabajos');
+        return this._apiService.get('/ambiente-trabajos');
     }
 
     ambientePorId(id){
