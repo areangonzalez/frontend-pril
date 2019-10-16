@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AmbienteTrabajoService {
 
-    constructor(private _apiServcie: ApiService ) { }
+    constructor(private _apiService: ApiService ) { }
 
     guardar(params: object, id: number) {
         if (id != 0) {
-            return this._apiServcie.put('/ambiente-trabajos/' + id, params);
+            return this._apiService.put('/ambiente-trabajos/' + id, params);
         } else {
-            return this._apiServcie.post('/ambiente-trabajos', params);
+            return this._apiService.post('/ambiente-trabajos', params);
         }
     }
     /**
@@ -21,6 +23,21 @@ export class AmbienteTrabajoService {
     }
 
     ambientePorId(id){
-        return this._apiServcie.get('/ambiente-trabajos/' + id);
+        return this._apiService.get('/ambiente-trabajos/' + id);
     }
+
+    /**
+     * Realizamos la precarga de datos
+     */
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot,
+        ): Observable<any>|Promise<any>|any {
+          let id = route.params.id;
+          if(id){
+            return this._apiService.get('/ambiente-trabajos/' + parseInt(id));
+          }else{
+            return this._apiService.get('/ambiente-trabajos');
+          }
+        }
 }
