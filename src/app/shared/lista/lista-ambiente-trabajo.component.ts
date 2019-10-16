@@ -9,7 +9,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
     providers: [NgbTooltipConfig]
 })
 export class ListaAmbienteTrabajoComponent {
-    @Input('ambientes') ambientes: Object;
+    @Input('ambientes') ambientes: any;
     @Input('totalFiltrado') public totalFiltrado:number;
 
     constructor(
