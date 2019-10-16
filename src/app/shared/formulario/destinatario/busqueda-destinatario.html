@@ -1,11 +1,11 @@
 <div class="col-md-12">
-    <form>
+    <form [formGroup]="busquedaForm">
         <div class="row">
             <div class="col-md-12">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar por nombre, apellido o número documento" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Buscar por nombre, apellido o número documento" formControlName="global_param" >
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="button" (click)="realizarBusqueda()">
                             <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
                         </button>
                         <a class="btn btn-success" [routerLink]="['agregar']" ><span class="oi oi-plus" title="Agregar" aria-hidden="true"></span></a>
@@ -15,33 +15,31 @@
         </div>
         <div class="row">
             <div class="col-md-12 inner" >
-                <!-- <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
-                    aria-controls="collapseExample">
-                    Busqueda avanzada
-                </button> -->
                 <p>
                   <button type="button" class="btn btn-outline-primary" (click)="abrirCerrarBusquedaAvanzada()">
                       Busqueda avanzada
                   </button>
                 </p>
-                <!-- <div id="collapseExample" [ngbCollapse]="isCollapsed"> -->
                 <div [@abrirCerrar]="state" id="busqueda_avanzada_destinatario" >
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
+                              <div class="col-md-4">
+                                  <select class="form-control" formControlName="nivel_educativoid">
+                                      <option value="">Seleccionar nivel educativo</option>
+                                      <option *ngFor="let nivel_educativo of nivelEducativoLista" value="nivel_educativo.id">{{nivel_educativo.nombre}}</option>
+                                  </select>
+                              </div>
                                 <div class="col-md-4">
-                                    <select class="form-control">
-                                        <option>Seleccionar profesión</option>
+                                    <select class="form-control" formControlName="profesionid">
+                                        <option value="">Seleccionar profesión</option>
+                                        <option *ngFor="let profesion of profesionLista" value="profesion.id">{{profesion.nombre}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
-                                    <select class="form-control">
-                                        <option>Seleccionar oficio</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <select class="form-control">
-                                        <option>Seleccionar nivel educativo</option>
+                                    <select class="form-control" formControlName="oficioid">
+                                        <option value="">Seleccionar oficio</option>
+                                        <option *ngFor="let oficio of oficioLista" value="oficio.id">{{oficio.nombre}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -49,7 +47,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control"  placeholder="dd/mm/yyyy (Desde)" ngbDatepicker #d="ngbDatepicker" [container]="'body'">
+                                            <input class="form-control"  placeholder="dd/mm/yyyy (Desde)" ngbDatepicker #d="ngbDatepicker" [container]="'body'" formControlName="fechaDesde" (ngModelChange)="obtenerFechaDesde($event)">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
                                                     <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
@@ -61,7 +59,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" ngbDatepicker #d2="ngbDatepicker" [container]="'body'">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" ngbDatepicker #d2="ngbDatepicker" [container]="'body'" formControlName="fechaHasta" (change)="obtenerFechaHasta($event.target.value)">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-info" (click)="d2.toggle()" type="button">
                                                     <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>

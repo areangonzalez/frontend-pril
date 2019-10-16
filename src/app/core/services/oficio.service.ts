@@ -11,7 +11,9 @@ export class OficioService {
     listarOficios() {
         return this._apiService.get('/oficios');
     }
-
+    /**
+     * Datos precargados en el ruteo de la aplicación
+     */
     resolve(
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot,

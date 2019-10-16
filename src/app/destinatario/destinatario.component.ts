@@ -27,7 +27,6 @@ export class DestinatarioComponent implements OnInit {
      * Configuracion de Destinatario
      */
     public configDestinatario(destinatarios:any) {
-      console.log(destinatarios);
       this.configPaginacion.colleccionSize = destinatarios.total_filtrado;
       // tamaño pagina
       //this.configPaginacion.pageSize = destinatarios.pagesize;
@@ -62,5 +61,11 @@ export class DestinatarioComponent implements OnInit {
         rangoFinal = (cantRegistrosXpag < total) ? cantRegistrosXpag : total;
       }
       return rangoFinal;
+    }
+
+    /* Busqueda avanzada */
+
+    configurarBusqueda(busqueda:any) {
+      console.log(busqueda);
     }
 }
