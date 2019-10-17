@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { FormGroup, AbstractControl } from "@angular/forms";
-import { Router } from '@angular/router';
 import { UtilService } from "../../../core/utils";
 // services
 import { LocalidadService } from "../../../core/services/localidad.service";
@@ -9,10 +8,11 @@ import { PersonaService } from "../../../core/services/persona.service";
 
 @Component({
     selector: 'datos-representante-form',
-    templateUrl: './representante-form.html',
-    styleUrls: ['./representante-form.css']
+    templateUrl: './datos-representante-form.html',
+    styleUrls: ['./datos-representante-form.css'],
+    providers: [UtilService, PersonaService]
 })
-export class RepresentanteFormComponent implements OnInit {
+export class DatosRepresentanteFormComponent implements OnInit {
     /**
      * @var datosPersona contiene los datos del formulario
      * @var submitted otorga la activación de errores de los inputs del formulario

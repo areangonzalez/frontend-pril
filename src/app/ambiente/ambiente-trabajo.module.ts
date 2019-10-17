@@ -10,8 +10,6 @@ import { AmbienteTrabajoComponent } from './ambiente-trabajo.component';
 import { BusquedaAmbienteTrabajoComponent } from './busqueda/busqueda-ambiente-trabajo.component';
 import { VistaAmbienteTrabajoComponent } from "./vista/vista-ambiente-trabajo.component";
 import { FormAmbienteTrabajoComponent } from "./form/form-ambiente-trabajo.component";
-import { AmbienteTrabajoFormComponent } from "./form/ambiente-trabajo/ambiente-trabajo-form.component";
-import { RepresentanteFormComponent } from "./form/representante/representante-form.component";
 import { OfertaComponent } from "./oferta/oferta.component";
 //import { ListaOfertaComponent } from "./oferta/lista/lista-oferta.component";
 import { FormOfertaComponent } from "./oferta/form/form-oferta.components";
@@ -21,10 +19,10 @@ import { ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, Moda
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [AmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
+    declarations: [AmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
     imports: [CommonModule, NgbModule, SharedModule, AmbienteTrabajoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [AmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, AmbienteTrabajoFormComponent, RepresentanteFormComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
+    exports: [AmbienteTrabajoComponent, BusquedaAmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
     entryComponents: [ModalContentOferta, ModalContentOfertaVista]
 })
 export class AmbienteTrabajoModule { }

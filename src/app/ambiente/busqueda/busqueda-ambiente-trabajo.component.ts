@@ -17,7 +17,5 @@ export class BusquedaAmbienteTrabajoComponent {
     ) { }
 
 
-    agregarAmbiente() {
-        this._router.navigate(['ambiente', 'agregar']);
-    }
+    
 }

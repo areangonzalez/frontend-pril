@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from "@angular/forms";
-import { Router } from '@angular/router';
 import { UtilService } from "../../../core/utils";
 // services
 import { TipoAmbienteTrabajoService } from "../../../core/services/tipo-ambiente-trabajo.service";
@@ -8,10 +7,11 @@ import { MensajesService } from "../../../core/services/mensajes.service";
 
 @Component({
     selector: 'datos-ambiente-trabajo-form',
-    templateUrl: './ambiente-trabajo-form.html',
-    styleUrls: ['./ambiente-trabajo-form.css']
+    templateUrl: './datos-ambiente-trabajo-form.html',
+    styleUrls: ['./datos-ambiente-trabajo-form.css'],
+    providers: [UtilService]
 })
-export class AmbienteTrabajoFormComponent implements OnInit {
+export class DatosAmbienteTrabajoFormComponent implements OnInit {
     @Input("group") public datosAmbienteTrabajo: FormGroup;
     @Input("submitted") public submitted: boolean;
 

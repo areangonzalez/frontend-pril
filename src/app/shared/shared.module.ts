@@ -12,6 +12,7 @@ import { DatosPersonaComponent } from "./formulario/persona";
 import { DatosDestinatarioComponent, BusquedaDestinatarioComponent } from "./formulario/destinatario";
 import { EstudioComponent } from "./formulario/estudio";
 import { AutoCompletarComponent } from "./formulario/auto-completar";
+import { DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent } from "./formulario/ambiente-trabajo";
 
 import { DatosDestinatarioVistaComponent } from "./vista";
 import { TagComponent, VistaTagComponent } from "./formulario/tag";
@@ -38,6 +39,7 @@ import {
     DatosDestinatarioComponent, BusquedaDestinatarioComponent,
     EstudioComponent,
     AutoCompletarComponent,
+    DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent,
     DatosDestinatarioVistaComponent,
     TagComponent, VistaTagComponent,
     ModalConfirmacionComponent, ModalContentConfirmacion,
@@ -52,6 +54,7 @@ import {
     DatosDestinatarioComponent, BusquedaDestinatarioComponent,
     EstudioComponent,
     AutoCompletarComponent,
+    DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent,
     DatosDestinatarioVistaComponent,
     TagComponent, VistaTagComponent,
     ModalConfirmacionComponent, ModalContentConfirmacion,
