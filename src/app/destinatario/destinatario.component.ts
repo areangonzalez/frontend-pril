@@ -1,6 +1,6 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DestinatarioService } from '../core/services';
+import { DestinatarioService, MensajesService } from '../core/services';
 
 @Component({
     selector: 'app-destinatario',
@@ -13,7 +13,7 @@ export class DestinatarioComponent implements OnInit {
     public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
 
     constructor(
-      private _route: ActivatedRoute, private _destinatarioService: DestinatarioService
+      private _route: ActivatedRoute, private _destinatarioService: DestinatarioService, private _mensajeService: MensajesService
       ) {
     }
 
@@ -74,11 +74,9 @@ export class DestinatarioComponent implements OnInit {
      * @param params [object] parametros que se filtraran en la busqueda
      */
     buscar(params:any) {
-      console.log(params);
-
       this._destinatarioService.buscar(params).subscribe(
         respuesta => {
-          console.log(respuesta);
-      }, error => { /* this._mensajeService.cancelar() */ });
+          this.configDestinatario(respuesta);
+      }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
     }
 }

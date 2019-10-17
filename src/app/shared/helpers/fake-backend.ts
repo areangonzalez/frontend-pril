@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 // datos JSON
 import * as data from '../../../assets/data/data.json';
+import { Destinatario } from 'src/app/core/models/index.js';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -165,13 +166,46 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/destinatarios') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
 
-                // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    let totalF = destinatarioLista.length;
-                    return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: destinatarioLista  } }));
-                // } else {
-                //     // return 401 not authorised if token is null or invalid
-                //     return throwError({ error: { message: 'Unauthorised' } });
-                // }
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  // parametros de busquedas
+                  let global_param = (request.params.get("global_param")) ? request.params.get("global_param") : '';
+                  let nivel_educativoid = (request.params.get("nivel_educativoid")) ? request.params.get("nivel_educativoid") : '';
+                  let profesionid = (request.params.get("profesionid")) ? request.params.get("profesionid") : '';
+                  let oficioid = (request.params.get("oficioid")) ?
+                  request.params.get("oficioid") : '';
+                  // datos paginacion
+                  let page: number = parseInt(request.params.get("page"));
+                  let pageSize: number = parseInt(request.params.get('pagesize'));
+
+                  let search = [''];
+                  if (global_param != ''){
+                    search = global_param.split(" ");
+                  }
+
+                  //preparo objeto de paginacion
+                  let totalPaginas = 0;
+                  let encontrados: any[] = [];
+                  let listaRecursos = {
+                    total_filtrado: 0,
+                    pagesize: pageSize,
+                    pages: totalPaginas,
+                    estado: true,
+                    resultado:encontrados,
+                  };
+
+
+
+                  //buscar por nombre, apellido, documento
+                  /* if (global_param != '' && )
+                  encontrados = destinatarioLista.filter(destinatario => { return destinatario.persona.nro_documento === global_param; }); */
+
+                  //console.log("params destinatario mock: ",params);
+                  let totalF = destinatarioLista.length;
+                  return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: destinatarioLista  } }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ error: { message: 'Unauthorised' } });
+                }
             }
             // Agregar destinatario
             if (request.url.endsWith('/apimock/destinatarios') && request.method === 'POST') {
