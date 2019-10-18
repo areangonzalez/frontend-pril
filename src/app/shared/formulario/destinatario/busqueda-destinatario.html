@@ -27,19 +27,19 @@
                               <div class="col-md-4">
                                   <select class="form-control" formControlName="nivel_educativoid">
                                       <option value="">Seleccionar nivel educativo</option>
-                                      <option *ngFor="let nivel_educativo of nivelEducativoLista" value="nivel_educativo.id">{{nivel_educativo.nombre}}</option>
+                                      <option *ngFor="let nivel_educativo of nivelEducativoLista" value="{{nivel_educativo.id}}">{{nivel_educativo.nombre}}</option>
                                   </select>
                               </div>
                                 <div class="col-md-4">
                                     <select class="form-control" formControlName="profesionid">
                                         <option value="">Seleccionar profesión</option>
-                                        <option *ngFor="let profesion of profesionLista" value="profesion.id">{{profesion.nombre}}</option>
+                                        <option *ngFor="let profesion of profesionLista" value="{{profesion.id}}">{{profesion.nombre}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
                                     <select class="form-control" formControlName="oficioid">
                                         <option value="">Seleccionar oficio</option>
-                                        <option *ngFor="let oficio of oficioLista" value="oficio.id">{{oficio.nombre}}</option>
+                                        <option *ngFor="let oficio of oficioLista" value="{{oficio.id}}">{{oficio.nombre}}</option>
                                     </select>
                                 </div>
                             </div>

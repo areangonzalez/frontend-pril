@@ -174,8 +174,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   let oficioid = (request.params.get("oficioid")) ?
                   request.params.get("oficioid") : '';
                   // datos paginacion
-                  let page: number = parseInt(request.params.get("page"));
-                  let pageSize: number = parseInt(request.params.get('pagesize'));
+                  // let page: number = parseInt(request.params.get("page"));
+                  // let pageSize: number = parseInt(request.params.get("pagesize"));
+                  let page: number = 0;
+                  let pageSize: number = 20;
 
                   let search = [''];
                   if (global_param != ''){
@@ -185,23 +187,110 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   //preparo objeto de paginacion
                   let totalPaginas = 0;
                   let encontrados: any[] = [];
-                  let listaRecursos = {
+                  let listaDestinatario = {
                     total_filtrado: 0,
                     pagesize: pageSize,
                     pages: totalPaginas,
                     estado: true,
                     resultado:encontrados,
                   };
+                  encontrados = destinatarioLista.filter(
+                    destinatario => {
+                      for (let i = 0; i < search.length; i++) {
+                        let nombre = destinatario.persona.nombre.split(" ");
+                        for (let j = 0; j < nombre.length; j++) {
+                            if ( nombre[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
+                              return destinatario;
+                            }
+                        }
+                        if (destinatario.persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
+                          return destinatario;
+                        }
+                        if ( destinatario.persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
+                          return destinatario;
+                        }
+                      }
+                    });
+
+                    if (nivel_educativoid != '') {
+                      if (encontrados.length > 0) {
+                        encontrados = encontrados.filter(destinatario => {
+                          let existe = false;
+                          for (let i = 0; i < destinatario.persona.estudios.length; i++) {
+                            existe = parseInt(nivel_educativoid) === parseInt(destinatario.persona.estudios[i].nivel_educativoid);
+                          }
+                          if (existe) { return destinatario; }
+                        });
+                      }else{
+                        encontrados = destinatarioLista.filter(destinatario => {
+                          let existe = false;
+                          for (let i = 0; i < destinatario.persona.estudios.length; i++) {
+                            existe = parseInt(nivel_educativoid) === parseInt(destinatario.persona.estudios[i].nivel_educativoid);
+                          }
+                          if (existe) { return destinatario; }
+                        });
+                      }
+                    }
+                    if (profesionid != '') {
+                      if (encontrados.length > 0) {
+                        encontrados = encontrados.filter(destinatario => {
+                          let existe = false;
+                          for (let i = 0; i < destinatario.persona.estudios.length; i++) {
+                            existe = parseInt(profesionid) === parseInt(destinatario.persona.estudios[i].profesionid);
+                          }
+                          if (existe) { return destinatario; }
+                        });
+                      }else{
+                        encontrados = destinatarioLista.filter(destinatario => {
+                          let existe = false;
+                          for (let i = 0; i < destinatario.persona.estudios.length; i++) {
+                            existe = parseInt(profesionid) === parseInt(destinatario.persona.estudios[i].profesionid);
+                          }
+                          if (existe) { return destinatario; }
+                        });
+                      }
+                    }
+                    if (oficioid != '') {
+                      if (encontrados.length > 0) {
+                        encontrados = encontrados.filter(destinatario => {
+                          let existe = false;
+                          for (let i = 0; i < destinatario.persona.lista_oficio.length; i++) {
+                            existe = parseInt(oficioid) === parseInt(destinatario.persona.lista_oficio[i].id);
+                          }
+                          if (existe) { return destinatario; }
+                        });
+                      }else{
+                        encontrados = destinatarioLista.filter(destinatario => {
+                          let existe = false;
+                          for (let i = 0; i < destinatario.persona.lista_oficio.length; i++) {
+                            existe = parseInt(oficioid) === parseInt(destinatario.persona.lista_oficio[i].id);
+                          }
+                          if (existe) { return destinatario; }
+                        });
+                      }
+                    }
+
+                  let totalFiltrado:number = encontrados.length;
+                  let total:number = totalFiltrado/pageSize;
+                  let numEntero = Math.floor(total);
+                  let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
+
+                  listaDestinatario.total_filtrado = encontrados.length;
+                  listaDestinatario.pages = totalPagina;
 
 
+                  if (page > 0) {
+                    page = page;
+                    let pageStart = page * pageSize;
+                    let pageEnd = pageStart + pageSize;
+                    listaDestinatario.resultado = encontrados.slice(pageStart, pageEnd);
+                  }else{
+                    listaDestinatario.resultado = encontrados.slice(0,pageSize);
 
-                  //buscar por nombre, apellido, documento
-                  /* if (global_param != '' && )
-                  encontrados = destinatarioLista.filter(destinatario => { return destinatario.persona.nro_documento === global_param; }); */
+                  }
 
                   //console.log("params destinatario mock: ",params);
-                  let totalF = destinatarioLista.length;
-                  return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: destinatarioLista  } }));
+                  return of(new HttpResponse({ status: 200, body: listaDestinatario }));
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ error: { message: 'Unauthorised' } });

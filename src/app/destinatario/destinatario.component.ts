@@ -10,7 +10,7 @@ import { DestinatarioService, MensajesService } from '../core/services';
 export class DestinatarioComponent implements OnInit {
     public destinatariosLista: any[] = [];
     public totalFiltrado: number = 0;
-    public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
+    public configPaginacion:any = { "colleccionSize": 0, "pageSize": 20, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
 
     constructor(
       private _route: ActivatedRoute, private _destinatarioService: DestinatarioService, private _mensajeService: MensajesService
@@ -26,6 +26,7 @@ export class DestinatarioComponent implements OnInit {
      * @param pagina [number] numero de pagina
      */
     cambiarPagina(pagina: any) {
+      //this.buscar()
       console.log("nro pagina:", pagina);
     }
     /**
@@ -74,8 +75,11 @@ export class DestinatarioComponent implements OnInit {
      * @param params [object] parametros que se filtraran en la busqueda
      */
     buscar(params:any) {
+      Object.assign({page: (this.configPaginacion.page - 1), pageSize: this.configPaginacion.pageSize});
+      console.log('parametros: ',params);
       this._destinatarioService.buscar(params).subscribe(
         respuesta => {
+          console.log(respuesta);
           this.configDestinatario(respuesta);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
     }
