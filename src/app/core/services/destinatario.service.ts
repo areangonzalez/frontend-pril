@@ -40,7 +40,9 @@ export class DestinatarioService {
         if(destinatarioId){
           return this._apiService.get('/destinatarios/' + parseInt(destinatarioId));
         }else{
-          return this._apiService.get('/destinatarios');
+          let httpParams = new HttpParams();
+          httpParams = this._apiService.formatParams(httpParams, {page:0});
+          return this._apiService.get('/destinatarios', httpParams);
         }
       }
 

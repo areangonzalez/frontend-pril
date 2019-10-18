@@ -74,13 +74,21 @@ export class DestinatarioComponent implements OnInit {
      * Configurar busqueda avanzada para mostrar listado
      * @param params [object] parametros que se filtraran en la busqueda
      */
-    buscar(params:any) {
-      Object.assign({page: (this.configPaginacion.page - 1), pageSize: this.configPaginacion.pageSize});
-      console.log('parametros: ',params);
+    buscar(params:any, page:number) {
+      Object.assign(params, {page: page});
+      console.log("parametros: ",params);
       this._destinatarioService.buscar(params).subscribe(
         respuesta => {
           console.log(respuesta);
           this.configDestinatario(respuesta);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+    }
+
+    /**
+     * limpia los campos del formulario de busqueda avanzada
+     * @param e [boolean] valor identificable para limpiar los campos y realizar la busqueda
+     */
+    limpiarCampos(e:boolean) {
+      this.buscar({}, 0);
     }
 }

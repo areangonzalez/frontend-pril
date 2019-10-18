@@ -174,10 +174,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   let oficioid = (request.params.get("oficioid")) ?
                   request.params.get("oficioid") : '';
                   // datos paginacion
-                  // let page: number = parseInt(request.params.get("page"));
-                  // let pageSize: number = parseInt(request.params.get("pagesize"));
-                  let page: number = 0;
-                  let pageSize: number = 20;
+                  let page: number = parseInt(request.params.get("page"));
+                  let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
 
                   let search = [''];
                   if (global_param != ''){
