@@ -6,20 +6,25 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 
 import { CabeceraComponent, PieComponent } from "./layout";
-import { ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent } from "./lista";
+//listas
+import { ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent, ListaOfertaComponent } from "./lista";
+//formularios
 import { LugarComponent } from "./formulario/lugar";
 import { DatosPersonaComponent } from "./formulario/persona";
 import { DatosDestinatarioComponent, BusquedaDestinatarioComponent } from "./formulario/destinatario";
 import { EstudioComponent } from "./formulario/estudio";
 import { AutoCompletarComponent } from "./formulario/auto-completar";
 import { DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent } from "./formulario/ambiente-trabajo";
-
+import { FormOfertaComponent } from './formulario/oferta';
+//vistas y tags
 import { DatosDestinatarioVistaComponent } from "./vista";
 import { TagComponent, VistaTagComponent } from "./formulario/tag";
-
+//modal
 import {
   ModalConfirmacionComponent, ModalContentConfirmacion,
-  ModalEstudioComponent, ModalContentEstudio
+  ModalEstudioComponent, ModalContentEstudio,
+  ModalOfertaComponent, ModalContentOferta,
+  ModalVistaOfertaComponent, ModalContentOfertaVista,
 } from './modal'
 
 @NgModule({
@@ -40,10 +45,13 @@ import {
     EstudioComponent,
     AutoCompletarComponent,
     DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent,
+    FormOfertaComponent,ListaOfertaComponent,
     DatosDestinatarioVistaComponent,
     TagComponent, VistaTagComponent,
     ModalConfirmacionComponent, ModalContentConfirmacion,
-    ModalEstudioComponent, ModalContentEstudio
+    ModalEstudioComponent, ModalContentEstudio,
+    ModalOfertaComponent, ModalContentOferta,
+    ModalVistaOfertaComponent, ModalContentOfertaVista
   ],
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule,
@@ -55,14 +63,20 @@ import {
     EstudioComponent,
     AutoCompletarComponent,
     DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent,
+    FormOfertaComponent,ListaOfertaComponent,
     DatosDestinatarioVistaComponent,
     TagComponent, VistaTagComponent,
     ModalConfirmacionComponent, ModalContentConfirmacion,
-    ModalEstudioComponent, ModalContentEstudio
+    ModalEstudioComponent, ModalContentEstudio,
+    ModalOfertaComponent, ModalContentOferta,
+    ModalVistaOfertaComponent, ModalContentOfertaVista,
+
   ],
   entryComponents:[
     ModalConfirmacionComponent, ModalContentConfirmacion,
-    ModalEstudioComponent, ModalContentEstudio
+    ModalEstudioComponent, ModalContentEstudio,
+    ModalOfertaComponent, ModalContentOferta,
+    ModalVistaOfertaComponent, ModalContentOfertaVista,
   ]
 })
 export class SharedModule {}

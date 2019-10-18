@@ -22,7 +22,7 @@ const routes: Routes = [
       path: 'editar/:id', component: FormAmbienteTrabajoComponent,
       data: { loading: true, title: 'Editar ambiente de Trabajo' }
     },{
-      path: 'ambiente/:id/ofertas', component: OfertaComponent,
+      path: ':id/ofertas', component: OfertaComponent,
       data: { loading: true, title: 'Ofertas' }
     }
 ];

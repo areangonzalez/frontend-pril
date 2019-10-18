@@ -11,18 +11,14 @@ import { OfertaComponent } from "./oferta/oferta.component";
 import { AmbienteTrabajoComponent } from './ambiente-trabajo.component';
 import { VistaAmbienteTrabajoComponent } from "./vista/vista-ambiente-trabajo.component";
 import { FormAmbienteTrabajoComponent } from "./form/form-ambiente-trabajo.component";
-//import { ListaOfertaComponent } from "./oferta/lista/lista-oferta.component";
-import { FormOfertaComponent } from "./oferta/form/form-oferta.components";
 import { VistaOfertaComponent } from "./oferta/vista/vista-oferta.component";
-import { ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent } from "./oferta/modal";
 
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [AmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
+    declarations: [AmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, VistaOfertaComponent],
     imports: [CommonModule, NgbModule, SharedModule, AmbienteTrabajoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [AmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, /* ListaOfertaComponent, */ FormOfertaComponent, ModalContentOferta, ModalOfertaComponent, ModalContentOfertaVista, ModalVistaOfertaComponent, VistaOfertaComponent],
-    entryComponents: [ModalContentOferta, ModalContentOfertaVista]
+    exports: [AmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, VistaOfertaComponent],
 })
 export class AmbienteTrabajoModule { }

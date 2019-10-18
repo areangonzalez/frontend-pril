@@ -21,14 +21,14 @@ export class ListaAmbienteTrabajoComponent {
     }
 
     verAmbienteTrabajo(id) {
-        this._router.navigate(['ambiente', 'vista', id]);
+        this._router.navigate(['inicio','ambiente', 'vista', id]);
     }
 
     editarAmbienteTrabajo(id) {
-        this._router.navigate(['ambiente/editar', id]);
+        this._router.navigate(['inicio','ambiente','editar', id]);
     }
 
     agregarOfertas(id) {
-        this._router.navigate(['ambiente', id, 'ofertas']);
+        this._router.navigate(['inicio','ambiente', id, 'ofertas']);
     }
 }

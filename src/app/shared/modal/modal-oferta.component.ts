@@ -1,8 +1,8 @@
 import { Component, Input, Injectable, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Oferta, Lugar } from "../../../core/models";
-import { MensajesService, OfertaService } from "../../../core/services";
+import { Oferta, Lugar } from "../../core/models";
+import { MensajesService, OfertaService } from "../../core/services";
 
 @Component({
     selector: 'modal-content-oferta',
