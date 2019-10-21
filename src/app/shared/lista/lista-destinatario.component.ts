@@ -32,7 +32,8 @@ export class ListaDestinatarioComponent {
 
     getDireccion(lugar: Object) {
         let dir = "";
-        dir += lugar['localidad'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+        dir += (lugar['localidad'] != undefined) ? lugar['localidad'] + ' - ' : '';
+        dir += lugar['calle'] + ' ' + lugar['altura'];
         dir += (lugar['barrio'] != '') ? " - " + lugar['barrio'] : '';
         dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
         dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';

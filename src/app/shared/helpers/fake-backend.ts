@@ -4,7 +4,6 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 // datos JSON
 import * as data from '../../../assets/data/data.json';
-import { Destinatario } from 'src/app/core/models/index.js';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -12,7 +11,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+      // traer listado de ambientes
+      // desde el archivo "data.json" y del "local storage"
       function getAmientes(){
         let ambienteLista = (<any>data).ambientes;
         let existe = false;
@@ -30,37 +30,75 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
           }
         }
-
         return ambienteLista;
+      }
+      // traer listado de destinatarios
+      // desde el archivo "data.json" y del "local storage"
+      function getDestinatarios(){
+        let destinatarioLista = (<any>data).destinatarios;
+        let existe = false;
+        if(localStorage.getItem("destinatarioLista")) {
+          let destinatarioStorage: any[] = JSON.parse(localStorage.getItem("destinatarioLista"));
+          for (let i = 0; i < destinatarioStorage.length; i++) {
+            for (let j = 0; j < destinatarioLista.length; j++) {
+              if (destinatarioStorage[i].id === destinatarioLista[j].id){
+                destinatarioLista[j] = destinatarioStorage[i]; // si se edito
+                existe = true;
+              }
+            }
+            if (!existe) {
+              destinatarioLista.push(destinatarioStorage[i]);
+            }
+          }
+        }
+        return destinatarioLista;
+      }
+
+      // traer listado de persona
+      // desde el archivo "data.json" y del "local storage"
+      function getPersonas(){
+        let personaLista = (<any>data).personas;
+        let existe = false;
+        if(localStorage.getItem("personaLista")) {
+          let personaStorage: any[] = JSON.parse(localStorage.getItem("personaLista"));
+          for (let i = 0; i < personaStorage.length; i++) {
+            for (let j = 0; j < personaLista.length; j++) {
+              if (personaStorage[i].id === personaLista[j].id){
+                personaLista[j] = personaStorage[i]; // si se edito
+                existe = true;
+              }
+            }
+            if (!existe) {
+              personaLista.push(personaStorage[i]);
+            }
+          }
+        }
+        return personaLista;
       }
 
 
-
+      // listados de datos agregados
         let testUser = { id: 1, username: 'admin', password: 'admins', firstName: 'Admin', lastName: 'Super' };
-        // listados de datos agregados
-        let destinatarioLista: any = JSON.parse(localStorage.getItem('destinatarioLista')) || [];
-        let ambienteLista = getAmientes();
         let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
         let areasLista: any[] = JSON.parse(localStorage.getItem('areasLista')) || [];
-
-        // Agregados
-        //let destinatarioAgregados: any[] = JSON.parse(localStorage.getItem('destinatariosAgregados')) || [];
-        //let ambientesAgregados: any[] = JSON.parse(localStorage.getItem('ambientesAgregados')) || [];
         let ofertasAgregadas: any[] = JSON.parse(localStorage.getItem('ofertasAgregadas')) || [];
+
+        let destinatarioLista = getDestinatarios();
+        let ambienteLista = getAmientes();
+        let personas = getPersonas();
+
         // listados globales
-        let profesion: any[] = [{ id: 1, nombre: 'Abogado'},{ id: 3, nombre: 'Agrónomo'},{ id: 4, nombre: 'Bacteriólogo' },{ id: 5, nombre: 'Biofísico' },
-        { id: 6, nombre: 'climatologo' },{ id: 7, nombre: 'Cirujano' },{ id: 8, nombre: 'Dentista' },{ id: 9, nombre: 'Doctor' },{ id: 10, nombre: 'Enfermero' }];
-        let oficio: any[] = [{ id: 1, nombre: 'Albañil' },{ id: 2, nombre: 'Arbitro' },{ id: 3, nombre: 'Banquero' },{ id: 4, nombre: 'Bailarin' },{ id: 5, nombre: 'Cantante' },
-            { id: 6, nombre: 'Carpintero' },{ id: 7, nombre: 'Electricista' },{ id: 8, nombre: 'Escritor' },{ id: 9, nombre: 'Farmacéutico' },{ id: 10, nombre: 'Florista' }];
-        let sexo: any[] = [{ id: 1, nombre: "Hombre"}, {id: 2, nombre: "Mujer"}];
-        let genero: any[] = [{ id: 1, nombre: "Femenino" }, { id: 2, nombre: "Masculino" }];
-        let estadoCivil: any[] = [{ id: 1, nombre: "Casado/a" }, { id: 2, nombre: "Soltero/a" }, { id: 2, nombre: "Viudo/a" }];
-        let localidad: any[] = [{ id: 1, nombre: "Bariloche" }, { id: 2, nombre: "Cipolletti" }, { id: 3, nombre: "Gral. Roca" }, { id: 4, nombre: "Viedma" }];
-        let nivelEducativo: any[] = [{ id: 1, nombre: "Primaria" }, { id: 2, nombre: "Secundaria" }, { id: 3, nombre: "Terciaria" }, { id: 3, nombre: "Universitaria" }];
-        let tipoAmbienteTrabajoLista: any[] = [{ id: 1, nombre: 'Comisión de fomento' }, { id: 2, nombre: 'Empleador privado' },{ id: 3, nombre: 'Empresa' }, { id: 4, nombre: 'Institución gubernamental' },{ id: 5, nombre: 'Institución sin fines de lucro' }, { id: 6, nombre: 'Municipio' }];
-        let planes: any[] = [{ id: 1, nombre: '1000 / 10 horas' }, { id: 2, nombre: '2000 / 15 horas' },{ id: 3, nombre: '5000 / 20 horas' }];
+        let sexo = (<any>data).sexos;
+        let genero = (<any>data).generos;
+        let estadoCivil = (<any>data).estadoCivils;
+        let localidad = (<any>data).localidads;
+
+        let profesion = (<any>data).profesions;
+        let oficio = (<any>data).oficios;
+        let nivelEducativo = (<any>data).nivelEducativos;
+        let tipoAmbienteTrabajoLista = (<any>data).tipoAmbienteTrabajos;
+        let planes = (<any>data).planes;
         // datos adicionales
-        let personas: any[] = [{ id: 1, nombre: "Romina", apellido: "Rodríguez", nro_documento: "29890098", fecha_nacimiento: "1980-12-12", telefono: "2920430690", celular: "2920412127", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "rr1980@gmail.com", cuil: "20298900988", estudios: [{ anio: "2013", nivel_educativoid: 1, nivel_educativo: 'Primaria', titulo: "grado", completo: true, en_curso: false, profesionid: '', profesion: '' }], lista_oficio:[], lugar: { id: 1, barrio: "Santa Clara", calle: "misiones", altura: "27", escalera: '', piso: "", depto: "", localidadid: 1 } }, { id: 2, nombre: "Juan jose", apellido: "Casillas", nro_documento: "29232132", fecha_nacimiento: "1985-10-23", telefono: "2920430753", celular: "2920412265", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "jjcasillas@gmail.com", cuil: "20292321328", estudios: [{ anio: "2013", nivel_educativoid: 2, nivel_educativo: 'Secundaria', titulo: "bachiller en economía financiera", completo: false, en_curso: true, profesionid: '', profesion: '' }], lista_oficio:[], lugar: { id: 2, barrio: "Don bosco", calle: "Mitre", altura: "327", escalera: '', piso: "", depto: "", localidadid: 1 } }, { id: 3, nombre: "Carlos", apellido: "Mansilla", nro_documento: "29857364", fecha_nacimiento: "1988-05-14", telefono: "2920430132", celular: "2920412628", fax:"", estado_civilid: 1, sexoid: 2, generoid: 1, email: "carlosmansilla@gmail.com", cuil: "20298573648", estudios: [{ anio: "2013", nivel_educativoid: 3, nivel_educativo: 'Terciaria', titulo: "Doctorado", completo: true, en_curso: false, profesionid: 9, profesion: 'Doctor' }], lista_oficio: [{ id: 1, nombre: 'Albañil' },{ id: 2, nombre: 'Arbitro' },{ id: 3, nombre: 'Banquero' }], lugar: { id: 3, barrio: "Fátima", calle: "san luis", altura: "1032", escalera: '', piso: "", depto: "", localidadid: 1 } }];
 
 
         /*** Funciones para el uso de datos ***/
@@ -192,6 +230,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     estado: true,
                     resultado:encontrados,
                   };
+
+                  // armo el listado de destinatario
+                  for (let d = 0; d < destinatarioLista.length; d++) {
+                    for (let p = 0; p < personas.length; p++) {
+                      if (destinatarioLista[d]["personaid"] === personas[p]["id"]) {
+                        destinatarioLista[d]["persona"] = personas[p];
+                      }
+                    }
+                  }
+
+                  // realizo busqueda por los parametros enviados
                   encontrados = destinatarioLista.filter(
                     destinatario => {
                       for (let i = 0; i < search.length; i++) {
@@ -275,16 +324,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                   listaDestinatario.total_filtrado = encontrados.length;
                   listaDestinatario.pages = totalPagina;
-
+                    console.log("Antes de paginacion: ",listaDestinatario);
 
                   if (page > 0) {
                     page = page;
                     let pageStart = page * pageSize;
                     let pageEnd = pageStart + pageSize;
                     listaDestinatario.resultado = encontrados.slice(pageStart, pageEnd);
+                    console.log("pagina mayor a 0, page = a " + page +" : ",listaDestinatario);
                   }else{
                     listaDestinatario.resultado = encontrados.slice(0,pageSize);
-
+                    console.log("pagina igual a 0: ",listaDestinatario);
                   }
 
                   //console.log("params destinatario mock: ",params);

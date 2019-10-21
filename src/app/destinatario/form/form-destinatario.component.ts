@@ -172,6 +172,7 @@ export class FormDestinatarioComponent implements OnInit {
         })
         .subscribe(
             datos => {
+              console.log(datos);
                 // variables para el documento, profesion y oficio
                 this.nroDoc = datos['persona']['nro_documento'];
                 // seteo los valores del objeto
