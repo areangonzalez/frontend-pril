@@ -5,7 +5,7 @@
             <select class="form-control" id="tipo_ambiente_trabajo" formControlName="tipo_ambiente_trabajoid"
              (change)="selTipo($event)" [ngClass]="{'is-invalid': (ambiente.tipo_ambiente_trabajoid.invalid && submitted)}">
                 <option value="">Seleccione tipo ambiente de trabajo</option>
-                <option *ngFor="let tipo of tipoAmbienteTrabajoListado" value="{{tipo.id}}">{{tipo.nombre}}</option>
+                <option *ngFor="let tipo of tipo_ambiente_trabajo_lista" value="{{tipo.id}}">{{tipo.nombre}}</option>
             </select>
             <div *ngIf="(ambiente.tipo_ambiente_trabajoid.invalid && submitted)"
                 class="text-danger">

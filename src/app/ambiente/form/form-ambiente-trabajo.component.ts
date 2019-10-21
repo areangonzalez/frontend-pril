@@ -29,6 +29,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     public submitted: boolean = false;
     private id: any;
     public idAmbiente = '';
+    public tipo_ambiente_trabajo_lista //lista de de tipos de ambientes de trabajo
     /**
      * Inicializa los servicios
      * @param _router manejo de rutas dentro del componente
@@ -87,6 +88,8 @@ export class FormAmbienteTrabajoComponent implements OnInit {
         // breadcrumbs Dinamico
         this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Ambiente de trabajo', url: 'ambiente', params: [] }, { label: 'Agregar', url: 'ambiente/agregar', params: [] }]);
         this.id = this._route.snapshot.paramMap.get('id');
+        this.tipo_ambiente_trabajo_lista = this._route.snapshot.data['tipoAmbienteTrabajoLista'];
+        
         if (this.id != undefined) {
             this.idAmbiente = this.id;
             this.ambientePorId(this.id);
