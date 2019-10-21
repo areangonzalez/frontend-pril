@@ -17,7 +17,7 @@ import { AutoCompletarComponent } from "./formulario/auto-completar";
 import { DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent } from "./formulario/ambiente-trabajo";
 import { FormOfertaComponent } from './formulario/oferta';
 //vistas y tags
-import { DatosDestinatarioVistaComponent } from "./vista";
+import { DatosDestinatarioVistaComponent,VistaOfertaComponent } from "./vista";
 import { TagComponent, VistaTagComponent } from "./formulario/tag";
 //modal
 import {
@@ -51,7 +51,8 @@ import {
     ModalConfirmacionComponent, ModalContentConfirmacion,
     ModalEstudioComponent, ModalContentEstudio,
     ModalOfertaComponent, ModalContentOferta,
-    ModalVistaOfertaComponent, ModalContentOfertaVista
+    ModalVistaOfertaComponent, ModalContentOfertaVista,
+    VistaOfertaComponent,
   ],
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule,
@@ -70,7 +71,7 @@ import {
     ModalEstudioComponent, ModalContentEstudio,
     ModalOfertaComponent, ModalContentOferta,
     ModalVistaOfertaComponent, ModalContentOfertaVista,
-
+    VistaOfertaComponent
   ],
   entryComponents:[
     ModalConfirmacionComponent, ModalContentConfirmacion,

@@ -11,14 +11,13 @@ import { OfertaComponent } from "./oferta/oferta.component";
 import { AmbienteTrabajoComponent } from './ambiente-trabajo.component';
 import { VistaAmbienteTrabajoComponent } from "./vista/vista-ambiente-trabajo.component";
 import { FormAmbienteTrabajoComponent } from "./form/form-ambiente-trabajo.component";
-import { VistaOfertaComponent } from "./oferta/vista/vista-oferta.component";
 
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [AmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, VistaOfertaComponent],
+    declarations: [AmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent],
     imports: [CommonModule, NgbModule, SharedModule, AmbienteTrabajoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [AmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent, VistaOfertaComponent],
+    exports: [AmbienteTrabajoComponent, VistaAmbienteTrabajoComponent, OfertaComponent, FormAmbienteTrabajoComponent],
 })
 export class AmbienteTrabajoModule { }
