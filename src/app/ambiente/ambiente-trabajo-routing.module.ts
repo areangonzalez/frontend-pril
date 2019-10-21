@@ -21,7 +21,7 @@ const routes: Routes = [
       resolve: { tipoAmbienteTrabajoLista: TipoAmbienteTrabajoService}
     },{
       path: 'editar/:id', component: FormAmbienteTrabajoComponent,
-      data: { loading: true, title: 'Editar ambiente de Trabajo' }
+      data: { loading: true, title: 'Editar ambiente de Trabajo' },
       resolve: { tipoAmbienteTrabajoLista: TipoAmbienteTrabajoService}
     },{
       path: ':id/ofertas', component: OfertaComponent,
