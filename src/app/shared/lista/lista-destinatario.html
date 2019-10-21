@@ -3,9 +3,9 @@
     <span *ngIf="configPaginacion.totalRegistros > 0">Destinatarios: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
     <span *ngIf="configPaginacion.totalRegistros == 0">Destinatarios: {{configPaginacion.cantRegistros}}</span>
   </div>
-  <div class="d-flex align-items-center p-2 font-weight-bold">
+  <!-- <div class="d-flex align-items-center p-2 font-weight-bold">
     <ngb-pagination *ngIf="(configPaginacion.page > 1)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)" aria-label="Default pagination" style="margin-bottom: -15px;" ></ngb-pagination>
-  </div>
+  </div> -->
 </div>
 <div class="col-md-12">
     <table class="table table-hover">
@@ -32,7 +32,7 @@
                     <button type="button" class="btn btn-outline-secondary btn-margin-left" tooltipClass="tooltip-inner" ngbTooltip="{{getDireccion(destinatario.persona.lugar)}}">
                         <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.email}}">
+                    <button *ngIf="(destinatario.persona.email != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.email}}">
                         <span class="oi oi-envelope-closed" title="Email" aria-hidden="true"></span>
                     </button>
                     <button *ngIf="(destinatario.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.telefono}}">
@@ -55,5 +55,5 @@
     </table>
 </div>
 <div class=" d-flex justify-content-center">
-    <ngb-pagination *ngIf="(configPaginacion.page > 1)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)"></ngb-pagination>
+    <ngb-pagination *ngIf="(configPaginacion.colleccionSize > 0)"  [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)"></ngb-pagination>
 </div>

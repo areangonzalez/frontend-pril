@@ -11,6 +11,7 @@ export class DestinatarioComponent implements OnInit {
     public destinatariosLista: any[] = [];
     public totalFiltrado: number = 0;
     public configPaginacion:any = { "colleccionSize": 0, "pageSize": 20, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
+    public filtradoBusqueda:any = {}; // variable que mantiene el filtro de busqueda
 
     constructor(
       private _route: ActivatedRoute, private _destinatarioService: DestinatarioService, private _mensajeService: MensajesService
@@ -26,8 +27,8 @@ export class DestinatarioComponent implements OnInit {
      * @param pagina [number] numero de pagina
      */
     cambiarPagina(pagina: any) {
-      //this.buscar()
-      console.log("nro pagina:", pagina);
+      this.buscar(this.filtradoBusqueda, (pagina - 1));
+      //console.log("nro pagina:", pagina);
     }
     /**
      * Se configura paginacion y listado de destinatario
@@ -73,10 +74,11 @@ export class DestinatarioComponent implements OnInit {
     /**
      * Configurar busqueda avanzada para mostrar listado
      * @param params [object] parametros que se filtraran en la busqueda
+     * @param page [number] Es el numero de pagina menos 1
      */
     buscar(params:any, page:number) {
       Object.assign(params, {page: page});
-      console.log("parametros: ",params);
+      //this.filtradoBusqueda = params;
       this._destinatarioService.buscar(params).subscribe(
         respuesta => {
           console.log(respuesta);
