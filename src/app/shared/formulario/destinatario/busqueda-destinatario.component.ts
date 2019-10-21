@@ -23,6 +23,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BusquedaDestinatarioComponent implements OnInit {
     @Output("obtenerBusqueda") obtenerBusqueda = new EventEmitter();
+    @Output("limpiar") limpiar = new EventEmitter();
     public state: string = 'small';
     public busquedaForm: FormGroup;
     public nivelEducativoLista: any = [];
@@ -73,6 +74,21 @@ export class BusquedaDestinatarioComponent implements OnInit {
         }
       }
       this.obtenerBusqueda.emit(apiBusqueda);
+    }
+
+    limpiarCampos() {
+      let busqueda: any = this.busquedaForm.value;
+      for (const key in busqueda) {
+        if (key == 'fechaDesde') {
+          busqueda[key] = null;
+        }else if (key == 'fechaHasta') {
+          busqueda[key] = null;
+        }else {
+          busqueda[key] = '';
+        }
+      }
+      this.busquedaForm.patchValue(busqueda);
+      this.limpiar.emit(true);
     }
 
 

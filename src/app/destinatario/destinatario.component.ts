@@ -10,7 +10,7 @@ import { DestinatarioService, MensajesService } from '../core/services';
 export class DestinatarioComponent implements OnInit {
     public destinatariosLista: any[] = [];
     public totalFiltrado: number = 0;
-    public configPaginacion:any = { "colleccionSize": 0, "pageSize": 0, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
+    public configPaginacion:any = { "colleccionSize": 0, "pageSize": 20, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
 
     constructor(
       private _route: ActivatedRoute, private _destinatarioService: DestinatarioService, private _mensajeService: MensajesService
@@ -26,6 +26,7 @@ export class DestinatarioComponent implements OnInit {
      * @param pagina [number] numero de pagina
      */
     cambiarPagina(pagina: any) {
+      //this.buscar()
       console.log("nro pagina:", pagina);
     }
     /**
@@ -73,10 +74,21 @@ export class DestinatarioComponent implements OnInit {
      * Configurar busqueda avanzada para mostrar listado
      * @param params [object] parametros que se filtraran en la busqueda
      */
-    buscar(params:any) {
+    buscar(params:any, page:number) {
+      Object.assign(params, {page: page});
+      console.log("parametros: ",params);
       this._destinatarioService.buscar(params).subscribe(
         respuesta => {
+          console.log(respuesta);
           this.configDestinatario(respuesta);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
+    }
+
+    /**
+     * limpia los campos del formulario de busqueda avanzada
+     * @param e [boolean] valor identificable para limpiar los campos y realizar la busqueda
+     */
+    limpiarCampos(e:boolean) {
+      this.buscar({}, 0);
     }
 }
