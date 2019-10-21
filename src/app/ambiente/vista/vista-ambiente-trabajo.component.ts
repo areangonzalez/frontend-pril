@@ -79,7 +79,7 @@ export class VistaAmbienteTrabajoComponent {
      * @param id identificador de ambiente de trabajo
      */
     agregarOferta(id) {
-        this._router.navigate(['ambiente', id, 'ofertas']);
+        this._router.navigate(['inicio','ambiente', id, 'ofertas']);
     }
     /**
      * @function buscarOfertas utilizada para obtener el listado de ofertas del ambiente de trabajo
