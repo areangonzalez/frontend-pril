@@ -29,6 +29,7 @@ export class BusquedaDestinatarioComponent implements OnInit {
     public nivelEducativoLista: any = [];
     public profesionLista: any = [];
     public oficioLista: any = [];
+    public btnSeleccion: boolean = false;
 
     constructor(private _route: ActivatedRoute, private _fb: FormBuilder, private _utilService: UtilService){
       this.busquedaForm = _fb.group({
@@ -65,14 +66,17 @@ export class BusquedaDestinatarioComponent implements OnInit {
     realizarBusqueda() {
       let busquedaAvanzada = this.busquedaForm.value;
       let apiBusqueda:any = {};
-
+      let esTrue: boolean = false;
       for (const clave in busquedaAvanzada) {
         if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
           if (clave != 'fechaDesde' && clave != 'fechaHasta'){
             Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
+            esTrue = true;
           }
         }
       }
+      this.btnSeleccion = esTrue;
+      this.state = (esTrue) ? 'large' : 'small';
       this.obtenerBusqueda.emit(apiBusqueda);
     }
 
@@ -88,7 +92,19 @@ export class BusquedaDestinatarioComponent implements OnInit {
         }
       }
       this.busquedaForm.patchValue(busqueda);
+      this.btnSeleccion = false;
+      this.state = 'small';
       this.limpiar.emit(true);
+    }
+    /**
+     *
+     * @param valor [any] contiene el valor de la variable
+     * @return [boolean] devuelve el valor a marcar en booleano
+     */
+    marcarCampo(valor:any) {
+      let marcar: boolean = false;
+      marcar = (valor != null && valor != '') ? true : false;
+      return marcar;
     }
 
 

@@ -44,3 +44,14 @@ label {
 .prioridad {
   margin-bottom: 1px !important;
 }
+
+.campo-seleccionado {
+  color: #495057;
+  background-color: #fff;
+  border: groove #8cc63f;
+  outline: 0
+}
+.campo-seleccionado:focus {
+  border: #8cc63f;
+  box-shadow: 0 0 0 0.2rem #8cc63f;
+}
