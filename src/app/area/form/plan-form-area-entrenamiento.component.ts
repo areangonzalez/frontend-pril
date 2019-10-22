@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // services
-import { MensajesService, DestinatarioService, OfertaService, AmbienteTrabajoService, AreaEntrenamientoService, PlanService } from '../../../core/services';
+import { MensajesService, DestinatarioService, OfertaService, AmbienteTrabajoService, AreaEntrenamientoService, PlanService } from '../../core/services';
 // MOdels
-import { AmbienteTrabajo, Oferta, Lugar, Representante, Persona, AreaEntrenamiento } from "../../../core/models";
+import { AmbienteTrabajo, Oferta, Lugar, Representante, Persona, AreaEntrenamiento } from "../../core/models";
 import { UtilService } from 'src/app/core/utils';
 
 @Component({

@@ -682,19 +682,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         seleccion = matchedAmbiente.length ? matchedAmbiente : seleccion;
                       }
                       if (seleccion.length > 0) {
-                        return of(new HttpResponse({ status: 200, body: { coleccion: seleccion, total_filtrado: seleccion.length } }));
+                        return of(new HttpResponse({ status: 200, body: { resultado: seleccion, total_filtrado: seleccion.length } }));
                       }else{
-                        return of(new HttpResponse({ status: 200, body: { coleccion: ofertasLista, total_filtrado: ofertasLista.length } }));
+                        return of(new HttpResponse({ status: 200, body: { resultado: ofertasLista, total_filtrado: ofertasLista.length } }));
                       }
                     }else{
-                      return of(new HttpResponse({ status: 200, body: { coleccion: ofertasLista, total_filtrado: ofertasLista.length } }));
+                      return of(new HttpResponse({ status: 200, body: { resultado: ofertasLista, total_filtrado: ofertasLista.length } }));
                     }
-
-
-                // } else {
-                //     // return 401 not authorised if token is null or invalid
-                //     return throwError({ error: { message: 'Unauthorised' } });
-                // }
             }
 
             // Crear ofertas
@@ -922,7 +916,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   }
 
                 }
-                return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, coleccion: areaColeccion  } }));
+                return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: areaColeccion  } }));
             // } else {
             //     // return 401 not authorised if token is null or invalid
             //     return throwError({ error: { message: 'Unauthorised' } });

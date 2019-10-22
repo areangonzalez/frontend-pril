@@ -16,7 +16,7 @@ export class BusquedaAreaEntrenamientoComponent implements OnInit {
     }
 
     agregarArea(){
-        this._router.navigate(['area-entrenamiento', 'crear-seleccion']);
+        this._router.navigate(['inicio','area-entrenamiento', 'crear-seleccion']);
     }
 
 }

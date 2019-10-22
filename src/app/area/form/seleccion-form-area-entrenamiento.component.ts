@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 // services
-import { OfertaService } from '../../../core/services/oferta.service'
-import { DestinatarioService } from '../../../core/services/destinatario.service'
-import { MensajesService } from '../../../core/services/mensajes.service'
+import { OfertaService, DestinatarioService, MensajesService } from '../../core/services';
 
 
 @Component({

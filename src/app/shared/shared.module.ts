@@ -7,7 +7,10 @@ import { RouterModule } from "@angular/router";
 
 import { CabeceraComponent, PieComponent } from "./layout";
 //listas
-import { ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent, ListaOfertaComponent } from "./lista";
+import {
+  ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent, ListaOfertaComponent, ListaAreaEntrenamientoComponent,
+  ListaDestinatarioAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent
+} from "./lista";
 //formularios
 import { LugarComponent } from "./formulario/lugar";
 import { DatosPersonaComponent } from "./formulario/persona";
@@ -16,6 +19,7 @@ import { EstudioComponent } from "./formulario/estudio";
 import { AutoCompletarComponent } from "./formulario/auto-completar";
 import { DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent } from "./formulario/ambiente-trabajo";
 import { FormOfertaComponent } from './formulario/oferta';
+import { BusquedaAreaEntrenamientoComponent } from "./formulario/area-entrenamiento";
 //vistas y tags
 import { DatosDestinatarioVistaComponent,VistaOfertaComponent } from "./vista";
 import { TagComponent, VistaTagComponent } from "./formulario/tag";
@@ -38,7 +42,8 @@ import {
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     CabeceraComponent, PieComponent,
-    ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent,
+    ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent, ListaAreaEntrenamientoComponent,
+    ListaDestinatarioAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent,
     LugarComponent,
     DatosPersonaComponent,
     DatosDestinatarioComponent, BusquedaDestinatarioComponent,
@@ -46,6 +51,7 @@ import {
     AutoCompletarComponent,
     DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent,
     FormOfertaComponent,ListaOfertaComponent,
+    BusquedaAreaEntrenamientoComponent,
     DatosDestinatarioVistaComponent,
     TagComponent, VistaTagComponent,
     ModalConfirmacionComponent, ModalContentConfirmacion,
@@ -57,7 +63,8 @@ import {
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule,
     CabeceraComponent, PieComponent,
-    ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent,
+    ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent,ListaAreaEntrenamientoComponent,
+    ListaDestinatarioAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent,
     LugarComponent,
     DatosPersonaComponent,
     DatosDestinatarioComponent, BusquedaDestinatarioComponent,
@@ -65,6 +72,7 @@ import {
     AutoCompletarComponent,
     DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent,
     FormOfertaComponent,ListaOfertaComponent,
+    BusquedaAreaEntrenamientoComponent,
     DatosDestinatarioVistaComponent,
     TagComponent, VistaTagComponent,
     ModalConfirmacionComponent, ModalContentConfirmacion,
