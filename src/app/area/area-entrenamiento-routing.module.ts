@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AreaEntrenamientoComponent } from "./area-entrenamiento.component";
-import { SeleccionFormAreaEntrenamientoComponent } from './form/seleccion/seleccion-form-area-entrenamiento.component';
-import { PlanFormAreaEntrenamientoComponent } from "./form/plan/plan-form-area-entrenamiento.component";
+import { SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent } from "./form";
 import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamiento.component";
 
 const routes: Routes = [
