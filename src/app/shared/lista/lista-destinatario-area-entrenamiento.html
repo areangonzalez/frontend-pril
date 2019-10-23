@@ -26,13 +26,13 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let destinatario of destinatarios" [ngClass]="{'table-success': (selId == destinatario.id)}" (click)="seleccionarDestinatario(destinatario.id, destinatario.deseo_actividad, destinatario.oficio)">
+            <tr *ngFor="let destinatario of destinatarios" [ngClass]="{'table-success': (selId == destinatario.id)}" (click)="seleccionarDestinatario(destinatario.id, destinatario.deseo_actividad, destinatario.persona.lista_oficio)">
               <td>{{destinatario.persona.nro_documento}}</td>
               <th rowspan="1" colspan="2">{{destinatario.persona.apellido}}, {{destinatario.persona.nombre}}
                 <button type="button" class="btn btn-sm btn-outline-secondary btn-margin-left" tooltipClass="tooltip-inner" ngbTooltip="{{getDireccion(destinatario.persona.lugar)}}">
                   <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.email}}">
+                <button *ngIf="(destinatario.persona.email != '')" type="button" class="btn btn-sm btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.email}}">
                   <span class="oi oi-envelope-closed" title="Email" aria-hidden="true"></span>
                   </button>
                   <button *ngIf="(destinatario.persona.telefono != '')" type="button" class="btn btn-sm btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.telefono}}">
@@ -43,7 +43,9 @@
                   </button>
               </th>
               <td>{{destinatario.deseo_actividad}}</td>
-              <td>{{destinatario.oficio}}</td>
+              <td class="text-center">
+                  <vista-tag-component [listaTags]="destinatario.persona.lista_oficio"></vista-tag-component>
+              </td>
               <td class="text-center"  width="70">
                   <i *ngIf="(selId == destinatario.id)" class="fas fa-check" title="seleccionar"></i>
               </td>

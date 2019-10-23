@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 // services
 import { OfertaService, DestinatarioService, MensajesService } from '../../core/services';
 
@@ -11,66 +11,53 @@ import { OfertaService, DestinatarioService, MensajesService } from '../../core/
 })
 export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     page = 1;
-    public ofertas:any[];
-    public destinatarios: any[];
+    public ofertas:any = {};
+    public destinatarios: any = {};
     public destinatarioId:number = 0;
     public ofertaId:number = 0;
     public totalOfertas: number = 0;
     public totalDestinatarios: number = 0;
 
     constructor(
-        private _router: Router,
-        private _ofertaService: OfertaService,
-        private _destinatarioService: DestinatarioService,
-        private _mensajesService: MensajesService
+      private _route: ActivatedRoute,
+      private _router: Router,
+      private _ofertaService: OfertaService,
+      private _destinatarioService: DestinatarioService,
+      private _mensajesService: MensajesService
     ) {}
 
     ngOnInit() {
+      this.destinatarios = this._route.snapshot.data['destinatarios'];
+      /* this.ofertas = this._route.snapshot.data['ofertas']; */
       this.listarOfertas();
-      this.listarDestinatario();
     }
 
     private listarOfertas(){
       this._ofertaService.listarOfertas('').subscribe(
         datos => {
-          this.ofertas = datos['coleccion'];
-          this.totalOfertas = datos['total_filtrado'];
+          this.ofertas = datos;
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
         });
       }
-
-      private listarDestinatario(){
-        this._destinatarioService.listarDestinatario().subscribe(
-          datos => {
-            this.destinatarios = datos['coleccion'];
-            this.totalDestinatarios = datos['total_filtrado'];
-        }, error => {
-          this._mensajesService.cancelado(error, [{name:''}]);
-        });
-    }
-
-
-
+    /**
+     * Cancelacion del formulario
+     */
     cancelar() {
-        this._router.navigate(['area']);
-    }
-
-    crearArea(){
-        this._router.navigate(['area', 'crear-plan']);
+        this._router.navigate(['inicio','area-entrenamiento']);
     }
 
     destinatarioElegido(destinatario){
+      console.log("Seleccion de destinatario: ",destinatario);
       if (destinatario != null) {
         this.destinatarioId = destinatario.id;
         this.ofertaId = 0;
-        this._ofertaService.buscarOfertaPor(destinatario).subscribe(
+        /* this._ofertaService.buscarOfertaPor(destinatario).subscribe(
           datos => {
-            this.ofertas = datos['coleccion'];
-            this.totalOfertas = datos['total_filtrado'];
+            this.ofertas = datos;
           }, error => {
             this._mensajesService.cancelado(error, [{name:''}]);
-          });
+          }); */
       } else {
         this.destinatarioId = 0;
         this.listarOfertas();
@@ -87,7 +74,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
 
     seguirCreando(){
       if (this.destinatarioId != 0 && this.ofertaId != 0){
-        this._router.navigate(['area-entrenamiento', 'crear-plan', this.destinatarioId, this.ofertaId]);
+        this._router.navigate(['inicio','area-entrenamiento', 'crear-plan', this.destinatarioId, this.ofertaId]);
       }else{
         this._mensajesService.cancelado('Por favor verifique los datos!!!', [{'name':''}]);
         // aviso si falta algo.

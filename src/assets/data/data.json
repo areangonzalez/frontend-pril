@@ -117,6 +117,99 @@
     "observacion": "",
     "personaid": 7
   }],
+  "ofertas": [{
+    "ambiente_trabajo": "Panaderia San Fernando",
+    "ambiente_trabajoid": "1",
+    "area": "Ventas",
+    "demanda_laboral": "atención al publico",
+    "estado": "Vacante",
+    "fecha_inicial": "2019-9-22",
+    "id": 1,
+    "lugar": {
+      "altura": "321",
+      "barrio": "",
+      "calle": "buenos aires",
+      "depto": "",
+      "escalera": "",
+      "id": 1,
+      "localidad": "Viedma",
+      "localidadid": "9",
+      "piso": ""
+    },
+    "nombre_sucursal": "Local 32",
+    "objetivo": "",
+    "puesto": "Cajero",
+    "tarea": ""
+  },{
+    "ambiente_trabajo": "Panaderia San Fernando",
+    "ambiente_trabajoid": "1",
+    "area": "Limpieza",
+    "demanda_laboral": "Limpieza",
+    "estado": "Vacante",
+    "fecha_inicial": "2019-9-22",
+    "id": 1,
+    "lugar": {
+      "altura": "321",
+      "barrio": "",
+      "calle": "buenos aires",
+      "depto": "",
+      "escalera": "",
+      "id": 1,
+      "localidad": "Viedma",
+      "localidadid": "9",
+      "piso": ""
+    },
+    "nombre_sucursal": "local 23",
+    "objetivo": "",
+    "puesto": "limpieza",
+    "tarea": ""
+  },{
+    "ambiente_trabajo": "Saturno Hogar S.A",
+    "ambiente_trabajoid": "3",
+    "area": "Ventas",
+    "demanda_laboral": "atención al publico",
+    "estado": "Vacante",
+    "fecha_inicial": "2019-9-22",
+    "id": 1,
+    "lugar": {
+      "altura": "321",
+      "barrio": "",
+      "calle": "buenos aires",
+      "depto": "",
+      "escalera": "",
+      "id": 1,
+      "localidad": "Viedma",
+      "localidadid": "9",
+      "piso": ""
+    },
+    "nombre_sucursal": "local 2",
+    "objetivo": "",
+    "puesto": "Vendedor",
+    "tarea": ""
+  },{
+    "ambiente_trabajo": "Saturno Hogar S.A.",
+    "ambiente_trabajoid": "1",
+    "area": "Limpieza",
+    "demanda_laboral": "atención al publico",
+    "estado": "Vacante",
+    "fecha_inicial": "2019-9-22",
+    "id": 1,
+    "lugar": {
+      "altura": "321",
+      "barrio": "",
+      "calle": "buenos aires",
+      "depto": "",
+      "escalera": "",
+      "id": 1,
+      "localidad": "Viedma",
+      "localidadid": "9",
+      "piso": ""
+    },
+    "nombre_sucursal": "Local 2",
+    "objetivo": "",
+    "puesto": "Limpieza",
+    "tarea": ""
+  }],
   "personas": [{
               "id": 1,
               "nombre": "Victoria Margarita",
@@ -408,7 +501,11 @@
                 "perfil":"cep11p",
                 "icono_class": "fab fa-facebook-square"
               }],
-              "lista_oficio":[],
+              "lista_oficio":[
+                { "id": 1, "nombre": "Albañil" },
+                { "id": 7, "nombre": "Electricista" },
+                { "id": 9, "nombre": "Farmacéutico" }
+              ],
               "estudios": [
                   {
                       "id": 4,

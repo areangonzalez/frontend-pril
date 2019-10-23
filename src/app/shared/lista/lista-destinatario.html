@@ -44,7 +44,7 @@
                 </td>
                 <td class="text-center">{{destinatario.profesion}}</td>
                 <td class="text-center">
-                    <span *ngFor="let oficio of destinatario.persona.lista_oficio" class="badge badge-pill badge-success">{{oficio.nombre}}</span>
+                    <vista-tag-component [listaTags]="destinatario.persona.lista_oficio"></vista-tag-component>
                 </td>
                 <td>
                     <a class="btn btn-info btn-sm" [routerLink]="['vista', destinatario.id]"><span class="oi oi-eye" title="Ver destinatario" aria-hidden="true"></span></a>

@@ -75,14 +75,35 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
         return personaLista;
       }
+       // traer listado de Ofertas
+      // desde el archivo "data.json" y del "local storage"
+      function getOfertas(){
+        let ofertasLista = (<any>data).ofertas;
+        let existe = false;
+        if(localStorage.getItem("ofertasLista")) {
+          let ofertasStorage: any[] = JSON.parse(localStorage.getItem("ofertasLista"));
+          for (let i = 0; i < ofertasStorage.length; i++) {
+            for (let j = 0; j < ofertasLista.length; j++) {
+              if (ofertasStorage[i].id === ofertasLista[j].id){
+                ofertasLista[j] = ofertasStorage[i]; // si se edito
+                existe = true;
+              }
+            }
+            if (!existe) {
+              ofertasLista.push(ofertasStorage[i]);
+            }
+          }
+        }
+        return ofertasLista;
+      }
 
 
       // listados de datos agregados
         let testUser = { id: 1, username: 'admin', password: 'admins', firstName: 'Admin', lastName: 'Super' };
-        let ofertasLista: any[] = JSON.parse(localStorage.getItem('ofertasLista')) || [];
         let areasLista: any[] = JSON.parse(localStorage.getItem('areasLista')) || [];
         let ofertasAgregadas: any[] = JSON.parse(localStorage.getItem('ofertasAgregadas')) || [];
 
+        let ofertasLista = getOfertas();
         let destinatarioLista = getDestinatarios();
         let ambienteLista = getAmientes();
         let personas = getPersonas();
@@ -324,17 +345,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                   listaDestinatario.total_filtrado = encontrados.length;
                   listaDestinatario.pages = totalPagina;
-                    console.log("Antes de paginacion: ",listaDestinatario);
 
                   if (page > 0) {
                     page = page;
                     let pageStart = page * pageSize;
                     let pageEnd = pageStart + pageSize;
                     listaDestinatario.resultado = encontrados.slice(pageStart, pageEnd);
-                    console.log("pagina mayor a 0, page = a " + page +" : ",listaDestinatario);
                   }else{
                     listaDestinatario.resultado = encontrados.slice(0,pageSize);
-                    console.log("pagina igual a 0: ",listaDestinatario);
                   }
 
                   //console.log("params destinatario mock: ",params);

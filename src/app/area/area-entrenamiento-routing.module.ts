@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AreaEntrenamientoComponent } from "./area-entrenamiento.component";
 import { SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent } from "./form";
 import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamiento.component";
+import { DestinatarioService, OfertaService } from '../core/services';
 
 const routes: Routes = [
     {
@@ -12,7 +13,8 @@ const routes: Routes = [
     },
     {
       path: 'crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent,
-      data: { loading: true, title: 'Crear área de entrenamiento' }
+      data: { loading: true, title: 'Crear área de entrenamiento' },
+      resolve: { destinatarios: DestinatarioService, /* ofertas: OfertaService */ }
     },{
       path: 'crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent, data: { loading: true, title: 'Crear área de entrenamiento' }
     },{
@@ -24,6 +26,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-  //  providers: [ProgramaService, TipoRecursoService]
+    providers: [DestinatarioService, OfertaService]
 })
 export class AreaEntrenamientoRoutingModule { }

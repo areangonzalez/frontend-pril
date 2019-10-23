@@ -21,7 +21,6 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
         config: NgbTooltipConfig
     ) {
         config.placement = 'top';
-        config.triggers = 'click';
     }
 
     limpiar(){
@@ -39,10 +38,10 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
       return dir;
     }
 
-    seleccionarDestinatario(id:number, formacionDeseada:string, oficio:string){
+    seleccionarDestinatario(id:number, formacionDeseada:string, lista_oficio:any){
       if (this.selId != id) {
         this.selId = id;
-        this.destinatarioElegido.emit({ id:id, deseo_actividad: formacionDeseada, oficio:oficio });
+        this.destinatarioElegido.emit({ id:id, deseo_actividad: formacionDeseada, lista_oficio: lista_oficio });
       }else{
         this.selId = 0;
         this.destinatarioElegido.emit(null);
