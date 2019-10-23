@@ -1,31 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { ApiService } from "./api.service";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
 export class OfertaService {
 
-    constructor(private _http: ApiService) { }
+    constructor(private _apiService: ApiService) { }
 
     listarOfertas(idAmbiente = '') {
       if (idAmbiente != ''){
         let params = new HttpParams().set('ambiente_trabajoid', idAmbiente);
-        return this._http.get('/ofertas', params);
+        return this._apiService.get('/ofertas', params);
       }else{
-        return this._http.get('/ofertas');
+        return this._apiService.get('/ofertas');
       }
     }
 
     getOfertaPorId(id: number) {
-        return this._http.get('/ofertas/' + id);
+        return this._apiService.get('/ofertas/' + id);
     }
 
     guardar(params: object, id: number) {
         if (id != 0) {
-            return this._http.put('/ofertas/' + id, params);
+            return this._apiService.put('/ofertas/' + id, params);
         } else {
-            return this._http.post('/ofertas', params);
+            return this._apiService.post('/ofertas', params);
         }
     }
 
@@ -34,7 +36,27 @@ export class OfertaService {
       for (const key in params) {
         httpParams = httpParams.append(key.toString(), params[key].toString());
       }
-      return this._http.get('/ofertas', httpParams);
+      return this._apiService.get('/ofertas', httpParams);
     }
+
+    /**
+     * Realizamos la precarga de datos
+     */
+    resolve(
+      route: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot,
+      ): Observable<any>|Promise<any>|any {
+        let id = route.params.id;
+        let ambienteid = route.params.ambienteid;
+        if(id){
+          return this._apiService.get('/ofertas/' + parseInt(id));
+        }else if(ambienteid) { 
+          let httpParams = new HttpParams();
+          httpParams = this._apiService.formatParams(httpParams, {ambienteid:ambienteid});
+          return this._apiService.get('/ofertas', httpParams);
+        }else{
+          return this._apiService.get('/ofertas');
+        }
+      }
 
 }

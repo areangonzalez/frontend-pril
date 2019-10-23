@@ -11,7 +11,7 @@ import { MensajesService } from "../../core/services/mensajes.service";
     styleUrls: ['./oferta.css']
 })
 export class OfertaComponent implements OnInit {
-    public listaOfertas: Object;
+    public lista_ofertas: any;
     private id:any;
     public idAmbiente = '';
     public ambiente: any;
@@ -57,7 +57,10 @@ export class OfertaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.id = this._route.snapshot.paramMap.get('id');
+        this.id = this._route.snapshot.paramMap.get('ambienteid');
+        this.lista_ofertas = this._route.snapshot.data['ofertaLista']['resultado'];
+        console.log(this.lista_ofertas);
+        
         if (this.id != undefined) {
             this.idAmbiente = this.id;
             this.buscarOfertas(this.id);
@@ -71,7 +74,7 @@ export class OfertaComponent implements OnInit {
     private buscarOfertas(idAmbiente) {
         this._ofertaService.listarOfertas(idAmbiente).subscribe(
             datos => {
-                this.listaOfertas = datos;
+                this.lista_ofertas = datos;
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             });

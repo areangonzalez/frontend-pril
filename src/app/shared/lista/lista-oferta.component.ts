@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
     templateUrl: './lista-oferta.html',
 })
 export class ListaOfertaComponent implements OnInit {
-    @Input('listaOfertas') public listaOfertas: Object;
+    @Input('listaOfertas') public lista_ofertas: any;
     @Input('nombreAmbiente') public nombreAmbiente: string;
     @Input('mostrarEdicion') public mostrarEdicion:number;
     @Output('guardarOferta') public guardarOferta = new EventEmitter();

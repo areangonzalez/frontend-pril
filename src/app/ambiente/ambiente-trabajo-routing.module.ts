@@ -4,7 +4,7 @@ import { AmbienteTrabajoComponent } from './ambiente-trabajo.component';
 import { VistaAmbienteTrabajoComponent } from './vista/vista-ambiente-trabajo.component';
 import { FormAmbienteTrabajoComponent } from './form/form-ambiente-trabajo.component';
 import { OfertaComponent } from './oferta/oferta.component';
-import { AmbienteTrabajoService, TipoAmbienteTrabajoService } from '../core/services';
+import { AmbienteTrabajoService, TipoAmbienteTrabajoService, OfertaService } from '../core/services';
 
 const routes: Routes = [
     {
@@ -24,8 +24,9 @@ const routes: Routes = [
       data: { loading: true, title: 'Editar ambiente de Trabajo' },
       resolve: { tipoAmbienteTrabajoLista: TipoAmbienteTrabajoService}
     },{
-      path: ':id/ofertas', component: OfertaComponent,
-      data: { loading: true, title: 'Ofertas' }
+      path: ':ambienteid/ofertas', component: OfertaComponent,
+      data: { loading: true, title: 'Ofertas' },
+      resolve: { ofertaLista: OfertaService}
     }
 ];
 
