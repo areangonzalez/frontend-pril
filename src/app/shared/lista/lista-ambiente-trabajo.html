@@ -57,8 +57,8 @@
                     <button type="button" class="btn btn-light btn-sm" (click)="editarAmbienteTrabajo(ambiente.id)">
                         <span class="oi oi-pencil" title="Editar ambiente" aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="btn btn-success btn-sm" (click)="agregarOfertas(ambiente.id)">
-                        <span class="oi oi-briefcase" title="Agregar ofertas" aria-hidden="true"></span>
+                    <button type="button" triggers="hover" ngbTooltip="Lista de ofertas laborales" class="btn btn-secondary btn-sm" (click)="agregarOfertas(ambiente.id)">
+                        <span class="oi oi-briefcase" aria-hidden="true"></span>
                     </button>
                 </td>
             </tr>
