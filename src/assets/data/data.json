@@ -7371,7 +7371,6 @@
         "telefono3": null,
         "email": null,
         "fax": null,
-        // "oferta_cant":3,
         "persona": {
             "id": 2,
             "nombre": "Isabel Sofía",
@@ -7428,7 +7427,6 @@
         "telefono3": null,
         "email": null,
         "fax": null,
-        // "oferta_cant":0,
         "persona": {
             "id": 2,
             "nombre": "Isabel Sofía",
@@ -7485,7 +7483,6 @@
         "telefono3": null,
         "email": null,
         "fax": null,
-        // "oferta_cant":1,
         "persona": {
             "id": 3,
             "nombre": "Dulce María",
@@ -7542,7 +7539,6 @@
         "telefono3": null,
         "email": null,
         "fax": null,
-        // "oferta_cant":0,
         "persona": {
             "id": 4,
             "nombre": "Natalia Valentina",
@@ -7599,7 +7595,6 @@
         "telefono3": null,
         "email": null,
         "fax": null,
-        // "oferta_cant":0,
         "persona": {
             "id": 5,
             "nombre": "Ana María",
