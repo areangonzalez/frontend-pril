@@ -14,7 +14,7 @@ const routes: Routes = [
     {
       path: 'crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent,
       data: { loading: true, title: 'Crear área de entrenamiento' },
-      resolve: { destinatarios: DestinatarioService, /* ofertas: OfertaService */ }
+      resolve: { destinatarios: DestinatarioService, ofertas: OfertaService }
     },{
       path: 'crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent, data: { loading: true, title: 'Crear área de entrenamiento' }
     },{

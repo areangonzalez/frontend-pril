@@ -28,8 +28,8 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
 
     ngOnInit() {
       this.destinatarios = this._route.snapshot.data['destinatarios'];
-      /* this.ofertas = this._route.snapshot.data['ofertas']; */
-      this.listarOfertas();
+      console.log(this._route.snapshot.data['ofertas']);
+      this.ofertas = this._route.snapshot.data['ofertas'];
     }
 
     private listarOfertas(){

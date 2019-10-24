@@ -674,17 +674,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let ambienteId = request.params.get('ambiente_trabajoid');
-                    let oficioNombre = request.params.get('oficio');
-                    let deseoActividad = request.params.get('deseo_actividad');
+                    // let oficioNombre = request.params.get('oficio');
+                    // let deseoActividad = request.params.get('deseo_actividad');
                     //let mensaje: string = 'Este ambiente no existe.';
 
                     if (ambienteId != null) {
 
                       let matchedAmbiente = ofertasLista.filter(ofertas => { return ofertas.ambiente_trabajoid === ambienteId; });
                       let seleccion = matchedAmbiente.length ? matchedAmbiente : [];
-
-                      return of(new HttpResponse({ status: 200, body: seleccion }));
-                    } else if ( (oficioNombre != null && oficioNombre != '') || deseoActividad != null && deseoActividad != '' ) {
+                      // por ambiente id
+                      return of(new HttpResponse({ status: 200, body: { resultado: seleccion, total_filtrado: seleccion.length } }));
+                    /* } else if ( (oficioNombre != null && oficioNombre != '') || deseoActividad != null && deseoActividad != '' ) {
                       let seleccion:any;
                       // coincidencia de oficios en listado oferta
                       if (oficioNombre != null && oficioNombre != ''){
@@ -703,7 +703,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         return of(new HttpResponse({ status: 200, body: { resultado: seleccion, total_filtrado: seleccion.length } }));
                       }else{
                         return of(new HttpResponse({ status: 200, body: { resultado: ofertasLista, total_filtrado: ofertasLista.length } }));
-                      }
+                      } */
                     }else{
                       return of(new HttpResponse({ status: 200, body: { resultado: ofertasLista, total_filtrado: ofertasLista.length } }));
                     }
