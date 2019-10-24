@@ -50,9 +50,9 @@ export class OfertaService {
         let ambienteid = route.params.ambienteid;
         if(id){
           return this._apiService.get('/ofertas/' + parseInt(id));
-        }else if(ambienteid) { 
+        }else if(ambienteid) {
           let httpParams = new HttpParams();
-          httpParams = this._apiService.formatParams(httpParams, {ambienteid:ambienteid});
+          httpParams = this._apiService.formatParams(httpParams, {ambiente_trabajoid:ambienteid});
           return this._apiService.get('/ofertas', httpParams);
         }else{
           return this._apiService.get('/ofertas');

@@ -61,11 +61,7 @@ export class OfertaComponent implements OnInit {
         this.lista_ofertas = this._route.snapshot.data['ofertaLista']['resultado'];
         console.log(this.lista_ofertas);
         
-        if (this.id != undefined) {
-            this.idAmbiente = this.id;
-            this.buscarOfertas(this.id);
-            this.ambientePorId(this.id);
-        }else{
+        if (this.id == undefined) {
             this._router.navigate(['ambiente']);
         }
     }
@@ -80,17 +76,6 @@ export class OfertaComponent implements OnInit {
             });
     }
 
-    private ambientePorId(id){
-        this._ambienteTrabajoService.ambientePorId(id).subscribe(
-            datos => {
-                for (var key in datos) {
-                    this.ambiente[key] = datos[key];
-                }
-            }, error => {
-                this._mensajeService.cancelado(error, [{name:''}]);
-            });
-    }
-
     public guardarOferta(datos) {
         this._ofertaService.guardar(datos['params'], datos['id']).subscribe(
             data => {
@@ -102,11 +87,11 @@ export class OfertaComponent implements OnInit {
     }
 
     public volver(){
-        this._router.navigate(['ambiente']);
+        this._router.navigate(['inicio','ambiente']);
     }
 
     public vistaAmbiente(id){
-        this._router.navigate(['ambiente', 'vista', id]);
+        this._router.navigate(['inicio','ambiente', 'vista', id]);
     }
 
 }
