@@ -31,4 +31,26 @@ export class ListaAmbienteTrabajoComponent {
     agregarOfertas(id) {
         this._router.navigate(['inicio','ambiente', id, 'ofertas']);
     }
+
+    getDireccion(lugar: Object) {
+        let dir = "";
+        dir += lugar['localidad'];
+        dir += (lugar['barrio'] != '') ? " - Bº " + lugar['barrio'] : '';
+        dir += ' - ' + lugar['calle'] + ' ' + lugar['altura'];
+        dir += (lugar['escalera'] != '') ? ' - ' + lugar['escalera'] : '';
+        dir += (lugar['piso'] != '') ? ' - ' + lugar['piso'] : '';
+        dir += (lugar['depto'] != '') ? ' - ' + lugar['depto'] : '';
+  
+        return dir;
+    }
+
+    getTelefonos(telefono1:string, telefono2:string, telefono3:string) {
+        
+        let telefonos = '';
+        telefonos += (telefono1)?telefono1:''; 
+        telefonos += (telefono2)?' '+telefono2:''; 
+        telefonos += (telefono3)?' '+telefono3:'';
+        
+        return telefonos;
+    }
 }

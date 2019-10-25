@@ -33,6 +33,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-  //  providers: [ProgramaService, TipoRecursoService] // <-- aca tenes que decirle al routing los servicios que vas a utilizar
+    providers: [AmbienteTrabajoService, TipoAmbienteTrabajoService, OfertaService] // <-- aca tenes que decirle al routing los servicios que vas a utilizar
 })
 export class AmbienteTrabajoRoutingModule { }

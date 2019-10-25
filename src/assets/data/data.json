@@ -7366,11 +7366,11 @@
         "actividad": "Vende facturas, tortas y variedades de panes",
         "tipo_ambiente_trabajoid": 1,
         "lugarid": 105,
-        "telefono1": null,
-        "telefono2": null,
-        "telefono3": null,
-        "email": null,
-        "fax": null,
+        "telefono1": "",
+        "telefono2": "",
+        "telefono3": "",
+        "email": "",
+        "fax": "123354367",
         "persona": {
             "id": 2,
             "nombre": "Isabel Sofía",
@@ -7422,11 +7422,11 @@
         "actividad": "Vende facturas, tortas y variedades de panes",
         "tipo_ambiente_trabajoid": 1,
         "lugarid": 2,
-        "telefono1": null,
-        "telefono2": null,
-        "telefono3": null,
-        "email": null,
-        "fax": null,
+        "telefono1": "",
+        "telefono2": "",
+        "telefono3": "",
+        "email": "",
+        "fax": "",
         "persona": {
             "id": 2,
             "nombre": "Isabel Sofía",
@@ -7478,11 +7478,11 @@
         "actividad": "es una empresa que vende electrodomestico",
         "tipo_ambiente_trabajoid": 2,
         "lugarid": 3,
-        "telefono1": null,
-        "telefono2": null,
-        "telefono3": null,
-        "email": null,
-        "fax": null,
+        "telefono1": "15412127",
+        "telefono2": "",
+        "telefono3": "",
+        "email": "",
+        "fax": "",
         "persona": {
             "id": 3,
             "nombre": "Dulce María",
@@ -7534,11 +7534,10 @@
         "actividad": "es una empresa que vende Helados",
         "tipo_ambiente_trabajoid": 2,
         "lugarid": 4,
-        "telefono1": null,
-        "telefono2": null,
-        "telefono3": null,
-        "email": null,
-        "fax": null,
+        "telefono1": "",
+        "telefono2": "",
+        "telefono3": "",
+        "email": "",
         "persona": {
             "id": 4,
             "nombre": "Natalia Valentina",
@@ -7590,11 +7589,11 @@
         "actividad": "es una empresa que vende Calsados",
         "tipo_ambiente_trabajoid": 2,
         "lugarid": 5,
-        "telefono1": null,
-        "telefono2": null,
-        "telefono3": null,
-        "email": null,
-        "fax": null,
+        "telefono1": "",
+        "telefono2": "(2920) 15 264121",
+        "telefono3": "(011) 15 23124565",
+        "email": "",
+        "fax": "",
         "persona": {
             "id": 5,
             "nombre": "Ana María",
@@ -7634,7 +7633,7 @@
             "entre_calle_2": "Entrecalle-99",
             "localidad": "Villa Mascardi"
         }
-      }
+        }
     ]
 
 }
