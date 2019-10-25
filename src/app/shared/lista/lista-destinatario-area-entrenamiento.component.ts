@@ -11,10 +11,10 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 export class ListaDestinatarioAreaEntrenamientoComponent {
     @Input('destinatarios') destinatarios: Object;
     @Input('totalFiltrado') public totalFiltrado: number;
+    @Input("idSeleccionado") public selId: number;
     @Output('destinatarioElegido') destinatarioElegido = new EventEmitter();
 
     public pagina = 0;
-    public selId = 0;
 
     constructor(
         private _router: Router,
