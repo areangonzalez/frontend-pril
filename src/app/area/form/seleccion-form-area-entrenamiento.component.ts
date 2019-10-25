@@ -28,10 +28,18 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
 
     ngOnInit() {
       this.destinatarios = this._route.snapshot.data['destinatarios'];
-      console.log(this._route.snapshot.data['ofertas']);
       this.ofertas = this._route.snapshot.data['ofertas'];
     }
 
+    private listarDestinatarios(){
+      this._destinatarioService.listarDestinatario().subscribe(
+        datos => {
+          this.destinatarios = datos;
+        }, error => { this._mensajesService.cancelado(error, [{name: ''}]); })
+    }
+    /**
+     * Listado de ofertas
+     */
     private listarOfertas(){
       this._ofertaService.listarOfertas('').subscribe(
         datos => {
@@ -46,38 +54,34 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     cancelar() {
         this._router.navigate(['inicio','area-entrenamiento']);
     }
-
-    destinatarioElegido(destinatario){
-      console.log("Seleccion de destinatario: ",destinatario);
-      if (destinatario != null) {
+    // selecciono Destinatario
+    destinatarioElegido(destinatario:any){
+      if (destinatario) {
         this.destinatarioId = destinatario.id;
-        this.ofertaId = 0;
-        /* this._ofertaService.buscarOfertaPor(destinatario).subscribe(
-          datos => {
-            this.ofertas = datos;
-          }, error => {
-            this._mensajesService.cancelado(error, [{name:''}]);
-          }); */
       } else {
         this.destinatarioId = 0;
+        this.ofertaId = 0;
         this.listarOfertas();
       }
     }
 
-    ofertaElegida(oferta){
-      if (oferta != null) {
+    ofertaElegida(oferta:any){
+      if (oferta) {
         this.ofertaId = oferta.id;
       }else{
+        this.destinatarioId = 0;
         this.ofertaId = 0;
+        this.listarDestinatarios();
       }
     }
 
     seguirCreando(){
-      if (this.destinatarioId != 0 && this.ofertaId != 0){
+      console.log(this.destinatarioId + " - " + this.ofertaId);
+      /* if (this.destinatarioId != 0 && this.ofertaId != 0){
         this._router.navigate(['inicio','area-entrenamiento', 'crear-plan', this.destinatarioId, this.ofertaId]);
       }else{
         this._mensajesService.cancelado('Por favor verifique los datos!!!', [{'name':''}]);
         // aviso si falta algo.
-      }
+      } */
     }
 }
