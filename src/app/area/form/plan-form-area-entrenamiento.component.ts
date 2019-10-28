@@ -122,7 +122,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     this._areaEntrenamientoService.guardar(datos, 0).subscribe(
       respuesta => {
         //console.log(respuesta);
-        this._mensajesService.exitoso('Guardado exitoso',[{name:'area-entrenamiento'}]);
+        this._mensajesService.exitoso('Guardado exitoso',[{name:'/inicio/area-entrenamiento'}]);
       },error => {
         this._mensajesService.cancelado(error, [{name:''}]);
       });
@@ -137,9 +137,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
       this.areaEntrenamientoForm.controls['ofertaid'].patchValue(this.ofertaId);
       const areaEntrenamiento:any = this.areaEntrenamientoForm.value;
 
-      console.log(areaEntrenamiento);
-
-      //this.guardarEntrenamiento(areaEntrenamiento);
+      this.guardarEntrenamiento(areaEntrenamiento);
     }else{
       this._mensajesService.cancelado('Campos sin completar.', [{ name: '' }]);
       return ;

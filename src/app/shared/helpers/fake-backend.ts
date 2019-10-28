@@ -4,6 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 // datos JSON
 import * as data from '../../../assets/data/data.json';
+import { AmbienteTrabajo } from 'src/app/core/models/index.js';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -897,13 +898,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 let totalF = areasLista.length;
                 let areaColeccion: any[] = [];
-
                 if (areasLista.length > 0) {
                   // recorro la lista de areas para armar el array de la coleccion
                   for (let i = 0; i < areasLista.length; i++) {
                     //areasLista[i];
-
-
                     // selecciono la oferta que coincida con el area
                     let matchedOferta = ofertasLista.filter(oferta => { return oferta.id === areasLista[i]['ofertaid']; });
                     let ofertaElegida = matchedOferta.length ? matchedOferta[0] : [];
@@ -921,18 +919,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       tarea: areasLista[i]['tarea'],
                       plan: areasLista[i]['plan'],
                       estado: 'vigente',
-                      destinatario: {
-                        nro_documento: destinatarioElegido['persona']['nro_documento'],
-                        nombre: destinatarioElegido['persona']['nombre'],
-                        apellido: destinatarioElegido['persona']['apellido']
-                      },
-                      ambiente_trabajo: {
-                        nombre: (ofertaElegida['nombre_sucursal'] != '') ?  ambienteElegido['nombre'] + " (" + ofertaElegida['nombre_sucursal'] + ")" : ambienteElegido['nombre'] + "",
-                      }
+                      destinatario: destinatarioElegido,
+                      oferta: ofertaElegida,
+                      ambiente_trabajo: ambienteElegido
                     });
 
                   }
-
                 }
                 return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: areaColeccion  } }));
             // } else {

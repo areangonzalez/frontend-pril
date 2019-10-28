@@ -27,7 +27,7 @@ export class AreaEntrenamientoComponent implements OnInit {
       this._areaEntrenamientoService.listar().subscribe(
         datos => {
           if (datos['success']) {
-            this.areas = datos['coleccion'];
+            this.areas = datos['resultado'];
           }
           this.totalFiltrado = datos['total_filtrado'];
         }, error => {
