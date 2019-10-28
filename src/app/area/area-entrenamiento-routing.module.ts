@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AreaEntrenamientoComponent } from "./area-entrenamiento.component";
 import { SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent } from "./form";
 import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamiento.component";
-import { DestinatarioService, OfertaService } from '../core/services';
+import { DestinatarioService, OfertaService, PlanService } from '../core/services';
 
 const routes: Routes = [
     {
@@ -16,9 +16,10 @@ const routes: Routes = [
       data: { loading: true, title: 'Crear área de entrenamiento' },
       resolve: { destinatarios: DestinatarioService, ofertas: OfertaService }
     },{
-      path: 'crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent, data: { loading: true, title: 'Crear área de entrenamiento' }
+      path: 'crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent, data: { loading: true, title: 'Crear área de entrenamiento' },
+      resolve: { destinatario: DestinatarioService, oferta: OfertaService, planes: PlanService }
     },{
-      path: 'area-entrenamiento/vista/:id', component: VistaAreaEntrenamientoComponent,
+      path: 'vista/:area_entrenamientoid', component: VistaAreaEntrenamientoComponent,
       data: { loading: true, title: 'Ver área de entrenamiento' }
     }
 ];

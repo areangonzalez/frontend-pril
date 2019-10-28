@@ -11,12 +11,12 @@ import { Persona, Lugar, Representante, AmbienteTrabajo, Destinatario } from 'sr
 export class VistaAreaEntrenamientoComponent implements OnInit {
 
     public areaId:any;
-    public lugar = new Lugar(0,0,'','','','','','','');
+    /* public lugar = new Lugar(0,0,'','','','','','','');
     public persona = new Persona(0,'','','','','',0,0,0,'','','',this.lugar,[]);
     public representante = new Representante(0,'','','','','','');
     public ambienteTrabajo = new AmbienteTrabajo(0,'','','','','',0,this.lugar,this.representante,'','','','','','');
-    public destinatario = new Destinatario('',{},'','','',0,0,false,'','','','','', this.persona);
-    public area:object = {};
+    public destinatario = new Destinatario('',{},'','','',0,0,false,'','','','','', this.persona); */
+    public area:any = {};
 
     constructor(
       private _router: Router,
@@ -28,12 +28,12 @@ export class VistaAreaEntrenamientoComponent implements OnInit {
 
     ngOnInit() {
         // obtener parametro
-        this.areaId = this._route.snapshot.paramMap.get('id');
+        this.areaId = this._route.snapshot.paramMap.get('area_entrenamientoid');
 
         if (this.areaId != undefined) {
           this.areaEntrenamientoPorId(this.areaId);
         }else{
-          this._router.navigate(['/']);
+          //this._router.navigate(['/']);
         }
     }
 

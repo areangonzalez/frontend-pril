@@ -47,9 +47,12 @@ export class OfertaService {
       state: RouterStateSnapshot,
       ): Observable<any>|Promise<any>|any {
         let id = route.params.id;
+        let ofertaid = route.params.ofertaid;
         let ambienteid = route.params.ambienteid;
         if(id){
           return this._apiService.get('/ofertas/' + parseInt(id));
+        }else if(ofertaid) {
+          return this._apiService.get('/ofertas/' + parseInt(ofertaid));
         }else if(ambienteid) {
           let httpParams = new HttpParams();
           httpParams = this._apiService.formatParams(httpParams, {ambiente_trabajoid:ambienteid});

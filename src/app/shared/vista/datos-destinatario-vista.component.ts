@@ -22,20 +22,4 @@ export class DatosDestinatarioVistaComponent {
         config.placement = 'top';
         config.triggers = 'click';
     }
-
-    ngOnInit() {}
-
-    /**
-     * vuelve al listado de destinatario
-     */
-    volver() {
-        this._router.navigate(['inicio','destinatario']);
-    }
-
-    /**
-     * se dirige al formulario de edición
-     */
-    editar(id:number) {
-        this._router.navigate(['inicio','destinatario', 'editar', id]);
-    }
 }

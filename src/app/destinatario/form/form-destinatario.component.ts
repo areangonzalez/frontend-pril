@@ -90,7 +90,7 @@ export class FormDestinatarioComponent implements OnInit {
       this.oficioLista = this._route.snapshot.data['oficio'];
       //this.getListaOficios();
         // obtener parametro
-        this.id = this._route.snapshot.paramMap.get('id');
+        this.id = this._route.snapshot.paramMap.get('destinatarioid');
         if (this.id != undefined) {
             this.idDestinatario = this.id;
             this.destinatarioPorId(this.id);
@@ -142,7 +142,6 @@ export class FormDestinatarioComponent implements OnInit {
     private guardarDestinatario(params:object, id:number){
         this._destinatarioService.guardar(params,id).subscribe(
             datos => {
-                console.log(datos);
                 this._mensajeService.exitoso('Guardado exitoso.', [{ name: 'inicio/destinatario/vista/' + datos.id }]);
         },error => {
             this._mensajeService.cancelado(error, [{ name: '' }]);

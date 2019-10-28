@@ -76,12 +76,12 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     }
 
     seguirCreando(){
-      console.log(this.destinatarioId + " - " + this.ofertaId);
-      /* if (this.destinatarioId != 0 && this.ofertaId != 0){
+      //console.log(this.destinatarioId + " - " + this.ofertaId);
+      if (this.destinatarioId != 0 && this.ofertaId != 0){
         this._router.navigate(['inicio','area-entrenamiento', 'crear-plan', this.destinatarioId, this.ofertaId]);
       }else{
         this._mensajesService.cancelado('Por favor verifique los datos!!!', [{'name':''}]);
         // aviso si falta algo.
-      } */
+      }
     }
 }

@@ -3,142 +3,13 @@
       <ngb-tabset  [justify]="'justified'">
         <ngb-tab title="Destinatario">
           <ng-template ngbTabContent>
-              <div class="row">
-                  <div class="col-md-12 ">
-                    <div class="row">
-                        <div class="col-md-4 vista-detalle">
-                            <dl class="row">
-                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Apellido y nombre:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.apellido}}, {{destinatario.persona.nombre}}</dd>
-                            </dl>
-                            <dl class="row">
-                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.nro_documento}}</dd>
-                            </dl>
-                            <dl class="row">
-                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha nacimiento:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.fecha_nacimiento | date:'dd/MM/yyyy'}}</dd>
-                            </dl>
-                            <dl class="row">
-                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Sexo (Genero):</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.sexo}} ({{destinatario.persona.genero}})</dd>
-                            </dl>
-                            <dl class="row">
-                                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Estado civil:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.estado_civil}}</dd>
-                            </dl>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-6 vista-detalle">
-                                    <dl class="row">
-                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha presentación:</dt>
-                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.fecha_presentacion | date:'dd/MM/yyyy'}}</dd>
-                                    </dl>
-                                    <dl class="row">
-                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuil:</dt>
-                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.persona.cuil}}</dd>
-                                    </dl>
-                                    <dl class="row">
-                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Formación deseada:</dt>
-                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.deseo_actividad}}</dd>
-                                    </dl>
-                                    <dl class="row">
-                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Conocimientos basicos:</dt>
-                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.conocimientos_basicos}}</dd>
-                                    </dl>
-                                </div>
-                                <div class="col-md-6 vista-detalle">
-                                    <dl class="row">
-                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Experiencia laboral:</dt>
-                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{(destinatario.experiencia_laboral)?'si':'no'}}</dd>
-                                    </dl>
-                                    <dl class="row">
-                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Profesión:</dt>
-                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.profesion}}</dd>
-                                    </dl>
-                                    <dl class="row">
-                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Oficio:</dt>
-                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.oficio}}</dd>
-                                    </dl>
-                                    <dl class="row">
-                                        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Lugar elegido:</dt>
-                                        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{destinatario.deseo_lugar_entrenamiento}}</dd>
-                                    </dl>
-                                </div>
-                                <div class="col-md-12 vista-detalle">
-                                    <dl class="row">
-                                        <dt class="col col-sm-6 col-md-3 col-lg-3">Origen de inscripción:</dt>
-                                        <dd class="col col-sm-6 col-md-9 col-lg-9">{{destinatario.origen}}</dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <ul class="list-inline d-flex justify-content-center">
-                                <li class="list-inline-item">
-                                    <ng-template #direccionContent>
-                                        {{destinatario.persona.lugar.localidad}} <br>
-                                        {{destinatario.persona.lugar.barrio}} <br>
-                                        {{destinatario.persona.lugar.calle}} {{destinatario.persona.lugar.altura}}
-                                        <span *ngIf="(destinatario.persona.lugar.escalera != '' || destinatario.persona.lugar.depto != '' || destinatario.persona.lugar.piso != '')">
-                                            <br>
-                                            {{(destinatario.persona.lugar.escalera != "")?destinatario.persona.lugar.escalera:""}} {{(destinatario.persona.lugar.depto != "")?destinatario.persona.lugar.depto:""}} {{(destinatario.persona.lugar.piso != "")?destinatario.persona.lugar.piso:""}}
-                                        </span>
-                                    </ng-template>
-                                    <button type="button" class="btn btn-outline-secondary btn-margin-left" [ngbTooltip]="direccionContent">
-                                        <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
-                                    </button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button *ngIf="(destinatario.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.telefono}}">
-                                        <i class="fas fa-phone" title="Telefono"></i>
-                                    </button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button *ngIf="(destinatario.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.celular}}">
-                                        <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
-                                    </button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <ng-template #bancoContent>{{destinatario.banco_nombre}} <br> <b>CBU:</b> {{destinatario.banco_cbu}} <br> <b>Alias:</b> {{destinatario.banco_alias}}</ng-template>
-                                    <button *ngIf="(destinatario.banco_nombre != '')" type="button" class="btn btn-outline-secondary btn-margin-left"
-                                      [ngbTooltip]="bancoContent">
-                                        <i class="fas fa-university"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-md-12 padding-estudios" >
-                            <div class="col-md-12">
-                              <div class="d-flex justify-content-between">
-                                <div class="col-5 pt-1">
-                                    <hr>
-                                </div>
-                                <div class="col-2">
-                                  <h3 class="text-center">
-                                    <small class="text-muted">Estudios</small>
-                                  </h3>
-                                </div>
-                                <div class="col-5 pt-1">
-                                  <hr>
-                                </div>
-                              </div>
-                            </div>
-                            <lista-estudio *ngIf="(destinatario.persona.estudios.length > 0)" [listaEstudios]="destinatario.persona.estudios" [tipo]="0" ></lista-estudio>
-                            <hr *ngIf="(destinatario.persona.estudios.length == 0)" class="mb-3">
-                            <div *ngIf="(destinatario.persona.estudios.length == 0)" class="d-flex justify-content-center alert alert-danger">
-                                    Destinatario sin  estudios.
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-              </div>
+            <datos-destinatario-vista [destinatario]="destinatario" ></datos-destinatario-vista>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Ambiente de trabajo / Oferta">
           <ng-template ngbTabContent>
-              <div class="row">
+            <oferta-vista [ofertaid]="ofertaId" ></oferta-vista>
+              <!-- <div class="row">
                   <div class="col-md-12 ">
                       <div class="row">
                         <div class="col-md-4 vista-detalle">
@@ -234,12 +105,13 @@
                         </div>
                     </div>
                   </div>
-              </div>
+              </div> -->
           </ng-template>
         </ngb-tab>
       </ngb-tabset>
     </div>
 </div>
+
 <h3 class="mt-2">Área entrenamiento</h3>
 <form [formGroup]="areaEntrenamientoForm" >
     <div class="row">
@@ -249,23 +121,23 @@
                   <input class="form-control" #c1 placeholder="dd/mm/yyyy" ngbDatepicker #faed="ngbDatepicker" id="fecha_inicial"
                       (ngModelChange)="formatFechaInicial($event)" formControlName="fechaInicial">
                   <div class="input-group-append">
-                      <button class="btn btn-outline-info" (click)="faed.toggle()" type="button" [ngClass]="{'btn-outline-danger': (entrenamiento.fechaInicial.invalid && submitted), 'is-invalid': (entrenamiento.fechaInicial.invalid && submitted)}">
+                      <button class="btn btn-outline-info" (click)="faed.toggle()" type="button" [ngClass]="{'btn-outline-danger': (areaEntrenamientoForm.get('fechaInicial').invalid && submitted), 'is-invalid': (areaEntrenamientoForm.get('fechaInicial').invalid && submitted)}">
                           <span class="oi oi-calendar" title="fecha inicial" aria-hidden="true"></span>
                       </button>
                   </div>
               </div>
-              <div *ngIf="(entrenamiento.fechaInicial.invalid && submitted)" class="text-danger">
-                  <div *ngIf="entrenamiento.fechaInicial.errors.required">Este campo es requerido. </div>
+              <div *ngIf="(areaEntrenamientoForm.get('fechaInicial').invalid && submitted)" class="text-danger">
+                  <div *ngIf="areaEntrenamientoForm.get('fechaInicial').hasError('required')">Este campo es requerido. </div>
               </div>
         </div>
         <div class="form-group col-md-4">
             <label for="plan" class="prioridad">Plan (<span>*</span>):</label>
-            <select class="form-control" id="plan" formControlName="planid" [ngClass]="{'is-invalid': (entrenamiento.planid.invalid && submitted)}">
+            <select class="form-control" id="plan" formControlName="planid" [ngClass]="{'is-invalid': (areaEntrenamientoForm.get('planid').invalid && submitted)}">
                 <option value="">Seleccione plan</option>
                 <option *ngFor="let plan of planLista" value="{{plan.id}}">{{plan.nombre}}</option>
             </select>
-            <div *ngIf="(entrenamiento.planid.invalid && submitted)" class="text-danger">
-                <div *ngIf="entrenamiento.planid.errors.required">Este campo es requerido.</div>
+            <div *ngIf="(areaEntrenamientoForm.get('planid').invalid && submitted)" class="text-danger">
+                <div *ngIf="areaEntrenamientoForm.get('planid').hasError('required')">Este campo es requerido.</div>
             </div>
         </div>
         <div class="form-group col-md-4">
@@ -275,9 +147,9 @@
         <div class="col-md-6">
             <label for="tarea" class="prioridad" >Tarea (<span>*</span>):</label>
             <textarea id="tarea" rows="2" class="form-control" formControlName="tarea"></textarea>
-            <div *ngIf="(entrenamiento.tarea.invalid && submitted)" class="text-danger">
-                <div *ngIf="entrenamiento.tarea.errors.required">Este campo es requerido.</div>
-                <div *ngIf="entrenamiento.tarea.errors.minlength">Por favor, describa la tarea.</div>
+            <div *ngIf="(areaEntrenamientoForm.get('tarea').invalid && submitted)" class="text-danger">
+                <div *ngIf="areaEntrenamientoForm.get('tarea').hasError('required')">Este campo es requerido.</div>
+                <div *ngIf="areaEntrenamientoForm.get('tarea').hasError('minlength')">Por favor, describa la tarea.</div>
             </div>
         </div>
         <div class="col-md-6">
@@ -288,6 +160,6 @@
     <div class="float-right" style="margin-top:5px;">
         <button class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
         <button class="btn btn-primary" (click)="volver()"><span class="oi oi-arrow-thick-left align-icon" title="atras" aria-hidden="true"></span> Atras</button> &nbsp;
-        <button class="btn btn-success" (click)="guardarEntrenamiento()"><span class="fas fa-save" title="atras" aria-hidden="true"></span> Crear</button>
+        <button class="btn btn-success" (click)="validarForm()"><span class="fas fa-save" title="atras" aria-hidden="true"></span> Crear</button>
     </div>
 </form>

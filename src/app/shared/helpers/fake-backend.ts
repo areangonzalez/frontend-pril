@@ -367,7 +367,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 // get new user object from post body
                 let newDestinatario = request.body;
-                console.log('recibo respuesta: ', newDestinatario );
                 let estudios = [];
                 // validation
                 let duplicateUser = destinatarioLista.filter(destinatario => { return destinatario.persona.nro_documento === newDestinatario.destinatario.persona.nro_documento; }).length;
@@ -406,7 +405,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // conseguir destinatario por id
             if (request.url.match(/\/apimock\/destinatarios\/\d+$/) && request.method === 'GET') {
-                console.log("llega fake backend");
                 // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let respuesta = {};
@@ -416,8 +414,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let matchedUsers = destinatarioLista.filter(destinatario => { return destinatario.id === id; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
 
+                    let personaMatch  = personas.filter(persona => { return seleccion.personaid === persona.id; });
+                    seleccion['persona'] = personaMatch[0];
+
                     respuesta = { status: 200, body: seleccion };
-                    console.log("FB - devuelvo valor",respuesta);
                     return of(new HttpResponse(respuesta));
                 } else {
                 //     // return 401 not authorised if token is null or invalid
@@ -998,7 +998,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // Buscar personas
             if (request.url.endsWith('/apimock/personas') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                console.log(request.params);
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let nro_documento = request.params.get('nro_documento');
                     let mensaje:string = 'Esta persona no existe.';

@@ -1,1 +1,21 @@
-<datos-destinatario-vista [destinatario]="destinatario" ></datos-destinatario-vista>
+<div class="row botton-separate">
+    <div class="col-md-12" >
+        <div class="d-flex justify-content-between">
+          <a class="btn btn-outline-danger btn-md" [routerLink]="['/inicio','destinatario']" routerLinkActive="router-link-active" >
+              <span class="oi oi-arrow-left"></span> Atras
+          </a>
+          <a class="btn btn-outline-success btn-md" [routerLink]="['/inicio','destinatario','editar', destinatario.id]" routerLinkActive="router-link-active" >
+            <span class="oi oi-pencil"></span> Editar
+          </a>
+        </div>
+    </div>
+</div>
+<div class="row botton-separate">
+    <div class="col-md-12 ">
+        <div class="card">
+            <div class="card-body">
+              <datos-destinatario-vista [destinatario]="destinatario" ></datos-destinatario-vista>
+            </div>
+          </div>
+      </div>
+  </div>

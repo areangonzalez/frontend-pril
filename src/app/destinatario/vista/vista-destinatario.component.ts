@@ -11,7 +11,6 @@ export class VistaDestinatarioComponent implements OnInit {
     constructor( private _route: ActivatedRoute) {}
 
     ngOnInit(){
-      console.log("respuesta en componente: ",this._route.snapshot.data['destinatario'])
       // datos destinatario
       this.destinatario = this._route.snapshot.data['destinatario'];
     }

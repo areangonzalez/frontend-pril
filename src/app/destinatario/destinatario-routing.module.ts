@@ -17,11 +17,11 @@ const routes: Routes = [
       data: { loading: true, title: 'Agregar destinatario', breadcrumb: 'Agregar' },
       resolve: { sexo: SexoService, genero: GeneroService, estadoCivil: EstadoCivilService, oficio: OficioService }
     },{
-      path: 'vista/:id', component: VistaDestinatarioComponent,
+      path: 'vista/:destinatarioid', component: VistaDestinatarioComponent,
       data: { loading: true, title: 'Ver destinatario', breadcrumb: 'Vista' },
       resolve: { destinatario: DestinatarioService }
     },{
-      path: 'editar/:id', component: FormDestinatarioComponent,
+      path: 'editar/:destinatarioid', component: FormDestinatarioComponent,
       data: { loading: true, title: 'Editar destinatario', breadcrumb: 'Editar' },
       resolve: { sexo: SexoService, genero: GeneroService, estadoCivil: EstadoCivilService, oficio: OficioService }
     /*} ,{

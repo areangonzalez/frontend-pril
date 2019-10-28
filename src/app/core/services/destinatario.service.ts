@@ -36,9 +36,10 @@ export class DestinatarioService {
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot,
       ): Observable<any>|Promise<any>|any {
-        let destinatarioId = route.params.id;
-        if(destinatarioId){
-          return this._apiService.get('/destinatarios/' + parseInt(destinatarioId));
+        let destinatarioid = route.params.destinatarioid;
+
+        if (destinatarioid) {
+          return this._apiService.get('/destinatarios/' + parseInt(destinatarioid));
         }else{
           let httpParams = new HttpParams();
           httpParams = this._apiService.formatParams(httpParams, {page:0});
