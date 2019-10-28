@@ -5,10 +5,9 @@
                 <th scope="col">Nombre</th>
                 <th scope="col"></th>
                 <th scope="col">Cuit</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Representante</th>
                 <th scope="col"></th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Acción</th>
             </tr>
         </thead>
@@ -21,45 +20,49 @@
             <tr *ngFor="let ambiente of ambientes; let i = index;">
                 <th>{{ambiente.nombre}}</th>
                 <td>
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{getDireccion(ambiente.lugar)}}">
-                        <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
-                    </button>
-                    <button *ngIf="(getTelefonos(ambiente.telefono1,ambiente.telefono2,ambiente.telefono3) != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{getTelefonos(ambiente.telefono1,ambiente.telefono2,ambiente.telefono3)}}">
-                        <i class="fas fa-phone" title="Telefono"></i>
-                    </button>
-                    <button *ngIf="!((ambiente.fax == '') || !(ambiente.fax))" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.fax}}">
-                        <i class="fas fa-fax" title="fax" aria-hidden="true"></i>
-                    </button>
-                    <button *ngIf="!((ambiente.mail == '') || !(ambiente.mail))" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.email}}">
-                        <i class="fas fa-envelope" title="mail" aria-hidden="true"></i>
-                    </button>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{getDireccion(ambiente.lugar)}}">
+                            <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                        </button>
+                        <button *ngIf="(getTelefonos(ambiente.telefono1,ambiente.telefono2,ambiente.telefono3) != '')" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{getTelefonos(ambiente.telefono1,ambiente.telefono2,ambiente.telefono3)}}">
+                            <i class="fas fa-phone" title="Telefono"></i>
+                        </button>
+                        <button *ngIf="!((ambiente.fax == '') || !(ambiente.fax))" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{ambiente.fax}}">
+                            <i class="fas fa-fax" title="fax" aria-hidden="true"></i>
+                        </button>
+                        <button *ngIf="!((ambiente.mail == '') || !(ambiente.mail))" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{ambiente.email}}">
+                            <i class="fas fa-envelope" title="mail" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </td>
                 <td>{{ambiente.cuit}}</td>
-                <td>{{ambiente.representante}}</td>
-                <td>
-
-                    <button *ngIf="(ambiente.rep_telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.rep_telefono}}">
-                        <i class="fas fa-phone" title="Teléfono representante"></i>
-                    </button>
-                    <button *ngIf="(ambiente.rep_celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.rep_celular}}">
-                        <span class="oi oi-phone" title="Celular representante" aria-hidden="true"></span>
-                    </button>
-                    <button *ngIf="(ambiente.rep_email != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.rep_email}}">
-                        <i class="fas fa-envelope" title="email representante" aria-hidden="true"></i>
-                    </button>
-                </td>
                 <td>{{ambiente.tipo_ambiente_trabajo}}</td>
-                <td>{{ambiente.estado}}</td>
+                <td>{{ambiente.persona.nombre}} {{ambiente.persona.apellido}}</td>
                 <td>
-                    <button type="button" class="btn btn-info btn-sm" (click)="verAmbienteTrabajo(ambiente.id)">
-                        <span class="oi oi-eye" title="Ver ambiente" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-light btn-sm" (click)="editarAmbienteTrabajo(ambiente.id)">
-                        <span class="oi oi-pencil" title="Editar ambiente" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" triggers="hover" ngbTooltip="Lista de ofertas laborales" class="btn btn-secondary btn-sm" (click)="agregarOfertas(ambiente.id)">
-                        <span class="oi oi-briefcase" aria-hidden="true"></span>
-                    </button>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button *ngIf="!((ambiente.persona.telefono == '') || !(ambiente.persona.telefono))" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{ambiente.persona.telefono}}">
+                            <i class="fas fa-phone" title="Teléfono representante"></i>
+                        </button>
+                        <button *ngIf="!((ambiente.persona.celular == '') || !(ambiente.persona.celular))" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{ambiente.persona.celular}}">
+                            <span class="oi oi-phone" title="Celular representante" aria-hidden="true"></span>
+                        </button>
+                        <button *ngIf="!((ambiente.persona.mail == '') || !(ambiente.persona.mail))" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="!((ambiente.persona.celular == '') || !(ambiente.persona.celular))">
+                            <i class="fas fa-envelope" title="email representante" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-info btn-sm" (click)="verAmbienteTrabajo(ambiente.id)">
+                            <span class="oi oi-eye" title="Ver ambiente" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" class="btn btn-light btn-sm" (click)="editarAmbienteTrabajo(ambiente.id)">
+                            <span class="oi oi-pencil" title="Editar ambiente" aria-hidden="true"></span>
+                        </button>
+                        <button type="button" triggers="hover" ngbTooltip="Lista de ofertas laborales" class="btn btn-secondary btn-sm" (click)="agregarOfertas(ambiente.id)">
+                            <span class="oi oi-briefcase" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </td>
             </tr>
         </tbody>
