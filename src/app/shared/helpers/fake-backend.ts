@@ -911,6 +911,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // selecciono el destinatario que coincida con el area
                     let matchedDestinatario = destinatarioLista.filter(destinatario => { return destinatario.id === areasLista[i]['destinatarioid']; });
                     let destinatarioElegido = matchedDestinatario.length ? matchedDestinatario[0] : [];
+                    // Selecciono la persona del destinatario
+                    let matchedPersona = personas.filter(persona => { return persona.id === destinatarioElegido.personaid; });
+                    let personaElegido = matchedPersona.length ? matchedPersona[0] : [];
+
+                    destinatarioElegido["persona"] = personaElegido;
 
                     areaColeccion.push({
                       id: areasLista[i]['id'],
