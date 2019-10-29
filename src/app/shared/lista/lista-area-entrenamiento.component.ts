@@ -9,7 +9,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
     providers: [NgbTooltipConfig]
 })
 export class ListaAreaEntrenamientoComponent {
-    @Input('areas') areas: any[];
+    @Input('areas') areas: any;
     @Input('totalFiltrado') public totalFiltrado:number;
     //title = 'app';
 
