@@ -1,6 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { BreadcrumbsService } from '../../shared/breadcrumbs/breadcrumbs.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // services
 import { MensajesService } from "../../core/services/mensajes.service";
@@ -34,7 +33,6 @@ export class FormAmbienteTrabajoComponent implements OnInit {
      * Inicializa los servicios
      * @param _router manejo de rutas dentro del componente
      * @param _route Servicio para obtener el parametro del ruteo
-     * @param _breadcrumbsService maneja el camino del cliente por el sistema
      * @param _fb formBuilder servicio para crear el formulario
      * @param _mensajeService servicio que maneja los mensajes.
      * @param _ambienteTrabajoService maneja el guarado y editado del formulario
@@ -42,7 +40,6 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     constructor(
         private _router: Router,
         private _route: ActivatedRoute,
-        private _breadcrumbsService: BreadcrumbsService,
         private _fb: FormBuilder,
         private _mensajeService: MensajesService,
         private _ambienteTrabajoService: AmbienteTrabajoService
@@ -86,7 +83,6 @@ export class FormAmbienteTrabajoComponent implements OnInit {
 
     ngOnInit() {
         // breadcrumbs Dinamico
-        this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Ambiente de trabajo', url: 'ambiente', params: [] }, { label: 'Agregar', url: 'ambiente/agregar', params: [] }]);
         this.id = this._route.snapshot.paramMap.get('ambienteid');
         this.tipo_ambiente_trabajo_lista = this._route.snapshot.data['tipoAmbienteTrabajoLista'];
         
@@ -99,7 +95,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
      * @function volver Vuelve a la vista del listado de ambiente de trabajo
      */
     volver() {
-        this._router.navigate(['ambiente']);
+        this._router.navigate(['inicio','ambiente']);
     }
 
     GuardarAmbiente() {
