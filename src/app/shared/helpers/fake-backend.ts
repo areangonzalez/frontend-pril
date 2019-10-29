@@ -529,7 +529,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // Selecciono la persona del destinatario
                     let matchedPersona = personas.filter(persona => { return persona.id === ambienteLista[i].personaid; });
                     let personaElegido = matchedPersona.length ? matchedPersona[0] : [];
-console.log("persona: ",personaElegido);
 
                     ambienteColeccion.push({
                       actividad: ambienteLista[i].actividad,
@@ -566,8 +565,7 @@ console.log("persona: ",personaElegido);
                       persona: personaElegido
                     })
                   }
-                  console.log(ambienteColeccion);
-                  
+
                     return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: ambienteColeccion  } }));
                 // } else {
                 //     // return 401 not authorised if token is null or invalid
@@ -943,6 +941,31 @@ console.log("persona: ",personaElegido);
           if (request.url.endsWith('/apimock/area-entrenamientos') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                // parametros de busquedas
+                let global_param = (request.params.get("global_param")) ? request.params.get("global_param") : '';
+                let estado = (request.params.get("estado")) ? request.params.get("estado") : '';
+                // datos paginacion
+                // let page: number = parseInt(request.params.get("page"));
+                let page: number = 0;
+                let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
+
+                let search = [''];
+                if (global_param != ''){
+                  search = global_param.split(" ");
+                }
+
+                //preparo objeto de paginacion
+                let totalPaginas = 0;
+                let encontrados: any[] = [];
+                let listaAreas = {
+                  total_filtrado: 0,
+                  pagesize: pageSize,
+                  pages: totalPaginas,
+                  estado: true,
+                  resultado:encontrados,
+                };
+
+
                 let totalF = areasLista.length;
                 let areaColeccion: any[] = [];
                 if (areasLista.length > 0) {
@@ -964,21 +987,79 @@ console.log("persona: ",personaElegido);
 
                     destinatarioElegido["persona"] = personaElegido;
 
-                    areaColeccion.push({
-                      id: areasLista[i]['id'],
-                      fecha_inicial: areasLista[i]['fecha_inicial'],
-                      fecha_final: areasLista[i]['fecha_final'],
-                      tarea: areasLista[i]['tarea'],
-                      plan: areasLista[i]['plan'],
-                      estado: 'vigente',
-                      destinatario: destinatarioElegido,
-                      oferta: ofertaElegida,
-                      ambiente_trabajo: ambienteElegido
+                    areasLista[i]["destinatario"] = destinatarioElegido;
+                    areasLista[i]["oferta"] = ofertaElegida;
+                    areasLista[i]["ambiente_trabajo"] = ambienteElegido["nombre"];
+                    /* areasLista[i]["ambiente_trabajo"] = ambienteElegido;
+                    areasLista[i]["ambiente_trabajo"]["persona"] = representanteElegido; */
+
+                  } // fin armado de areas
+
+                  // realizo busqueda por los parametros enviados
+                  encontrados = areasLista.filter(
+                    area => {
+                      for (let i = 0; i < search.length; i++) {
+                        let nombre = area.destinatario.persona.nombre.split(" ");
+                        for (let j = 0; j < nombre.length; j++) {
+                            if ( nombre[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
+                              return area;
+                            }
+                        }
+                        let nombreAmbiente = area.ambiente_trabajo.split(" ");
+                        for (let j = 0; j < nombreAmbiente.length; j++) {
+                            if ( nombreAmbiente[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
+                              return area;
+                            }
+                        }
+                        if (area.destinatario.persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
+                          return area;
+                        }
+                        if ( area.destinatario.persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
+                          return area;
+                        }
+                      }
                     });
 
-                  }
+                    if (estado != '') {
+                      if (encontrados.length > 0) {
+                        encontrados = encontrados.filter(area => {
+                          let existe = false;
+                          for (let i = 0; i < area.length; i++) {
+                            existe = estado === area.estado;
+                          }
+                          if (existe) { return area; }
+                        });
+                      }else{
+                        encontrados = areasLista.filter(area => {
+                          let existe = false;
+                          for (let i = 0; i < area.length; i++) {
+                            existe = estado === area.estado;
+                          }
+                          if (existe) { return area; }
+                        });
+                      }
+                    }
+
+                    let totalFiltrado:number = encontrados.length;
+                    let total:number = totalFiltrado/pageSize;
+                    let numEntero = Math.floor(total);
+                    let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
+
+                    listaAreas.total_filtrado = encontrados.length;
+                    listaAreas.pages = totalPagina;
+
+                    if (page > 0) {
+                      page = page;
+                      let pageStart = page * pageSize;
+                      let pageEnd = pageStart + pageSize;
+                      listaAreas.resultado = encontrados.slice(pageStart, pageEnd);
+                    }else{
+                      listaAreas.resultado = encontrados.slice(0,pageSize);
+                    }
                 }
-                return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: areaColeccion  } }));
+
+                console.log(listaAreas);
+                return of(new HttpResponse({ status: 200, body: listaAreas }));
             // } else {
             //     // return 401 not authorised if token is null or invalid
             //     return throwError({ error: { message: 'Unauthorised' } });

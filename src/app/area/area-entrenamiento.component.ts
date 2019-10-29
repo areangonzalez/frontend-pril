@@ -10,7 +10,7 @@ import { MensajesService } from 'src/app/core/services/mensajes.service';
     // styleUrls: ['./lista.component.css']
 })
 export class AreaEntrenamientoComponent implements OnInit {
-    public areas = [];
+    public areas:any[] = [];
     public totalFiltrado = 0;
     public page = 1;
 
@@ -26,9 +26,7 @@ export class AreaEntrenamientoComponent implements OnInit {
     private obtenerAreasEntrenamiento(){
       this._areaEntrenamientoService.listar().subscribe(
         datos => {
-          if (datos['success']) {
-            this.areas = datos['resultado'];
-          }
+          this.areas = datos['resultado'];
           this.totalFiltrado = datos['total_filtrado'];
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
