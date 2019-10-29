@@ -45,12 +45,11 @@ export class VistaAmbienteTrabajoComponent {
 
     ngOnInit() {
         // breadcrumbs Dinamico
-        this.id = this._route.snapshot.paramMap.get('id');
+        this.id = this._route.snapshot.paramMap.get('ambienteid');
         this.ambiente = this._route.snapshot.data['ambiente'];
+        this.listaOfertas = this._route.snapshot.data['ofertaLista']['resultado'];
         
-        if (this.id != undefined) {
-            this.buscarOfertas(this.id);
-        } else {
+        if (this.id == undefined) {
             this._router.navigate(['inicio','ambiente']);
         }
     }

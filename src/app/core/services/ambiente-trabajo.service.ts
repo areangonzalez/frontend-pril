@@ -33,9 +33,9 @@ export class AmbienteTrabajoService {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
         ): Observable<any>|Promise<any>|any {
-          let id = route.params.id;
-          if(id){
-            return this._apiService.get('/ambiente-trabajos/' + parseInt(id));
+          let ambienteid = route.params.ambienteid;//parametro instaciada desde el routing
+          if(ambienteid){
+            return this._apiService.get('/ambiente-trabajos/' + parseInt(ambienteid));
           }else{
             return this._apiService.get('/ambiente-trabajos');
           }

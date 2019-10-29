@@ -87,7 +87,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
     ngOnInit() {
         // breadcrumbs Dinamico
         this._breadcrumbsService.store([{ label: 'Inicio', url: 'inicio', params: [] }, { label: 'Ambiente de trabajo', url: 'ambiente', params: [] }, { label: 'Agregar', url: 'ambiente/agregar', params: [] }]);
-        this.id = this._route.snapshot.paramMap.get('id');
+        this.id = this._route.snapshot.paramMap.get('ambienteid');
         this.tipo_ambiente_trabajo_lista = this._route.snapshot.data['tipoAmbienteTrabajoLista'];
         
         if (this.id != undefined) {

@@ -13,15 +13,15 @@ const routes: Routes = [
       resolve: { ambientes: AmbienteTrabajoService}
     },
     {
-      path: 'vista/:id', component: VistaAmbienteTrabajoComponent,
+      path: 'vista/:ambienteid', component: VistaAmbienteTrabajoComponent,
       data: { loading: true, title: 'Ver ambiente de Trabajo' },
-      resolve: { ambiente: AmbienteTrabajoService}
+      resolve: { ambiente: AmbienteTrabajoService, ofertaLista: OfertaService}
     },{
       path: 'agregar', component: FormAmbienteTrabajoComponent,
       data: { loading: true, title: 'Agregar ambiente de Trabajo' },
       resolve: { tipoAmbienteTrabajoLista: TipoAmbienteTrabajoService}
     },{
-      path: 'editar/:id', component: FormAmbienteTrabajoComponent,
+      path: 'editar/:ambienteid', component: FormAmbienteTrabajoComponent,
       data: { loading: true, title: 'Editar ambiente de Trabajo' },
       resolve: { tipoAmbienteTrabajoLista: TipoAmbienteTrabajoService}
     },{
