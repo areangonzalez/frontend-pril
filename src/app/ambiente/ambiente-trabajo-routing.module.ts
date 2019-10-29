@@ -14,7 +14,8 @@ const routes: Routes = [
     },
     {
       path: 'vista/:id', component: VistaAmbienteTrabajoComponent,
-      data: { loading: true, title: 'Ver ambiente de Trabajo' }
+      data: { loading: true, title: 'Ver ambiente de Trabajo' },
+      resolve: { ambiente: AmbienteTrabajoService}
     },{
       path: 'agregar', component: FormAmbienteTrabajoComponent,
       data: { loading: true, title: 'Agregar ambiente de Trabajo' },

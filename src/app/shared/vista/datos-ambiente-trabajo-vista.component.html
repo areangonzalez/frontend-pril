@@ -1,0 +1,96 @@
+
+<div class="row">
+    <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre:</dt>
+            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.nombre}}</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Tipo:</dt>
+            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.tipo_ambiente_trabajo}}</dd>
+        </dl>
+        </div>
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Legajo:</dt>
+                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.legajo}}</dd>
+            </dl>
+            <dl class="row">
+            <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Cuit:</dt>
+            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.cuit}}</dd>
+            </dl>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <dl class="row">
+                <dt class="col-3 col-sm-3 col-md-3 col-lg-3">Actividad:</dt>
+                <dd class="col-9 col-sm-9 col-md-9 col-lg-9">{{ambiente.actividad}}</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-3 col-sm-3 col-md-3 col-lg-3">Observación:</dt>
+                <dd class="col-9 col-sm-9 col-md-9 col-lg-9">{{ambiente.observacion}}</dd>
+            </dl>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Representante:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.apellido}}, {{ambiente.persona.nombre}}</dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.nro_documento}}</dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Teléfono / celular:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.telefono}} <span *ngIf="(ambiente.persona.telefono != '' && ambiente.persona.celular != '')">/</span> {{ambiente.persona.celular}}</dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Email:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{ambiente.persona.email}}</dd>
+    </dl>
+    </div>
+</div>
+
+<!-- Botonera -->
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-inline d-flex justify-content-center">
+            <li class="list-inline-item">
+                <ng-template #direccionContent>
+                    {{ambiente.lugar.localidad}} <br>
+                    {{ambiente.lugar.calle}} {{ambiente.lugar.altura}}
+                    <span *ngIf="(ambiente.lugar.escalera != '' || ambiente.lugar.depto != '' || ambiente.lugar.piso != '' || ambiente.lugar.barrio != '')">
+                        <br>
+                        {{(ambiente.lugar.barrio != '')?"Barrio: " + ambiente.lugar.barrio:""}} {{(ambiente.lugar.escalera != "")?"Esc/Mod: " + ambiente.lugar.escalera:""}} {{(ambiente.lugar.depto != "")?"Dpto: " + ambiente.lugar.depto:""}} {{(ambiente.lugar.piso != "")?"Piso: " + ambiente.lugar.piso:""}}
+                    </span>
+                </ng-template>
+                <button type="button" class="btn btn-outline-secondary btn-margin-left" [ngbTooltip]="direccionContent">
+                    <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                </button>
+            </li>
+            <li class="list-inline-item">
+                <ng-template #telefonoContent>
+                    {{ambiente.telefono1}} {{(ambiente.telefono2 != '')?"/ " + ambiente.telefono2:""}} {{(ambiente.telefono3 != "")?"/ " + ambiente.telefono3:""}}
+                </ng-template>
+                <button *ngIf="(ambiente.telefono1 != '')" type="button" class="btn btn-outline-secondary btn-margin-left" [ngbTooltip]="telefonoContent">
+                    <i class="fas fa-phone" title="Telefono"></i>
+                </button>
+            </li>
+            <li class="list-inline-item">
+                <button *ngIf="(ambiente.fax != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.fax}}">
+                    <i class="fas fa-fax" title="fax" aria-hidden="true"></i>
+                </button>
+            </li>
+            <li class="list-inline-item">
+                <button *ngIf="(ambiente.email != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{ambiente.email}}">
+                    <span class="oi oi-envelope-closed" title="Email" aria-hidden="true"></span>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

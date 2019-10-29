@@ -55,3 +55,14 @@ label {
   border: #8cc63f;
   box-shadow: 0 0 0 0.2rem #8cc63f;
 }
+dt{
+  align-content: flex-end;
+  text-align: right;
+  padding-left: 0px !important;
+  padding-right: 8px !important;
+}
+dd {
+  align-content: flex-start;
+  text-align: left;
+  padding-left: 0px !important;
+}  

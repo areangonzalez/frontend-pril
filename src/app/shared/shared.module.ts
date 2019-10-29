@@ -21,7 +21,7 @@ import { DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, Bus
 import { FormOfertaComponent } from './formulario/oferta';
 import { BusquedaAreaEntrenamientoComponent } from "./formulario/area-entrenamiento";
 //vistas y tags
-import { DatosDestinatarioVistaComponent,VistaOfertaComponent } from "./vista";
+import { DatosDestinatarioVistaComponent, VistaOfertaComponent, DatosAmbienteTrabajoVistaComponent } from "./vista";
 import { TagComponent, VistaTagComponent } from "./formulario/tag";
 //modal
 import {
@@ -49,7 +49,7 @@ import {
     DatosDestinatarioComponent, BusquedaDestinatarioComponent,
     EstudioComponent,
     AutoCompletarComponent,
-    DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent,
+    DatosAmbienteTrabajoFormComponent, DatosAmbienteTrabajoVistaComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent,
     FormOfertaComponent,ListaOfertaComponent,
     BusquedaAreaEntrenamientoComponent,
     DatosDestinatarioVistaComponent,
@@ -70,7 +70,7 @@ import {
     DatosDestinatarioComponent, BusquedaDestinatarioComponent,
     EstudioComponent,
     AutoCompletarComponent,
-    DatosAmbienteTrabajoFormComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent,
+    DatosAmbienteTrabajoFormComponent, DatosAmbienteTrabajoVistaComponent, DatosRepresentanteFormComponent, BusquedaAmbienteTrabajoComponent,
     FormOfertaComponent,ListaOfertaComponent,
     BusquedaAreaEntrenamientoComponent,
     DatosDestinatarioVistaComponent,

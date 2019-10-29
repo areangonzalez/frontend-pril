@@ -14,7 +14,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       // traer listado de ambientes
       // desde el archivo "data.json" y del "local storage"
-      function getAmientes(){
+      function getAmbientes(){
         let ambienteLista = (<any>data).ambientes;
         let existe = false;
         if(localStorage.getItem("ambienteLista")) {
@@ -106,7 +106,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         let ofertasLista = getOfertas();
         let destinatarioLista = getDestinatarios();
-        let ambienteLista = getAmientes();
+        let ambienteLista = getAmbientes();
         let personas = getPersonas();
 
         // listados globales
@@ -523,7 +523,52 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   let totalF = ambienteLista.length;
-                    return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: ambienteLista  } }));
+                  let ambienteColeccion : any[]=[];
+
+                  for (let i = 0; i < ambienteLista.length; i++) {
+                    // Selecciono la persona del destinatario
+                    let matchedPersona = personas.filter(persona => { return persona.id === ambienteLista[i].personaid; });
+                    let personaElegido = matchedPersona.length ? matchedPersona[0] : [];
+console.log("persona: ",personaElegido);
+
+                    ambienteColeccion.push({
+                      actividad: ambienteLista[i].actividad,
+                      calificacion: ambienteLista[i].calificacion,
+                      cuit: ambienteLista[i].cuit,
+                      email: ambienteLista[i].email,
+                      fax: ambienteLista[i].fax,
+                      id: ambienteLista[i].id,
+                      legajo: ambienteLista[i].legajo,
+                      lugar:{
+                        altura: ambienteLista[i].lugar.altura,
+                        barrio: ambienteLista[i].lugar.barrio,
+                        calle: ambienteLista[i].lugar.calle,
+                        depto: ambienteLista[i].lugar.depto,
+                        entre_calle_1: ambienteLista[i].lugar.entre_calle_1,
+                        entre_calle_2: ambienteLista[i].lugar.entre_calle_2,
+                        escalera: ambienteLista[i].lugar.escalera,
+                        id: ambienteLista[i].lugar.id,
+                        latitud: ambienteLista[i].lugar.latitud,
+                        localidad: ambienteLista[i].lugar.localidad,
+                        localidadid: ambienteLista[i].lugar.localidadid,
+                        longitud: ambienteLista[i].lugar.longitud,
+                        nombre: ambienteLista[i].lugar.nombre,
+                        piso: ambienteLista[i].lugar.piso
+                      },
+                      lugarid: 105,
+                      nombre: ambienteLista[i].nombre,
+                      observacion: ambienteLista[i].observacion,
+                      personaid: ambienteLista[i].personaid,
+                      telefono1: ambienteLista[i].telefono1,
+                      telefono2: ambienteLista[i].telefono2,
+                      telefono3: ambienteLista[i].telefono3,
+                      tipo_ambiente_trabajoid: ambienteLista[i].tipo_ambiente_trabajoid,
+                      persona: personaElegido
+                    })
+                  }
+                  console.log(ambienteColeccion);
+                  
+                    return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: ambienteColeccion  } }));
                 // } else {
                 //     // return 401 not authorised if token is null or invalid
                 //     return throwError({ error: { message: 'Unauthorised' } });
@@ -598,7 +643,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let id = parseInt(urlParts[urlParts.length - 1]);
                     let matchedUsers = ambienteLista.filter(ambiente => { return ambiente.id === id; });
                     let seleccion = matchedUsers.length ? matchedUsers[0] : null;
-
+                    let matchedPersona = personas.filter(personas => { return personas.id === seleccion.personaid; });
+                    let persona = matchedPersona.length ? matchedPersona[0] : null;
+                    seleccion["persona"]=persona;
                     return of(new HttpResponse({ status: 200, body: seleccion }));
                 // } else {
                 //     // return 401 not authorised if token is null or invalid
