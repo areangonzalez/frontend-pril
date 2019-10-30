@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'lista-oferta',
@@ -12,8 +13,12 @@ export class ListaOfertaComponent implements OnInit {
     @Output('guardarOferta') public guardarOferta = new EventEmitter();
 
     constructor(
-        private _router: Router
-    ) { }
+        private _router: Router,
+        config: NgbTooltipConfig
+    ) {
+        config.placement = 'top';
+        config.triggers = 'click';
+    }
 
     ngOnInit() {
     }

@@ -125,10 +125,11 @@
     "estado": "Vacante",
     "fecha_inicial": "2019-9-22",
     "id": 1,
+    "telefono":"(2920) 15415161, (2920) 430698",
     "lugar": {
-      "altura": "321",
+      "altura": "295",
       "barrio": "",
-      "calle": "buenos aires",
+      "calle": "Mitre",
       "depto": "",
       "escalera": "",
       "id": 1,
@@ -148,6 +149,7 @@
     "estado": "Vacante",
     "fecha_inicial": "2019-9-22",
     "id": 2,
+    "telefono":"(2920) 15321161, (2920) 438998",
     "lugar": {
       "altura": "321",
       "barrio": "",

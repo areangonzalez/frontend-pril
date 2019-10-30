@@ -1,24 +1,36 @@
 <div class="row">
     <div class="col-md-12">
         <h3 *ngIf="(nombreAmbiente != '' && nombreAmbiente != undefined)" >Ofertas de {{nombreAmbiente}}</h3>
-        <table class="table table-bordered table-hover">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">Fecha de inicio</th>
                     <th scope="col">Sucursal</th>
-                    <th scope="col">Localidad</th>
-                    <th scope="col">Puesto</th>
-                    <th scope="col">Estado</th>
+                    <!-- <th scope="col">Domicilio</th> -->
+                    <th class="text-center" scope="col">Puesto</th>
+                    <th class="text-center" scope="col">Estado</th>
                     <th class="text-center" scope="col">Acción</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let oferta of lista_ofertas">
                     <td>{{oferta.fecha_inicial | date:'dd/MM/yyyy' }}</td>
-                    <td>{{oferta.nombre_sucursal}}</td>
-                    <td>{{oferta.lugar.localidad}}</td>
-                    <td>{{oferta.puesto}}</td>
-                    <td>{{oferta.estado}}</td>
+                    <td>
+                        <div class="d-flex justify-content-between">
+                            {{oferta.nombre_sucursal}} ({{oferta.lugar.localidad}})                            
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" tooltipClass="tooltip-inner" ngbTooltip="{{oferta.lugar.calle}} {{oferta.lugar.altura}}" container="body">
+                                    <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
+                                </button>
+                                <button *ngIf="!((oferta.telefono == '') || !(oferta.telefono))" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{oferta.telefono}}" container="body">
+                                    <i class="fas fa-phone" title="Teléfono representante"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </td>
+                    <td class="text-center">{{oferta.puesto}}</td>
+                    <td class="text-center">{{oferta.estado}}</td>
                     <td class="text-center">
                         <modal-vista-oferta [ofertaid]="oferta.id"></modal-vista-oferta>
                         <modal-oferta *ngIf="!(mostrarEdicion == 0)" [tipo]="'editar'" [texto]="''" [ambienteid]="oferta.ambiente_trabajoid"
