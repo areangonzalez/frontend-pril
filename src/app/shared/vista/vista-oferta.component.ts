@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
-import { MensajesService } from "../../core/services/mensajes.service";
-import { OfertaService } from "../../core/services/oferta.service";
+import { Oferta, Lugar } from 'src/app/core/models';
 
 @Component({
     selector: 'oferta-vista',
@@ -10,11 +8,8 @@ import { OfertaService } from "../../core/services/oferta.service";
 })
 export class VistaOfertaComponent implements OnInit {
     @Input("oferta") public oferta: any;
-    
+
     constructor() { }
 
     ngOnInit(): void {}
-
-    
-
 }

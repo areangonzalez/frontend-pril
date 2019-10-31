@@ -48,7 +48,7 @@ export class ModalContentOfertaVista implements OnInit {
     ofertaPorId(id) {
         this._ofertaService.getOfertaPorId(id).subscribe(
             response => {
-                this.oferta = response
+                this.oferta = response;
                 console.log(this.oferta);
                 
             }, error => {
