@@ -6,7 +6,7 @@
                 <th scope="col">Fecha final</th>
                 <th scope="col">Tarea</th>
                 <th scope="col">Destinatario</th>
-                <th scope="col">Ambiente de trabajo</th>
+                <th scope="col">Ambiente de trabajo (Sucursal)</th>
                 <th scope="col">Plan</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Acción</th>
@@ -25,7 +25,7 @@
                 <td>
                     {{area.destinatario.persona.nro_documento}} - {{area.destinatario.persona.apellido}}, {{area.destinatario.persona.nombre}}
                 </td>
-                <td>{{area.oferta.ambiente_trabajo}}</td>
+                <td>{{area.oferta.ambiente_trabajo}} ({{area.oferta.nombre_sucursal}}) </td>
                 <td>{{area.plan}}</td>
                 <td>{{area.estado}}</td>
                 <td>

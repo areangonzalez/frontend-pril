@@ -3,24 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 import { AreaEntrenamientoComponent } from "./area-entrenamiento.component";
 import { SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent } from "./form";
 import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamiento.component";
-import { DestinatarioService, OfertaService, PlanService } from '../core/services';
+import { DestinatarioService, OfertaService, PlanService, AreaEntrenamientoService } from '../core/services';
 
 const routes: Routes = [
     {
       path: '', component: AreaEntrenamientoComponent,
-      data: { loading: true, title: 'Lista área de entrenamiento' },
-      /* resolve: { programas: ProgramaService, tipoRecursos: TipoRecursoService } */
+      data: { loading: true, title: 'Lista área de entrenamiento', breadcrumb: 'Lista' },
+      resolve: { listadoAreas: AreaEntrenamientoService }
     },
     {
       path: 'crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent,
-      data: { loading: true, title: 'Crear área de entrenamiento' },
+      data: { loading: true, title: 'Crear área de entrenamiento', breadcrumb: 'Seleccionar destinatario y oferta' },
       resolve: { destinatarios: DestinatarioService, ofertas: OfertaService }
     },{
-      path: 'crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent, data: { loading: true, title: 'Crear área de entrenamiento' },
+      path: 'crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent,
+      data: { loading: true, title: 'Crear área de entrenamiento', breadcrumb: 'Crear plan' },
       resolve: { destinatario: DestinatarioService, oferta: OfertaService, planes: PlanService }
     },{
       path: 'vista/:area_entrenamientoid', component: VistaAreaEntrenamientoComponent,
-      data: { loading: true, title: 'Ver área de entrenamiento' }
+      data: { loading: true, title: 'Ver área de entrenamiento', breadcrumb: 'vista' }
     }
 ];
 

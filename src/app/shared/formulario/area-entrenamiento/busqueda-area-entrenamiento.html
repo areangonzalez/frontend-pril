@@ -1,5 +1,5 @@
 <div class="col-md-12">
-    <form>
+    <form [formGroup]="buscarForm">
         <div class="row">
             <div class="col-md-3">
                 <select class="form-control">
@@ -8,9 +8,9 @@
             </div>
             <div class="col-md-9">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" formControlName="global_param">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">
+                        <button class="btn btn-outline-secondary" type="button" (click)="buscar()">
                             <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
                         </button>
                         <button class="btn btn-outline-success" type="button" (click)="agregarArea()">
