@@ -1,5 +1,6 @@
 import { Component, Input, Injectable, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { OfertaService, MensajesService } from 'src/app/core/services';
 
 @Component({
     selector: 'modal-content-oferta',
@@ -11,7 +12,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       </button>
     </div>
     <div class="modal-body">
-        <oferta-vista [ofertaid]="ofertaid"></oferta-vista>
+        <oferta-vista [oferta]="oferta"></oferta-vista>
     </div>
     <div class="modal-footer">
         <button class="btn btn-danger" type="button" (click)="activeModal.close('close')">
@@ -27,16 +28,30 @@ export class ModalContentOfertaVista implements OnInit {
      * @var oferta objeto que contiene los datos de la oferta
      */
     @Input('ofertaid') public ofertaid: number;
-    public oferta: object;
+    public oferta: any;
 
     constructor(
-
+        private _ofertaService: OfertaService,
+        private _mensajesService: MensajesService,
         public activeModal: NgbActiveModal
     ) {
 
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.ofertaPorId(this.ofertaid);
+    }
+    ofertaPorId(id) {
+        this._ofertaService.getOfertaPorId(id).subscribe(
+            response => {
+                this.oferta = response
+                console.log(this.oferta);
+                
+            }, error => {
+                this._mensajesService.cancelado('Ups hubo un problema, por favor verifique los datos.', [{name: ''}])
+            }
+        );
+    }
 }
 @Component({
     selector: 'modal-vista-oferta',

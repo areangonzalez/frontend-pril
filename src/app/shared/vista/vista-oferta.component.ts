@@ -9,51 +9,12 @@ import { OfertaService } from "../../core/services/oferta.service";
     styleUrls: ['./vista-oferta.css']
 })
 export class VistaOfertaComponent implements OnInit {
-    @Input("ofertaid") public ofertaid;
-    public datosOferta = {
-        id: 0,
-        ambienteid: "",
-        nombre_sucursal: "",
-        puesto: "",
-        area: "",
-        demanda_laboral: "",
-        objetivo: "",
-        dia_horario: "",
-        tarea: "",
-        fecha_inicial: "",
-        lugar: {
-            id: 0,
-            localidadid: "",
-            calle: "",
-            altura: "",
-            barrio: "",
-            piso: "",
-            depto: "",
-            escalera: "",
-            localidad: ""
-        }
-    };
+    @Input("oferta") public oferta: any;
+    
+    constructor() { }
 
-    constructor(
-        private _ofertaService: OfertaService,
-        private _mensajesService: MensajesService
-    ) { }
+    ngOnInit(): void {}
 
-    ngOnInit(): void {
-        this.ofertaPorId(this.ofertaid);
-    }
-
-
-    ofertaPorId(id) {
-        this._ofertaService.getOfertaPorId(id).subscribe(
-            datos => {
-                for (var key in datos) {
-                    this.datosOferta[key] = datos[key];
-                }
-            }, error => {
-                this._mensajesService.cancelado('Ups hubo un problema, por favor verifique los datos.', [{name: ''}])
-            }
-        );
-    }
+    
 
 }

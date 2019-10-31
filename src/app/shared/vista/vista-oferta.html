@@ -4,20 +4,20 @@
                     <div class="col-md-4 vista-detalle">
                         <dl class="row">
                             <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Fecha incial:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.fecha_inicial}}</dd>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.fecha_inicial}}</dd>
                         </dl>
                         <dl class="row">
                             <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nombre Sucursal:</dt>
-                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.nombre_sucursal}}</dd>
+                            <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.nombre_sucursal}}</dd>
                         </dl>
                         <dl class="row">
                             <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Dirección:</dt>
                             <dd class="col-6 col-sm-6 col-md-6 col-lg-6">
-                                {{datosOferta.lugar.localidad}} - {{datosOferta.lugar.calle}} {{datosOferta.lugar.altura}}
-                                <span *ngIf="(datosOferta.lugar.barrio != '')"><br> Barrio: {{datosOferta.lugar.barrio}}</span>
-                                <span *ngIf="(datosOferta.lugar.escalera != '')"><br> Esc/Mod: {{datosOferta.lugar.escalera}}</span>
-                                <span *ngIf="(datosOferta.lugar.escalera != '')"><br> Piso: {{datosOferta.lugar.piso}}</span>
-                                <span *ngIf="(datosOferta.lugar.escalera != '')"><br> Dpto: {{datosOferta.lugar.depto}}</span>
+                                {{oferta.lugar.localidad}} - {{oferta.lugar.calle}} {{oferta.lugar.altura}}
+                                <span *ngIf="(oferta.lugar.barrio != '')"><br> Barrio: {{oferta.lugar.barrio}}</span>
+                                <span *ngIf="(oferta.lugar.escalera != '')"><br> Esc/Mod: {{oferta.lugar.escalera}}</span>
+                                <span *ngIf="(oferta.lugar.escalera != '')"><br> Piso: {{oferta.lugar.piso}}</span>
+                                <span *ngIf="(oferta.lugar.escalera != '')"><br> Dpto: {{oferta.lugar.depto}}</span>
                             </dd>
                         </dl>
                     </div>
@@ -26,13 +26,13 @@
                           <div class="col-md-6 vista-detalle">
                               <dl class="row">
                                   <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Área:</dt>
-                                  <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.area}}</dd>
+                                  <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.area}}</dd>
                               </dl>
                           </div>
                           <div class="col-md-6 vista-detalle">
                               <dl class="row">
                                   <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Puesto:</dt>
-                                  <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.puesto}}</dd>
+                                  <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.puesto}}</dd>
                               </dl>
                           </div>
                       </div>
@@ -40,42 +40,15 @@
                         <div class="col-md-12 vista-detalle">
                             <dl class="row">
                                 <dt class="col-3 col-sm-3 col-md-3 col-lg-3">Demanda Laboral:</dt>
-                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{datosOferta.demanda_laboral}}</dd>
+                                <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{oferta.demanda_laboral}}</dd>
                             </dl>
                             <dl class="row">
                                 <dt class="col-3 col-sm-3 col-md-3 col-lg-3">Objetivo:</dt>
-                                <dd class="col-9 col-sm-9 col-md-9 col-lg-9">{{datosOferta.objetivo}}</dd>
+                                <dd class="col-9 col-sm-9 col-md-9 col-lg-9">{{oferta.objetivo}}</dd>
                             </dl>
                         </div>
                       </div>
-                    </div>
-
-                    <!-- <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <dl class="row">
-                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Dirección:</dt>
-                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                        {{datosOferta.lugar.localidad}} - {{datosOferta.lugar.calle}} {{datosOferta.lugar.altura}}
-                                        <span><br> {{datosOferta.lugar.barrio}}</span>
-                                        <span *ngIf="(datosOferta.lugar.escalera != '')"> - {{datosOferta.lugar.escalera}}</span>
-                                        <span *ngIf="(datosOferta.lugar.escalera != '')"> - {{datosOferta.lugar.piso}}</span>
-                                        <span *ngIf="(datosOferta.lugar.escalera != '')"> - {{datosOferta.lugar.depto}}</span>
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <dl class="row">
-                                    <dt class="col-12 col-sm-12 col-md-12 col-lg-12">Objetivo:</dt>
-                                    <dd class="col-12 col-sm-12 col-md-12 col-lg-12">{{datosOferta.objetivo}}</dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div> -->
+                    </div>                    
                 </div>
             </div>
         </div>

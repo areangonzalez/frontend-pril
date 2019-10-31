@@ -59,7 +59,6 @@ export class OfertaComponent implements OnInit {
     ngOnInit() {
         this.id = this._route.snapshot.paramMap.get('ambienteid');
         this.lista_ofertas = this._route.snapshot.data['ofertaLista']['resultado'];
-        console.log(this.lista_ofertas);
         
         if (this.id == undefined) {
             this._router.navigate(['ambiente']);
