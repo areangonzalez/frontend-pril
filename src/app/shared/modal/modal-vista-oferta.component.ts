@@ -12,7 +12,11 @@ import { OfertaService, MensajesService } from 'src/app/core/services';
       </button>
     </div>
     <div class="modal-body">
-        <oferta-vista [oferta]="oferta"></oferta-vista>
+        <div class="card">
+            <div class="card-body">
+                <oferta-vista [oferta]="oferta"></oferta-vista>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button class="btn btn-danger" type="button" (click)="activeModal.close('close')">
