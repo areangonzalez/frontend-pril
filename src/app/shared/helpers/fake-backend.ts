@@ -941,7 +941,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           if (request.url.endsWith('/apimock/area-entrenamientos') && request.method === 'GET') {
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
               // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                console.log(request.params);
                 // parametros de busquedas
                 let global_param = (request.params.get("global_param")) ? request.params.get("global_param") : '';
                 let estado = (request.params.get("estado")) ? request.params.get("estado") : '';
@@ -1005,12 +1004,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                               return area;
                             }
                         }
-                        /* let nombreAmbiente = area.ambiente_trabajo.split(" ");
+                        let nombreAmbiente = area.oferta.ambiente_trabajo.split(" ");
                         for (let j = 0; j < nombreAmbiente.length; j++) {
                             if ( nombreAmbiente[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
                               return area;
                             }
-                        } */
+                        }
                         if (area.destinatario.persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
                           return area;
                         }
@@ -1019,7 +1018,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         }
                       }
                     });
-                    console.log("encontrados: ", encontrados);
                     if (estado != '') {
                       if (encontrados.length > 0) {
                         encontrados = encontrados.filter(area => {
@@ -1058,7 +1056,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 }
 
-                console.log(listaAreas);
                 return of(new HttpResponse({ status: 200, body: listaAreas }));
             // } else {
             //     // return 401 not authorised if token is null or invalid
