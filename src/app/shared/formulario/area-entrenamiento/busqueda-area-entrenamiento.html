@@ -1,12 +1,7 @@
 <div class="col-md-12">
     <form [formGroup]="buscarForm">
         <div class="row">
-            <div class="col-md-3">
-                <select class="form-control">
-                    <option>Seleccionar estado</option>
-                </select>
-            </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" formControlName="global_param">
                     <div class="input-group-append">
@@ -32,6 +27,20 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-md-6">
+                                    <select class="form-control">
+                                        <option value="">Seleccionar estado</option>
+                                        <option *ngFor="let estado of estadoLista" value="{{estado.id}}" >{{estado.nombre}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control">
+                                        <option value="">Seleccionar plan</option>
+                                        <option *ngFor="let plan of planLista" value="{{plan.id}}" >{{plan.nombre}}</option>
+                                    </select>
+                                </div>
+                              </div>
+                              <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
