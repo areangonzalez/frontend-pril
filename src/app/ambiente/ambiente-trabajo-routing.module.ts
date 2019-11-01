@@ -10,7 +10,7 @@ const routes: Routes = [
     {
       path: '', component: AmbienteTrabajoComponent,
       data: { loading: true, title: 'Lista ambiente de Trabajo', breadcrumb: 'Lista'},
-      resolve: { ambientes: AmbienteTrabajoService}
+      resolve: { ambientes: AmbienteTrabajoService, tipoAmbienteTrabajoLista: TipoAmbienteTrabajoService}
     },
     {
       path: 'vista/:ambienteid', component: VistaAmbienteTrabajoComponent,

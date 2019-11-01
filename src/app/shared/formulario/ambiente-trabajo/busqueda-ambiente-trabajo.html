@@ -1,14 +1,15 @@
 <div class="col-md-12">
-    <form>
+    <form [formGroup]="busquedaForm">
         <div class="row">
             <div class="col-md-3">
-                <select class="form-control">
-                    <option>Seleccionar estado</option>
-                </select>
+                <select class="form-control" id="tipo_ambiente_trabajo" formControlName="tipo_ambiente_trabajoid">
+                    <option value="">Seleccione tipo ambiente de trabajo</option>
+                    <option *ngFor="let tipo of tipo_ambiente_trabajo_lista" value="{{tipo.id}}">{{tipo.nombre}}</option>
+                </select>             
             </div>
             <div class="col-md-9">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Buscar por nombre de ambiente de trabajo">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="button">
                             <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
@@ -34,7 +35,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <select class="form-control">
-                                        <option>Seleccionar tipo</option>
+                                        <option>Seleccionar Estado</option>
                                     </select>
                                 </div>
                             </div>
