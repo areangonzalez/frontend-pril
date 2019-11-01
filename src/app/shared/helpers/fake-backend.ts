@@ -562,6 +562,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       telefono2: ambienteLista[i].telefono2,
                       telefono3: ambienteLista[i].telefono3,
                       tipo_ambiente_trabajoid: ambienteLista[i].tipo_ambiente_trabajoid,
+                      tipo_ambiente_trabajo: getNombreArray(ambienteLista[i].tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
                       persona: personaElegido
                     })
                   }

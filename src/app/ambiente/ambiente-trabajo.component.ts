@@ -25,6 +25,8 @@ export class AmbienteTrabajoComponent implements OnInit {
     ngOnInit() {
       //obtengo una lista de ambientes de trabajo
       this.ambientes = this._route.snapshot.data['ambientes']['resultado'];
-      this.totalFiltrado = this._route.snapshot.data['ambientes']['total_filtrado'];     
+      this.totalFiltrado = this._route.snapshot.data['ambientes']['total_filtrado'];   
+      console.log(this.ambientes);
+        
     }
 }
