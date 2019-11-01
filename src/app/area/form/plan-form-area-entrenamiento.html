@@ -8,7 +8,9 @@
         </ngb-tab>
         <ngb-tab title="Ambiente de trabajo / Oferta">
           <ng-template ngbTabContent>
-            <oferta-vista [ofertaid]="ofertaId" ></oferta-vista>
+            <oferta-vista [oferta]="oferta" ></oferta-vista>
+            <h2>ambiente trabajo</h2>
+            <datos-ambiente-trabajo-vista [ambiente]='ambienteTrabajo'></datos-ambiente-trabajo-vista>
               <!-- <div class="row">
                   <div class="col-md-12 ">
                       <div class="row">

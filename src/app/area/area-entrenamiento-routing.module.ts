@@ -9,15 +9,15 @@ const routes: Routes = [
     {
       path: '', component: AreaEntrenamientoComponent,
       data: { loading: true, title: 'Lista área de entrenamiento', breadcrumb: 'Lista' },
-      resolve: { listadoAreas: AreaEntrenamientoService }
+      resolve: { listadoAreas: AreaEntrenamientoService, planes: PlanService }
     },
     {
       path: 'crear-seleccion', component: SeleccionFormAreaEntrenamientoComponent,
-      data: { loading: true, title: 'Crear área de entrenamiento', breadcrumb: 'Seleccionar destinatario y oferta' },
+      data: { loading: true, title: 'Formulario de selección de área de entrenamiento', breadcrumb: 'Seleccionar destinatario y oferta' },
       resolve: { destinatarios: DestinatarioService, ofertas: OfertaService }
     },{
       path: 'crear-plan/:destinatarioid/:ofertaid', component: PlanFormAreaEntrenamientoComponent,
-      data: { loading: true, title: 'Crear área de entrenamiento', breadcrumb: 'Crear plan' },
+      data: { loading: true, title: 'Crear plan para área de entrenamiento', breadcrumb: 'Crear plan' },
       resolve: { destinatario: DestinatarioService, oferta: OfertaService, planes: PlanService }
     },{
       path: 'vista/:area_entrenamientoid', component: VistaAreaEntrenamientoComponent,
@@ -28,6 +28,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
-    providers: [DestinatarioService, OfertaService]
+    providers: [DestinatarioService, OfertaService, PlanService, AreaEntrenamientoService]
 })
 export class AreaEntrenamientoRoutingModule { }

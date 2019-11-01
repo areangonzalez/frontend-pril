@@ -49,20 +49,30 @@ export class BusquedaDestinatarioComponent implements OnInit {
       this.profesionLista = this._route.snapshot.data['profesion'];
       this.oficioLista = this._route.snapshot.data['oficio'];
     }
-
+    /**
+     * abre/cierra con animación la busqueda avanzada
+     */
     abrirCerrarBusquedaAvanzada() {
       this.state = (this.state === 'small' ? 'large' : 'small');
     }
-
+    /**
+     * Convierte la fecha de objeto a string
+     * @param fechaDesde [objeto] obtengo el objeto del ngbDate
+     */
     obtenerFechaDesde(fechaDesde: any) {
       this.busquedaForm.get('fecha_desde').patchValue(this._utilService.formatObjetoAFecha(fechaDesde));
     }
-
+    /**
+     * Convierte la fecha de objeto a string
+     * @param fechaHasta [objeto] obtengo el objeto del ngbDate
+     */
     obtenerFechaHasta(fechaHasta: object) {
       this.busquedaForm.get('fecha_hasta').setValue(this._utilService.formatObjetoAFecha(fechaHasta));
     }
 
-
+    /**
+     * Arma el array de busqueda para el API
+     */
     realizarBusqueda() {
       let busquedaAvanzada = this.busquedaForm.value;
       let apiBusqueda:any = {};
@@ -79,7 +89,9 @@ export class BusquedaDestinatarioComponent implements OnInit {
       this.state = (esTrue) ? 'large' : 'small';
       this.obtenerBusqueda.emit(apiBusqueda);
     }
-
+    /**
+     * Limpiar los campos de busqueda
+     */
     limpiarCampos() {
       let busqueda: any = this.busquedaForm.value;
       for (const key in busqueda) {
