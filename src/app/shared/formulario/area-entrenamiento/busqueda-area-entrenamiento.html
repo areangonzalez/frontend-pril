@@ -16,14 +16,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 inner">
                 <p>
-                    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
-                        aria-controls="collapseExample">
+                    <button type="button" class="btn btn-outline-primary" (click)="abrirCerrarBusquedaAvanzada()">
                         Busqueda avanzada
                     </button>
                 </p>
-                <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                <div [@abrirCerrar]="state" id="busqueda_avanzada_area_entrenamiento" >
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
