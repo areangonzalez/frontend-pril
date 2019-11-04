@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,7 +10,11 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListaAmbienteTrabajoComponent {
     @Input('ambientes') ambientes: any;
-    @Input('totalFiltrado') public totalFiltrado:number;
+    /**
+     * @var configPaginacion [object] configuracion de paginacion
+     */
+    @Input("configPaginacion") public configPaginacion:any;
+    @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
 
     constructor(
         private _router: Router,
@@ -52,5 +56,9 @@ export class ListaAmbienteTrabajoComponent {
         telefonos += (telefono3)?' '+telefono3:'';
         
         return telefonos;
+    }
+
+    cambioPagina(page:number){
+        this.cambioDePagina.emit(page);
     }
 }

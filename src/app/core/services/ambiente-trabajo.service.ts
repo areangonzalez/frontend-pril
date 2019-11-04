@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class AmbienteTrabajoService {
@@ -26,6 +27,13 @@ export class AmbienteTrabajoService {
         return this._apiService.get('/ambiente-trabajos/' + id);
     }
 
+    buscar(params:any) {
+      let httpParams = new HttpParams();
+      httpParams = this._apiService.formatParams(httpParams, params);
+
+      return this._apiService.get('/ambiente-trabajos', params);
+    }
+
     /**
      * Realizamos la precarga de datos
      */
@@ -37,7 +45,9 @@ export class AmbienteTrabajoService {
           if(ambienteid){
             return this._apiService.get('/ambiente-trabajos/' + parseInt(ambienteid));
           }else{
-            return this._apiService.get('/ambiente-trabajos');
+            let httpParams = new HttpParams();
+            httpParams = this._apiService.formatParams(httpParams, {page:0});
+            return this._apiService.get('/ambiente-trabajos', httpParams);
           }
         }
 }

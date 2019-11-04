@@ -520,7 +520,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          * ************************************************************************ */
             // lista de ambientes de trabajos
             if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'GET') {
-                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+              
+              // datos paginacion
+              let page: number = parseInt(request.params.get("page"));
+              let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
+
+              //preparo objeto de paginacion
+              let totalPaginas = 0;
+              let encontrados: any[] = [];
+              let lista = {
+                total_filtrado: 0,
+                pagesize: pageSize,
+                pages: totalPaginas,
+                estado: true,
+                resultado:encontrados,
+              };
+              
+              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   let totalF = ambienteLista.length;
                   let ambienteColeccion : any[]=[];
@@ -567,7 +583,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     })
                   }
 
-                    return of(new HttpResponse({ status: 200, body: { success: true, total_filtrado: totalF, resultado: ambienteColeccion  } }));
+                  lista.total_filtrado = ambienteColeccion.length;
+                  if (page > 0) {
+                    page = page;
+                    let pageStart = page * pageSize;
+                    let pageEnd = pageStart + pageSize;
+                    lista.resultado = ambienteColeccion.slice(pageStart, pageEnd);
+                  }else{
+                    lista.resultado = ambienteColeccion.slice(0,pageSize);
+                  }
+
+                    return of(new HttpResponse({ status: 200, body: lista}));
                 // } else {
                 //     // return 401 not authorised if token is null or invalid
                 //     return throwError({ error: { message: 'Unauthorised' } });
