@@ -10,8 +10,8 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListaAreaEntrenamientoComponent {
     @Input('areas') areas: any;
-    @Input('totalFiltrado') public totalFiltrado:number;
-    //title = 'app';
+    @Input("configPaginacion") public configPaginacion:any;
+
 
     constructor(
         private _router: Router,
@@ -22,7 +22,6 @@ export class ListaAreaEntrenamientoComponent {
     }
 
     verAreaEntrenamiento(id) {
-      console.log(id);
-        this._router.navigate(['area-entrenamiento', 'vista', id]);
+        this._router.navigate(['inicio','area-entrenamiento', 'vista', id]);
     }
 }

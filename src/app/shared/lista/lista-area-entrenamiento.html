@@ -1,8 +1,9 @@
 <div class="d-flex justify-content-between mt-2 border-top">
     <div class="d-flex align-items-center p-2 font-weight-bold">
-      <!-- <span *ngIf="configPaginacion.totalRegistros > 0">Destinatarios: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
-      <span *ngIf="configPaginacion.totalRegistros == 0">Destinatarios: {{configPaginacion.cantRegistros}}</span> -->
-    </div>
+        <span *ngIf="configPaginacion.totalRegistros > 0">Áreas de entrenamiento/s: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+        <span *ngIf="configPaginacion.totalRegistros == 0">Áreas de entrenamiento/s: {{configPaginacion.cantRegistros}}</span>
+      </div>
+</div>
 <div class="col-md-12">
     <table class="table table-hover">
         <thead>
@@ -17,12 +18,12 @@
                 <th scope="col">Acción</th>
             </tr>
         </thead>
-        <tbody *ngIf="(totalFiltrado == 0)">
+        <tbody *ngIf="(areas.length == 0)">
             <tr colspan="8" rowspan="1">
                 <td class="text-center" colspan="9" rowspan="1">No se han encontrado resultados que mostrar.</td>
             </tr>
         </tbody>
-        <tbody *ngIf="(totalFiltrado > 0)">
+        <tbody *ngIf="(areas.length > 0)">
             <tr *ngFor="let area of areas">
                 <th>{{area.fecha_inicial | date:'dd/MM/yyyy' }}</th>
                 <td>{{area.fecha_final | date:'dd/MM/yyyy'}}</td>

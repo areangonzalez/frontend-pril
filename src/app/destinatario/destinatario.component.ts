@@ -9,7 +9,6 @@ import { DestinatarioService, MensajesService } from '../core/services';
 @Injectable()
 export class DestinatarioComponent implements OnInit {
     public destinatariosLista: any[] = [];
-    public totalFiltrado: number = 0;
     public configPaginacion:any = { "colleccionSize": 0, "pageSize": 20, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
     public filtradoBusqueda:any = {}; // variable que mantiene el filtro de busqueda
 
@@ -78,10 +77,8 @@ export class DestinatarioComponent implements OnInit {
      */
     buscar(params:any, page:number) {
       Object.assign(params, {page: page});
-      //this.filtradoBusqueda = params;
       this._destinatarioService.buscar(params).subscribe(
         respuesta => {
-          console.log(respuesta);
           this.configDestinatario(respuesta);
       }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
     }

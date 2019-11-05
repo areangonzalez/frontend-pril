@@ -520,7 +520,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          * ************************************************************************ */
             // lista de ambientes de trabajos
             if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'GET') {
-              
+
               // datos paginacion
               let page: number = parseInt(request.params.get("page"));
               let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
@@ -535,7 +535,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 estado: true,
                 resultado:encontrados,
               };
-              
+
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   let totalF = ambienteLista.length;
@@ -970,8 +970,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                 // parametros de busquedas
                 let global_param = (request.params.get("global_param")) ? request.params.get("global_param") : '';
-                let estado = (request.params.get("estado")) ? request.params.get("estado") : '';
-                // datos paginacion
+                let estadoid = (request.params.get("estadoid")) ? request.params.get("estadoid") : '';
+                let planid = (request.params.get("planid")) ? request.params.get("planid") : '';
+                  // datos paginacion
                 let page: number = parseInt(request.params.get("page"));
                 let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
 
@@ -1045,12 +1046,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         }
                       }
                     });
-                    if (estado != '') {
+                    // busco por estadoid
+                    if (estadoid != '') {
                       if (encontrados.length > 0) {
                         encontrados = encontrados.filter(area => {
                           let existe = false;
                           for (let i = 0; i < area.length; i++) {
-                            existe = estado === area.estado;
+                            existe = estadoid === area[i].estadoid;
                           }
                           if (existe) { return area; }
                         });
@@ -1058,8 +1060,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         encontrados = areasLista.filter(area => {
                           let existe = false;
                           for (let i = 0; i < area.length; i++) {
-                            existe = estado === area.estado;
+                            existe = estadoid === area[i].estadoid;
                           }
+                          if (existe) { return area; }
+                        });
+                      }
+                    }
+                    // busco por plan id
+                    if (planid != '') {
+                      if (encontrados.length > 0) {
+                        encontrados = encontrados.filter(area => {
+                          let existe = false;
+                            existe = parseInt(planid) === parseInt(area.planid);
+                          if (existe) { return area; }
+                        });
+                      }else{
+                        encontrados = areasLista.filter(area => {
+                          let existe = false;
+                            existe = parseInt(planid) === parseInt(area.planid);
                           if (existe) { return area; }
                         });
                       }

@@ -23,6 +23,7 @@ import { UtilService } from 'src/app/core/utils';
 })
 export class BusquedaAreaEntrenamientoComponent implements OnInit {
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
+  @Output("limpiar") public limpiar = new EventEmitter();
   public state: string = 'small';
   public busquedaForm: FormGroup;
   public planLista: any = [];
@@ -107,6 +108,26 @@ export class BusquedaAreaEntrenamientoComponent implements OnInit {
       let marcar: boolean = false;
       marcar = (valor != null && valor != '') ? true : false;
       return marcar;
+    }
+    /**
+     * Limpiar los campos de busqueda
+     */
+    limpiarCampos() {
+      let busqueda: any = this.busquedaForm.value;
+      for (const key in busqueda) {
+        if (key == 'fechaDesde') {
+          busqueda[key] = null;
+        }else if (key == 'fechaHasta') {
+          busqueda[key] = null;
+        }else {
+          busqueda[key] = '';
+        }
+      }
+      this.global_param = '';
+      this.busquedaForm.patchValue(busqueda);
+      this.btnSeleccion = false;
+      this.state = 'small';
+      this.limpiar.emit(true);
     }
 
 }
