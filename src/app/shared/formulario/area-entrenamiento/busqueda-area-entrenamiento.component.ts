@@ -28,13 +28,13 @@ export class BusquedaAreaEntrenamientoComponent implements OnInit {
   public planLista: any = [];
   public estadoLista: any = [{ id:"finalizado", nombre: "Finalizado" }, { id: "vigente", nombre: "Vigente" }];
   public btnSeleccion: boolean = false;
+  public global_param: string = '';
 
 
     constructor(
       private _router: Router, private _fb: FormBuilder, private _route: ActivatedRoute, private _utilService: UtilService
     ) {
       this.busquedaForm = _fb.group({
-        global_param: '',
         estadoid: '',
         planid: '',
         fechaInicialDesde: '',
@@ -60,6 +60,11 @@ export class BusquedaAreaEntrenamientoComponent implements OnInit {
       let busquedaAvanzada = this.busquedaForm.value;
       let apiBusqueda:any = {};
       let esTrue: boolean = false;
+
+      // parametro del input buscar, no esta en conjunto al formulario
+      if (this.global_param !== ''){
+        Object.assign(apiBusqueda, {'global_param': this.global_param});
+      }
       for (const clave in busquedaAvanzada) {
         if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
           if (clave != 'fechaInicialDesde' && clave != 'fechaInicialHasta'){
