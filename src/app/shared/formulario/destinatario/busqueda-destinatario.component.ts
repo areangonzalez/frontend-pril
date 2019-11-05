@@ -109,7 +109,7 @@ export class BusquedaDestinatarioComponent implements OnInit {
       this.limpiar.emit(true);
     }
     /**
-     *
+     * Marca los campos que han sido utilizados en búsqueda
      * @param valor [any] contiene el valor de la variable
      * @return [boolean] devuelve el valor a marcar en booleano
      */
