@@ -74,7 +74,7 @@ export class AmbienteTrabajoComponent implements OnInit {
     }
 
     /**
-     * Configurar busqueda avanzada para mostrar listado
+     * Se configura busqueda avanzada para mostrar listado
      * @param params [object] parametros que se filtraran en la busqueda
      * @param page [number] Es el numero de pagina menos 1
      */

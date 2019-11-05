@@ -1,49 +1,44 @@
 <div class="col-md-12">
-    <form [formGroup]="busquedaForm">
-        <div class="row">
-            <div class="col-md-3">
-                <select class="form-control" id="tipo_ambiente_trabajo" formControlName="tipo_ambiente_trabajoid">
-                    <option value="">Seleccione tipo ambiente de trabajo</option>
-                    <option *ngFor="let tipo of tipo_ambiente_trabajo_lista" value="{{tipo.id}}">{{tipo.nombre}}</option>
-                </select>             
-            </div>
-            <div class="col-md-9">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar por nombre de ambiente de trabajo">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">
-                            <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
-                        </button>
-                        <a class="btn btn-outline-success" [routerLink]="['agregar']" routerLinkActive="router-link-active" >
-                            <span class="oi oi-plus" title="Agregar" aria-hidden="true"></span>
-                        </a>
-                    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <select class="form-control" id="tipo_ambiente_trabajo" [(ngModel)]="tipo_ambiente_trabajoid" [ngClass]="{'campo-seleccionado': marcarCampo(tipo_ambiente_trabajoid)}">
+                <option value="">Seleccione tipo ambiente de trabajo</option>
+                <option *ngFor="let tipo of tipo_ambiente_trabajo_lista" value="{{tipo.id}}">{{tipo.nombre}}</option>
+            </select>             
+        </div>
+        <div class="col-md-9">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Buscar por nombre de ambiente de trabajo" [(ngModel)]="global_param" [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
+                    </button>
+                    <button class="btn btn-outline-danger" type="button" (click)="limpiarCampos()">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                    <a class="btn btn-outline-success" [routerLink]="['agregar']" routerLinkActive="router-link-active" >
+                        <span class="oi oi-plus" title="Agregar" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
+    <form [formGroup]="busquedaForm">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 inner">
                 <p>
-                    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
-                        aria-controls="collapseExample">
+                    <button type="button" class="btn btn-outline-primary" (click)="abrirCerrarBusquedaAvanzada()" [ngClass]="{'btn-outline-success': btnSeleccion, 'btn-outline-primary': !btnSeleccion}">
                         Busqueda avanzada
                     </button>
                 </p>
-                <div id="collapseExample" [ngbCollapse]="isCollapsed">
+                <div [@abrirCerrar]="state" id="busqueda_avanzada">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <select class="form-control">
-                                        <option>Seleccionar Estado</option>
-                                    </select>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="dd/mm/yyyy (Desde)" ngbDatepicker #d="ngbDatepicker">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Desde)" ngbDatepicker #d="ngbDatepicker" [container]="'body'" formControlName="fechaDesde" (ngModelChange)="obtenerFechaDesde($event)" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('fechaDesde').value)}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
                                                     <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
@@ -55,7 +50,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" ngbDatepicker #d2="ngbDatepicker">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" ngbDatepicker #d2="ngbDatepicker" [container]="'body'" formControlName="fechaHasta" (change)="obtenerFechaHasta($event.target.value)" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('fechaHasta').value)}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-info" (click)="d2.toggle()" type="button">
                                                     <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
