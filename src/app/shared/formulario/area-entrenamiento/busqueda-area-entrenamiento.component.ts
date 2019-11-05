@@ -24,18 +24,19 @@ import { UtilService } from 'src/app/core/utils';
 export class BusquedaAreaEntrenamientoComponent implements OnInit {
   @Output("obtenerBusqueda") public obtenerBusqueda = new EventEmitter();
   public state: string = 'small';
-  public buscarForm: FormGroup;
-  public planLista: any[] = [];
-  public estadoLista: any[] = [{ id:"finalizado", nombre: "Finalizado" }, { id: "vigente", nombre: "Vigente" }];
+  public busquedaForm: FormGroup;
+  public planLista: any = [];
+  public estadoLista: any = [{ id:"finalizado", nombre: "Finalizado" }, { id: "vigente", nombre: "Vigente" }];
+  public btnSeleccion: boolean = false;
 
 
     constructor(
       private _router: Router, private _fb: FormBuilder, private _route: ActivatedRoute, private _utilService: UtilService
     ) {
-      this.buscarForm = _fb.group({
+      this.busquedaForm = _fb.group({
         global_param: '',
-        estado: '',
-        plan: '',
+        estadoid: '',
+        planid: '',
         fechaInicialDesde: '',
         fecha_inicial_desde: '',
         fechaInicialHasta: '',
@@ -55,8 +56,22 @@ export class BusquedaAreaEntrenamientoComponent implements OnInit {
     /**
      * Arma el array de parametros a buscar
      */
-    buscar() {
-      this.obtenerBusqueda.emit(this.buscarForm.value);
+    realizarBusqueda() {
+      let busquedaAvanzada = this.busquedaForm.value;
+      let apiBusqueda:any = {};
+      let esTrue: boolean = false;
+      for (const clave in busquedaAvanzada) {
+        if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
+          if (clave != 'fechaInicialDesde' && clave != 'fechaInicialHasta'){
+            Object.assign(apiBusqueda, {[clave]: busquedaAvanzada[clave]});
+            esTrue = true;
+          }
+        }
+      }
+
+      this.btnSeleccion = esTrue;
+      this.state = (esTrue) ? 'large' : 'small';
+      this.obtenerBusqueda.emit(apiBusqueda);
     }
     /**
      * abre con animación la busqueda avanzada
@@ -69,14 +84,24 @@ export class BusquedaAreaEntrenamientoComponent implements OnInit {
      * @param fechaDesde [objeto] obtengo el objeto del ngbDate
      */
     obtenerFechaDesde(fechaDesde: any) {
-      this.buscarForm.get('fecha_desde').patchValue(this._utilService.formatObjetoAFecha(fechaDesde));
+      this.busquedaForm.get('fecha_inicial_desde').patchValue(this._utilService.formatObjetoAFecha(fechaDesde));
     }
     /**
      * Convierte la fecha de objeto a string
      * @param fechaHasta [objeto] obtengo el objeto del ngbDate
      */
     obtenerFechaHasta(fechaHasta: object) {
-      this.buscarForm.get('fecha_hasta').setValue(this._utilService.formatObjetoAFecha(fechaHasta));
+      this.busquedaForm.get('fecha_inicial_hasta').setValue(this._utilService.formatObjetoAFecha(fechaHasta));
+    }
+    /**
+     * Marca los campos que han sido utilizados en búsqueda
+     * @param valor [any] contiene el valor de la variable
+     * @return [boolean] devuelve el valor a marcar en booleano
+     */
+    marcarCampo(valor:any) {
+      let marcar: boolean = false;
+      marcar = (valor != null && valor != '') ? true : false;
+      return marcar;
     }
 
 }

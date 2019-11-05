@@ -1,11 +1,11 @@
 <div class="col-md-12">
-    <form [formGroup]="buscarForm">
+    <form [formGroup]="busquedaForm">
         <div class="row">
             <div class="col-md-12">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" formControlName="global_param">
+                    <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" formControlName="global_param" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('global_param').value)}">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" (click)="buscar()">
+                        <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda()">
                             <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
                         </button>
                         <button class="btn btn-outline-success" type="button" (click)="agregarArea()">
@@ -18,8 +18,8 @@
         <div class="row">
             <div class="col-md-12 inner">
                 <p>
-                    <button type="button" class="btn btn-outline-primary" (click)="abrirCerrarBusquedaAvanzada()">
-                        Busqueda avanzada
+                    <button type="button" class="btn" (click)="abrirCerrarBusquedaAvanzada()" [ngClass]="{'btn-outline-success': btnSeleccion, 'btn-outline-primary': !btnSeleccion}">
+                        B&uacute;squeda avanzada
                     </button>
                 </p>
                 <div [@abrirCerrar]="state" id="busqueda_avanzada_area_entrenamiento" >
@@ -27,13 +27,13 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <select class="form-control">
+                                    <select id="estado" class="form-control" formControlName="estadoid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('estadoid').value)}">
                                         <option value="">Seleccionar estado</option>
                                         <option *ngFor="let estado of estadoLista" value="{{estado.id}}" >{{estado.nombre}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-control">
+                                    <select id="plan" formControlName="planid" class="form-control" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('planid').value)}">
                                         <option value="">Seleccionar plan</option>
                                         <option *ngFor="let plan of planLista" value="{{plan.id}}" >{{plan.nombre}}</option>
                                     </select>
@@ -43,7 +43,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="dd/mm/yyyy (Desde)" ngbDatepicker #d="ngbDatepicker">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Desde)" ngbDatepicker #d="ngbDatepicker"  formControlName="fechaInicialDesde" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('fechaInicialDesde').value)}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
                                                     <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
@@ -55,7 +55,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" ngbDatepicker #d2="ngbDatepicker">
+                                            <input class="form-control" placeholder="dd/mm/yyyy (Hasta)" ngbDatepicker #d2="ngbDatepicker" formControlName="fechaInicialHasta"[ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('fechaInicialHasta').value)}">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-info" (click)="d2.toggle()" type="button">
                                                     <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
