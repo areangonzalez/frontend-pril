@@ -521,6 +521,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // lista de ambientes de trabajos
             if (request.url.endsWith('/apimock/ambiente-trabajos') && request.method === 'GET') {
 
+              // parametros de busquedas
+              let global_param = (request.params.get("global_param")) ? request.params.get("global_param") : '';
+              let tipo_ambiente_trabajoid = (request.params.get("tipo_ambiente_trabajoid")) ? request.params.get("tipo_ambiente_trabajoid") : '';
+                  
               // datos paginacion
               let page: number = parseInt(request.params.get("page"));
               let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
@@ -536,13 +540,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 resultado:encontrados,
               };
 
+              let search = [''];
+              if (global_param != ''){
+                search = global_param.split(" ");
+              }
+
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   let totalF = ambienteLista.length;
                   let ambienteColeccion : any[]=[];
 
                   for (let i = 0; i < ambienteLista.length; i++) {
-                    // Selecciono la persona del destinatario
+                    // Selecciono la persona del ambiente de trabajo
                     let matchedPersona = personas.filter(persona => { return persona.id === ambienteLista[i].personaid; });
                     let personaElegido = matchedPersona.length ? matchedPersona[0] : [];
 
@@ -583,14 +592,56 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     })
                   }
 
-                  lista.total_filtrado = ambienteColeccion.length;
+                  // realizo busqueda por los parametros enviados
+                  encontrados = ambienteColeccion.filter(
+                    ambiente => {
+                      for (let i = 0; i < search.length; i++) {
+                        let nombre = ambiente.nombre.split(" ");
+                        for (let j = 0; j < nombre.length; j++) {
+                            if ( nombre[j].toLowerCase().indexOf(search[i].toLowerCase()) > -1  ) {
+                              return ambiente;
+                            }
+                        }
+                        // if (destinatario.persona.nro_documento.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ){
+                        //   return destinatario;
+                        // }
+                        // if ( destinatario.persona.apellido.toLowerCase().indexOf(search[i].toLowerCase()) > -1 ) {
+                        //   return destinatario;
+                        // }
+                      }
+                    });
+
+                  if (tipo_ambiente_trabajoid != '') {
+                    if (encontrados.length > 0) {
+                      encontrados = encontrados.filter(ambiente => {
+                        let existe = false;                        
+                        existe = parseInt(tipo_ambiente_trabajoid) === parseInt(ambiente.tipo_ambiente_trabajoid);                      
+                        if (existe) { return ambiente; }
+                      });
+                    }else{
+                      encontrados = ambienteColeccion.filter(ambiente => {
+                        let existe = false;
+                        existe = parseInt(tipo_ambiente_trabajoid) === parseInt(ambiente.tipo_ambiente_trabajoid);                           
+                        if (existe) { return ambiente; }
+                      });
+                    }
+                  }
+
+                  let totalFiltrado:number = encontrados.length;
+                  let total:number = totalFiltrado/pageSize;
+                  let numEntero = Math.floor(total);
+                  let totalPagina:number = (total > numEntero) ? numEntero + 1 : total;
+
+                  lista.total_filtrado = encontrados.length;
+                  lista.pages = totalPagina;
+
                   if (page > 0) {
                     page = page;
                     let pageStart = page * pageSize;
                     let pageEnd = pageStart + pageSize;
-                    lista.resultado = ambienteColeccion.slice(pageStart, pageEnd);
+                    lista.resultado = encontrados.slice(pageStart, pageEnd);
                   }else{
-                    lista.resultado = ambienteColeccion.slice(0,pageSize);
+                    lista.resultado = encontrados.slice(0,pageSize);
                   }
 
                     return of(new HttpResponse({ status: 200, body: lista}));
@@ -1006,7 +1057,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let matchedAmbiente = ambienteLista.filter(ambiente => { return ambiente.id === parseInt(ofertaElegida['ambiente_trabajoid']); });
                     let ambienteElegido = matchedAmbiente.length ? matchedAmbiente[0] : [];
                     // selecciono el destinatario que coincida con el area
-                    let matchedDestinatario = destinatarioLista.filter(destinatario => { return destinatario.id === areasLista[i]['destinatarioid']; });
+                    let matchedDestinatario = ambienteColeccion.filter(destinatario => { return destinatario.id === areasLista[i]['destinatarioid']; });
                     let destinatarioElegido = matchedDestinatario.length ? matchedDestinatario[0] : [];
                     // Selecciono la persona del destinatario
                     let matchedPersona = personas.filter(persona => { return persona.id === destinatarioElegido.personaid; });

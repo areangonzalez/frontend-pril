@@ -115,12 +115,14 @@ export class BusquedaAmbienteTrabajoComponent implements OnInit{
         let busquedaAvanzada = this.busquedaForm.value;
         let apiBusqueda:any = {};
         let esTrue: boolean = false;
+
+        //Se agrupan los parametros de búsqueda a apiBusqueda
         if (this.global_param != '') {
             Object.assign(apiBusqueda, {'global_param': this.global_param});
         }
         if (this.tipo_ambiente_trabajoid != '') {
             Object.assign(apiBusqueda, {'tipo_ambiente_trabajoid': this.tipo_ambiente_trabajoid});            
-        }
+        }        
         for (const clave in busquedaAvanzada) {
           if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
             if (clave != 'fechaDesde' && clave != 'fechaHasta'){
@@ -129,6 +131,7 @@ export class BusquedaAmbienteTrabajoComponent implements OnInit{
             }
           }
         }
+        
         this.btnSeleccion = esTrue;
         this.state = (esTrue) ? 'large' : 'small';
         this.obtenerBusqueda.emit(apiBusqueda);

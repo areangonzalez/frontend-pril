@@ -8,15 +8,15 @@
         </div>
         <div class="col-md-9">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar por nombre de ambiente de trabajo" [(ngModel)]="global_param" [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}">
+                <input type="text" class="form-control" placeholder="Buscar por nombre de ambiente de trabajo" [(ngModel)]="global_param" [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}" (keyup.enter)="realizarBusqueda()">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">
+                    <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda()" ngbTooltip='Buscar'>
                         <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
                     </button>
-                    <button class="btn btn-outline-danger" type="button" (click)="limpiarCampos()">
+                    <button class="btn btn-outline-danger" type="button" (click)="limpiarCampos()" ngbTooltip='Limpiar filtros'>
                         <i class="far fa-trash-alt"></i>
                     </button>
-                    <a class="btn btn-outline-success" [routerLink]="['agregar']" routerLinkActive="router-link-active" >
+                    <a class="btn btn-outline-success" [routerLink]="['agregar']" routerLinkActive="router-link-active" ngbTooltip='Agregar Ambiente de trabajo'>
                         <span class="oi oi-plus" title="Agregar" aria-hidden="true"></span>
                     </a>
                 </div>
