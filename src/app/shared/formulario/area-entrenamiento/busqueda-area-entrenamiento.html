@@ -30,7 +30,7 @@
                     <div class="card-body pb-1">
                         <div class="row">
                             <div class="col-md-6">
-                                <select id="estado" class="form-control" formControlName="estadoid" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('estadoid').value)}">
+                                <select id="estado" class="form-control" formControlName="estado" [ngClass]="{'campo-seleccionado': marcarCampo(busquedaForm.get('estado').value)}">
                                     <option value="">Seleccionar estado</option>
                                     <option *ngFor="let estado of estadoLista" value="{{estado.id}}" >{{estado.nombre}}</option>
                                 </select>
