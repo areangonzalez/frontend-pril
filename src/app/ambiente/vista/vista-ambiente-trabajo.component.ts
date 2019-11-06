@@ -23,7 +23,7 @@ export class VistaAmbienteTrabajoComponent {
      * @var ammbiente modelo para instanciar el ambiente
      */
     public listaOfertas:any[]= [];
-    private id:any;
+    public id:any;
     public idAmbiente:number;
     public lugar = new Lugar(0,0,'','','','','','','');
     public persona = new Representante(0,'','','','','','');
