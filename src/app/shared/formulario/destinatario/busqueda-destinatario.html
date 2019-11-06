@@ -2,15 +2,15 @@
       <div class="row">
           <div class="col-md-12">
               <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Buscar por nombre, apellido o número documento" [(ngModel)]="global_param" [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}">
+                  <input type="text" class="form-control" placeholder="Buscar por nombre, apellido o número documento" [(ngModel)]="global_param" (keyup.enter)="realizarBusqueda()" [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}">
                   <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda()" ngbTooltip>
-                          <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
+                      <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda()" ngbTooltip="Buscar" placement="top">
+                          <span class="oi oi-magnifying-glass"></span>
                       </button>
-                      <button class="btn btn-outline-danger" type="button" (click)="limpiarCampos()">
+                      <button class="btn btn-outline-danger" type="button" (click)="limpiarCampos()" ngbTooltip="Limpiar campos" placement="top">
                           <i class="far fa-trash-alt"></i>
                       </button>
-                      <a class="btn btn-outline-success" [routerLink]="['agregar']" ><span class="oi oi-plus" title="Agregar" aria-hidden="true"></span></a>
+                      <a class="btn btn-outline-success" [routerLink]="['agregar']" ngbTooltip="Agregar un destinatario" placement="top"><span class="oi oi-plus"></span></a>
                   </div>
               </div>
           </div>

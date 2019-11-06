@@ -2,15 +2,15 @@
     <div class="row">
         <div class="col-md-12">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" [(ngModel)]="global_param"  [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}">
+                <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" [(ngModel)]="global_param" (keyup.enter)="realizarBusqueda()"  [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}" placement="top">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda()">
+                    <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda()" ngbTooltip="Buscar">
                         <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
                     </button>
-                    <button class="btn btn-outline-danger" type="button" (click)="limpiarCampos()">
+                    <button class="btn btn-outline-danger" type="button" (click)="limpiarCampos()" ngbTooltip="Limpiar campos" placement="top">
                         <i class="far fa-trash-alt"></i>
                     </button>
-                    <button class="btn btn-outline-success" type="button" (click)="agregarArea()">
+                    <button class="btn btn-outline-success" type="button" (click)="agregarArea()" ngbTooltip="Agregar un área de entrenamiento" placement="top">
                         <span class="oi oi-plus" title="Agregar" aria-hidden="true"></span>
                     </button>
                 </div>
