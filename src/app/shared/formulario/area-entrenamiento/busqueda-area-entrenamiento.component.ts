@@ -36,7 +36,7 @@ export class BusquedaAreaEntrenamientoComponent implements OnInit {
       private _router: Router, private _fb: FormBuilder, private _route: ActivatedRoute, private _utilService: UtilService
     ) {
       this.busquedaForm = _fb.group({
-        estadoid: '',
+        estado: '',
         planid: '',
         fechaInicialDesde: '',
         fecha_inicial_desde: '',

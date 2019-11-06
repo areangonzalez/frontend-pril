@@ -30,10 +30,10 @@ export class BusquedaDestinatarioComponent implements OnInit {
     public profesionLista: any = [];
     public oficioLista: any = [];
     public btnSeleccion: boolean = false;
+    public global_param: string = '';
 
     constructor(private _route: ActivatedRoute, private _fb: FormBuilder, private _utilService: UtilService){
       this.busquedaForm = _fb.group({
-        global_param: '',
         profesionid: '',
         oficioid: '',
         nivel_educativoid: '',
@@ -77,6 +77,10 @@ export class BusquedaDestinatarioComponent implements OnInit {
       let busquedaAvanzada = this.busquedaForm.value;
       let apiBusqueda:any = {};
       let esTrue: boolean = false;
+
+      if (this.global_param !== '') {
+        Object.assign(apiBusqueda, {"global_param": this.global_param});
+      }
       for (const clave in busquedaAvanzada) {
         if(busquedaAvanzada[clave] !== '' && busquedaAvanzada[clave] !== null && (busquedaAvanzada[clave])){
           if (clave != 'fechaDesde' && clave != 'fechaHasta'){
@@ -103,6 +107,7 @@ export class BusquedaDestinatarioComponent implements OnInit {
           busqueda[key] = '';
         }
       }
+      this.global_param = '';
       this.busquedaForm.patchValue(busqueda);
       this.btnSeleccion = false;
       this.state = 'small';
