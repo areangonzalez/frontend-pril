@@ -524,7 +524,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // parametros de busquedas
               let global_param = (request.params.get("global_param")) ? request.params.get("global_param") : '';
               let tipo_ambiente_trabajoid = (request.params.get("tipo_ambiente_trabajoid")) ? request.params.get("tipo_ambiente_trabajoid") : '';
-                  
+
               // datos paginacion
               let page: number = parseInt(request.params.get("page"));
               let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
@@ -614,14 +614,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   if (tipo_ambiente_trabajoid != '') {
                     if (encontrados.length > 0) {
                       encontrados = encontrados.filter(ambiente => {
-                        let existe = false;                        
-                        existe = parseInt(tipo_ambiente_trabajoid) === parseInt(ambiente.tipo_ambiente_trabajoid);                      
+                        let existe = false;
+                        existe = parseInt(tipo_ambiente_trabajoid) === parseInt(ambiente.tipo_ambiente_trabajoid);
                         if (existe) { return ambiente; }
                       });
                     }else{
                       encontrados = ambienteColeccion.filter(ambiente => {
                         let existe = false;
-                        existe = parseInt(tipo_ambiente_trabajoid) === parseInt(ambiente.tipo_ambiente_trabajoid);                           
+                        existe = parseInt(tipo_ambiente_trabajoid) === parseInt(ambiente.tipo_ambiente_trabajoid);
                         if (existe) { return ambiente; }
                       });
                     }
@@ -1057,7 +1057,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     let matchedAmbiente = ambienteLista.filter(ambiente => { return ambiente.id === parseInt(ofertaElegida['ambiente_trabajoid']); });
                     let ambienteElegido = matchedAmbiente.length ? matchedAmbiente[0] : [];
                     // selecciono el destinatario que coincida con el area
-                    let matchedDestinatario = ambienteColeccion.filter(destinatario => { return destinatario.id === areasLista[i]['destinatarioid']; });
+                    let matchedDestinatario = destinatarioLista.filter(destinatario => { return destinatario.id === areasLista[i]['destinatarioid']; });
                     let destinatarioElegido = matchedDestinatario.length ? matchedDestinatario[0] : [];
                     // Selecciono la persona del destinatario
                     let matchedPersona = personas.filter(persona => { return persona.id === destinatarioElegido.personaid; });
