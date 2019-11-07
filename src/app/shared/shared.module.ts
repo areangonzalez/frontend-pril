@@ -30,6 +30,7 @@ import {
   ModalOfertaComponent, ModalContentOferta,
   ModalVistaOfertaComponent, ModalContentOfertaVista,
 } from './modal'
+import { PaginacionComponent } from "./paginacion";
 
 @NgModule({
   imports: [
@@ -59,6 +60,7 @@ import {
     ModalOfertaComponent, ModalContentOferta,
     ModalVistaOfertaComponent, ModalContentOfertaVista,
     VistaOfertaComponent,
+    PaginacionComponent
   ],
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule,
@@ -79,7 +81,8 @@ import {
     ModalEstudioComponent, ModalContentEstudio,
     ModalOfertaComponent, ModalContentOferta,
     ModalVistaOfertaComponent, ModalContentOfertaVista,
-    VistaOfertaComponent
+    VistaOfertaComponent,
+    PaginacionComponent
   ],
   entryComponents:[
     ModalConfirmacionComponent, ModalContentConfirmacion,
