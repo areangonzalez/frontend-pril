@@ -4,13 +4,13 @@ import { AmbienteTrabajoComponent } from './ambiente-trabajo.component';
 import { VistaAmbienteTrabajoComponent } from './vista/vista-ambiente-trabajo.component';
 import { FormAmbienteTrabajoComponent } from './form/form-ambiente-trabajo.component';
 import { OfertaComponent } from './oferta/oferta.component';
-import { AmbienteTrabajoService, TipoAmbienteTrabajoService, OfertaService } from '../core/services';
+import { AmbienteTrabajoService, TipoAmbienteTrabajoService, OfertaService, LocalidadService } from '../core/services';
 
 const routes: Routes = [
     {
       path: '', component: AmbienteTrabajoComponent,
       data: { loading: true, title: 'Lista ambiente de Trabajo', breadcrumb: 'Lista'},
-      resolve: { ambientes: AmbienteTrabajoService, tipoAmbienteTrabajoLista: TipoAmbienteTrabajoService}
+      resolve: { ambientes: AmbienteTrabajoService, tipoAmbienteTrabajoLista: TipoAmbienteTrabajoService, localidadLista: LocalidadService}
     },
     {
       path: 'vista/:ambienteid', component: VistaAmbienteTrabajoComponent,
