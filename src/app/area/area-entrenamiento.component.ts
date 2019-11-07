@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AreaEntrenamientoService } from 'src/app/core/services/area-entrenamiento.service';
 import { MensajesService } from 'src/app/core/services/mensajes.service';
 

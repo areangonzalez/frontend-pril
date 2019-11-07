@@ -36,7 +36,7 @@ export class DestinatarioComponent implements OnInit {
     public configDestinatario(datos:any) {
       this.configPaginacion.colleccionSize = datos.total_filtrado;
       // tamaño pagina
-      //this.configPaginacion.pageSize = datos.pagesize;
+      this.configPaginacion.pageSize = datos.pagesize;
       this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, datos.total_filtrado, this.configPaginacion.pageSize);
       this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, datos.total_filtrado, this.configPaginacion.pageSize);
       // total de registros

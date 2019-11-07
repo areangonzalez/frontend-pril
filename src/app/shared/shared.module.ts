@@ -30,7 +30,6 @@ import {
   ModalOfertaComponent, ModalContentOferta,
   ModalVistaOfertaComponent, ModalContentOfertaVista,
 } from './modal'
-import { PaginacionComponent } from "./paginacion";
 
 @NgModule({
   imports: [
@@ -59,8 +58,7 @@ import { PaginacionComponent } from "./paginacion";
     ModalEstudioComponent, ModalContentEstudio,
     ModalOfertaComponent, ModalContentOferta,
     ModalVistaOfertaComponent, ModalContentOfertaVista,
-    VistaOfertaComponent,
-    PaginacionComponent
+    VistaOfertaComponent
   ],
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule,
@@ -81,8 +79,7 @@ import { PaginacionComponent } from "./paginacion";
     ModalEstudioComponent, ModalContentEstudio,
     ModalOfertaComponent, ModalContentOferta,
     ModalVistaOfertaComponent, ModalContentOfertaVista,
-    VistaOfertaComponent,
-    PaginacionComponent
+    VistaOfertaComponent
   ],
   entryComponents:[
     ModalConfirmacionComponent, ModalContentConfirmacion,
