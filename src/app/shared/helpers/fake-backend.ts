@@ -1025,7 +1025,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let planid = (request.params.get("planid")) ? request.params.get("planid") : '';
                   // datos paginacion
                 let page: number = parseInt(request.params.get("page"));
-                let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
+                let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 1;
 
                 let search = [''];
                 if (global_param != ''){
@@ -1043,9 +1043,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   resultado:encontrados,
                 };
 
-
-                let totalF = areasLista.length;
-                let areaColeccion: any[] = [];
                 if (areasLista.length > 0) {
                   // recorro la lista de areas para armar el array de la coleccion
                   for (let i = 0; i < areasLista.length; i++) {

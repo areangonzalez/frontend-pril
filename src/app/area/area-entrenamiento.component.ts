@@ -30,8 +30,7 @@ export class AreaEntrenamientoComponent implements OnInit {
      * @param page [number] Es el numero de pagina menos 1
      */
     buscar(params:any, page:number) {
-      Object.assign(params, {page: 0});
-      console.log(params);
+      Object.assign(params, {page: page});
       this._areaEntrenamientoService.buscar(params).subscribe(
         busqueda => {
           this.config(busqueda);
@@ -48,16 +47,16 @@ export class AreaEntrenamientoComponent implements OnInit {
 
     /**
      * Se configura paginacion y listado de destinatario
-     * @param destinatarios [Object] objeto que contiene los valores de paginacion y listado de destinatario
+     * @param datos [Object] objeto que contiene los valores de paginacion y listado de destinatario
      */
-    public config(destinatarios:any) {
-      this.configPaginacion.colleccionSize = destinatarios.total_filtrado;
+    public config(datos:any) {
+      this.configPaginacion.colleccionSize = datos.total_filtrado;
       // tamaño pagina
-      //this.configPaginacion.pageSize = destinatarios.pagesize;
-      this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, destinatarios.total_filtrado, this.configPaginacion.pageSize);
-      this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, destinatarios.total_filtrado, this.configPaginacion.pageSize);
+      this.configPaginacion.pageSize = datos.pagesize;
+      this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, datos.total_filtrado, this.configPaginacion.pageSize);
+      this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, datos.total_filtrado, this.configPaginacion.pageSize);
       // total de registros
-      this.areas = destinatarios.resultado;
+      this.areas = datos.resultado;
     }
 
     /**
@@ -85,5 +84,13 @@ export class AreaEntrenamientoComponent implements OnInit {
         rangoFinal = (cantRegistrosXpag < total) ? cantRegistrosXpag : total;
       }
       return rangoFinal;
+    }
+
+    /**
+     * Solicito el cambio de pagina
+     * @param pagina [number] numero de pagina
+     */
+    cambiarPagina(pagina: any) {
+      this.buscar(this.filtradoBusqueda, (pagina - 1));
     }
 }

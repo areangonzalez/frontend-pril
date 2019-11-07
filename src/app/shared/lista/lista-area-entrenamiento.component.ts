@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,6 +11,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 export class ListaAreaEntrenamientoComponent {
     @Input('areas') areas: any;
     @Input("configPaginacion") public configPaginacion:any;
+    @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
 
 
     constructor(
@@ -24,4 +25,9 @@ export class ListaAreaEntrenamientoComponent {
     verAreaEntrenamiento(id) {
         this._router.navigate(['inicio','area-entrenamiento', 'vista', id]);
     }
+
+    cambioPagina(page:number){
+      this.cambioDePagina.emit(page);
+    }
+
 }

@@ -33,14 +33,14 @@ export class DestinatarioComponent implements OnInit {
      * Se configura paginacion y listado de destinatario
      * @param destinatarios [Object] objeto que contiene los valores de paginacion y listado de destinatario
      */
-    public configDestinatario(destinatarios:any) {
-      this.configPaginacion.colleccionSize = destinatarios.total_filtrado;
+    public configDestinatario(datos:any) {
+      this.configPaginacion.colleccionSize = datos.total_filtrado;
       // tamaño pagina
-      //this.configPaginacion.pageSize = destinatarios.pagesize;
-      this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, destinatarios.total_filtrado, this.configPaginacion.pageSize);
-      this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, destinatarios.total_filtrado, this.configPaginacion.pageSize);
+      //this.configPaginacion.pageSize = datos.pagesize;
+      this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, datos.total_filtrado, this.configPaginacion.pageSize);
+      this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, datos.total_filtrado, this.configPaginacion.pageSize);
       // total de registros
-      this.destinatariosLista = destinatarios.resultado;
+      this.destinatariosLista = datos.resultado;
     }
 
     /**
