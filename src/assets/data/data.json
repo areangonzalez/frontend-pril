@@ -3,7 +3,7 @@
   "generos": [{ "id": 1, "nombre": "Femenino" }, { "id": 2, "nombre": "Masculino" }],
   "estadoCivils": [{ "id": 1, "nombre": "Casado/a" }, { "id": 2, "nombre": "Soltero/a" }, { "id": 2, "nombre": "Viudo/a" }],
   "localidads": [
-    { "id": 1, "nombre": "Aguada de Guerra" }, { "id": 2, "nombre": "Bariloche" }, { "id": 3, "nombre": "Choele Choel" }, { "id": 4, "nombre": "Cinco Saltos" }, { "id": 5, "nombre": "Cipolletti" }, { "id": 6, "nombre": "Coronel Belisle" }, { "id": 7, "nombre": "General Roca" }, { "id": 8, "nombre": "Río colorado" }, { "id": 9, "nombre": "Viedma" }, { "id": 10, "nombre": "Villa Regina" }
+    { "id": 2636, "nombre": "Aguada de Guerra" }, { "id": 2539, "nombre": "Bariloche" }, { "id": 2599, "nombre": "Choele Choel" }, { "id": 2587, "nombre": "Cinco Saltos" }, { "id": 2586, "nombre": "Cipolletti" }, { "id": 2600, "nombre": "Coronel Belisle" }, { "id": 2576, "nombre": "General Roca" }, { "id": 2626, "nombre": "Río colorado" }, { "id": 2640, "nombre": "Viedma" }, { "id": 2577, "nombre": "Villa Regina" }
   ],
   "programas": [
     { "id": 1, "nombre": "Emprender", "lista_tipo_recurso": [{"id":2, "nombre": "Empleo / Formación laboral"}] },
@@ -7379,7 +7379,7 @@
             "nombre": "",
             "calle": "mata negra",
             "altura": "1233",
-            "localidadid": 1,
+            "localidadid": 2640,
             "latitud": "",
             "longitud": "",
             "barrio": "",
@@ -7388,7 +7388,7 @@
             "escalera": "",
             "entre_calle_1": "",
             "entre_calle_2": "",
-            "localidad": "Capital Federal"
+            "localidad": "Viedma"
         }
     },
     {
@@ -7447,7 +7447,7 @@
             "nombre": "",
             "calle": "calle3",
             "altura": "",
-            "localidadid": 2540,
+            "localidadid": 2640,
             "latitud": "-1234121",
             "longitud": "21314126",
             "barrio": "barrio3",
@@ -7456,7 +7456,7 @@
             "escalera": "escalera3",
             "entre_calle_1": "Entrecalle3",
             "entre_calle_2": "Entrecalle-101",
-            "localidad": "Mallin Ahogado"
+            "localidad": "Viedma"
         }
     },
     {
@@ -7480,7 +7480,7 @@
             "nombre": "",
             "calle": "calle4",
             "altura": "",
-            "localidadid": 2541,
+            "localidadid": 2539,
             "latitud": "-1234120",
             "longitud": "21314127",
             "barrio": "barrio4",
@@ -7489,7 +7489,7 @@
             "escalera": "escalera4",
             "entre_calle_1": "Entrecalle4",
             "entre_calle_2": "Entrecalle-100",
-            "localidad": "Rio Villegas"
+            "localidad": "San Carlos De Bariloche"
         }
     },
     {
@@ -7514,7 +7514,7 @@
             "nombre": "",
             "calle": "calle5",
             "altura": "",
-            "localidadid": 2542,
+            "localidadid": 2576,
             "latitud": "-1234119",
             "longitud": "21314128",
             "barrio": "barrio5",
@@ -7523,7 +7523,7 @@
             "escalera": "escalera5",
             "entre_calle_1": "Entrecalle5",
             "entre_calle_2": "Entrecalle-99",
-            "localidad": "Villa Mascardi"
+            "localidad": "General Roca"
         }
         }
     ]
