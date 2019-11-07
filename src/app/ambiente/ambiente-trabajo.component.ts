@@ -10,7 +10,6 @@ import { AmbienteTrabajoService, MensajesService } from '../core/services';
 
 export class AmbienteTrabajoComponent implements OnInit {
     public ambientes:any;
-    public tipo_ambiente_trabajo_lista:any;
     public filtradoBusqueda:any = {}; // variable que mantiene el filtro de busqueda
     public configPaginacion:any = { "colleccionSize": 0, "pageSize": 20, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
 
@@ -38,11 +37,11 @@ export class AmbienteTrabajoComponent implements OnInit {
     public config(lista:any) {
         this.configPaginacion.colleccionSize = lista.total_filtrado;
         // tamaño pagina
-        //this.configPaginacion.pageSize = lista.pagesize;
+        this.configPaginacion.pageSize = lista.pagesize;
         this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, lista.total_filtrado, this.configPaginacion.pageSize);
         this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, lista.total_filtrado, this.configPaginacion.pageSize);
         // total de registros
-        this.ambientes = lista.resultado;
+        this.ambientes = lista.resultado;     
     }
 
     /**
@@ -74,7 +73,7 @@ export class AmbienteTrabajoComponent implements OnInit {
     }
 
     /**
-     * Se configura busqueda avanzada para mostrar listado
+     * Se configura el filtrado para mostrar listado
      * @param params [object] parametros que se filtraran en la busqueda
      * @param page [number] Es el numero de pagina menos 1
      */
@@ -83,7 +82,6 @@ export class AmbienteTrabajoComponent implements OnInit {
         //this.filtradoBusqueda = params;
         this._ambienteTrabajoService.buscar(params).subscribe(
           respuesta => {
-            console.log(respuesta);
             this.config(respuesta);
         }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
       }
@@ -94,6 +92,13 @@ export class AmbienteTrabajoComponent implements OnInit {
      */
     cambiarPagina(pagina: any) {
         this.buscar(this.filtradoBusqueda, (pagina - 1));
-        // console.log("nro pagina:", pagina);
     }
+
+    /**
+     * limpia los campos de filtro
+     * @param e [boolean] valor identificable para limpiar los campos y realizar la busqueda
+     */
+    limpiarCampos(e:boolean) {
+        this.buscar({}, 0);
+      }
 }

@@ -524,10 +524,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // parametros de busquedas
               let global_param = (request.params.get("global_param")) ? request.params.get("global_param") : '';
               let tipo_ambiente_trabajoid = (request.params.get("tipo_ambiente_trabajoid")) ? request.params.get("tipo_ambiente_trabajoid") : '';
-
+              let localidadid = (request.params.get("localidadid")) ? request.params.get("localidadid") : '';
+              
               // datos paginacion
               let page: number = parseInt(request.params.get("page"));
-              let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
+              let pageSize: number = 2;
 
               //preparo objeto de paginacion
               let totalPaginas = 0;
@@ -611,6 +612,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       }
                     });
 
+                  //Filtramos por tipo de ambiente de trabajo
                   if (tipo_ambiente_trabajoid != '') {
                     if (encontrados.length > 0) {
                       encontrados = encontrados.filter(ambiente => {
@@ -626,6 +628,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       });
                     }
                   }
+
+                  //filtramos por localidad
+                  if (localidadid != '') {
+                    if (encontrados.length > 0) {
+                      encontrados = encontrados.filter(ambiente => {
+                        let existe = false;
+                        existe = parseInt(localidadid) === parseInt(ambiente.lugar.localidadid);
+                        if (existe) { return ambiente; }
+                      });
+                    }else{
+                      encontrados = ambienteColeccion.filter(ambiente => {
+                        let existe = false;
+                        existe = parseInt(localidadid) === parseInt(ambiente.lugar.localidadid);
+                        if (existe) { return ambiente; }
+                      });
+                    }
+                  }
+
 
                   let totalFiltrado:number = encontrados.length;
                   let total:number = totalFiltrado/pageSize;
