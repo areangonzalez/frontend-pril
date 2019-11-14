@@ -235,7 +235,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   request.params.get("oficioid") : '';
                   // datos paginacion
                   let page: number = parseInt(request.params.get("page"));
-                  let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 20;
+                  let pageSize: number = (request.params.get("pagesize")) ? parseInt(request.params.get("pagesize")) : 5;
 
                   let search = [''];
                   if (global_param != ''){
@@ -525,10 +525,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               let global_param = (request.params.get("global_param")) ? request.params.get("global_param") : '';
               let tipo_ambiente_trabajoid = (request.params.get("tipo_ambiente_trabajoid")) ? request.params.get("tipo_ambiente_trabajoid") : '';
               let localidadid = (request.params.get("localidadid")) ? request.params.get("localidadid") : '';
-              
+
               // datos paginacion
               let page: number = parseInt(request.params.get("page"));
-              let pageSize: number = 2;
+              let pageSize: number = 5;
 
               //preparo objeto de paginacion
               let totalPaginas = 0;

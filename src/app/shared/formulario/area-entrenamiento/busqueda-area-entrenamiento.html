@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar" aria-label="buscador destinatario" [(ngModel)]="global_param" (keyup.enter)="realizarBusqueda()"  [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}" placement="top">
+                <input type="text" class="form-control" placeholder="Buscar por DNI, nombre y apellido de destinatario o nombre de ambiente de trabajo" aria-label="buscador destinatario" [(ngModel)]="global_param" (keyup.enter)="realizarBusqueda()"  [ngClass]="{'campo-seleccionado': marcarCampo(global_param)}" placement="top">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda()" ngbTooltip="Buscar">
                         <span class="oi oi-magnifying-glass" title="Dirección" aria-hidden="true"></span>
