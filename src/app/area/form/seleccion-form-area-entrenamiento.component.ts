@@ -2,20 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 // services
 import { OfertaService, DestinatarioService, MensajesService } from '../../core/services';
+import { ConfiguracionParaPaginarService } from 'src/app/core/utils';
 
 
 @Component({
     selector: 'area-entrenamiento-form-seleccion',
     templateUrl: './seleccion-form-area-entrenamiento.html',
-    styleUrls: ['./seleccion-form-area-entrenamiento.css']
+    styleUrls: ['./seleccion-form-area-entrenamiento.css'],
+    providers: [ConfiguracionParaPaginarService]
 })
 export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
-    page = 1;
-    public ofertas:any = {};
-    public destinatarios: any = {};
-    public destinatarioId:number = 0;
-    public ofertaId:number = 0;
-    public totalOfertas: number = 0;
+    public ofertas:any; // listado de ofertas
+    public confOfertas: any; // obteiene el objeto de configuracion de rango y paginado de ofertas
+    public destinatarios: any; // listado de destinatarios
+    public confDestinatario: any; // obteiene el objeto de configuracion de rango y paginado de destinatarios
+    public destinatarioId:number = 0; // variable que gestiona el id del destinatario
+    public ofertaId:number = 0; // variable que gestiona el id de oferta
+    public totalOfertas: number = 0; //
     public totalDestinatarios: number = 0;
 
     constructor(
@@ -23,26 +26,35 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       private _router: Router,
       private _ofertaService: OfertaService,
       private _destinatarioService: DestinatarioService,
-      private _mensajesService: MensajesService
+      private _mensajesService: MensajesService,
+      private _confPaginacion: ConfiguracionParaPaginarService
     ) {}
 
     ngOnInit() {
-      this.destinatarios = this._route.snapshot.data['destinatarios'];
-      this.ofertas = this._route.snapshot.data['ofertas'];
+      this.listarDestinatarios({});
+      this.listarOfertas({});
     }
-
-    private listarDestinatarios(){
-      this._destinatarioService.listarDestinatario().subscribe(
+    /**
+     * Obtiene el listado de destinatarios
+     * @param params parametros de busqueda
+     */
+    private listarDestinatarios(params:any){
+      Object.assign(params, { "pagesize": 5 });
+      this._destinatarioService.buscar(params).subscribe(
         datos => {
-          this.destinatarios = datos;
+          this.confDestinatario = this._confPaginacion.config(datos);
+          this.destinatarios = datos['resultado'];
         }, error => { this._mensajesService.cancelado(error, [{name: ''}]); })
     }
     /**
-     * Listado de ofertas
+     * Obtiene el listado de ofertas
+     * @param params parametros de busqueda
      */
-    private listarOfertas(){
-      this._ofertaService.listarOfertas('').subscribe(
+    private listarOfertas(params:any){
+      Object.assign(params, {"pagesize": 5});
+      this._ofertaService.buscarOfertaPor(params).subscribe(
         datos => {
+          this.confOfertas = this._confPaginacion.config(datos);
           this.ofertas = datos;
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
@@ -54,34 +66,53 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     cancelar() {
         this._router.navigate(['inicio','area-entrenamiento']);
     }
-    // selecciono Destinatario
+    /**
+     * Setea el id del destinatario elegido
+     * @param destinatario objeto que contiene al destinatario seleccionado
+     */
     destinatarioElegido(destinatario:any){
       if (destinatario) {
         this.destinatarioId = destinatario.id;
       } else {
         this.destinatarioId = 0;
         this.ofertaId = 0;
-        this.listarOfertas();
+        this.listarOfertas({});
       }
     }
-
+    /**
+     * Setea el id de la oferta elegida
+     * @param oferta objeto que contiene el id de la oferta seleccionada
+     */
     ofertaElegida(oferta:any){
       if (oferta) {
         this.ofertaId = oferta.id;
       }else{
         this.destinatarioId = 0;
         this.ofertaId = 0;
-        this.listarDestinatarios();
+        this.listarDestinatarios({});
       }
     }
-
+    /**
+     * Obtiene los id de oferta y destinatario y son enviados por router
+     * a la segunda parte del formulario
+     */
     seguirCreando(){
-      //console.log(this.destinatarioId + " - " + this.ofertaId);
       if (this.destinatarioId != 0 && this.ofertaId != 0){
         this._router.navigate(['inicio','area-entrenamiento', 'crear-plan', this.destinatarioId, this.ofertaId]);
       }else{
-        this._mensajesService.cancelado('Por favor verifique los datos!!!', [{'name':''}]);
         // aviso si falta algo.
+        this._mensajesService.cancelado('Por favor verifique los datos!!!', [{'name':''}]);
       }
     }
+
+    /**
+     * Solicito el cambio de pagina
+     * @param pagina [number] numero de pagina
+     */
+    cambiarPagina(pagina: any) {
+      //this.buscar(this.filtradoBusqueda, (pagina - 1));
+    }
+
+
+
 }

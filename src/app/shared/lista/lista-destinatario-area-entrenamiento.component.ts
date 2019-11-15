@@ -9,7 +9,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
     providers: [NgbTooltipConfig]
 })
 export class ListaDestinatarioAreaEntrenamientoComponent {
-    @Input('destinatarios') destinatarios: Object;
+    @Input('destinatarios') destinatarios: any;
     @Input('totalFiltrado') public totalFiltrado: number;
     @Input("idSeleccionado") public selId: number;
     @Output('destinatarioElegido') destinatarioElegido = new EventEmitter();
