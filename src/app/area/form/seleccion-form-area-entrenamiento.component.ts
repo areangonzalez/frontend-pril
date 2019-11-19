@@ -14,7 +14,7 @@ import { ConfiguracionParaPaginarService } from 'src/app/core/utils';
 })
 export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     public ofertas:any; // listado de ofertas
-    public confOfertas: any; // obteiene el objeto de configuracion de rango y paginado de ofertas
+    public confOfertas: ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0); // obteiene el objeto de configuracion de rango y paginado de ofertas
     public destinatarios: any; // listado de destinatarios
     public confDestinatario: ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0); // obteiene el objeto de configuracion de rango y paginado de destinatarios
     public destinatarioId:number = 0; // variable que gestiona el id del destinatario
