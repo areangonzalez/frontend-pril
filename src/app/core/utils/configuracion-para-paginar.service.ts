@@ -37,10 +37,12 @@ export class ConfiguracionParaPaginarService {
     /**
      * Se configura paginacion y listado de destinatario
      * @param datos [object] objeto que contiene los datos (pagesize, page, total_filtrado) de paginacion
+     * @param pagina [number] numero de pagina
      * @returns {ConfigurarPagina} devuelve un objeto de tipo <ConfigurarPagina> configuracion de paginas con sus rangos
      */
-    public config(datos:any) {
+    public config(datos:any, pagina:number) {
       let configPaginacion:ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0);
+      configPaginacion.page = pagina;
       configPaginacion.colleccionSize = datos.total_filtrado;
       // tamaño pagina
       configPaginacion.pageSize = datos.pagesize;

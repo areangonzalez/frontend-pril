@@ -5,7 +5,7 @@
     </div>
     <div class="col-4 pt-1"><hr></div>
 </div>
-<area-entrenamiento-lista-destinatario [idSeleccionado]="destinatarioId" [destinatarios]="destinatarios" [configurarPaginacion]="confDestinatario" (destinatarioElegido)="destinatarioElegido($event)"></area-entrenamiento-lista-destinatario>
+<area-entrenamiento-lista-destinatario [idSeleccionado]="destinatarioId" [destinatarios]="destinatarios" [configurarPaginacion]="confDestinatario" (destinatarioElegido)="destinatarioElegido($event)" (cambioDePagina)="cambiarPagina($event)" ></area-entrenamiento-lista-destinatario>
 <div class="d-flex justify-content-between">
     <div class="col-4 pt-1"><hr></div>
     <div class="col-4">

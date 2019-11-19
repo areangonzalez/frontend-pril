@@ -13,6 +13,7 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
     @Input('destinatarios') destinatarios: any;
     @Input('configurarPaginacion') public configurarPaginacion: ConfigurarPagina;
     @Input("idSeleccionado") public selId: number;
+    @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
     @Output('destinatarioElegido') destinatarioElegido = new EventEmitter();
 
     public pagina = 0;
@@ -49,4 +50,12 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
       }
 
     }
+    /**
+     * Envia la página seleccionada al componente padre
+     * @param page numero de página
+     */
+    cambioPagina(page:number){
+      this.cambioDePagina.emit(page);
+    }
+
 }

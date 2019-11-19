@@ -5,7 +5,9 @@ export interface IConfigurarPagina {
   cantRegistros: number,
   totalRegistros: number
 }
-
+/**
+ * Clase que construye el objeto de la configuracion de pagina
+ */
 export class ConfigurarPagina implements IConfigurarPagina {
 
   constructor(

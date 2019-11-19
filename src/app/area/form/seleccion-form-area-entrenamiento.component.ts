@@ -19,8 +19,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     public confDestinatario: ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0); // obteiene el objeto de configuracion de rango y paginado de destinatarios
     public destinatarioId:number = 0; // variable que gestiona el id del destinatario
     public ofertaId:number = 0; // variable que gestiona el id de oferta
-    public totalOfertas: number = 0; //
-    public totalDestinatarios: number = 0;
+    public filtroBusquedaDestinatario: any = {};
 
     constructor(
       private _route: ActivatedRoute,
@@ -32,18 +31,19 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-      this.listarDestinatarios({});
+      this.listarDestinatarios(this.filtroBusquedaDestinatario, 1);
       this.listarOfertas({});
     }
     /**
      * Obtiene el listado de destinatarios
      * @param params parametros de busqueda
      */
-    private listarDestinatarios(params:any){
-      Object.assign(params, { "pagesize": 5 });
+    private listarDestinatarios(params:any, page:number){
+      Object.assign(params, { "page": (page - 1) });
+      let nro_pagina =
       this._destinatarioService.buscar(params).subscribe(
         datos => {
-          this.confDestinatario = this._confPaginacion.config(datos);
+          this.confDestinatario = this._confPaginacion.config(datos, page);
           this.destinatarios = datos['resultado'];
         }, error => { this._mensajesService.cancelado(error, [{name: ''}]); })
     }
@@ -55,7 +55,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       Object.assign(params, {"pagesize": 5});
       this._ofertaService.buscarOfertaPor(params).subscribe(
         datos => {
-          this.confOfertas = this._confPaginacion.config(datos);
+          this.confOfertas = this._confPaginacion.config(datos, 1);
           this.ofertas = datos['resultado'];
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
@@ -90,7 +90,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       }else{
         this.destinatarioId = 0;
         this.ofertaId = 0;
-        this.listarDestinatarios({});
+        this.listarDestinatarios(this.filtroBusquedaDestinatario, 1);
       }
     }
     /**
@@ -110,8 +110,9 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      * Solicito el cambio de pagina
      * @param pagina [number] numero de pagina
      */
-    cambiarPagina(pagina: any) {
-      //this.buscar(this.filtradoBusqueda, (pagina - 1));
+    cambiarPagina(pagina: number) {
+      this.confDestinatario.page = pagina;
+      this.listarDestinatarios(this.filtroBusquedaDestinatario, pagina);
     }
 
 
