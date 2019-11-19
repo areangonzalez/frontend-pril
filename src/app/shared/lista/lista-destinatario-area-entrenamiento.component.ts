@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ConfigurarPagina } from '../../core/models';
 
 @Component({
     selector: 'area-entrenamiento-lista-destinatario',
@@ -10,7 +11,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ListaDestinatarioAreaEntrenamientoComponent {
     @Input('destinatarios') destinatarios: any;
-    @Input('totalFiltrado') public totalFiltrado: number;
+    @Input('configurarPaginacion') public configurarPaginacion: ConfigurarPagina;
     @Input("idSeleccionado") public selId: number;
     @Output('destinatarioElegido') destinatarioElegido = new EventEmitter();
 

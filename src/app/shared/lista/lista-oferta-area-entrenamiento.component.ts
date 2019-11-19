@@ -10,7 +10,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 export class ListaOfertaAreaEntrenamientoComponent {
   @Input('idSeleccionado') public selId: number;
   @Input('ofertas') ofertas: any;
-  @Input('totalFiltrado') public totalFiltrado: number;
+  //@Input('configurarPaginacion') public config: any;
   @Output('ofertaElegida') public ofertaElegida = new EventEmitter();
   public pagina: number = 1;
 

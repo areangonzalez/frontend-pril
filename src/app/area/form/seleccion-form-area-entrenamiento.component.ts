@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 // services
 import { OfertaService, DestinatarioService, MensajesService } from '../../core/services';
+import { ConfigurarPagina } from "../../core/models";
 import { ConfiguracionParaPaginarService } from 'src/app/core/utils';
 
 
@@ -15,7 +16,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     public ofertas:any; // listado de ofertas
     public confOfertas: any; // obteiene el objeto de configuracion de rango y paginado de ofertas
     public destinatarios: any; // listado de destinatarios
-    public confDestinatario: any; // obteiene el objeto de configuracion de rango y paginado de destinatarios
+    public confDestinatario: ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0); // obteiene el objeto de configuracion de rango y paginado de destinatarios
     public destinatarioId:number = 0; // variable que gestiona el id del destinatario
     public ofertaId:number = 0; // variable que gestiona el id de oferta
     public totalOfertas: number = 0; //
@@ -55,7 +56,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       this._ofertaService.buscarOfertaPor(params).subscribe(
         datos => {
           this.confOfertas = this._confPaginacion.config(datos);
-          this.ofertas = datos;
+          this.ofertas = datos['resultado'];
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
         });

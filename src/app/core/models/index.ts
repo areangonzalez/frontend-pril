@@ -9,3 +9,4 @@ export * from './persona.model';
 export * from './representante.model';
 export * from './user';
 export * from './loader';
+export * from './configurar-pagina';

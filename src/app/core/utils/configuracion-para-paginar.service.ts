@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { ConfigurarPagina } from "../models";
 
 @Injectable()
 export class ConfiguracionParaPaginarService {
@@ -35,11 +36,11 @@ export class ConfiguracionParaPaginarService {
 
     /**
      * Se configura paginacion y listado de destinatario
-     * @param datos [Object] objeto que contiene los datos (pagesize, page, total_filtrado) de paginacion
-     * @returns devuelve un objeto de configuracion de paginas con sus rangos
+     * @param datos [object] objeto que contiene los datos (pagesize, page, total_filtrado) de paginacion
+     * @returns {ConfigurarPagina} devuelve un objeto de tipo <ConfigurarPagina> configuracion de paginas con sus rangos
      */
     public config(datos:any) {
-      let configPaginacion:any = { "colleccionSize": 0, "pageSize": 20, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
+      let configPaginacion:ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0);
       configPaginacion.colleccionSize = datos.total_filtrado;
       // tamaño pagina
       configPaginacion.pageSize = datos.pagesize;
