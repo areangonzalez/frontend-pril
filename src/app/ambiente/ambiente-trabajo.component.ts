@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AmbienteTrabajoService, MensajesService } from '../core/services';
+import { ConfigurarPagina } from "../core/models";
+import { ConfiguracionParaPaginarService } from 'src/app/core/utils';
 
 @Component({
     selector: 'app-ambiente-trabajo',
     templateUrl: './ambiente-trabajo.html',
-    // styleUrls: ['./lista.component.css']
+    providers: [ConfiguracionParaPaginarService]
 })
 
 export class AmbienteTrabajoComponent implements OnInit {
     public ambientes:any;
     public filtradoBusqueda:any = {}; // variable que mantiene el filtro de busqueda
-    public configPaginacion:any = { "colleccionSize": 0, "pageSize": 20, "page": 1, "cantRegistros": 0, "totalRegistros": 0 };
+    public configPaginacion:ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de destinatarios
 
     /**
      * Inicializacion de servicios utiles para el componente
@@ -22,76 +24,45 @@ export class AmbienteTrabajoComponent implements OnInit {
         private _route: ActivatedRoute,
         private _ambienteTrabajoService: AmbienteTrabajoService,
         private _mensajeService: MensajesService,
+        private _confPaginacion: ConfiguracionParaPaginarService
     ) {
     }
 
     ngOnInit() {
       //Se configura paginación y se hace la pre-carga de la lista de ambientes
-      this.config(this._route.snapshot.data['ambientes']);        
+      this.config(this._route.snapshot.data['ambientes'],1);        
     }
 
     /**
      * Se configura paginación y listado de ambiente trabajo
      * @param lista [Object] colección de datos con paginación
      */
-    public config(lista:any) {
-        this.configPaginacion.colleccionSize = lista.total_filtrado;
-        // tamaño pagina
-        this.configPaginacion.pageSize = lista.pagesize;
-        this.configPaginacion.cantRegistros = this.rangoInicialXpagina(this.configPaginacion.page, lista.total_filtrado, this.configPaginacion.pageSize);
-        this.configPaginacion.totalRegistros = this.rangoFinalXpagina(this.configPaginacion.page, lista.total_filtrado, this.configPaginacion.pageSize);
+    public config(lista:any, pagina:number) {
+        this.configPaginacion = this._confPaginacion.config(lista, pagina);
         // total de registros
         this.ambientes = lista.resultado;     
     }
 
     /**
-     * @function rangoInicialXpagina funcion que calcula el rango inicial
-     * @param pagina numero de pagina
-     * @param total cantidad de registros
-     */
-    public rangoInicialXpagina(pagina: number, total: number, pagesize: number){
-        let paginaReal = pagina - 1;
-        let rangoInicial: number = 0;
-        if (total !== 0){
-            rangoInicial = paginaReal * pagesize + 1;
-        }
-        return rangoInicial;
-    }
-
-    /**
-     * @function rangoFinalXpagina funcion que calcula el rango final
-     * @param pagina numero de pagina
-     * @param total cantidad de registros
-     */
-    rangoFinalXpagina(pagina: number, total: number, pagesize:number){
-    let cantRegistrosXpag = (pagina * pagesize);
-    let rangoFinal: number = 0;
-    if (total !== 0){
-        rangoFinal = (cantRegistrosXpag < total) ? cantRegistrosXpag : total;
-    }
-    return rangoFinal;
-    }
-
-    /**
-     * Se configura el filtrado para mostrar listado
+     * Se filtran ambientes con criterio de busquedad y pagina
      * @param params [object] parametros que se filtraran en la busqueda
      * @param page [number] Es el numero de pagina menos 1
      */
     buscar(params:any, page:number) {
-        Object.assign(params, {page: page});
-        //this.filtradoBusqueda = params;
+        Object.assign(params, {page: (page-1)});
+        this.filtradoBusqueda = params;
         this._ambienteTrabajoService.buscar(params).subscribe(
           respuesta => {
-            this.config(respuesta);
+            this.config(respuesta,page);
         }, error => { this._mensajeService.cancelado(error, [{name:''}]); });
-      }
+    }
 
     /**
-     * Solicito el cambio de pagina
+     * Se realiza la busquedad con cambio de pagina, por otro lado persistimos la pagina
      * @param pagina [number] numero de pagina
      */
     cambiarPagina(pagina: any) {
-        this.buscar(this.filtradoBusqueda, (pagina - 1));
+        this.buscar(this.filtradoBusqueda, pagina);
     }
 
     /**
@@ -99,6 +70,6 @@ export class AmbienteTrabajoComponent implements OnInit {
      * @param e [boolean] valor identificable para limpiar los campos y realizar la busqueda
      */
     limpiarCampos(e:boolean) {
-        this.buscar({}, 0);
-      }
+        this.buscar({}, 1);
+    }
 }

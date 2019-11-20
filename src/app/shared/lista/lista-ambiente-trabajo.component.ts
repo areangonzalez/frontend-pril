@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ConfigurarPagina } from 'src/app/core/models';
 
 @Component({
     selector: 'ambiente-trabajo-lista',
@@ -13,7 +14,7 @@ export class ListaAmbienteTrabajoComponent {
     /**
      * @var configPaginacion [object] configuracion de paginacion
      */
-    @Input("configPaginacion") public configPaginacion:any;
+    @Input("configPaginacion") public configPaginacion:ConfigurarPagina;
     @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
 
     constructor(
