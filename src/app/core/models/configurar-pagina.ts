@@ -15,10 +15,7 @@ export class ConfigurarPagina implements IConfigurarPagina {
   public cantRegistros: number;
   public totalRegistros: number;
 
-
-  constructor(
-
-    ) {
+  constructor() {
       this.colleccionSize = 0;
     this.pageSize = 20;
     this.page = 1;

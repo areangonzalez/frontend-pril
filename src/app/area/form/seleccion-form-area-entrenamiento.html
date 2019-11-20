@@ -13,7 +13,7 @@
     </div>
     <div class="col-4 pt-1"><hr></div>
 </div>
-<area-entrenamiento-lista-oferta [idSeleccionado]="ofertaId" [ofertas]="ofertas" [configurarPaginacion]="confOfertas" (ofertaElegida)="ofertaElegida($event)"></area-entrenamiento-lista-oferta>
+<area-entrenamiento-lista-oferta [idSeleccionado]="ofertaId" [ofertas]="ofertas" [configurarPaginacion]="confOfertas" (cambioDePagina)="cambiarPaginaOfertas($event)" (ofertaElegida)="ofertaElegida($event)"></area-entrenamiento-lista-oferta>
 
 <div class="float-right">
     <button class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;

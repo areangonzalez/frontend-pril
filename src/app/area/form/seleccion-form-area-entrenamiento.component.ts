@@ -107,7 +107,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     }
 
     /**
-     * Solicito el cambio de pagina
+     * Solicito el cambio de pagina para el listado de destinatario
      * @param pagina [number] numero de pagina
      */
     cambiarPaginaDestinatario(pagina: number) {
@@ -115,6 +115,13 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       this.listarDestinatarios(this.filtroBusquedaDestinatario, pagina);
     }
 
-
+    /**
+     * Solicito el cambio de pagina para las ofertas
+     * @param pagina [number] numero de pagina
+     */
+    cambiarPaginaOfertas(pagina: number) {
+      this.confOfertas.page = pagina;
+      this.listarDestinatarios(this.filtroBusquedaDestinatario, pagina);
+    }
 
 }

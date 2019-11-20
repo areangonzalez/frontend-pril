@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ConfigurarPagina } from 'src/app/core/models';
 
 @Component({
     selector: 'area-entrenamiento-lista-oferta',
@@ -10,7 +11,7 @@ import { NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 export class ListaOfertaAreaEntrenamientoComponent {
   @Input('idSeleccionado') public selId: number;
   @Input('ofertas') ofertas: any;
-  //@Input('configurarPaginacion') public config: any;
+  @Input('configurarPaginacion') public configurarPagina: ConfigurarPagina;
   @Output('ofertaElegida') public ofertaElegida = new EventEmitter();
   public pagina: number = 1;
 

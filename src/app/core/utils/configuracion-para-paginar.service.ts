@@ -41,7 +41,7 @@ export class ConfiguracionParaPaginarService {
      * @returns {ConfigurarPagina} devuelve un objeto de tipo <ConfigurarPagina> configuracion de paginas con sus rangos
      */
     public config(datos:any, pagina:number) {
-      let configPaginacion:ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0);
+      let configPaginacion:ConfigurarPagina = new ConfigurarPagina();
       configPaginacion.page = pagina;
       configPaginacion.colleccionSize = datos.total_filtrado;
       // tamaño pagina
