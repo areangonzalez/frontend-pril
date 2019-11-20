@@ -13,7 +13,7 @@ export class ListaOfertaAreaEntrenamientoComponent {
   @Input('ofertas') ofertas: any;
   @Input('configurarPaginacion') public configurarPagina: ConfigurarPagina;
   @Output('ofertaElegida') public ofertaElegida = new EventEmitter();
-  public pagina: number = 1;
+  @Output('cambioDePagina') public cambioDePagina = new EventEmitter();
 
   constructor(
       private _router: Router,
@@ -36,5 +36,9 @@ export class ListaOfertaAreaEntrenamientoComponent {
       this.ofertaElegida.emit(null);
     }
 
+  }
+
+  cambioPagina(page:number) {
+    this.cambioDePagina.emit(page);
   }
 }

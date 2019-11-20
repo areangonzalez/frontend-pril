@@ -55,6 +55,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       Object.assign(params, {"page": (page - 1)});
       this._ofertaService.buscarOfertaPor(params).subscribe(
         datos => {
+          console.log(datos);
           this.confOfertas = this._confPaginacion.config(datos, page);
           this.ofertas = datos['resultado'];
         }, error => {
@@ -111,7 +112,6 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      * @param pagina [number] numero de pagina
      */
     cambiarPaginaDestinatario(pagina: number) {
-      this.confDestinatario.page = pagina;
       this.listarDestinatarios(this.filtroBusquedaDestinatario, pagina);
     }
 
@@ -120,8 +120,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      * @param pagina [number] numero de pagina
      */
     cambiarPaginaOfertas(pagina: number) {
-      this.confOfertas.page = pagina;
-      this.listarDestinatarios(this.filtroBusquedaDestinatario, pagina);
+      this.listarDestinatarios(this.filtroBusquedaOferta, pagina);
     }
 
 }

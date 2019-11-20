@@ -16,8 +16,6 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
     @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
     @Output('destinatarioElegido') destinatarioElegido = new EventEmitter();
 
-    public pagina = 0;
-
     constructor(
         private _router: Router,
         config: NgbTooltipConfig

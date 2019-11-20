@@ -35,7 +35,7 @@ export class ConfiguracionParaPaginarService {
     }
 
     /**
-     * Se configura paginacion y listado de destinatario
+     * Se configura paginacion
      * @param datos [object] objeto que contiene los datos (pagesize, page, total_filtrado) de paginacion
      * @param pagina [number] numero de pagina
      * @returns {ConfigurarPagina} devuelve un objeto de tipo <ConfigurarPagina> configuracion de paginas con sus rangos

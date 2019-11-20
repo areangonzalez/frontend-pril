@@ -849,7 +849,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         return of(new HttpResponse({ status: 200, body: { resultado: ofertasLista, total_filtrado: ofertasLista.length } }));
                       } */
                     }else{
-                      return of(new HttpResponse({ status: 200, body: { resultado: ofertasLista, total_filtrado: ofertasLista.length } }));
+                      return of(new HttpResponse({ status: 200, body: { resultado: ofertasLista, total_filtrado: ofertasLista.length, pagesize:5 } }));
                     }
             }
 
