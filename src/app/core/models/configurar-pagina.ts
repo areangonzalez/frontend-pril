@@ -9,12 +9,20 @@ export interface IConfigurarPagina {
  * Clase que construye el objeto de la configuracion de pagina
  */
 export class ConfigurarPagina implements IConfigurarPagina {
+  public colleccionSize: number;
+  public pageSize: number;
+  public page: number;
+  public cantRegistros: number;
+  public totalRegistros: number;
+
 
   constructor(
-    public colleccionSize: number,
-    public pageSize: number,
-    public page: number,
-    public cantRegistros: number,
-    public totalRegistros: number
-  ) { }
+
+    ) {
+      this.colleccionSize = 0;
+    this.pageSize = 20;
+    this.page = 1;
+    this.cantRegistros = 0;
+    this.totalRegistros = 0;
+    }
 }

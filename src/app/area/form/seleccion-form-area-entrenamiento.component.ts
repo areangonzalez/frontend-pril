@@ -14,12 +14,13 @@ import { ConfiguracionParaPaginarService } from 'src/app/core/utils';
 })
 export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     public ofertas:any; // listado de ofertas
-    public confOfertas: ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0); // obteiene el objeto de configuracion de rango y paginado de ofertas
+    public confOfertas: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de ofertas
+    public filtroBusquedaOferta: any = {}; // filtro de busqueda de oferta
     public destinatarios: any; // listado de destinatarios
-    public confDestinatario: ConfigurarPagina = new ConfigurarPagina(0,20,1,0,0); // obteiene el objeto de configuracion de rango y paginado de destinatarios
+    public confDestinatario: ConfigurarPagina = new ConfigurarPagina(); // obteiene el objeto de configuracion de rango y paginado de destinatarios
     public destinatarioId:number = 0; // variable que gestiona el id del destinatario
     public ofertaId:number = 0; // variable que gestiona el id de oferta
-    public filtroBusquedaDestinatario: any = {};
+    public filtroBusquedaDestinatario: any = {}; // filtro de busqueda de destinatario
 
     constructor(
       private _route: ActivatedRoute,
@@ -32,7 +33,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
 
     ngOnInit() {
       this.listarDestinatarios(this.filtroBusquedaDestinatario, 1);
-      this.listarOfertas({});
+      this.listarOfertas(this.filtroBusquedaOferta, 1);
     }
     /**
      * Obtiene el listado de destinatarios
@@ -40,7 +41,6 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      */
     private listarDestinatarios(params:any, page:number){
       Object.assign(params, { "page": (page - 1) });
-      let nro_pagina =
       this._destinatarioService.buscar(params).subscribe(
         datos => {
           this.confDestinatario = this._confPaginacion.config(datos, page);
@@ -51,11 +51,11 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      * Obtiene el listado de ofertas
      * @param params parametros de busqueda
      */
-    private listarOfertas(params:any){
-      Object.assign(params, {"pagesize": 5});
+    private listarOfertas(params:any, page: number){
+      Object.assign(params, {"page": (page - 1)});
       this._ofertaService.buscarOfertaPor(params).subscribe(
         datos => {
-          this.confOfertas = this._confPaginacion.config(datos, 1);
+          this.confOfertas = this._confPaginacion.config(datos, page);
           this.ofertas = datos['resultado'];
         }, error => {
           this._mensajesService.cancelado(error, [{name:''}]);
@@ -77,7 +77,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       } else {
         this.destinatarioId = 0;
         this.ofertaId = 0;
-        this.listarOfertas({});
+        this.listarOfertas(this.filtroBusquedaOferta, 1);
       }
     }
     /**
@@ -110,7 +110,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      * Solicito el cambio de pagina
      * @param pagina [number] numero de pagina
      */
-    cambiarPagina(pagina: number) {
+    cambiarPaginaDestinatario(pagina: number) {
       this.confDestinatario.page = pagina;
       this.listarDestinatarios(this.filtroBusquedaDestinatario, pagina);
     }
