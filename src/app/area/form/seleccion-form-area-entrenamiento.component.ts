@@ -53,9 +53,9 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      */
     private buscarOfertas(params:any, page: number){
       Object.assign(params, {"page": (page - 1)});
+      console.log(params);
       this._ofertaService.buscarOfertaPor(params).subscribe(
         datos => {
-          console.log(datos);
           this.confOfertas = this._confPaginacion.config(datos, page);
           this.ofertas = datos['resultado'];
         }, error => {
@@ -129,7 +129,10 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
         this.buscarDestinatarios(this.filtroBusquedaDestinatario, 1);
       }
       if (tipo == 'oferta'){
+        console.log(param);
 
+        this.filtroBusquedaOferta = param;
+        this.buscarOfertas(this.filtroBusquedaOferta, 1);
       }
     }
 

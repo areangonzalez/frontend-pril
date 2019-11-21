@@ -68,6 +68,7 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
       if (!limpiar){
         this.buscar.emit({ "global_param": this.global_param });
       }else{
+        this.global_param = "";
         this.buscar.emit({});
       }
     }

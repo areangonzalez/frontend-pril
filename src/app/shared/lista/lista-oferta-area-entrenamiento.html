@@ -1,32 +1,30 @@
 <div class="table-responsive">
     <div class="col-md-12">
-      <form>
-          <div class="row">
+          <div class="row" style="margin-top: 3px;" >
               <div class="form-group col-md-3">
                 <div class="input-group">
-                  <input class="form-control" placeholder="fecha de inicio: dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker">
+                  <input class="form-control" placeholder="fecha de inicio: dd/mm/yyyy" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="fecha_inicial" container="body" (keyup.enter)="realizarBusqueda(false)">
                   <div class="input-group-append">
                     <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
-                      <span class="oi oi-calendar" title="Dirección" aria-hidden="true"></span>
+                      <span class="oi oi-calendar" title="fecha inicial" aria-hidden="true"></span>
                     </button>
                   </div>
                 </div>
               </div>
                 <div class="col-md-9">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar: ambiente de trabajo, puesto, días y horarios" aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Buscar: ambiente de trabajo, puesto, días y horarios" [(ngModel)]="global_param" (keyup.enter)="realizarBusqueda(false)">
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">
+                      <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda(false)">
                         <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
                       </button>
-                      <button class="btn btn-outline-danger" type="button" (click)="limpiar()">
+                      <button class="btn btn-outline-danger" type="button" (click)="realizarBusqueda(true)">
                         <span class="oi oi-trash" title="Limpiar campos" aria-hidden="true"></span>
                       </button>
                     </div>
                   </div>
                 </div>
           </div>
-      </form>
       <table class="table table-bordered table-hover table-sm">
         <thead>
           <tr>
