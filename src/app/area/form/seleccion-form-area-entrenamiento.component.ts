@@ -32,14 +32,14 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-      this.listarDestinatarios(this.filtroBusquedaDestinatario, 1);
-      this.listarOfertas(this.filtroBusquedaOferta, 1);
+      this.buscarDestinatarios(this.filtroBusquedaDestinatario, 1);
+      this.buscarOfertas(this.filtroBusquedaOferta, 1);
     }
     /**
      * Obtiene el listado de destinatarios
      * @param params parametros de busqueda
      */
-    private listarDestinatarios(params:any, page:number){
+    private buscarDestinatarios(params:any, page:number){
       Object.assign(params, { "page": (page - 1) });
       this._destinatarioService.buscar(params).subscribe(
         datos => {
@@ -51,10 +51,11 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      * Obtiene el listado de ofertas
      * @param params parametros de busqueda
      */
-    private listarOfertas(params:any, page: number){
+    private buscarOfertas(params:any, page: number){
       Object.assign(params, {"page": (page - 1)});
       this._ofertaService.buscarOfertaPor(params).subscribe(
         datos => {
+          console.log(datos);
           this.confOfertas = this._confPaginacion.config(datos, page);
           this.ofertas = datos['resultado'];
         }, error => {
@@ -77,7 +78,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       } else {
         this.destinatarioId = 0;
         this.ofertaId = 0;
-        this.listarOfertas(this.filtroBusquedaOferta, 1);
+        this.buscarOfertas(this.filtroBusquedaOferta, 1);
       }
     }
     /**
@@ -90,7 +91,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
       }else{
         this.destinatarioId = 0;
         this.ofertaId = 0;
-        this.listarDestinatarios(this.filtroBusquedaDestinatario, 1);
+        this.buscarDestinatarios(this.filtroBusquedaDestinatario, 1);
       }
     }
     /**
@@ -111,8 +112,7 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      * @param pagina [number] numero de pagina
      */
     cambiarPaginaDestinatario(pagina: number) {
-      this.confDestinatario.page = pagina;
-      this.listarDestinatarios(this.filtroBusquedaDestinatario, pagina);
+      this.buscarDestinatarios(this.filtroBusquedaDestinatario, pagina);
     }
 
     /**
@@ -120,8 +120,17 @@ export class SeleccionFormAreaEntrenamientoComponent implements OnInit {
      * @param pagina [number] numero de pagina
      */
     cambiarPaginaOfertas(pagina: number) {
-      this.confOfertas.page = pagina;
-      this.listarDestinatarios(this.filtroBusquedaDestinatario, pagina);
+      this.buscarOfertas(this.filtroBusquedaOferta, pagina);
+    }
+
+    prepararBusqueda(param:any, tipo:string){
+      if (tipo == 'destinatario'){
+        this.filtroBusquedaDestinatario = param;
+        this.buscarDestinatarios(this.filtroBusquedaDestinatario, 1);
+      }
+      if (tipo == 'oferta'){
+
+      }
     }
 
 }

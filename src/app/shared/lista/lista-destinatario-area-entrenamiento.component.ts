@@ -15,8 +15,9 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
     @Input("idSeleccionado") public selId: number;
     @Output("cambioDePagina") public cambioDePagina = new EventEmitter();
     @Output('destinatarioElegido') destinatarioElegido = new EventEmitter();
+    @Output("buscar") public buscar = new EventEmitter();
 
-    public pagina = 0;
+    public global_param: string = "";
 
     constructor(
         private _router: Router,
@@ -24,12 +25,10 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
     ) {
         config.placement = 'top';
     }
-
-    limpiar(){
-        console.log('limpiar campos');
-    }
-
-
+    /**
+     * Genera un string concatenando los datos de una direccion de una persona
+     * @param lugar [object] objeto que contiene los datos de direccion
+     */
     getDireccion(lugar: Object) {
       let dir = "";
       dir += lugar['localidad'] + " - " + lugar['barrio'] + ' - ' + lugar['calle'] + ' ' + lugar['altura'];
@@ -39,7 +38,12 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
 
       return dir;
     }
-
+    /**
+     * selecciona un destinatario del listado
+     * @param id [nummber] identificador del destinatario
+     * @param formacionDeseada [string] formacion deseada del destinatario
+     * @param lista_oficio [Array] listado de oficios que contiene un destinatario
+     */
     seleccionarDestinatario(id:number, formacionDeseada:string, lista_oficio:any){
       if (this.selId != id) {
         this.selId = id;
@@ -57,5 +61,14 @@ export class ListaDestinatarioAreaEntrenamientoComponent {
     cambioPagina(page:number){
       this.cambioDePagina.emit(page);
     }
-
+    /**
+     * Construyo el api que aplicara el filtrado del listado
+     */
+    realizarBusqueda(limpiar:boolean){
+      if (!limpiar){
+        this.buscar.emit({ "global_param": this.global_param });
+      }else{
+        this.buscar.emit({});
+      }
+    }
 }
