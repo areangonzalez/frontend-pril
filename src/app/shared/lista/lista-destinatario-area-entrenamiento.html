@@ -1,17 +1,17 @@
 <div class="col-md-12" style="margin-bottom: 5px;">
-    <form><div class="row"><div class="col-md-12">
+    <div class="row"><div class="col-md-12">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar: nombre, apellido, documento, oficio, puesto ..." aria-label="buscador destinatario" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Buscar: nombre, apellido, documento, oficio, puesto ..." [(ngModel)]="global_param" (keyup.enter)="realizarBusqueda(false)">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">
+                        <button class="btn btn-outline-secondary" type="button" (click)="realizarBusqueda(false)">
                             <span class="oi oi-magnifying-glass" title="Buscar" aria-hidden="true"></span>
                         </button>
-                        <button class="btn btn-outline-danger" type="button" (click)="limpiar()">
+                        <button class="btn btn-outline-danger" type="button" (click)="realizarBusqueda(true)">
                             <span class="oi oi-trash" title="Limpiar campos" aria-hidden="true"></span>
                         </button>
                     </div>
                 </div>
-    </div></div></form>
+    </div></div>
 </div>
 <div class="col-md-12">
     <table class="table table-bordered table-hover table-sm mb-0">
