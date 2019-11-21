@@ -6,14 +6,14 @@
     <div class="col-4 pt-1"><hr></div>
 </div>
 <area-entrenamiento-lista-destinatario [idSeleccionado]="destinatarioId" [destinatarios]="destinatarios" [configurarPaginacion]="confDestinatario" (destinatarioElegido)="destinatarioElegido($event)" (cambioDePagina)="cambiarPaginaDestinatario($event)" (buscar)="prepararBusqueda($event, 'destinatario')" ></area-entrenamiento-lista-destinatario>
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between" style="margin-bottom: 2px;">
     <div class="col-4 pt-1"><hr></div>
     <div class="col-4">
       <h3 class="text-center"><small class="text-muted">Seleccionar oferta</small></h3>
     </div>
     <div class="col-4 pt-1"><hr></div>
 </div>
-<area-entrenamiento-lista-oferta [idSeleccionado]="ofertaId" [ofertas]="ofertas" [configurarPaginacion]="confOfertas" (cambioDePagina)="cambiarPaginaOfertas($event)" (ofertaElegida)="ofertaElegida($event)"></area-entrenamiento-lista-oferta>
+<area-entrenamiento-lista-oferta [idSeleccionado]="ofertaId" [ofertas]="ofertas" [configurarPaginacion]="confOfertas" (cambioDePagina)="cambiarPaginaOfertas($event)" (ofertaElegida)="ofertaElegida($event)" (buscar)="prepararBusqueda($event, 'oferta')" ></area-entrenamiento-lista-oferta>
 
 <div class="float-right">
     <button class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button> &nbsp;
