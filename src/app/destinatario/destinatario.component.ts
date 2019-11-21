@@ -25,14 +25,14 @@ export class DestinatarioComponent implements OnInit {
 
     ngOnInit(){
       //obtengo lista de destinatarios
-      this.config(this._route.snapshot.data['destinatarios']);
+      this.config(this._route.snapshot.data['destinatarios'], 1);
     }
     /**
      * Solicito el cambio de pagina
      * @param pagina [number] numero de pagina
      */
     cambiarPagina(pagina: any) {
-      this.buscar(this.filtradoBusqueda, (pagina));
+      this.buscar(this.filtradoBusqueda, pagina);
     }
     /**
      * Se configura paginacion y listado de destinatario
@@ -52,6 +52,8 @@ export class DestinatarioComponent implements OnInit {
      */
     buscar(params:any, page:number) {
       Object.assign(params, {page: page-1});
+      console.log(params);
+      
       this.filtradoBusqueda = params;
       this._destinatarioService.buscar(params).subscribe(
         respuesta => {

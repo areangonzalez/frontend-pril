@@ -261,7 +261,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       }
                     }
                   }
-
+                  
                   // realizo busqueda por los parametros enviados
                   encontrados = destinatarioLista.filter(
                     destinatario => {
@@ -282,63 +282,37 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     });
 
                     if (nivel_educativoid != '') {
-                      if (encontrados.length > 0) {
+                      console.log(encontrados);
+                      
                         encontrados = encontrados.filter(destinatario => {
                           let existe = false;
                           for (let i = 0; i < destinatario.persona.estudios.length; i++) {
                             existe = parseInt(nivel_educativoid) === parseInt(destinatario.persona.estudios[i].nivel_educativoid);
+                            console.log(existe);
+                            
+                            if (existe) { return destinatario; }
                           }
-                          if (existe) { return destinatario; }
                         });
-                      }else{
-                        encontrados = destinatarioLista.filter(destinatario => {
-                          let existe = false;
-                          for (let i = 0; i < destinatario.persona.estudios.length; i++) {
-                            existe = parseInt(nivel_educativoid) === parseInt(destinatario.persona.estudios[i].nivel_educativoid);
-                          }
-                          if (existe) { return destinatario; }
-                        });
-                      }
                     }
                     if (profesionid != '') {
-                      if (encontrados.length > 0) {
                         encontrados = encontrados.filter(destinatario => {
                           let existe = false;
                           for (let i = 0; i < destinatario.persona.estudios.length; i++) {
                             existe = parseInt(profesionid) === parseInt(destinatario.persona.estudios[i].profesionid);
+                            if (existe) { return destinatario; }
                           }
-                          if (existe) { return destinatario; }
                         });
-                      }else{
-                        encontrados = destinatarioLista.filter(destinatario => {
-                          let existe = false;
-                          for (let i = 0; i < destinatario.persona.estudios.length; i++) {
-                            existe = parseInt(profesionid) === parseInt(destinatario.persona.estudios[i].profesionid);
-                          }
-                          if (existe) { return destinatario; }
-                        });
-                      }
                     }
                     if (oficioid != '') {
-                      if (encontrados.length > 0) {
-                        encontrados = encontrados.filter(destinatario => {
-                          let existe = false;
-                          for (let i = 0; i < destinatario.persona.lista_oficio.length; i++) {
-                            existe = parseInt(oficioid) === parseInt(destinatario.persona.lista_oficio[i].id);
-                          }
-                          if (existe) { return destinatario; }
-                        });
-                      }else{
-                        encontrados = destinatarioLista.filter(destinatario => {
-                          let existe = false;
-                          for (let i = 0; i < destinatario.persona.lista_oficio.length; i++) {
-                            existe = parseInt(oficioid) === parseInt(destinatario.persona.lista_oficio[i].id);
-                          }
-                          if (existe) { return destinatario; }
-                        });
-                      }
+                      encontrados = encontrados.filter(destinatario => {
+                        let existe = false;
+                        for (let i = 0; i < destinatario.persona.lista_oficio.length; i++) {
+                          existe = parseInt(oficioid) === parseInt(destinatario.persona.lista_oficio[i].id);
+                          if (existe) {return destinatario;}
+                        }
+                      });                      
                     }
-
+                  
                   let totalFiltrado:number = encontrados.length;
                   let total:number = totalFiltrado/pageSize;
                   let numEntero = Math.floor(total);
