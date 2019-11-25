@@ -39,7 +39,6 @@ export class DatosRepresentanteFormComponent implements OnInit {
     ngOnInit() {
     }
 
-    get representante() { return this.datosPersona.controls; }
 
     /**
      * @function esNumeroDocuemnto funcion que sirve para escribir solo números

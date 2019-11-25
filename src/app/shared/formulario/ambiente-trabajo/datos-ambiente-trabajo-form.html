@@ -1,15 +1,15 @@
-<fieldset [formGroup]="datosAmbienteTrabajo">
+<fieldset [formGroup]="ambiente">
     <div class="row">
         <div class="form-group col-md-6">
             <label for="tipo_ambiente_trabajo" class="prioridad">Tipo ambiente de trabajo (<span>*</span>):</label>
             <select class="form-control" id="tipo_ambiente_trabajo" formControlName="tipo_ambiente_trabajoid"
-             (change)="selTipo($event)" [ngClass]="{'is-invalid': (ambiente.tipo_ambiente_trabajoid.invalid && submitted)}">
+             (change)="selTipo($event)" [ngClass]="{'is-invalid': (ambiente.get('tipo_ambiente_trabajoid').invalid && submitted)}">
                 <option value="">Seleccione tipo ambiente de trabajo</option>
                 <option *ngFor="let tipo of tipo_ambiente_trabajo_lista" value="{{tipo.id}}">{{tipo.nombre}}</option>
             </select>
-            <div *ngIf="(ambiente.tipo_ambiente_trabajoid.invalid && submitted)"
+            <div *ngIf="(ambiente.get('tipo_ambiente_trabajoid').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="ambiente.tipo_ambiente_trabajoid.errors.required">Este campo es requerido. </div>
+                <div *ngIf="ambiente.get('tipo_ambiente_trabajoid').hasError('required')">Este campo es requerido. </div>
             </div>
         </div>
     </div>
@@ -17,38 +17,37 @@
         <div class="form-group col-md-4">
             <label for="nombre_ambiente" class="prioridad">Nombre <small>{{tipoAt}}</small> (<span>*</span>):</label>
             <input type="text" id="nombre_ambiente" class="form-control" formControlName="nombre"
-             placeholder="Nombre" [ngClass]="{'is-invalid': (ambiente.nombre.invalid && submitted)}">
-            <div *ngIf="(ambiente.nombre.invalid && submitted)"
+             placeholder="Nombre" [ngClass]="{'is-invalid': (ambiente.get('nombre').invalid && submitted)}">
+            <div *ngIf="(ambiente.get('nombre').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="ambiente.nombre.errors.required">Este campo es requerido. </div>
-                <div *ngIf="ambiente.nombre.errors.minlength">Escriba un nombre valido.</div>
+                <div *ngIf="ambiente.get('nombre').hasError('required')">Este campo es requerido. </div>
+                <div *ngIf="ambiente.get('nombre').hasError('minlength')">Por favor, escriba una actividad valida.</div>
             </div>
         </div>
-        <div class="form-group col-md-4">
+         <div class="form-group col-md-4">
             <label for="cuit" class="prioridad">Cuit (<span>*</span>):</label>
             <input type="text" id="cuit" class="form-control" formControlName="cuit" (keyup)="esCuit($event.target.value)"
-             maxlength="11" placeholder="Ej.: 20335674568" [ngClass]="{'is-invalid': (ambiente.cuit.invalid && submitted)}">
-            <div *ngIf="(ambiente.cuit.invalid && submitted)"
+             maxlength="11" placeholder="Ej.: 20335674568" [ngClass]="{'is-invalid': (ambiente.get('cuit').invalid && submitted)}">
+            <div *ngIf="(ambiente.get('cuit').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="ambiente.cuit.errors.required">Este campo es requerido. </div>
+                <div *ngIf="ambiente.get('cuit').hasError('required')">Este campo es requerido. </div>
             </div>
         </div>
         <div class="form-group col-md-4">
             <label for="legajo" class="prioridad">Legajo (<span>*</span>):</label>
             <input type="text" id="legajo" class="form-control" formControlName="legajo"
-             placeholder="######" [ngClass]="{'is-invalid': (ambiente.legajo.invalid && submitted)}">
-            <div *ngIf="(ambiente.legajo.invalid && submitted)"
-                class="text-danger">
-                <div *ngIf="ambiente.legajo.errors.required">Este campo es requerido. </div>
+             placeholder="######" [ngClass]="{'is-invalid': (ambiente.get('legajo').invalid && submitted)}">
+             <div *ngIf="(ambiente.get('legajo').invalid && submitted)" class="text-danger">
+                <div *ngIf="ambiente.get('legajo').hasError('required')">Este campo es requerido. </div>
             </div>
         </div>
         <div class="form-group col-md-6">
             <label for="actividad" class="prioridad">Actividad que desarrolla (<span>*</span>):</label>
-            <textarea class="form-control" id="actividad" rows="2" formControlName="actividad" placeholder="Definir actividad que se desarrolla...." [ngClass]="{'is-invalid': (ambiente.actividad.invalid && submitted)}"></textarea>
-            <div *ngIf="(ambiente.actividad.invalid && submitted)"
+            <textarea class="form-control" id="actividad" rows="2" formControlName="actividad" placeholder="Definir actividad que se desarrolla...." [ngClass]="{'is-invalid': (ambiente.get('actividad').invalid && submitted)}"></textarea>
+            <div *ngIf="(ambiente.get('actividad').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="ambiente.actividad.errors.required">Este campo es requerido. </div>
-                <div *ngIf="ambiente.nombre.errors.minlength">Por favor, describa la actividad.</div>
+                <div *ngIf="ambiente.get('actividad').hasError('required')">Este campo es requerido. </div>
+                <div *ngIf="ambiente.get('actividad').hasError('minlength')">Por favor, describa la actividad.</div>
             </div>
         </div>
         <div class="form-group col-md-6">
@@ -78,10 +77,10 @@
         <div class="form-group col-md-4">
             <label for="email" class="prioridad">Email:</label>
             <input type="text" id="email" class="form-control" formControlName="email"
-             placeholder="Ej.: mi_correo@correo.com.ar" [ngClass]="{'is-invalid': (ambiente.email.invalid && submitted)}">
-             <div *ngIf="(ambiente.email.invalid && submitted)"
+             placeholder="Ej.: mi_correo@correo.com.ar" [ngClass]="{'is-invalid': (ambiente.get('email').invalid && submitted)}">
+             <div *ngIf="(ambiente.get('email').invalid && submitted)"
                 class="text-danger">
-                <div *ngIf="ambiente.email.errors.pattern">El email es invalido.</div>
+                <div *ngIf="ambiente.get('email').hasError('pattern')">El email es invalido.</div>
             </div>
         </div>
     </div>
@@ -94,5 +93,5 @@
         </div>
         <div class="col-5 pt-1"><hr></div>
     </div>
-    <lugar-form [group]="ambiente.lugar" [submitted]="submitted"></lugar-form>
+    <lugar-form [group]="ambiente.get('lugar')" [submitted]="submitted"></lugar-form>
 </fieldset>

@@ -9,7 +9,7 @@ import { UtilService } from "../../../core/utils";
     providers: [UtilService]
 })
 export class DatosAmbienteTrabajoFormComponent implements OnInit {
-    @Input("group") public datosAmbienteTrabajo: FormGroup;
+    @Input("group") public ambiente: FormGroup;
     @Input("submitted") public submitted: boolean;
     @Input("tipoAmbienteTrabajoLista") public tipo_ambiente_trabajo_lista: any; // lista de tipos de ambientes de trabajo
 
@@ -22,8 +22,6 @@ export class DatosAmbienteTrabajoFormComponent implements OnInit {
 
     ngOnInit() {
     }
-
-    get ambiente(){ return this.datosAmbienteTrabajo.controls; }
 
     selTipo(event){
         if (event.target.selectedOptions[0].value != ''){
