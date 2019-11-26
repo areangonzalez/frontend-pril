@@ -4,10 +4,6 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 // services
 import { MensajesService } from "../../core/services/mensajes.service";
 import { AmbienteTrabajoService } from "../../core/services/ambiente-trabajo.service";
-// modelos
-import { AmbienteTrabajo } from "../../core/models/ambiente-trabajo.model";
-import { Representante } from "../../core/models/representante.model";
-import { Lugar } from "../../core/models/lugar.model";
 
 @Component({
     selector: 'destinatario-form',
@@ -98,13 +94,15 @@ export class FormAmbienteTrabajoComponent implements OnInit {
         this._router.navigate(['inicio','ambiente']);
     }
 
-    GuardarAmbiente() {
-        const params = {persona: this.prepararPersona(), ambiente: this.prepararAmbienteTrabajo()};
+    prepararAmbiente() {
+        const params = this.ambienteForm.get('ambiente').value;
+        params['persona'] = this.ambienteForm.get('persona').value;
+
         this.submitted = true;
         if (this.ambienteForm.invalid) {
             this._mensajeService.cancelado('Campos sin completar.', [{ name: '' }]);
             return;
-        }else{
+        }else{            
             if (this.id) {
                 this.guardarAmbiente(params, this.id);
             }else{
@@ -125,16 +123,6 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }
         );
-    }
-
-    private prepararAmbienteTrabajo() {
-        let lugar = new Lugar(0, 0, '', '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona.lugar);
-        let persona = new Representante(0, '', '', '', '', '', '');
-        return new AmbienteTrabajo(0, '', '', '', '', '', 0, lugar, persona, '', '', '', '', '','').deserialize(this.ambienteForm.value.ambiente);
-    }
-
-    private prepararPersona() {
-        return new Representante(0, '', '', '', '', '', '').deserialize(this.ambienteForm.value.persona)
     }
 
     private ambientePorId(id) {
