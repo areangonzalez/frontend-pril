@@ -99,6 +99,10 @@
       <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.banco_alias}}</dd>
     </dl>
   </div>
+  <div class="col-md-12">
+    <!-- <button type="button" class="btn btn-link btn-sm float-right" ngbTooltip="Ver mas detalle del destinatario" ><i class="far fa-eye"></i> Ver mas...</button> -->
+    <button-detalle-destinatario-modal [destinatario]="area.destinatario"></button-detalle-destinatario-modal>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-12 mb-1">
@@ -114,7 +118,9 @@
   <div class="col-md-4">
     <dl class="row">
         <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Sucursal <em ngbTooltip="Ambiente de trabajo">(AT)</em>:</dt>
-        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.oferta.nombre_sucursal}} <em>({{area.oferta.ambiente_trabajo}})</em></dd>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">
+          {{area.oferta.nombre_sucursal}}&nbsp;<span class="btn-link" ngbTooltip="Mostrar datos ambiente de trabajo" placement="top" >({{area.oferta.ambiente_trabajo}})</span>
+        </dd>
     </dl>
   </div>
   <div class="col-md-4">
