@@ -21,7 +21,8 @@ const routes: Routes = [
       resolve: { destinatario: DestinatarioService, oferta: OfertaService, planes: PlanService }
     },{
       path: 'vista/:area_entrenamientoid', component: VistaAreaEntrenamientoComponent,
-      data: { loading: true, title: 'Ver área de entrenamiento', breadcrumb: 'vista' }
+      data: { loading: true, title: 'Ver área de entrenamiento', breadcrumb: 'vista' },
+      resolve: { areaEntrenamiento: AreaEntrenamientoService }
     }
 ];
 

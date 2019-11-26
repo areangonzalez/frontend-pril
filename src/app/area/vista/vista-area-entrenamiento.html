@@ -1,44 +1,186 @@
 <div class="row mb-4">
     <div class="col-md-12">
-        <button class="btn btn-danger btn-md" (click)="volver()">
-            <span class="oi oi-arrow-left"></span> Atras</button> &nbsp;
-        <button class="btn btn-success btn-md">
-            <span class="oi oi-pencil"></span> Editar</button>
+      <div class="d-flex justify-content-between">
+        <div>
+            <button class="btn btn-outline-danger btn-md" (click)="volver()">
+                <span class="oi oi-arrow-left"></span> Atras</button>
+        </div>
+        <div>
+          <h2 class="text-muted">{{area.estado}}</h2>
+        </div>
+        <div>
+          <span class="text-success" ngbTooltip="Fecha inicial" placement="left"><strong>{{area.fecha_inicial | date:'dd/MM/yyyy' }}</strong></span> <br> <span class="text-danger"ngbTooltip="Fecha final" placement="left" ><strong>{{area.fecha_final | date:'dd/MM/yyyy' }}</strong></span>
+        </div>
+      </div>
     </div>
 </div>
-<!-- <pre>{{area | json}}</pre> -->
 <div class="row">
-    <div class="col-md-12">
-        <ngb-accordion #acc="ngbAccordion" activeIds="info-1, info-2, info-3">
-            <ngb-panel id="info-0" title="Ambiente de trabajo">
-                <ng-template ngbPanelContent>
-                    ambiente de trabajo
-                </ng-template>
-            </ngb-panel>
-            <ngb-panel id="info-1" title="Oferta">
-                <ng-template ngbPanelContent>
-                    oferta
-                </ng-template>
-            </ngb-panel>
-            <ngb-panel id="info-2" title="Destinatario">
-                <ng-template ngbPanelContent>
-                     destinatario
-                </ng-template>
-            </ngb-panel>
-            <ngb-panel id="info-3" title="Plan">
-                <ng-template ngbPanelContent>
-                    <dl class="row">
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Fecha de inicio:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">12/07/2018</dd>
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Plan:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-2">$1000 / 10 hs</dd>
-                    </dl>
-                    <dl class="row">
-                        <dt class="col-5 col-sm-3 col-md-3 col-lg-2">Tarea:</dt>
-                        <dd class="col-5 col-sm-3 col-md-3 col-lg-10">limpiar el local.</dd>
-                    </dl>
-                </ng-template>
-            </ngb-panel>
-        </ngb-accordion>
+  <div class="col-md-12 mb-1">
+    <div class="d-flex justify-content-between">
+      <div class="col-5 pt-1"><hr></div>
+      <div class="col-2">
+        <h3 class="text-center"><small class="text-muted">Datos Destinatario</small></h3>
+      </div>
+      <div class="col-5 pt-1"><hr></div>
     </div>
+  </div>
+  <!-- datos desitnatario -->
+  <div class="col-md-4">
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Apellido y nombre:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.persona.apellido}}, {{area.destinatario.persona.nombre}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-3">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Nro. Documento:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.persona.nro_documento}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-3">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Sexo (Genero):</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.persona.sexo}} ({{area.destinatario.persona.genero}})</dd>
+    </dl>
+  </div>
+  <div class="col-md-2">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Edad:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.persona.edad}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-4">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6"><span ngbTooltip="Actividad en la que se desea formación y entrenamiento">Actividad</span>:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.deseo_actividad}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6" ngbTooltip="Conocimientos básicos sobre la actividad que desea recibir formación y entrenamiento" >Conocimientos básicos:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.conocimientos_basicos}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-8">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-3 col-lg-3">Direccion:</dt>
+      <dd class="col-6 col-sm-6 col-md-9 col-lg-9">{{obtenerDireccion(area.destinatario.persona.lugar)}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-4 col-lg-4">Profesion:</dt>
+      <dd class="col-6 col-sm-6 col-md-8 col-lg-8">{{obtenerProfesion(area.destinatario.persona.estudios)}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-4 col-lg-4">Oficio/s:</dt>
+      <dd class="col-6 col-sm-6 col-md-8 col-lg-8">
+          <vista-tag-component [listaTags]="area.destinatario.persona.lista_oficio"></vista-tag-component>
+      </dd>
+    </dl>
+  </div>
+  <div class="col-md-4">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Banco:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.banco_nombre}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-4">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">CBU:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.banco_cbu}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-4">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Alias:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.destinatario.banco_alias}}</dd>
+    </dl>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 mb-1">
+    <div class="d-flex justify-content-between">
+      <div class="col-5 pt-1"><hr></div>
+      <div class="col-2">
+        <h3 class="text-center"><small class="text-muted">Datos Oferta</small></h3>
+      </div>
+      <div class="col-5 pt-1"><hr></div>
+    </div>
+  </div>
+  <!-- datos oferta -->
+  <div class="col-md-4">
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Sucursal <em ngbTooltip="Ambiente de trabajo">(AT)</em>:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.oferta.nombre_sucursal}} <em>({{area.oferta.ambiente_trabajo}})</em></dd>
+    </dl>
+  </div>
+  <div class="col-md-4">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Area:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.oferta.area}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-4">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Puesto:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.oferta.puesto}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-4 col-lg-4">Demanda Laboral:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.oferta.demanda_laboral}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-4 col-lg-4">Objetivo/s:</dt>
+      <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.oferta.objetivo}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="row">
+      <dt class="col-6 col-sm-6 col-md-4 col-lg-4">Direccion:</dt>
+      <dd class="col-6 col-sm-6 col-md-8 col-lg-8">{{obtenerDireccion(area.oferta.lugar)}}</dd>
+    </dl>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 mb-1">
+    <div class="d-flex justify-content-between">
+      <div class="col-5 pt-1"><hr></div>
+      <div class="col-2">
+        <h3 class="text-center"><small class="text-muted">Datos del Plan</small></h3>
+      </div>
+      <div class="col-5 pt-1"><hr></div>
+    </div>
+  </div>
+  <!-- datos oferta -->
+  <div class="col-md-4">
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Plan:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.plan}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-4 col-lg-4">Tarea:</dt>
+        <dd class="col-6 col-sm-6 col-md-8 col-lg-8">{{area.tarea}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-4">
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Jornada:</dt>
+        <dd class="col-6 col-sm-6 col-md-6 col-lg-6">{{area.jornada}}</dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <dl class="row">
+        <dt class="col-6 col-sm-6 col-md-4 col-lg-4">Observación:</dt>
+        <dd class="col-6 col-sm-6 col-md-8 col-lg-8">{{area.observacion}}</dd>
+    </dl>
+  </div>
 </div>

@@ -192,6 +192,36 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return fecha.getFullYear() + '-' + fecha.getMonth() + '-' + fecha.getDate() + ' ' + fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
         }
 
+        function comprobarEstado(fechaFinal:string) {
+          let fechaFinalAux = fechaFinal.split("-");
+          let ffAnio = parseInt(fechaFinalAux[0]);
+          let ffMes = parseInt(fechaFinalAux[1]);
+          let ffDia = parseInt(fechaFinalAux[2]);
+          let fecha = new Date();
+          let anioHoy = fecha.getFullYear();
+          let mesHoy = fecha.getMonth();
+          let diaHoy = fecha.getDate();
+          let estado = '';
+
+          if( ffAnio < anioHoy ) {
+            estado = 'Finalizado';
+          }else{
+            if ( ffAnio == anioHoy && ffMes < mesHoy ) {
+              estado = 'Finalizado';
+            }else{
+              if (ffAnio == anioHoy && ffMes == mesHoy && ffDia < diaHoy){
+                estado = 'Finalizado';
+              }else{
+                if (ffAnio == anioHoy && ffMes == mesHoy && ffDia == diaHoy) {
+                  estado = 'Finalizado';
+                }else {
+                  estado = "Vigente";
+                }
+              }
+            }
+          }
+          return estado;
+        }
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
@@ -261,7 +291,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                       }
                     }
                   }
-                  
+
                   // realizo busqueda por los parametros enviados
                   encontrados = destinatarioLista.filter(
                     destinatario => {
@@ -283,13 +313,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                     if (nivel_educativoid != '') {
                       console.log(encontrados);
-                      
+
                         encontrados = encontrados.filter(destinatario => {
                           let existe = false;
                           for (let i = 0; i < destinatario.persona.estudios.length; i++) {
                             existe = parseInt(nivel_educativoid) === parseInt(destinatario.persona.estudios[i].nivel_educativoid);
                             console.log(existe);
-                            
+
                             if (existe) { return destinatario; }
                           }
                         });
@@ -310,9 +340,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                           existe = parseInt(oficioid) === parseInt(destinatario.persona.lista_oficio[i].id);
                           if (existe) {return destinatario;}
                         }
-                      });                      
+                      });
                     }
-                  
+
                   let totalFiltrado:number = encontrados.length;
                   let total:number = totalFiltrado/pageSize;
                   let numEntero = Math.floor(total);
@@ -974,7 +1004,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          *                          AREA DE ENTRENAMIENTO
          * ************************************************************************ */
 
-            // Crear ofertas
+            // Crear Area entrenamiento
             if (request.url.endsWith('/apimock/area-entrenamientos') && request.method === 'POST') {
               // get new user object from post body
               let newArea = request.body;
@@ -984,7 +1014,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               // genero la fecha inicial
               let fecha = new Date();
-              let fecha_inicial = fecha.getFullYear() + '-' + fecha.getMonth() + '-' + fecha.getDate() + ' ' + fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();;
+              let fecha_inicial = fecha.getFullYear() + '-' + fecha.getMonth() + '-' + fecha.getDate() + ' ' + fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
               let hora_inicial = fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
 
               areasLista.push({
@@ -1172,8 +1202,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // selecciono el destinatario que coincida con el area
               let matchedDestinatario = destinatarioLista.filter(destinatario => { return destinatario.id === seleccionArea['destinatarioid']; });
               let destinatarioElegido = matchedDestinatario.length ? matchedDestinatario[0] : [];
+              // selecciono la persona del destinatario
+              let matchedPersona = personas.filter(persona => { return destinatarioElegido.personaid === persona['id']; });
+              let personaElegida = matchedPersona.length ? matchedPersona[0] : [];
 
-              ofertaElegida['ambiente_trabajo'] = ambienteElegido;
+              destinatarioElegido['persona'] = personaElegida;
+              ofertaElegida['ambiente_trabajo'] = ambienteElegido.nombre;
 
               areaVista = {
                 id: seleccionArea['id'],
@@ -1187,9 +1221,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 jornada: seleccionArea['jornada'],
                 observacion: seleccionArea['observacion'],
                 plan: seleccionArea['plan'],
-                estado: 'vigente',
+                estado: comprobarEstado(seleccionArea['fecha_final']),
                 destinatario: destinatarioElegido,
-                oferta: ofertaElegida
+                oferta: ofertaElegida,
               };
 
               return of(new HttpResponse({ status: 200, body: areaVista }));

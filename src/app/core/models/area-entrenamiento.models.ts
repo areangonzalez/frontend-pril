@@ -1,3 +1,6 @@
+import { Destinatario } from "./destinatario.model";
+import { Lugar } from "./lugar.model";
+import { Oferta } from "./oferta.model";
 export interface IAreaEntrenamiento {
     id: number,
     tarea: string,
@@ -12,7 +15,9 @@ export interface IAreaEntrenamiento {
     observacion: string,
     plan: string,
     ambiente_trabajo: string,
-    destinatario: string
+    destinatario: Destinatario,
+    oferta: Oferta,
+    estado?: string
 }
 
 export class AreaEntrenamiento implements IAreaEntrenamiento {
@@ -31,7 +36,10 @@ export class AreaEntrenamiento implements IAreaEntrenamiento {
       public observacion: string,
       public plan: string,
       public ambiente_trabajo: string,
-      public destinatario: string
+      public destinatario: Destinatario,
+      public oferta: Oferta,
+      public estado?: string
+
     ){}
 
     deserialize(input: any): this {
