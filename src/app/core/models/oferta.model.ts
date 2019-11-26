@@ -9,7 +9,8 @@ export interface IOferta {
     demanda_laboral: string,
     objetivo: string,
     lugar: Lugar,
-    fecha_inicial?:string
+    fecha_inicial?:string,
+    ambiente_trabajo?: string
 }
 
 export class Oferta implements IOferta {
@@ -23,7 +24,8 @@ export class Oferta implements IOferta {
         public demanda_laboral: string,
         public objetivo: string,
         public lugar: Lugar,
-        public fecha_inicial: string
+        public fecha_inicial: string,
+        public ambiente_trabajo?:string
     ) { }
 
     deserialize(input: any) {
