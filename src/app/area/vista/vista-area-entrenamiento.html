@@ -100,7 +100,6 @@
     </dl>
   </div>
   <div class="col-md-12">
-    <!-- <button type="button" class="btn btn-link btn-sm float-right" ngbTooltip="Ver mas detalle del destinatario" ><i class="far fa-eye"></i> Ver mas...</button> -->
     <button-detalle-destinatario-modal [destinatario]="area.destinatario"></button-detalle-destinatario-modal>
   </div>
 </div>
@@ -119,7 +118,7 @@
     <dl class="row">
         <dt class="col-6 col-sm-6 col-md-6 col-lg-6">Sucursal <em ngbTooltip="Ambiente de trabajo">(AT)</em>:</dt>
         <dd class="col-6 col-sm-6 col-md-6 col-lg-6">
-          {{area.oferta.nombre_sucursal}}&nbsp;<span class="btn-link" ngbTooltip="Mostrar datos ambiente de trabajo" placement="top" >({{area.oferta.ambiente_trabajo}})</span>
+          {{area.oferta.nombre_sucursal}}&nbsp;<mostrar-detalle-ambiente-trabajo-modal [ambienteTrabajo]="area.ambiente_trabajo" [nombreSucursal]="area.ambiente_trabajo.nombre" ></mostrar-detalle-ambiente-trabajo-modal>
         </dd>
     </dl>
   </div>
@@ -190,3 +189,4 @@
     </dl>
   </div>
 </div>
+

@@ -10,17 +10,18 @@ import { AreaEntrenamientoComponent } from './area-entrenamiento.component';
 import { SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent } from "./form";
 import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamiento.component";
 import {
-  DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent
+  DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent,
+  DetalleAmbienteTrabajoContentComponent, DetalleAmbienteTrabajoModalComponent
 } from "./modal";
 
 
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [AreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent],
+    declarations: [AreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent, DetalleAmbienteTrabajoContentComponent, DetalleAmbienteTrabajoModalComponent],
     imports: [CommonModule, NgbModule, SharedModule,  AreaEntrenamientoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [AreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent],
-    entryComponents: [DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent]
+    exports: [AreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent, DetalleAmbienteTrabajoContentComponent, DetalleAmbienteTrabajoModalComponent],
+    entryComponents: [DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent, DetalleAmbienteTrabajoContentComponent, DetalleAmbienteTrabajoModalComponent]
 })
 export class AreaEntrenamientoModule { }

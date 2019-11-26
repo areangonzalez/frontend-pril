@@ -1224,6 +1224,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 estado: comprobarEstado(seleccionArea['fecha_final']),
                 destinatario: destinatarioElegido,
                 oferta: ofertaElegida,
+                ambiente_trabajo: ambienteElegido
               };
 
               return of(new HttpResponse({ status: 200, body: areaVista }));
