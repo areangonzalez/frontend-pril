@@ -67,11 +67,10 @@ export class DatosRepresentanteFormComponent implements OnInit {
                         delete persona.generoid;
                         delete persona.cuil;
                         // seteo los valores en el formulario
-                        this.datosPersona.setValue(persona);
+                        this.datosPersona.patchValue(persona);
                         this.existeRepresentante = true;
                     }else{
                         this.resetForm(this.datosPersona);
-                        this._mensajeService.cancelado(respuesta['message'], [{ name: '' }]);
                         this.datosPersona.controls.nro_documento.setValue(doc);
                     }
                 }, error => {

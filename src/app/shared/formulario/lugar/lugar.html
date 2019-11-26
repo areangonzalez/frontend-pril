@@ -11,32 +11,32 @@
     </div>
     <div class="form-group col-md-4">
         <label for="calle" class="prioridad">Calle (<span>*</span>):</label>
-        <input type="text" id="calle" placeholder="calle" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (datosLugar.get('calle').invalid && submitted)}">
+        <input type="text" id="calle" placeholder="Calle" class="form-control" formControlName="calle" [ngClass]="{'is-invalid': (datosLugar.get('calle').invalid && submitted)}">
         <div *ngIf="(datosLugar.get('calle').invalid && submitted)" class="text-danger">
             <div *ngIf="datosLugar.get('calle').hasError('required')">Este campo es requerido. </div>
         </div>
     </div>
     <div class="form-group col-md-4">
         <label for="altura" class="prioridad">Altura (<span>*</span>):</label>
-        <input type="text" id="altura" placeholder="altura" class="form-control" formControlName="altura" [ngClass]="{'is-invalid': (datosLugar.get('altura').invalid && submitted)}">
+        <input type="text" id="altura" placeholder="Altura" class="form-control" formControlName="altura" [ngClass]="{'is-invalid': (datosLugar.get('altura').invalid && submitted)}">
         <div *ngIf="(datosLugar.get('altura').invalid && submitted)" class="text-danger">
             <div *ngIf="datosLugar.get('altura').hasError('required')">Este campo es requerido. </div>
         </div>
     </div>
     <div class="form-group col-md-3">
         <label for="barrio" class="prioridad">Barrio:</label>
-        <input type="text" id="barrio" placeholder="barrio" class="form-control" formControlName="barrio">
+        <input type="text" id="barrio" placeholder="Barrio" class="form-control" formControlName="barrio">
     </div>
     <div class="form-group col-md-3">
         <label for="escalera">Escalera/Modulo:</label>
-        <input type="text" id="escalera" placeholder="escalera" class="form-control" formControlName="escalera">
+        <input type="text" id="escalera" placeholder="Escalera" class="form-control" formControlName="escalera">
     </div>
     <div class="form-group col-md-3">
         <label for="piso">Piso:</label>
-        <input type="text" id="piso" placeholder="piso" class="form-control" formControlName="piso">
+        <input type="text" id="piso" placeholder="Piso" class="form-control" formControlName="piso">
     </div>
     <div class="form-group col-md-3">
         <label for="departamento">Departamento:</label>
-        <input type="text" id="departamento" placeholder="departamento" class="form-control" formControlName="depto">
+        <input type="text" id="departamento" placeholder="Departamento" class="form-control" formControlName="depto">
     </div>
 </div>

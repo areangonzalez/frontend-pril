@@ -34,12 +34,11 @@ export class DatosAmbienteTrabajoFormComponent implements OnInit {
 
     /**
      * @function esCuit funcion que sirve para escribir solo números
-     * @param event evento que toma el objeto de el input
+     * @param obj evento que toma el objeto de el input
      */
-    esCuit(event: any) {
-        let nro_docuemnto = this.datosAmbienteTrabajo.controls.cuit.value;
-        if (!this._utilService.validarNumero(event)) {
-            this.datosAmbienteTrabajo.controls.cuit.setValue(nro_docuemnto.substring(0, nro_docuemnto.length - 1));
+    esCuit(obj: any) {
+        if (!this._utilService.validarNumero(obj.value)) {
+            obj.value = obj.value.substring(0,obj.value.length - 1);
         }
     }
 }

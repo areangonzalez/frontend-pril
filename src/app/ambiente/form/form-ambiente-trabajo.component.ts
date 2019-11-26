@@ -120,7 +120,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
                     id = datos['id'];
                 }
                 console.log("id al editar un AT: ",id);
-                this._mensajeService.ofrecer('Se ha guardado correctamente el ambiente de trabajo.', [{ name: 'ambiente/' + id + '/ofertas', tipo: 'agregar' }, { name: 'ambiente/vista/' + id, tipo: 'vista' }]);
+                this._mensajeService.ofrecer('Se ha guardado correctamente el ambiente de trabajo.', [{ name: 'ambiente/' + id + '/ofertas', tipo: 'agregar' }, { name: 'inicio/ambiente/vista/' + id, tipo: 'vista' }]);
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             }

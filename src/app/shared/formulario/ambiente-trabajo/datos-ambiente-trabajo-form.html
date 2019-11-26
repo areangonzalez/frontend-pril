@@ -26,7 +26,7 @@
         </div>
          <div class="form-group col-md-4">
             <label for="cuit" class="prioridad">Cuit (<span>*</span>):</label>
-            <input type="text" id="cuit" class="form-control" formControlName="cuit" (keyup)="esCuit($event.target.value)"
+            <input type="text" id="cuit" class="form-control" formControlName="cuit" (keyup)="esCuit($event.target)"
              maxlength="11" placeholder="Ej.: 20335674568" [ngClass]="{'is-invalid': (ambiente.get('cuit').invalid && submitted)}">
             <div *ngIf="(ambiente.get('cuit').invalid && submitted)"
                 class="text-danger">
