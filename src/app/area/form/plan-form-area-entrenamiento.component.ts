@@ -121,8 +121,7 @@ export class PlanFormAreaEntrenamientoComponent implements OnInit {
     // guardo area de entrenamiento
     this._areaEntrenamientoService.guardar(datos, 0).subscribe(
       respuesta => {
-        //console.log(respuesta);
-        this._mensajesService.exitoso('Guardado exitoso',[{name:'/inicio/area-entrenamiento'}]);
+        this._mensajesService.exitoso('Guardado exitoso',[{name:'/inicio/area-entrenamiento/vista/' + respuesta['id']}]);
       },error => {
         this._mensajesService.cancelado(error, [{name:''}]);
       });

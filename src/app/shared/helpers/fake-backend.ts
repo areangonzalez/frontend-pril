@@ -688,9 +688,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                 newAmbiente.tipo_ambiente_trabajo = getNombreArray(newAmbiente.tipo_ambiente_trabajoid,tipoAmbienteTrabajoLista);
                 newAmbiente.lugar.localidad = getNombreArray(newAmbiente.lugar.localidadid,localidad);
-                
+
                 console.log(newAmbiente);
-                
+
                 ambienteLista.push(newAmbiente);
                                 // datos a mostrar en la tabla
                 localStorage.setItem('ambienteLista', JSON.stringify(newAmbiente));
@@ -1006,7 +1006,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               localStorage.setItem('areasLista', JSON.stringify(areasLista));
 
               // respond 200 OK
-              return of(new HttpResponse({ status: 200 }));
+              return of(new HttpResponse({ status: 200, body: { id: id } }));
           }
 
           // Listar Areas de entrenamientos
