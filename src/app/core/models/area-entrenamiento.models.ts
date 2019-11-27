@@ -1,6 +1,7 @@
 import { Destinatario } from "./destinatario.model";
 import { Lugar } from "./lugar.model";
 import { Oferta } from "./oferta.model";
+import { AmbienteTrabajo } from "./ambiente-trabajo.model";
 export interface IAreaEntrenamiento {
     id: number,
     tarea: string,
@@ -14,7 +15,7 @@ export interface IAreaEntrenamiento {
     jornada: string,
     observacion: string,
     plan: string,
-    ambiente_trabajo: string,
+    ambiente_trabajo: AmbienteTrabajo,
     destinatario: Destinatario,
     oferta: Oferta,
     estado?: string
@@ -35,7 +36,7 @@ export class AreaEntrenamiento implements IAreaEntrenamiento {
       public jornada: string,
       public observacion: string,
       public plan: string,
-      public ambiente_trabajo: string,
+      public ambiente_trabajo: AmbienteTrabajo,
       public destinatario: Destinatario,
       public oferta: Oferta,
       public estado?: string

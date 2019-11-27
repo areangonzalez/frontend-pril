@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AreaEntrenamientoService, MensajesService } from 'src/app/core/services';
-import { Persona, Lugar, Destinatario, AreaEntrenamiento, Oferta } from 'src/app/core/models';
+import { Persona, Lugar, Destinatario, AreaEntrenamiento, Oferta, AmbienteTrabajo, Representante } from 'src/app/core/models';
 
 @Component({
     selector: 'area-entrenamiento-vista',
@@ -16,7 +16,10 @@ export class VistaAreaEntrenamientoComponent implements OnInit {
     public destinatario = new Destinatario('',{},'','','',0,0,false,'','','','','', this.persona);
     public lugarOferta = new Lugar(0,0,'','','','','','','');
     public oferta = new Oferta(0,0,'','','','','',this.lugarOferta, '', '');
-    public area = new AreaEntrenamiento(0,'',0,0,0,{},'','','','','','','',this.destinatario,this.oferta,'');
+    public lugarAmbiente = new Lugar(0,0,'','','','','','','');
+    public representante = new Representante(0,'','','','','','');
+    public ambienteTrabajo = new AmbienteTrabajo(0,'','','','','',0,this.lugarAmbiente, this.representante, '','','','','','')
+    public area = new AreaEntrenamiento(0,'',0,0,0,{},'','','','','','',this.ambienteTrabajo,this.destinatario,this.oferta,'');
 
     constructor(
       private _router: Router,

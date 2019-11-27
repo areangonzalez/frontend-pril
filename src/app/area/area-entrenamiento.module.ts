@@ -9,14 +9,19 @@ import { AreaEntrenamientoRoutingModule } from "./area-entrenamiento-routing.mod
 import { AreaEntrenamientoComponent } from './area-entrenamiento.component';
 import { SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent } from "./form";
 import { VistaAreaEntrenamientoComponent } from "./vista/vista-area-entrenamiento.component";
+import {
+  DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent,
+  DetalleAmbienteTrabajoContentComponent, DetalleAmbienteTrabajoModalComponent
+} from "./modal";
 
 
 
 // Metadatos del módulo
 @NgModule({
-    declarations: [AreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent],
+    declarations: [AreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent, DetalleAmbienteTrabajoContentComponent, DetalleAmbienteTrabajoModalComponent],
     imports: [CommonModule, NgbModule, SharedModule,  AreaEntrenamientoRoutingModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [AreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent]
+    exports: [AreaEntrenamientoComponent, SeleccionFormAreaEntrenamientoComponent, PlanFormAreaEntrenamientoComponent, VistaAreaEntrenamientoComponent, DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent, DetalleAmbienteTrabajoContentComponent, DetalleAmbienteTrabajoModalComponent],
+    entryComponents: [DetalleDestinatarioContentComponent, DetalleDestinatarioModalComponent, DetalleAmbienteTrabajoContentComponent, DetalleAmbienteTrabajoModalComponent]
 })
 export class AreaEntrenamientoModule { }

@@ -6,3 +6,6 @@ dd {
     align-content: flex-start;
     text-align: left;
 }
+span.btn-link:hover {
+  cursor: pointer !important;
+}
