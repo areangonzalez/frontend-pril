@@ -681,50 +681,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let newAmbiente = request.body;
                 // save new user
                 // array de la tabla
-                newAmbiente.ambiente.id = generarId(ambienteLista);
-                let idAmbiente: number = newAmbiente.ambiente.id;
+                newAmbiente.id = generarId(ambienteLista);
+                let idAmbiente: number = newAmbiente.id;
                 newAmbiente.persona.id = generarId(personas);
-                newAmbiente.ambiente.lugar.id = generarId(ambienteLista);
-                ambienteLista.push({
-                    id: newAmbiente.ambiente.id,
-                    nombre: newAmbiente.ambiente.nombre,
-                    personaid: newAmbiente.persona.id,
-                    tipo_ambiente_trabajoid: newAmbiente.ambiente.tipo_ambiente_trabajoid,
-                    tipo_ambiente_trabajo: getNombreArray(newAmbiente.ambiente.tipo_ambiente_trabajoid, tipoAmbienteTrabajoLista),
-                    cuit: newAmbiente.ambiente.cuit,
-                    legajo: newAmbiente.ambiente.legajo,
-                    observacion: newAmbiente.ambiente.observacion,
-                    estado: 'Activo',
-                    actividad: newAmbiente.ambiente.actividad,
-                    lugarid: idAmbiente,
-                    telefono1: newAmbiente.ambiente.telefono1,
-                    telefono2: newAmbiente.ambiente.telefono2,
-                    telefono3: newAmbiente.ambiente.telefono3,
-                    email: newAmbiente.ambiente.email,
-                    fax: newAmbiente.ambiente.fax,
-                    persona: {
-                      id: newAmbiente.persona.id,
-                      nro_documento: newAmbiente.persona.nro_documento,
-                      apellido: newAmbiente.persona.apellido,
-                      nombre: newAmbiente.persona.nombre,
-                      telefono: newAmbiente.persona.telefono,
-                      celular: newAmbiente.persona.celular,
-                      email: newAmbiente.persona.email
-                    },
-                    lugar: {
-                      calle: newAmbiente.ambiente.lugar.calle,
-                      altura: newAmbiente.ambiente.lugar.altura,
-                      id: idAmbiente,
-                      localidadid: 1,
-                      barrio: newAmbiente.ambiente.lugar.barrio,
-                      piso: newAmbiente.ambiente.lugar.piso,
-                      depto: newAmbiente.ambiente.lugar.depto,
-                      escalera: newAmbiente.ambiente.lugar.escalera,
-                      localidad: getNombreArray(newAmbiente.ambiente.lugar.localidadid, localidad)
-                    }
-                });
-                // datos a mostrar en la tabla
-                localStorage.setItem('ambienteLista', JSON.stringify(ambienteLista));
+                newAmbiente.lugar.id = generarId(ambienteLista);
+
+                newAmbiente.tipo_ambiente_trabajo = getNombreArray(newAmbiente.tipo_ambiente_trabajoid,tipoAmbienteTrabajoLista);
+                newAmbiente.lugar.localidad = getNombreArray(newAmbiente.lugar.localidadid,localidad);
+                
+                console.log(newAmbiente);
+                
+                ambienteLista.push(newAmbiente);
+                                // datos a mostrar en la tabla
+                localStorage.setItem('ambienteLista', JSON.stringify(newAmbiente));
+
                 // datos de usuarios agregados
                 //ambientesAgregados.push(newAmbiente);
                 //localStorage.setItem('ambientesAgregados', JSON.stringify(ambientesAgregados));
