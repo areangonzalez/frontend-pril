@@ -550,11 +550,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 search = global_param.split(" ");
               }
 
+              ambienteLista = getAmbientes();
+
               // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                   let totalF = ambienteLista.length;
                   let ambienteColeccion : any[]=[];
-
+                  console.log(ambienteLista);
+                  
                   for (let i = 0; i < ambienteLista.length; i++) {
                     // Selecciono la persona del ambiente de trabajo
                     let matchedPersona = personas.filter(persona => { return persona.id === ambienteLista[i].personaid; });
