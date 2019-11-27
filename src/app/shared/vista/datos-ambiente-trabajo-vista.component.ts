@@ -19,4 +19,14 @@ export class DatosAmbienteTrabajoVistaComponent {
         config.placement = 'top';
         config.triggers = 'click';
     }
+
+    getTelefonos(telefono1:string, telefono2:string, telefono3:string) {
+        
+        let telefonos = '';
+        telefonos += (telefono1)?telefono1:''; 
+        telefonos += (telefono2)?' '+telefono2:''; 
+        telefonos += (telefono3)?' '+telefono3:'';
+        
+        return telefonos;
+    }
 }
