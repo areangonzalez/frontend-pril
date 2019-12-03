@@ -16,6 +16,7 @@ export class AutoCompletarComponent {
     @Input("placeHolder") public placeHolder:string;
     @Input("nombreValor") public model:string;
     @Output("seleccionaValor") public seleccionaValor = new EventEmitter();
+    @Output("buscarPorPalabra") public buscarPorPalabra = new EventEmitter();
 
     @ViewChild('instance') instance: NgbTypeahead;
     focus$ = new Subject<string>();
@@ -62,5 +63,9 @@ export class AutoCompletarComponent {
         }else{// sino hubo seleccion mando un mensaje de error
           this.seleccionaValor.emit({id:'',nombre:''});
         }
+      }
+
+      obtenerPalabra(valor:string) {
+        this.buscarPorPalabra.emit(valor);
       }
 }

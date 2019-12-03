@@ -36,7 +36,7 @@ export class EstudioComponent implements OnInit {
     ngOnInit() {
         this.getNivelEducativo();
         this.obtenerAnios();
-        this.profesiones();
+        this.profesiones('');
         if (this.datosEstudio) {
             this.estudios.patchValue(this.datosEstudio);
         }
@@ -89,8 +89,9 @@ export class EstudioComponent implements OnInit {
     /**
      * Obtengo el listado de profesiones
      */
-    profesiones() {
-      this._profesionService.listarProfesiones().subscribe(
+    profesiones(nombre:string) {
+
+      this._profesionService.buscarPorNombre(nombre).subscribe(
           data =>{
              return this.listaProfesiones = data;
           },
