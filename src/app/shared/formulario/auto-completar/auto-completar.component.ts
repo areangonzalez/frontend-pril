@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { NgbTypeahead, NgbTypeaheadSelectItemEvent } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject, merge } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Console } from '@angular/core/src/console';
 
 
@@ -11,12 +11,11 @@ import { Console } from '@angular/core/src/console';
     styles: ['./auto-completar.css']
 })
 export class AutoCompletarComponent {
-    @Input("listado") public listado;
+    @Input("listado") public listado: any;
     @Input("titulo") public titulo:string;
     @Input("placeHolder") public placeHolder:string;
     @Input("nombreValor") public model:string;
     @Output("seleccionaValor") public seleccionaValor = new EventEmitter();
-    @Output("buscarPorPalabra") public buscarPorPalabra = new EventEmitter();
 
     @ViewChild('instance') instance: NgbTypeahead;
     focus$ = new Subject<string>();
@@ -25,12 +24,12 @@ export class AutoCompletarComponent {
      * Busca las coincidencias dentro del listado
      */
     search = (text$: Observable<string>) => {
-        const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+        const debouncedText$ = text$.pipe(debounceTime(200),distinctUntilChanged());
         const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
         const inputFocus$ = this.focus$;
         return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
             map(term => (term === '' ? this.getListaNombres(this.listado)
-                : this.getListaNombres(this.listado).filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+               : this.getListaNombres(this.listado).filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
         );
     }
     /**
@@ -63,9 +62,5 @@ export class AutoCompletarComponent {
         }else{// sino hubo seleccion mando un mensaje de error
           this.seleccionaValor.emit({id:'',nombre:''});
         }
-      }
-
-      obtenerPalabra(valor:string) {
-        this.buscarPorPalabra.emit(valor);
       }
 }
