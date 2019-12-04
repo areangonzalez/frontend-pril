@@ -12,7 +12,7 @@ import { MensajesService } from "../../core/services/mensajes.service";
 })
 export class OfertaComponent implements OnInit {
     public lista_ofertas: any;
-    private id:any;
+    public id:any;
     public idAmbiente = '';
     public ambiente: any;
 
