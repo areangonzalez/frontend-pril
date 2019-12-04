@@ -1,3 +1,8 @@
 <label for="auto-completar" class="prioridad">{{titulo}}:</label>
-<input id="auto-completar" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)"
-    (click)="click$.next($event.target.value)" #instance="ngbTypeahead" placeholder="{{placeHolder}}" (selectItem)="seleccionaElemento($event)"/>
+<input id="auto-completar" type="text" class="form-control" [(ngModel)]="model"
+  [ngbTypeahead]="search"
+  (focus)="focus$.next($event.target.value)"
+  (click)="click$.next($event.target.value)"
+  #instance="ngbTypeahead"
+  placeholder="{{placeHolder}}"
+  (selectItem)="seleccionaElemento($event)" />

@@ -312,8 +312,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     });
 
                     if (nivel_educativoid != '') {
-                      console.log(encontrados);
-
                         encontrados = encontrados.filter(destinatario => {
                           let existe = false;
                           for (let i = 0; i < destinatario.persona.estudios.length; i++) {
@@ -557,7 +555,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   let totalF = ambienteLista.length;
                   let ambienteColeccion : any[]=[];
                   console.log(ambienteLista);
-                  
+
                   for (let i = 0; i < ambienteLista.length; i++) {
                     // Selecciono la persona del ambiente de trabajo
                     let matchedPersona = personas.filter(persona => { return persona.id === ambienteLista[i].personaid; });
@@ -1251,9 +1249,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // profesiones
             if (request.url.endsWith('/apimock/profesions') && request.method === 'GET') {
+              let nombre = (request.params.get("nombre")) ? request.params.get("nombre") : '';
+              let encontrados = [];
+                if (nombre != '' ){
+                  encontrados = profesion.filter(
+                    profesionEncontrada => {
+                      for (let i = 0; i < nombre.length; i++) {
+                        let nombreProfesion = profesionEncontrada.nombre.split(" ");
+                        for (let j = 0; j < nombreProfesion.length; j++) {
+                            if ( nombreProfesion[j].toLowerCase().indexOf(nombre[i].toLowerCase()) > -1  ) {
+                              return profesionEncontrada;
+                            }
+                        }
+                      }
+                    });
+                }
+                console.log(encontrados);
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    return of(new HttpResponse({ status: 200, body: profesion }));
+                    return of(new HttpResponse({ status: 200, body: encontrados }));
                 // } else {
                 //     // return 401 not authorised if token is null or invalid
                 //     return throwError({ error: { message: 'Unauthorised' } });

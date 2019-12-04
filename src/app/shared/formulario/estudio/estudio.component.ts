@@ -90,9 +90,10 @@ export class EstudioComponent implements OnInit {
      * Obtengo el listado de profesiones
      */
     profesiones() {
+
       this._profesionService.listarProfesiones().subscribe(
           data =>{
-             return this.listaProfesiones = data;
+            this.listaProfesiones = data;
           },
           error => {
             this._mensajesService.cancelado(error, [{name:''}]);
