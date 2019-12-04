@@ -9,9 +9,9 @@ export class PersonaService {
     constructor(private _apiService: ApiService) { }
 
     personaPorNroDocumento(nro_documento) {
-      let httpParams = new HttpParams();
-      httpParams = this._apiService.formatParams(httpParams, {'nro_documento':nro_documento})
-        return this._apiService.get('/personas', httpParams);
+      /* let httpParams = new HttpParams();
+      httpParams = this._apiService.formatParams(httpParams, {'nro_documento':nro_documento}) */
+        return this._apiService.get('/personas/buscar-por-documento/' + nro_documento);
     }
 
 

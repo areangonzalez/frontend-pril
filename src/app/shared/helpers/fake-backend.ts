@@ -1211,10 +1211,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          *                                  PERSONAS
          * ************************************************************************ */
             // Buscar personas
-            if (request.url.endsWith('/apimock/personas') && request.method === 'GET') {
+            if (request.url.match(/\/apimock\/personas\/buscar\-por\-documento\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    let nro_documento = request.params.get('nro_documento');
+                    let urlParts = request.url.split('/');
+                    let nro_documento = urlParts[urlParts.length - 1];
                     let mensaje:string = 'Esta persona no existe.';
 
                     let matchedUsers = personas.filter(persona => { return persona.nro_documento === nro_documento; });
@@ -1249,25 +1250,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // profesiones
             if (request.url.endsWith('/apimock/profesions') && request.method === 'GET') {
-              let nombre = (request.params.get("nombre")) ? request.params.get("nombre") : '';
-              let encontrados = [];
-                if (nombre != '' ){
-                  encontrados = profesion.filter(
-                    profesionEncontrada => {
-                      for (let i = 0; i < nombre.length; i++) {
-                        let nombreProfesion = profesionEncontrada.nombre.split(" ");
-                        for (let j = 0; j < nombreProfesion.length; j++) {
-                            if ( nombreProfesion[j].toLowerCase().indexOf(nombre[i].toLowerCase()) > -1  ) {
-                              return profesionEncontrada;
-                            }
-                        }
-                      }
-                    });
-                }
-                console.log(encontrados);
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    return of(new HttpResponse({ status: 200, body: encontrados }));
+                    return of(new HttpResponse({ status: 200, body: profesion }));
                 // } else {
                 //     // return 401 not authorised if token is null or invalid
                 //     return throwError({ error: { message: 'Unauthorised' } });
