@@ -115,7 +115,7 @@ export class FormAmbienteTrabajoComponent implements OnInit {
         this._ambienteTrabajoService.guardar(params, id).subscribe(
             datos => {
                 if (id == '') {
-                    id = datos['id'];
+                    id = datos['data']['id'];
                 }
                 console.log("id al editar un AT: ",id);
                 this._mensajeService.ofrecer('Se ha guardado correctamente el ambiente de trabajo.', [{ name: 'ambiente/' + id + '/ofertas', tipo: 'agregar' }, { name: 'inicio/ambiente/vista/' + id, tipo: 'vista' }]);
