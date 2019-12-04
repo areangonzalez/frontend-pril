@@ -56,8 +56,8 @@ export class DatosRepresentanteFormComponent implements OnInit {
         if (nroDocumento != '') {
             this._personaService.personaPorNroDocumento(nroDocumento).subscribe(
                 respuesta => {
-                    if (respuesta['estado']) {
-                        let persona = respuesta['resultado'][0];
+                    if (respuesta.length>0) {
+                        let persona = respuesta[0];
                         // borro variables que no son utilizadas en el objeto
                         delete persona.estudios;
                         delete persona.lugar;
@@ -71,7 +71,7 @@ export class DatosRepresentanteFormComponent implements OnInit {
                         this.existeRepresentante = true;
                     }else{
                         this.resetForm(this.datosPersona);
-                        this.datosPersona.controls.nro_documento.setValue(doc);
+                        this.datosPersona.controls.nro_documento.patchValue(doc);
                     }
                 }, error => {
                     this._mensajeService.cancelado(error, [{ name: '' }]);

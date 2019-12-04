@@ -124,25 +124,25 @@ export class DatosPersonaComponent implements OnInit {
             this._personaService.personaPorNroDocumento(nro_documento)
             .map(vDatos => {
               let vPersona = {};
-              if (vDatos.estado) {
+              if (vDatos.length > 0) {
                 // seteo listado de estudio
-                this.setListaEstudios.emit(vDatos.resultado[0]['estudios']);
-                this.setListaOficios.emit(vDatos.resultado[0]['lista_oficio']);
+                this.setListaEstudios.emit(vDatos[0]['estudios']);
+                this.setListaOficios.emit(vDatos[0]['lista_oficio']);
                 // borro datos que no sirven
-                delete vDatos.resultado[0]['estudios'];
-                delete vDatos.resultado[0]['fax'];
+                delete vDatos[0]['estudios'];
+                delete vDatos[0]['fax'];
 
                 // agrego los datos de persona
-                vPersona = vDatos.resultado[0];
+                vPersona = vDatos[0];
                 // ingreso el estado
-                vPersona['estado'] = vDatos.estado;
+                vPersona['estado'] = true;
                 // configuro las variables del formulario
-                vPersona['cuil_prin'] = this.primerosDigitosCuil(vDatos.resultado[0]['cuil']);
-                vPersona['cuil_ult'] = this.ultimoDigitoCuil(vDatos.resultado[0]['cuil']);
-                vPersona['fechaNacimiento'] = this.fechaAObjeto(vDatos.resultado[0]['fecha_nacimiento']);
+                vPersona['cuil_prin'] = this.primerosDigitosCuil(vDatos[0]['cuil']);
+                vPersona['cuil_ult'] = this.ultimoDigitoCuil(vDatos[0]['cuil']);
+                vPersona['fechaNacimiento'] = this.fechaAObjeto(vDatos[0]['fecha_nacimiento']);
               }else{
-                vPersona['estado'] = vDatos.estado;
-                vPersona['message'] = vDatos.message;
+                vPersona['estado'] = false;
+                // vPersona['message'] = vDatos.message;
               }
               // returno el array pre-armado
               return vPersona;
@@ -153,7 +153,7 @@ export class DatosPersonaComponent implements OnInit {
                     this.datosPersona.patchValue(respuesta);
                   }else{
                         this.resetForm(this.datosPersona);
-                        this._mensajeService.cancelado(respuesta['message'], [{ name: '' }]);
+                        // this._mensajeService.cancelado(respuesta['message'], [{ name: '' }]);
                         this.datosPersona.controls.nro_documento.setValue(nro_documento);
                         this.cuil_medio = nro_documento;
                     }
