@@ -142,7 +142,7 @@ export class FormDestinatarioComponent implements OnInit {
     private guardarDestinatario(params:object, id:number){
         this._destinatarioService.guardar(params,id).subscribe(
             datos => {
-                this._mensajeService.exitoso('Guardado exitoso.', [{ name: 'inicio/destinatario/vista/' + datos.id }]);
+                this._mensajeService.exitoso('Guardado exitoso.', [{ name: 'inicio/destinatario/vista/' + datos['data']['id']}]);
         },error => {
             this._mensajeService.cancelado(error, [{ name: '' }]);
         })
