@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between mt-2 border-top">
+<div class="d-flex justify-content-between border-top">
   <div class="d-flex align-items-center p-2 font-weight-bold">
     <span *ngIf="configPaginacion.totalRegistros > 0">Destinatario/s: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
     <span *ngIf="configPaginacion.totalRegistros == 0">Destinatarios: {{configPaginacion.cantRegistros}}</span>
@@ -26,26 +26,30 @@
                 <td>{{destinatario.persona.nro_documento}}</td>
                 <th>{{destinatario.persona.apellido}}, {{destinatario.persona.nombre}}</th>
                 <td>
-                    <button type="button" class="btn btn-outline-secondary btn-margin-left" tooltipClass="tooltip-inner" ngbTooltip="{{getDireccion(destinatario.persona.lugar)}}">
+                  <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" tooltipClass="tooltip-inner" ngbTooltip="{{getDireccion(destinatario.persona.lugar)}}">
                         <span class="oi oi-home" title="Dirección" aria-hidden="true"></span>
                     </button>
-                    <button *ngIf="(destinatario.persona.email != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.email}}">
+                    <button *ngIf="(destinatario.persona.email != '')" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{destinatario.persona.email}}">
                         <span class="oi oi-envelope-closed" title="Email" aria-hidden="true"></span>
                     </button>
-                    <button *ngIf="(destinatario.persona.telefono != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.telefono}}">
+                    <button *ngIf="(destinatario.persona.telefono != '')" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{destinatario.persona.telefono}}">
                         <i class="fas fa-phone" title="Telefono"></i>
                     </button>
-                    <button *ngIf="(destinatario.persona.celular != '')" type="button" class="btn btn-outline-secondary btn-margin-left" ngbTooltip="{{destinatario.persona.celular}}">
+                    <button *ngIf="(destinatario.persona.celular != '')" type="button" class="btn btn-sm btn-outline-secondary" ngbTooltip="{{destinatario.persona.celular}}">
                         <span class="oi oi-phone" title="Celular" aria-hidden="true"></span>
                     </button>
+                  </div>
                 </td>
                 <td class="text-center">{{destinatario.profesion}}</td>
                 <td class="text-center">
                     <vista-tag-component [listaTags]="destinatario.persona.lista_oficio"></vista-tag-component>
                 </td>
                 <td>
+                  <div class="btn-group" role="group">
                     <a class="btn btn-info btn-sm" [routerLink]="['vista', destinatario.id]"><span class="oi oi-eye" title="Ver destinatario" aria-hidden="true"></span></a>
                     <a class="btn btn-light btn-sm" [routerLink]="['editar', destinatario.id]"><span class="oi oi-pencil" title="Editar destinatario" aria-hidden="true" ></span></a>
+                  </div>
                 </td>
             </tr>
         </tbody>
