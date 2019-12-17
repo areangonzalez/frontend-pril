@@ -46,4 +46,22 @@ export class ListaDestinatarioComponent {
       this.cambioDePagina.emit(page);
     }
 
+    nivelEducativo(estudio:any) {
+      let texto = "N/A";
+      if (estudio !== '') {
+          texto = (estudio.nivel_educativo != '') ? estudio.nivel_educativo : "N/A";
+          texto += (estudio.en_curso) ? " (En curso)" : "";
+      }
+      return texto;
+    }
+
+    tituloProfesion(estudio:any) {
+      let texto = "N/A";
+      if (estudio !== '') {
+          texto = (estudio.profesion != '') ? estudio.profesion : "N/A";
+          texto += (estudio.en_curso) ? " (En curso)" : "";
+      }
+      return texto;
+    }
+
 }

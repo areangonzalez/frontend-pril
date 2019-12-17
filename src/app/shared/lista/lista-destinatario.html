@@ -11,6 +11,7 @@
                 <th scope="col">Nro. documento</th>
                 <th scope="col">Apellido y nombre</th>
                 <th scope="col"></th>
+                <th class="text-center" scope="col">Nivel Alcanzado</th>
                 <th class="text-center" scope="col">Profesión</th>
                 <th class="text-center" scope="col">Oficio</th>
                 <th scope="col">Acción</th>
@@ -41,7 +42,12 @@
                     </button>
                   </div>
                 </td>
-                <td class="text-center">{{destinatario.profesion}}</td>
+                <td class="text-center">
+                  <span>{{nivelEducativo(destinatario.persona.ultimo_estudio)}}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{tituloProfesion(destinatario.persona.ultimo_estudio)}}</span>
+                </td>
                 <td class="text-center">
                     <vista-tag-component [listaTags]="destinatario.persona.lista_oficio"></vista-tag-component>
                 </td>
@@ -59,3 +65,4 @@
     <ngb-pagination [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)"></ngb-pagination>
 </div>
 
+<pre>{{ destinatarios[0] | json }}

@@ -340,6 +340,34 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         }
                       });
                     }
+                    let ultimoEstudio = [];
+                    // verifico que haya algun destinario filtrado
+                    if (encontrados.length > 0){
+                      for (let i = 0; i < encontrados.length; i++) {
+                        if (encontrados[i].persona.estudios.length > 0) {
+                          console.log(encontrados[i].persona.estudios);
+                           ultimoEstudio = encontrados[i].persona.estudios[0];
+
+                          for (let j = 1; j < encontrados[i].persona.estudios.length; j++) {
+                            if (parseInt(encontrados[i].persona.estudios[j].anio) > parseInt(ultimoEstudio[0].anio)) {
+                              if (encontrados[i].persona.estudios[j].completo == 1) {
+                                ultimoEstudio = encontrados[i].persona.estudios[j];
+                              }
+                            }
+                          }
+
+                        encontrados[i].persona["ultimo_estudio"] = ultimoEstudio;
+                        delete(encontrados[i].persona["estudios"]);
+
+                        }else{
+                          encontrados[i].persona["ultimo_estudio"] = [];
+                        }
+                        delete(encontrados[i].persona["hogar"]);
+                      }
+                    }
+
+                    console.log(encontrados);
+
 
                   let totalFiltrado:number = encontrados.length;
                   let total:number = totalFiltrado/pageSize;

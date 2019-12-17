@@ -667,7 +667,9 @@
                       "en_curso": 0,
                       "nivel_educativoid": 1,
                       "nivel_educativo": "Primario",
-                      "anio": "2001"
+                      "anio": "2001",
+                      "profesionid": "",
+                      "profesion": ""
                   },
                   {
                       "id": 2,
@@ -676,7 +678,9 @@
                       "en_curso": 0,
                       "nivel_educativoid": 2,
                       "nivel_educativo": "Secundario",
-                      "anio": "2001"
+                      "anio": "2001",
+                      "profesionid": "",
+                      "profesion": ""
                   }
               ],
               "sexo": "Mujer",
@@ -751,7 +755,9 @@
                       "en_curso": 0,
                       "nivel_educativoid": 3,
                       "nivel_educativo": "Secundario",
-                      "anio": "2001"
+                      "anio": "2001",
+                      "profesionid": "",
+                      "profesion": ""
                   }
               ],
               "sexo": "Mujer",
@@ -836,7 +842,9 @@
                       "en_curso": 0,
                       "nivel_educativoid": 3,
                       "nivel_educativo": "Terciario",
-                      "anio": "2001"
+                      "anio": "2001",
+                      "profesionid": "",
+                      "profesion": ""
                   }
               ],
               "sexo": "Mujer",
@@ -917,7 +925,9 @@
                     "en_curso": 0,
                     "nivel_educativoid": 2,
                     "nivel_educativo": "Secundario",
-                    "anio": "2001"
+                    "anio": "2001",
+                    "profesionid": "",
+                    "profesion": ""
                 }
               ],
               "sexo": "Mujer",
@@ -998,7 +1008,9 @@
                     "en_curso": 0,
                     "nivel_educativoid":4,
                     "nivel_educativo": "Universitario",
-                    "anio": "2001"
+                    "anio": "2001",
+                    "profesionid": "",
+                    "profesion": ""
                 }
               ],
               "sexo": "Mujer",
@@ -1079,7 +1091,9 @@
                     "en_curso": 0,
                     "nivel_educativoid": 2,
                     "nivel_educativo": "Secundario",
-                    "anio": "2001"
+                    "anio": "2001",
+                    "profesionid": "",
+                    "profesion": ""
                 }
               ],
               "sexo": "Mujer",
@@ -1160,7 +1174,9 @@
                     "en_curso": 0,
                     "nivel_educativoid": 2,
                     "nivel_educativo": "Secundario",
-                    "anio": "2001"
+                    "anio": "2001",
+                    "profesionid": "",
+                    "profesion": ""
                 }
               ],
               "sexo": "Mujer",
@@ -1241,7 +1257,9 @@
                     "en_curso": 0,
                     "nivel_educativoid": 4,
                     "nivel_educativo": "Universitario",
-                    "anio": "2001"
+                    "anio": "2001",
+                    "profesionid": "",
+                    "profesion": ""
                 }
               ],
               "sexo": "Mujer",
