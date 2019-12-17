@@ -64,5 +64,3 @@
 <div *ngIf="(configPaginacion.colleccionSize > configPaginacion.pageSize)" class="d-flex justify-content-center">
     <ngb-pagination [collectionSize]="configPaginacion.colleccionSize" [(page)]="configPaginacion.page" [pageSize]="configPaginacion.pageSize" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="cambioPagina(configPaginacion.page)"></ngb-pagination>
 </div>
-
-<pre>{{ destinatarios[0] | json }}
