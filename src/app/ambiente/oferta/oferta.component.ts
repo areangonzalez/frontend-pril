@@ -57,10 +57,10 @@ export class OfertaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.id = this._route.snapshot.paramMap.get('ambienteid');
+        this.idAmbiente = this._route.snapshot.paramMap.get('ambienteid');
         this.lista_ofertas = this._route.snapshot.data['ofertaLista']['resultado'];
         
-        if (this.id == undefined) {
+        if (this.idAmbiente == undefined) {
             this._router.navigate(['ambiente']);
         }
     }
@@ -68,8 +68,8 @@ export class OfertaComponent implements OnInit {
 
     private buscarOfertas(idAmbiente) {
         this._ofertaService.listarOfertas(idAmbiente).subscribe(
-            datos => {
-                this.lista_ofertas = datos;
+            datos => {                
+                this.lista_ofertas = datos['resultado'];
             }, error => {
                 this._mensajeService.cancelado(error, [{ name: '' }]);
             });
