@@ -22,42 +22,11 @@ export class OfertaComponent implements OnInit {
         private _ofertaService: OfertaService,
         private _ambienteTrabajoService: AmbienteTrabajoService,
         private _mensajeService: MensajesService
-    ) {
-        this.ambiente = {
-            ambiente: {
-                id: 0,
-                nombre: "Saturno hogar S.A",
-                legajo: "",
-                observacion: "",
-                cuit: "",
-                actividad: "Venta de ",
-                tipo_ambiente_trabajoid: "",
-                lugar: {
-                    id: 0,
-                    localidadid: "",
-                    calle: "",
-                    altura: "",
-                    barrio: "",
-                    piso: "",
-                    depto: "",
-                    escalera: ""
-                }
-            },
-            persona: {
-                id: 0,
-                nro_documento: "",
-                apellido: "",
-                nombre: "",
-                telefono: "",
-                celular: "",
-                fax: "",
-                email: ""
-            }
-        }
-    }
+    ) {}
 
     ngOnInit() {
         this.idAmbiente = this._route.snapshot.paramMap.get('ambienteid');
+        this.ambiente = this._route.snapshot.data['ambiente'];
         this.lista_ofertas = this._route.snapshot.data['ofertaLista']['resultado'];
         
         if (this.idAmbiente == undefined) {
