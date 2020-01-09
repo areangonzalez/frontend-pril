@@ -27,7 +27,7 @@ const routes: Routes = [
     },{
       path: ':ambienteid/ofertas', component: OfertaComponent,
       data: { loading: true, title: 'Ofertas', breadcrumb: 'Lista de ofertas'},
-      resolve: { ofertaLista: OfertaService}
+      resolve: { ofertaLista: OfertaService, ambiente: AmbienteTrabajoService}
     }
 ];
 
