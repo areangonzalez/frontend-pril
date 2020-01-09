@@ -34,6 +34,15 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'admin', data: { title: "admin" },
+    //component: AdminLayoutComponent,
+    children: [{
+      path: '',
+      canActivate: [AuthGuard],
+      loadChildren: './admin/admin.module#AdminModule'
+    }]
+  },
   { path: 'login', data: { title: "Iniciar sesión" }, loadChildren: './login/login.module#LoginModule' },
   { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ]
