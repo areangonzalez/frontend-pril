@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from "@angular/router";
 
-import { CabeceraComponent, PieComponent } from "./layout";
+import { CabeceraComponent, PieComponent, MenuAdminComponent } from "./layout";
 //listas
 import {
   ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent, ListaOfertaComponent, ListaAreaEntrenamientoComponent,
@@ -41,7 +41,7 @@ import {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
-    CabeceraComponent, PieComponent,
+    CabeceraComponent, PieComponent, MenuAdminComponent,
     ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent, ListaAreaEntrenamientoComponent,
     ListaDestinatarioAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent,
     LugarComponent,
@@ -62,7 +62,7 @@ import {
   ],
   exports: [
     CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule,
-    CabeceraComponent, PieComponent,
+    CabeceraComponent, PieComponent, MenuAdminComponent,
     ListaDestinatarioComponent, ListaEstudioComponent, ListaAmbienteTrabajoComponent,ListaAreaEntrenamientoComponent,
     ListaDestinatarioAreaEntrenamientoComponent, ListaOfertaAreaEntrenamientoComponent,
     LugarComponent,

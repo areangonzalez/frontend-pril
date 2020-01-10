@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import {filter, map, mergeMap} from 'rxjs/operators';
-//import 'rxjs/add/operator/map';
-//import 'rxjs/add/operator/mergeMap';
 
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
-const APP_TITLE = 'Prestaciones - ';
+const APP_TITLE = 'PRIL - ';
 const SEPARATOR = ' > ';
+let titlePage = '';
 
 @Injectable()
 export class TitleService {
@@ -34,6 +33,7 @@ export class TitleService {
       .pipe(map((data) => {
         if ( data.title ) {
           // If a route has a title set (e.g. data: {title: "Foo"}) then we use it
+          titlePage = data.title;
           return data.title;
         } else {
           // If not, we do a little magic on the url to create an approximation
@@ -50,4 +50,9 @@ export class TitleService {
     if ( !string ) { return string; }
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+
+  public getTitlePage() {
+    return titlePage;
+  }
+
 }

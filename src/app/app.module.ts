@@ -16,6 +16,7 @@ import { fakeBackendProvider } from './shared/helpers/fake-backend';
 import { CoreModule } from "./core/core.module";
 import {
   AppLayoutComponent,
+  AdminLayoutComponent,
   MensajesComponent,
   BreadcrumbComponent, BreadcrumbsService,
   CustomDatepickerI18n,
@@ -32,6 +33,7 @@ import { ErrorInterceptor } from './shared/helpers/error.interceptor';
   declarations: [
     AppComponent,
     AppLayoutComponent,
+    AdminLayoutComponent,
     LoaderComponent,
     BreadcrumbComponent,
     MensajesComponent

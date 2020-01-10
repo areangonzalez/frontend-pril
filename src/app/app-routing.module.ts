@@ -5,6 +5,7 @@ import { AppCustomPreloader } from './app-routing-loader';
 
 import { AuthGuard } from './core/guards/auth.guard'
 import { AppLayoutComponent } from './shared';
+import { AdminLayoutComponent } from "./shared";
 
 const routes: Routes = [
 //  { path: 'login', component: LoginComponent },
@@ -36,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: 'admin', data: { title: "admin" },
-    //component: AdminLayoutComponent,
+    component: AdminLayoutComponent,
     children: [{
       path: '',
       canActivate: [AuthGuard],
