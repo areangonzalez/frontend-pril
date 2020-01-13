@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaRedesSocialesComponent, VistaTipoAmbienteTrabajoComponent } from './vistas';
 //import { DetalleProgramaService } from "../core/services";
 
 const routes: Routes = [
@@ -11,6 +12,21 @@ const routes: Routes = [
         /* resolve: {
           programas: DetalleProgramaService
         } */
+    },
+    {
+      path: 'oficio', component: VistaOficioComponent, data: { title: 'Oficio' }
+    },
+    {
+      path: 'plan', component: VistaPlanComponent, data: { title: 'Plan' }
+    },
+    {
+      path: 'profesion', component: VistaProfesionComponent, data: { title: 'Profesión' }
+    },
+    {
+      path: 'redes-sociales', component: VistaRedesSocialesComponent, data: { title: 'Redes Sociales' }
+    },
+    {
+      path: 'tipo-ambiente-trabajo', component: VistaTipoAmbienteTrabajoComponent, data: { title: 'Tipo Ambiente de Trabajo' }
     }
 ];
 

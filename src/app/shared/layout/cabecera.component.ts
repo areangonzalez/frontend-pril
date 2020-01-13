@@ -20,11 +20,7 @@ export class CabeceraComponent implements OnInit {
     }
 
     cerrarSesion(){
-      //this._loaderService.show();
-      //setTimeout(() => {
         this._authentication.logout();
-        //this._loaderService.hide();
         this._router.navigate(['/login']);
-        //}, 1000);
     }
 }

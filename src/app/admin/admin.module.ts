@@ -3,13 +3,19 @@ import { RouterModule } from "@angular/router";
 
 import { AdminComponent } from "./admin.component";
 import { AdminRoutingModule } from "./admin-routing.module";
+import {
+  VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaRedesSocialesComponent, VistaTipoAmbienteTrabajoComponent
+} from './vistas';
+import { AbmTablaComponent } from "./abm";
 
 @NgModule({
     imports: [
         AdminRoutingModule
     ],
     declarations: [
-        AdminComponent
+        AdminComponent,
+        VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaRedesSocialesComponent, VistaTipoAmbienteTrabajoComponent,
+        AbmTablaComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
