@@ -1,30 +1,21 @@
 <table class="table table-sm table-hover">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th *ngFor="let titulo of titulosArray" scope="col">{{titulo}}</th>
+      <th class="text-right" scope="col">
+        Acción
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let row of listado">
+      <td *ngFor="let titulo of titulosArray" scope="col">{{row[titulo]}}</td>
+      <td class="text-right" scope="col">
+        <div class="btn-group">
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="editar(row.id)"><i class="fas fa-pen"></i></button>
+          <button type="button" class="btn btn-sm btn-outline-danger" (click)="borrar(row.id)"><i class="fas fa-trash-alt"></i></button>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>

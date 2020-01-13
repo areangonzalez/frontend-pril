@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaRedesSocialesComponent, VistaTipoAmbienteTrabajoComponent } from './vistas';
+import { OficioService } from '../core/services';
 //import { DetalleProgramaService } from "../core/services";
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
         } */
     },
     {
-      path: 'oficio', component: VistaOficioComponent, data: { title: 'Oficio' }
+      path: 'oficio', component: VistaOficioComponent, data: { title: 'Oficio' }, resolve: { oficios: OficioService }
     },
     {
       path: 'plan', component: VistaPlanComponent, data: { title: 'Plan' }
