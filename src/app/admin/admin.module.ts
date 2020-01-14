@@ -4,7 +4,7 @@ import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/
 import { AdminRoutingModule } from "./admin-routing.module";
 import { AdminComponent } from "./admin.component";
 import {
-  VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaRedesSocialesComponent, VistaTipoAmbienteTrabajoComponent
+  VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent
 } from './vistas';
 import { AbmTablaComponent } from "./abm";
 
@@ -15,7 +15,7 @@ import { AbmTablaComponent } from "./abm";
     ],
     declarations: [
       AdminComponent,
-      VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaRedesSocialesComponent, VistaTipoAmbienteTrabajoComponent,
+      VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent,
       AbmTablaComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

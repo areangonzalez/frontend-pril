@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
-import { VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaRedesSocialesComponent, VistaTipoAmbienteTrabajoComponent } from './vistas';
-import { OficioService } from '../core/services';
+import { VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent } from './vistas';
+import { OficioService, PlanService, ProfesionService, TipoAmbienteTrabajoService } from '../core/services';
 //import { DetalleProgramaService } from "../core/services";
 
 const routes: Routes = [
@@ -18,16 +18,13 @@ const routes: Routes = [
       path: 'oficio', component: VistaOficioComponent, data: { title: 'Oficio' }, resolve: { oficios: OficioService }
     },
     {
-      path: 'plan', component: VistaPlanComponent, data: { title: 'Plan' }
+      path: 'plan', component: VistaPlanComponent, data: { title: 'Plan' }, resolve: { planes: PlanService }
     },
     {
-      path: 'profesion', component: VistaProfesionComponent, data: { title: 'Profesión' }
+      path: 'profesion', component: VistaProfesionComponent, data: { title: 'Profesión' }, resolve: { profesiones: ProfesionService }
     },
     {
-      path: 'redes-sociales', component: VistaRedesSocialesComponent, data: { title: 'Redes Sociales' }
-    },
-    {
-      path: 'tipo-ambiente-trabajo', component: VistaTipoAmbienteTrabajoComponent, data: { title: 'Tipo Ambiente de Trabajo' }
+      path: 'tipo-ambiente-trabajo', component: VistaTipoAmbienteTrabajoComponent, data: { title: 'Tipo Ambiente de Trabajo' }, resolve: { tipoAmbienteTrabajos: TipoAmbienteTrabajoService }
     }
 ];
 

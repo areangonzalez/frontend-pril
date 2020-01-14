@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'admin-vista-plan',
     templateUrl: './vista-plan.component.html'
 })
 export class VistaPlanComponent implements OnInit {
-    constructor(
-        private _router: Router,
-      ) {
-    }
+  public titulos: string[] = [];
+  public listado: any = [];
 
-    ngOnInit() {
-    }
+  constructor(
+      private _router: Router, private _route: ActivatedRoute
+    ) {
+  }
+
+  ngOnInit() {
+    this.renderTabla(this._route.snapshot.data['planes']);
+  }
+
+  renderTabla(listaOficio: any) {
+    this.titulos = Object.keys(listaOficio[0]);
+    this.listado = listaOficio;
+  }
 }

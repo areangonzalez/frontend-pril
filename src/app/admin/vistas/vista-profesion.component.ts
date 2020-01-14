@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'admin-vista-profesion',
     templateUrl: './vista-profesion.component.html'
 })
 export class VistaProfesionComponent implements OnInit {
-    constructor(
-        private _router: Router,
-      ) {
-    }
+  public titulos: string[] = [];
+  public listado: any = [];
 
-    ngOnInit() {
-    }
+  constructor(
+      private _router: Router, private _route: ActivatedRoute
+    ) {
+  }
+
+  ngOnInit() {
+    this.renderTabla(this._route.snapshot.data['profesiones']);
+  }
+
+  renderTabla(listaOficio: any) {
+    this.titulos = Object.keys(listaOficio[0]);
+    this.listado = listaOficio;
+  }
 }
