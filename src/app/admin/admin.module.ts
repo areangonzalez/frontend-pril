@@ -6,7 +6,7 @@ import { AdminComponent } from "./admin.component";
 import {
   VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent
 } from './vistas';
-import { AbmTablaComponent } from "./abm";
+import { AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar } from "./abm";
 
 @NgModule({
     imports: [
@@ -16,10 +16,9 @@ import { AbmTablaComponent } from "./abm";
     declarations: [
       AdminComponent,
       VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent,
-      AbmTablaComponent
+      AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [
-    ],
+    exports: [AbmAgregarModalComponent, ModalContentAbmAgregar]
 })
 export class AdminModule {}
