@@ -6,7 +6,7 @@ import { MensajesService } from 'src/app/core/services';
     selector: 'modal-content-oferta',
     template: `
     <div class="modal-header">
-      <h4 class="modal-title">Titulo</h4>
+      <h4 class="modal-title">{{titulo}}</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -14,7 +14,8 @@ import { MensajesService } from 'src/app/core/services';
     <div class="modal-body">
         <div class="card">
             <div class="card-body">
-                Agrego un {{tipo}}
+                <abm-form [armarForm]="armarForm"></abm-form>
+
             </div>
         </div>
     </div>
@@ -30,7 +31,10 @@ export class ModalContentAbmAgregar implements OnInit {
     /**
      * @var tipo tipo de formulario
      */
+    @Input('titulo') public titulo: string;
     @Input('tipo') public tipo: string;
+    @Input('datos') public datos: string;
+    @Input('aermarForm') public armarForm: string;
 
     constructor(
         private _mensajesService: MensajesService,
@@ -41,6 +45,8 @@ export class ModalContentAbmAgregar implements OnInit {
 
     ngOnInit(): void {
     }
+
+
 
 }
 
@@ -53,14 +59,19 @@ export class AbmAgregarModalComponent {
     /**
      * @var ofertaid id de la oferta.
      */
-    @Input("tipo") tipo: string;
-    @Input("datos") datos: any;
+    @Input("titulo")  public titulo: string;
+    @Input("tipo")  public tipo: string;
+    @Input("datos") public datos: any;
+    @Input("armarForm") public armarForm: any;
 
 
     constructor(private modalService: NgbModal) { }
 
     open() {
         const modalRef = this.modalService.open(ModalContentAbmAgregar, { size: 'lg' });
+        modalRef.componentInstance.titulo = this.titulo;
         modalRef.componentInstance.tipo = this.tipo;
+        modalRef.componentInstance.datos = this.datos;
+        modalRef.componentInstance.armarForm = this.armarForm;
     }
 }

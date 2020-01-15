@@ -6,19 +6,20 @@ import { AdminComponent } from "./admin.component";
 import {
   VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent
 } from './vistas';
-import { AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar } from "./abm";
+import { AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent } from "./abm";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
-      CommonModule, NgbModule,
+      CommonModule, NgbModule, FormsModule, ReactiveFormsModule,
       AdminRoutingModule
     ],
     declarations: [
       AdminComponent,
       VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent,
-      AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar
+      AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [AbmAgregarModalComponent, ModalContentAbmAgregar]
+    entryComponents: [AbmAgregarModalComponent, ModalContentAbmAgregar]
 })
 export class AdminModule {}

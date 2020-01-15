@@ -1,0 +1,9 @@
+<form [formGroup]="formulario">
+  <div class="row"  >
+    <div class="form-group col-md-4" *ngFor="let f of crearInputs" >
+      <label for="{{f}}">{{f}}:</label>
+      <input type="text" id="{{f}}" placeholder="{{f}}" class="form-control" formControlName="{{f}}">
+    </div>
+  </div>
+</form>
+

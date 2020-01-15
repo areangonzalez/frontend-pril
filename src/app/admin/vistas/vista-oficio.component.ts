@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class VistaOficioComponent implements OnInit {
   public titulos: string[] = [];
   public listado: any = [];
+  public objArmarForm:any = []
 
     constructor(
         private _router: Router, private _route: ActivatedRoute
@@ -21,6 +22,7 @@ export class VistaOficioComponent implements OnInit {
     renderTabla(listaOficio: any) {
       this.titulos = Object.keys(listaOficio[0]);
       this.listado = listaOficio;
+      this.objArmarForm = listaOficio[0];
     }
 
 }
