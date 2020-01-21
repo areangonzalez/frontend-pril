@@ -11,6 +11,21 @@ export class OficioService {
     listarOficios() {
         return this._apiService.get('/oficios');
     }
+
+    guardar(params:any, id:number) {
+      if (id !== 0) {
+        // edito
+        return this._apiService.post('/oficios/' + id, params);
+      }else{
+        // creo
+        return this._apiService.post('/oficios', params);
+      }
+    }
+
+    porId(id:number) {
+      return this._apiService.get('/oficio/' + id);
+    }
+
     /**
      * Datos precargados en el ruteo de la aplicación
      */

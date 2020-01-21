@@ -2,7 +2,7 @@
 
   <div class="d-flex justify-content-between align-items-center p-1">
     <h2 class="ml-3 mb-0" > Oficio </h2>
-    <abm-agregar-modal class="mr-3" [titulo]="'Agregar oficio'" [tipo]="'oficio'" [armarForm]="titulos" ></abm-agregar-modal>
+    <abm-agregar-modal class="mr-3" [titulo]="'Agregar oficio'" [tipo]="'oficio'" [armarForm]="titulos" (obtenerDatos)="guardar($event)" ></abm-agregar-modal>
   </div>
 </div>
 <abm-tabla [titulosArray]="titulos" [listado]="listado"></abm-tabla>

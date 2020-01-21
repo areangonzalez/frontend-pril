@@ -98,6 +98,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return ofertasLista;
       }
 
+      // traer listado de oficios
+      // desde el archivo "data.json" y del "local storage"
+      function getOficios(){
+        let oficios = (<any>data).oficios;
+        let existe = false;
+        if(localStorage.getItem("oficios")) {
+          let oficiosStorage: any[] = JSON.parse(localStorage.getItem("oficios"));
+          for (let i = 0; i < oficiosStorage.length; i++) {
+            for (let j = 0; j < oficios.length; j++) {
+              if (oficiosStorage[i].id === oficios[j].id){
+                oficios[j] = oficiosStorage[i]; // si se edito
+                existe = true;
+              }
+            }
+            if (!existe) {
+              oficios.push(oficiosStorage[i]);
+            }
+          }
+        }
+        return oficios;
+      }
+
 
       // listados de datos agregados
         let testUser = { id: 1, username: 'admin', password: 'admins', firstName: 'Admin', lastName: 'Super' };
@@ -108,6 +130,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let destinatarioLista = getDestinatarios();
         let ambienteLista = getAmbientes();
         let personas = getPersonas();
+        let oficio = getOficios();
 
         // listados globales
         let sexo = (<any>data).sexos;
@@ -116,7 +139,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let localidad = (<any>data).localidads;
 
         let profesion = (<any>data).profesions;
-        let oficio = (<any>data).oficios;
         let nivelEducativo = (<any>data).nivelEducativos;
         let tipoAmbienteTrabajoLista = (<any>data).tipoAmbienteTrabajos;
         let planes = (<any>data).planes;
@@ -1295,6 +1317,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 //     // return 401 not authorised if token is null or invalid
                 //     return throwError({ error: { message: 'Unauthorised' } });
                 // } */
+            }
+            // crear
+            if (request.url.endsWith('/apimock/oficios') && request.method === 'POST') {
+              // get new user object from post body
+              let newOficio = request.body;
+              console.log(newOficio);
+              let id = generarId(oficio);
+              oficio.push({
+                id: id,
+                nombre: newOficio.nombre
+              });
+
+              localStorage.setItem('oficios', JSON.stringify(oficio));
+              // respond 200 OK
+              return of(new HttpResponse({ status: 200, body: { id: id } }));
+
             }
             //sexo
             if (request.url.endsWith('/apimock/sexos') && request.method === 'GET') {

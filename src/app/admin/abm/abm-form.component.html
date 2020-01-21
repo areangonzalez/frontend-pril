@@ -1,9 +1,20 @@
 <form [formGroup]="formulario">
-  <div class="row"  >
-    <div class="form-group col-md-4" *ngFor="let f of crearInputs" >
-      <label for="{{f}}">{{f}}:</label>
-      <input type="text" id="{{f}}" placeholder="{{f}}" class="form-control" formControlName="{{f}}">
+  <fieldset>
+    <div class="row">
+      <div class="form-group col-md-12" *ngFor="let f of crearInputs" >
+        <label for="{{f}}">{{f}}:</label>
+        <input type="text" id="{{f}}" placeholder="{{f}}" class="form-control" formControlName="{{f}}" [ngClass]="{'is-invalid': (formulario.get(f).invalid && submitted)}" >
+        <div *ngIf="(formulario.get(f).invalid && submitted)" class="text-danger">
+            <div *ngIf="formulario.get(f).hasError('required')">Este campo es requerido. </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </fieldset>
 </form>
+<hr class="pt-1" style="margin-left: -1rem!important; margin-right: -1rem!important;">
+
+<div class="float-right pb-3">
+    <button type="button" class="btn btn-danger" (click)="cancelar()"><span class="oi oi-ban" title="Cancelar" aria-hidden="true"></span> Cancelar</button>&nbsp;
+    <button type="button" class="btn btn-success" (click)="validarForm()" ><span class="fas fa-save" title="Guardar" aria-hidden="true"></span> Guardar</button>
+</div>
 

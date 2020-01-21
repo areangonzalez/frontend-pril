@@ -70,3 +70,9 @@ dd {
 .bg-green-ds {
   background-color: #8cc63f !important;
 }
+.is-invalid {
+  border: 1px solid red;
+}
+.is-invalid:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.31);
+}

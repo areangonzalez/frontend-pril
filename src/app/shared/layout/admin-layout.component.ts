@@ -12,7 +12,7 @@ export class AdminLayoutComponent implements OnInit {
   constructor(
     private _titleService: TitleService,
     private _auth: AuthenticationService,
-    private _router: Router
+    private _router: Router,
   ) {
   }
 
