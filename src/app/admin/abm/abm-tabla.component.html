@@ -1,4 +1,23 @@
 <div class="bg-white rounded p-2">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex align-items-center p-2 font-weight-bold">
+      <span *ngIf="configPaginacion.totalRegistros > 0">{{nombreAbm}}: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+      <span *ngIf="configPaginacion.totalRegistros == 0">{{nombreAbm}}: {{configPaginacion.cantRegistros}}</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <span class="font-weight-bold mr-3">Registos por pagina:</span>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <select id="inputState" class="form-control" [(ngModel)]="pageSize" (change)="cambiarCantRegistros($event)">
+            <option value="5" selected>5</option>
+            <option value="10" selected>10</option>
+            <option value="25" selected>25</option>
+            <option value="50" selected>50</option>
+          </select>
+        </div>
+      </div>
+    </div>
+</div>
   <table class="table table-sm table-hover">
     <thead class="thead-dark rounded-top">
       <tr>
@@ -9,17 +28,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of listado">
+      <tr *ngFor="let row of listadoRender">
         <td *ngFor="let titulo of titulosArray" scope="col">{{row[titulo]}}</td>
         <td class="text-right" scope="col">
           <div class="btn-group">
-            <!-- <button type="button" class="btn btn-sm btn-outline-secondary" (click)="editar(row.id)"><i class="fas fa-pen"></i></button> -->
             <abm-agregar-modal [titulo]="tituloEditar" [tipo]="'modificar'" [armarForm]="titulosArray" [importarDatos]="row" (obtenerDatos)="editar($event)"></abm-agregar-modal>
-            <!-- <button type="button" class="btn btn-sm btn-outline-danger" (click)="borrar(row.id)"><i class="fas fa-trash-alt"></i></button> -->
             <abm-borrar-modal [nombreAbm]="nombreAbm" [importarId]="row['id']" (obtenerConfirmacion)="borrar($event)" ></abm-borrar-modal>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-center">
+    <ngb-pagination [collectionSize]="configPaginacion.colleccionSize" [(page)]="pagina" [pageSize]="configPaginacion.pageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [ellipses]="false"></ngb-pagination>
+  </div>
+
 </div>

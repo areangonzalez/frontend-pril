@@ -1346,7 +1346,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   oficioStorage[j].nombre = editarOficio.nombre
                 }
               }
-              console.log(oficioStorage);
               // guardo el ultimo oficio en el local storage
               localStorage.setItem('oficios', JSON.stringify(oficioStorage));
               return of(new HttpResponse({ status: 200, body: { id: editarOficio.id } }));

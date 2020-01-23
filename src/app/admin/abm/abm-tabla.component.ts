@@ -1,10 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { ConfiguracionParaPaginarService } from 'src/app/core/utils';
+import { ConfigurarPagina } from '../../core/models';
 
 @Component({
     selector: 'abm-tabla',
     templateUrl: './abm-tabla.component.html',
-    styleUrls: ['./abm-tabla.css']
+    styleUrls: ['./abm-tabla.css'],
+    providers: [ConfiguracionParaPaginarService]
 })
 export class AbmTablaComponent implements OnInit {
   @Input("titulosArray") public titulosArray:any;
@@ -14,15 +17,20 @@ export class AbmTablaComponent implements OnInit {
   @Output("borrarDato") public borrarDato = new EventEmitter();
 
   public tituloEditar = 'Editar ';
+  public pagina: number = 1;
+  public configPaginacion:ConfigurarPagina = new ConfigurarPagina();
+  public pageSize = 5;
+  public listadoRender: any[] = [];
 
     constructor(
-        private _router: Router,
+        private _router: Router, private _configurarPagina: ConfiguracionParaPaginarService
       ) {
 
     }
 
     ngOnInit() {
       this.tituloEditar += this.nombreAbm;
+      this.paginacion(this.listado, this.pagina, this.pageSize);
     }
 
     editar(datos:any){
@@ -35,5 +43,18 @@ export class AbmTablaComponent implements OnInit {
       if (dato !== false){
         this.borrarDato.emit(dato);
       }
+    }
+
+    paginacion(listadoArray: any, pagina: number, pagesize:number) {
+      let datos = {pagesize: pagesize, page: pagina, total_filtrado: listadoArray.length};
+      this.configPaginacion = this._configurarPagina.config(datos, pagina);
+      this.listadoRender = this._configurarPagina.paginarListado(pagina, pagesize, listadoArray);
+      console.log(this.listadoRender)
+    }
+
+    cambiarCantRegistros(cant:any) {
+      this.pageSize = cant.target.value;
+      console.log(this.listado);
+      this.paginacion(this.listado, this.pagina, this.pageSize);
     }
 }

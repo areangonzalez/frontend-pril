@@ -52,4 +52,18 @@ export class ConfiguracionParaPaginarService {
       return configPaginacion;
     }
 
+    public paginarListado(pagina, pageSize, listado) {
+      let nuevaLista: any = [];
+      if (pagina > 1) {
+        pagina = pagina;
+        let pageStart = pagina * pageSize;
+        let pageEnd = pageStart + pageSize;
+        nuevaLista = listado.slice(pageStart, pageEnd);
+      }else{
+        nuevaLista = listado.slice(0,pageSize);
+      }
+
+      return nuevaLista;
+    }
+
 }

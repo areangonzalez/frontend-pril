@@ -42,7 +42,9 @@ export class AbmFormComponent implements OnInit {
 
       return formArray;
     }
-
+    /**
+     * cancelo el formulario
+     */
     cancelar() {
       this.cancelarForm.emit(true);
     }
@@ -61,7 +63,7 @@ export class AbmFormComponent implements OnInit {
       }
     }
     /**
-     *
+     * se cargan los datos para editar el formulario
      * @param datos
      */
     cargarDatos(datos:any) {
