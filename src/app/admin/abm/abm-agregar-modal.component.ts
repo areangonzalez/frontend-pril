@@ -1,6 +1,7 @@
 import { Component, Input, Injectable, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MensajesService } from 'src/app/core/services';
+import { MensajesService } from '../../core/services';
+import { ConfigModal } from '../../core/models';
 
 @Component({
     selector: 'modal-content-oferta',
@@ -12,18 +13,15 @@ import { MensajesService } from 'src/app/core/services';
       </button>
     </div>
     <div class="modal-body">
-            <abm-form [armarForm]="armarForm" (cancelarForm)="cancelar($event)" (obtenerDatos)="obtenerDatos($event)"></abm-form>
+            <abm-form [armarForm]="armarForm" (cancelarForm)="cancelar($event)" [importarDatos]="importarDatos" (obtenerDatos)="obtenerDatos($event)"></abm-form>
     </div>
   `
 })
 @Injectable()
 export class ModalContentAbmAgregar implements OnInit {
-    /**
-     * @var tipo tipo de formulario
-     */
-    @Input('titulo') public titulo: string;
-    @Input('tipo') public tipo: string;
-    @Input('datos') public datos: string;
+    @Input("titulo") public titulo: string;
+    @Input("tipo") public tipo: string; // tipo agregar/modificar
+    @Input('importarDatos') public importarDatos: any;
     @Input('aermarForm') public armarForm: string;
 
     constructor(
@@ -52,31 +50,28 @@ export class ModalContentAbmAgregar implements OnInit {
 })
 @Injectable()
 export class AbmAgregarModalComponent {
-    /**
-     * @var ofertaid id de la oferta.
-     */
-    @Input("titulo")  public titulo: string;
-    @Input("tipo")  public tipo: string;
-    @Input("datos") public datos: any;
-    @Input("armarForm") public armarForm: any;
-    @Output("obtenerDatos") public obtenerDatos = new EventEmitter();
+  @Input("titulo") public titulo: string;
+  @Input("tipo") public tipo: string; // tipo agregar/modificar
+  @Input("importarDatos") public importarDatos: any;
+  @Input("armarForm") public armarForm: any;
+  @Output("obtenerDatos") public obtenerDatos = new EventEmitter();
 
 
-    constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal) { }
 
-    open() {
-        const modalRef = this.modalService.open(ModalContentAbmAgregar, { size: 'sm' });
-        modalRef.componentInstance.titulo = this.titulo;
-        modalRef.componentInstance.tipo = this.tipo;
-        modalRef.componentInstance.datos = this.datos;
-        modalRef.componentInstance.armarForm = this.armarForm;
-        modalRef.result.then(
-          (result) => {
-            if (result == 'closed') {
-            }else{
-              this.obtenerDatos.emit(result);
-            }
+  open() {
+      const modalRef = this.modalService.open(ModalContentAbmAgregar, { size: 'sm' });
+      modalRef.componentInstance.titulo = this.titulo;
+      modalRef.componentInstance.tipo = this.tipo;
+      modalRef.componentInstance.importarDatos = this.importarDatos;
+      modalRef.componentInstance.armarForm = this.armarForm;
+      modalRef.result.then(
+        (result) => {
+          if (result == 'closed') {
+          }else{
+            this.obtenerDatos.emit(result);
           }
-        )
-    }
+        }
+      )
+  }
 }

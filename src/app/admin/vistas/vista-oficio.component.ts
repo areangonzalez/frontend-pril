@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { OficioService } from 'src/app/core/services';
+import { OficioService, } from '../../core/services';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -10,11 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 export class VistaOficioComponent implements OnInit {
   public titulos: string[] = [];
   public listado: any = [];
-  public objArmarForm:any = []
+  public objArmarForm:any = [];
 
     constructor(
         private _router: Router, private _route: ActivatedRoute, private _oficioService: OficioService, private _toastrService: ToastrService
       ) {
+
     }
 
     ngOnInit() {
@@ -32,15 +33,17 @@ export class VistaOficioComponent implements OnInit {
 
     guardar(datos:any) {
       if (datos["id"] == 0){
-        console.log(datos);
         this._oficioService.guardar(datos, 0).subscribe(
           respuesta => {
-            this._toastrService.success('Se ha creado un nuevo oficio!!!')
+            this._toastrService.success('Se ha creado un nuevo oficio!!!');
             this.refrescarListado();
           });
-
       }else{
-
+        this._oficioService.guardar(datos, datos["id"]).subscribe(
+          respuesta => {
+            this._toastrService.success('El oficio se ha editado correctamente!!!');
+            this.refrescarListado();
+        });
       }
     }
 

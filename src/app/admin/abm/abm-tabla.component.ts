@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -9,6 +9,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AbmTablaComponent implements OnInit {
   @Input("titulosArray") public titulosArray:any;
   @Input("listado") public listado:any;
+  @Output("obtenerDatos") public obtenerDatos = new EventEmitter();
 
     constructor(
         private _router: Router,
@@ -18,8 +19,8 @@ export class AbmTablaComponent implements OnInit {
     ngOnInit() {
     }
 
-    editar(id:number){
-      console.log(id);
+    editar(datos:any){
+      this.obtenerDatos.emit(datos);
     }
 
     borrar(id:number){

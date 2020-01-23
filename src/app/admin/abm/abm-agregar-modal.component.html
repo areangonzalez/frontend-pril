@@ -1,3 +1,6 @@
-<button type="button" class="btn btn-sm btn-outline-success" (click)="open()">
+<button *ngIf="(tipo == 'agregar')" type="button" class="btn btn-sm btn-outline-success" (click)="open()">
   <span class="oi oi-plus" aria-hidden="true" ></span>&nbsp;Nuevo
+</button>
+<button *ngIf="(tipo == 'modificar')" type="button" class="btn btn-sm btn-outline-secondary" (click)="open()">
+  <span class="fas fa-pen" aria-hidden="true" ></span>
 </button>

@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AbmFormComponent implements OnInit {
   @Input("armarForm") public armarForm:any;
-  @Input("datos") public datos:any;
+  @Input("importarDatos") public importarDatos:any;
   @Output("obtenerDatos") public obtenerDatos = new EventEmitter();
   @Output("cancelarForm") public cancelarForm = new EventEmitter();
 
@@ -19,6 +19,9 @@ export class AbmFormComponent implements OnInit {
 
     ngOnInit() {
       this.formulario = this.armadoFormulario(this.armarForm);
+      if (this.importarDatos){
+        this.cargarDatos(this.importarDatos);
+      }
     }
 
     /**
@@ -53,9 +56,15 @@ export class AbmFormComponent implements OnInit {
         return;
       }else{ // valido
         let datos = this.formulario.value;
-        datos["id"] = 0;
+        datos["id"] = (this.importarDatos !== undefined) ? this.importarDatos["id"] : 0;
         this.obtenerDatos.emit(datos);
       }
     }
-
+    /**
+     *
+     * @param datos
+     */
+    cargarDatos(datos:any) {
+      this.formulario.patchValue(datos);
+    }
 }

@@ -1310,29 +1310,41 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             // oficios
             if (request.url.endsWith('/apimock/oficios') && request.method === 'GET') {
-                // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
-                // /* if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') { */
-                    return of(new HttpResponse({ status: 200, body: oficio }));
-                // /* } else {
-                //     // return 401 not authorised if token is null or invalid
-                //     return throwError({ error: { message: 'Unauthorised' } });
-                // } */
+                return of(new HttpResponse({ status: 200, body: oficio }));
             }
-            // crear
+            // crear oficio
             if (request.url.endsWith('/apimock/oficios') && request.method === 'POST') {
               // get new user object from post body
               let newOficio = request.body;
-              console.log(newOficio);
-              let id = generarId(oficio);
+              let oficioStorage: any[] = (localStorage.getItem("oficios")) ? JSON.parse(localStorage.getItem("oficios")) : [];
+              newOficio["id"] = generarId(oficio);
               oficio.push({
-                id: id,
+                id: newOficio.id,
                 nombre: newOficio.nombre
               });
-
-              localStorage.setItem('oficios', JSON.stringify(oficio));
+              // guardo el nuevo oficio en el local storage
+              oficioStorage.push({id: newOficio.id, nombre: newOficio.nombre});
+              localStorage.setItem('oficios', JSON.stringify(oficioStorage));
               // respond 200 OK
-              return of(new HttpResponse({ status: 200, body: { id: id } }));
+              return of(new HttpResponse({ status: 200, body: { id: newOficio.id } }));
 
+            }
+            // editar oficio
+            if (request.url.match(/\/apimock\/oficios\/\d+$/) && request.method === 'PUT') {
+              let urlParts = request.url.split('/');
+              let id = urlParts[urlParts.length - 1];
+              let editarOficio = request.body;
+              let oficioStorage: any[] = (localStorage.getItem("oficios")) ? JSON.parse(localStorage.getItem("oficios")) : [];
+
+              for (let i = 0; i < oficio.length; i++) {
+                if (oficio[i].id === id ){
+                  oficio[i].nombre = editarOficio.nombre;
+                }
+              }
+              oficioStorage.push({ id: editarOficio.id, nombre: editarOficio.nombre });
+              // guardo el ultimo oficio en el local storage
+              localStorage.setItem('oficios', JSON.stringify(oficioStorage));
+              return of(new HttpResponse({ status: 200, body: { id: editarOficio.id } }));
             }
             //sexo
             if (request.url.endsWith('/apimock/sexos') && request.method === 'GET') {

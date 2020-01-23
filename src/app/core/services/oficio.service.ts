@@ -15,7 +15,7 @@ export class OficioService {
     guardar(params:any, id:number) {
       if (id !== 0) {
         // edito
-        return this._apiService.post('/oficios/' + id, params);
+        return this._apiService.put('/oficios/' + id, params);
       }else{
         // creo
         return this._apiService.post('/oficios', params);

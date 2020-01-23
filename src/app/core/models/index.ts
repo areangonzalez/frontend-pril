@@ -10,3 +10,4 @@ export * from './representante.model';
 export * from './user';
 export * from './loader';
 export * from './configurar-pagina';
+export * from './config-modal.model'
