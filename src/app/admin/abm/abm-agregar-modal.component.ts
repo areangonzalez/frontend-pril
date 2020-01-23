@@ -4,7 +4,7 @@ import { MensajesService } from '../../core/services';
 import { ConfigModal } from '../../core/models';
 
 @Component({
-    selector: 'modal-content-oferta',
+    selector: 'modal-content-abm-agregar',
     template: `
     <div class="modal-header">
       <h4 class="modal-title">{{titulo}}</h4>

@@ -9,14 +9,19 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AbmTablaComponent implements OnInit {
   @Input("titulosArray") public titulosArray:any;
   @Input("listado") public listado:any;
+  @Input("nombreAbm") public nombreAbm: string;
   @Output("obtenerDatos") public obtenerDatos = new EventEmitter();
+
+  public tituloEditar = 'Editar ';
 
     constructor(
         private _router: Router,
       ) {
+
     }
 
     ngOnInit() {
+      this.tituloEditar += this.nombreAbm;
     }
 
     editar(datos:any){

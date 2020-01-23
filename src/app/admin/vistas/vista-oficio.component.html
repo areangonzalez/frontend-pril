@@ -5,5 +5,5 @@
     <abm-agregar-modal class="mr-3" [tipo]="'agregar'" [titulo]="'Agregar oficio'" [armarForm]="titulos" (obtenerDatos)="guardar($event)" ></abm-agregar-modal>
   </div>
 </div>
-<abm-tabla [titulosArray]="titulos" [listado]="listado" (obtenerDatos)="guardar($event)" ></abm-tabla>
+<abm-tabla [titulosArray]="titulos" [nombreAbm]="'Oficio'" [listado]="listado" (obtenerDatos)="guardar($event)" ></abm-tabla>
 
