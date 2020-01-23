@@ -11,6 +11,7 @@ export class AbmTablaComponent implements OnInit {
   @Input("listado") public listado:any;
   @Input("nombreAbm") public nombreAbm: string;
   @Output("obtenerDatos") public obtenerDatos = new EventEmitter();
+  @Output("borrarDato") public borrarDato = new EventEmitter();
 
   public tituloEditar = 'Editar ';
 
@@ -25,11 +26,14 @@ export class AbmTablaComponent implements OnInit {
     }
 
     editar(datos:any){
-      this.obtenerDatos.emit(datos);
+      if (datos !== false){
+        this.obtenerDatos.emit(datos);
+      }
     }
 
-    borrar(id:number){
-      console.log(id);
-
+    borrar(dato:any){
+      if (dato !== false){
+        this.borrarDato.emit(dato);
+      }
     }
 }

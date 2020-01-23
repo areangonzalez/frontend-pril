@@ -23,7 +23,11 @@ export class OficioService {
     }
 
     porId(id:number) {
-      return this._apiService.get('/oficio/' + id);
+      return this._apiService.get('/oficios/' + id);
+    }
+
+    borrar(id:number) {
+      return this._apiService.delete('/oficios/' + id);
     }
 
     /**

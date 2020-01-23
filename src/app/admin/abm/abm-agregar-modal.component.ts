@@ -8,7 +8,7 @@ import { ConfigModal } from '../../core/models';
     template: `
     <div class="modal-header">
       <h4 class="modal-title">{{titulo}}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('closed')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -68,6 +68,7 @@ export class AbmAgregarModalComponent {
       modalRef.result.then(
         (result) => {
           if (result == 'closed') {
+            this.obtenerDatos.emit(false);
           }else{
             this.obtenerDatos.emit(result);
           }

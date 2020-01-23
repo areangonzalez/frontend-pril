@@ -1332,7 +1332,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // editar oficio
             if (request.url.match(/\/apimock\/oficios\/\d+$/) && request.method === 'PUT') {
               let urlParts = request.url.split('/');
-              let id = urlParts[urlParts.length - 1];
+              let id = parseInt(urlParts[urlParts.length - 1]);
               let editarOficio = request.body;
               let oficioStorage: any[] = (localStorage.getItem("oficios")) ? JSON.parse(localStorage.getItem("oficios")) : [];
 
@@ -1341,11 +1341,44 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   oficio[i].nombre = editarOficio.nombre;
                 }
               }
-              oficioStorage.push({ id: editarOficio.id, nombre: editarOficio.nombre });
+              for (let j = 0; j < oficioStorage.length; j++) {
+                if (oficioStorage[j].id === id) {
+                  oficioStorage[j].nombre = editarOficio.nombre
+                }
+              }
+              console.log(oficioStorage);
               // guardo el ultimo oficio en el local storage
               localStorage.setItem('oficios', JSON.stringify(oficioStorage));
               return of(new HttpResponse({ status: 200, body: { id: editarOficio.id } }));
             }
+            // borrar oficio
+            if (request.url.match(/\/apimock\/oficios\/\d+$/) && request.method === 'DELETE') {
+              // check for fake auth token in header and return user if valid, this security is implemented server side in a real application
+              // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  // find user by id in users array
+                  let urlParts = request.url.split('/');
+                  let id = parseInt(urlParts[urlParts.length - 1]);
+                  let oficioStorage: any[] = (localStorage.getItem("oficios")) ? JSON.parse(localStorage.getItem("oficios")) : [];
+
+                  for (let i = 0; i < oficio.length; i++) {
+                    // busco la oferta con el id para borrar
+                    if (oficio[i]['id'] == id) {
+                      oficio.splice(i,1);
+                    }
+                  }
+                  if (oficioStorage.length > 0){
+                    for (let j = 0; j < oficioStorage.length; j++) {
+                      if (oficioStorage[j].id == id){
+                        oficioStorage.splice(j, 1);
+                      }
+                    }
+                  }
+                  // guardo el contenido del oficio storage si ha sido borrado algun elemento
+                  localStorage.setItem('oficios', JSON.stringify(oficioStorage));
+
+                  return of(new HttpResponse({ status: 200, body: {mensaje:"borrado exitoso"} }));
+              }
+
             //sexo
             if (request.url.endsWith('/apimock/sexos') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application

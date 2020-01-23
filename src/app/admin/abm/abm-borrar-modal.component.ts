@@ -7,19 +7,22 @@ import { MensajesService } from '../../core/services';
     template: `
     <div class="modal-header">
       <h4 class="modal-title">Borrar {{nombreAbm}}</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('close')">
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.close('closed')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
       <h5 class="d-flex justify-content-center">¿Está seguro que desea borrar este {{nombreAbm}}?</h5>
     </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" type="button" (click)="activeModal.close('closed')">No</button>&nbsp;
+      <button class="btn btn-success" type="button" (click)="borrar()">Si</button>
+    </div>
     `
 })
 @Injectable()
 export class ModalContentAbmBorrar implements OnInit {
     @Input("nombreAbm") public nombreAbm: string; // nombre del abm Ej.; 'Oficio'
-    @Input('importarId') public importarId: any;
 
     constructor(
         private _mensajesService: MensajesService,
@@ -31,12 +34,8 @@ export class ModalContentAbmBorrar implements OnInit {
     ngOnInit(): void {
     }
 
-    cancelar(cancela:boolean){
-      this.activeModal.close('closed');
-    }
-
-    obtenerDatos(datos:any){
-      this.activeModal.close(datos);
+    borrar(){
+      this.activeModal.close(true);
     }
 
 }
@@ -57,12 +56,12 @@ export class AbmBorrarModalComponent {
   open() {
       const modalRef = this.modalService.open(ModalContentAbmBorrar);
       modalRef.componentInstance.nombreAbm = this.nombreAbm;
-      modalRef.componentInstance.importarId = this.importarId;
       modalRef.result.then(
         (result) => {
           if (result == 'closed') {
+            this.obtenerConfirmacion.emit(false);
           }else{
-            this.obtenerConfirmacion.emit(result);
+            this.obtenerConfirmacion.emit(this.importarId);
           }
         }
       )

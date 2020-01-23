@@ -16,7 +16,7 @@
             <!-- <button type="button" class="btn btn-sm btn-outline-secondary" (click)="editar(row.id)"><i class="fas fa-pen"></i></button> -->
             <abm-agregar-modal [titulo]="tituloEditar" [tipo]="'modificar'" [armarForm]="titulosArray" [importarDatos]="row" (obtenerDatos)="editar($event)"></abm-agregar-modal>
             <!-- <button type="button" class="btn btn-sm btn-outline-danger" (click)="borrar(row.id)"><i class="fas fa-trash-alt"></i></button> -->
-            <abm-borrar-modal [nombreAbm]="nombreAbm" [importarId]="row['id']" ></abm-borrar-modal>
+            <abm-borrar-modal [nombreAbm]="nombreAbm" [importarId]="row['id']" (obtenerConfirmacion)="borrar($event)" ></abm-borrar-modal>
           </div>
         </td>
       </tr>
