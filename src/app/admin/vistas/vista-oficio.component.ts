@@ -23,32 +23,31 @@ export class VistaOficioComponent implements OnInit {
     }
     /**
      * Separo los datos de la lista para obtener sus propiedades
-     * @param listaOficio listado de oficios
+     * @param listado listado de oficios
      */
-    renderTabla(listaOficio: any) {
-      this.titulos = Object.keys(listaOficio[0]);
-      this.listado = listaOficio;
-      this.objArmarForm = listaOficio[0];
+    renderTabla(listado: any) {
+      this.titulos = Object.keys(listado[0]);
+      this.listado = listado;
+      this.objArmarForm = listado[0];
     }
     /**
      * guardado de un elemento nuevo o editado.
      * @param datos datos a guardar
      */
     guardar(datos:any) {
-      console.log(datos);
       if (datos !== false){
         if (datos["id"] == 0){
           this._oficioService.guardar(datos, 0).subscribe(
             respuesta => {
               this._toastrService.success('Se ha creado un nuevo oficio!!!');
               this.refrescarListado();
-            });
+            }, error => { this._toastrService.error(error); });
         }else{
           this._oficioService.guardar(datos, datos["id"]).subscribe(
             respuesta => {
               this._toastrService.success('El oficio se ha editado correctamente!!!');
               this.refrescarListado();
-          });
+          }, error => { this._toastrService.error(error); });
         }
       }
     }
@@ -70,7 +69,7 @@ export class VistaOficioComponent implements OnInit {
         respuesta => {
           this._toastrService.success("Se ha borrado el oficio correctamente.");
           this.refrescarListado();
-        })
+        }, error => { this._toastrService.error(error); });
     }
 
 }

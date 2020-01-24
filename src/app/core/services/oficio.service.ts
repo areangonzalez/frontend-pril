@@ -8,10 +8,18 @@ export class OficioService {
 
     constructor(private _apiService: ApiService) { }
 
+    /**
+     * obtiene el listado desde el servidor
+     */
     listarOficios() {
         return this._apiService.get('/oficios');
     }
 
+    /**
+     * Crea/modifica los datos en el servidor
+     * @param params parametros utilizados para crear o modficar
+     * @param id identificador del objeto
+     */
     guardar(params:any, id:number) {
       if (id !== 0) {
         // edito
@@ -21,11 +29,17 @@ export class OficioService {
         return this._apiService.post('/oficios', params);
       }
     }
-
+    /**
+     * busqueda de un objeto por su id
+     * @param id identificador del elemento
+     */
     porId(id:number) {
       return this._apiService.get('/oficios/' + id);
     }
-
+    /**
+     * borrado de un elemento por su id
+     * @param id identificador del elemento
+     */
     borrar(id:number) {
       return this._apiService.delete('/oficios/' + id);
     }

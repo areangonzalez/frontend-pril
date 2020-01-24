@@ -19,7 +19,7 @@ export class AbmTablaComponent implements OnInit {
   public tituloEditar = 'Editar ';
   public pagina: number = 1;
   public configPaginacion:ConfigurarPagina = new ConfigurarPagina();
-  public pageSize = 5;
+  public pageSize = 10;
   public listadoRender: any[] = [];
 
     constructor(
