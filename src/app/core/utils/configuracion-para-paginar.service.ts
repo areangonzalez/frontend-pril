@@ -55,7 +55,7 @@ export class ConfiguracionParaPaginarService {
     public paginarListado(pagina, pageSize, listado) {
       let nuevaLista: any = [];
       if (pagina > 1) {
-        pagina = pagina;
+        pagina = pagina - 1;
         let pageStart = pagina * pageSize;
         let pageEnd = pageStart + pageSize;
         nuevaLista = listado.slice(pageStart, pageEnd);

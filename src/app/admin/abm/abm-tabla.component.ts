@@ -57,4 +57,8 @@ export class AbmTablaComponent implements OnInit {
       console.log(this.listado);
       this.paginacion(this.listado, this.pagina, this.pageSize);
     }
+
+    cambiarPagina(pagina:number) {
+      this.paginacion(this.listado, pagina, this.pageSize);
+    }
 }

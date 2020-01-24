@@ -41,7 +41,7 @@
   </table>
 
   <div class="d-flex justify-content-center">
-    <ngb-pagination [collectionSize]="configPaginacion.colleccionSize" [(page)]="pagina" [pageSize]="configPaginacion.pageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [ellipses]="false"></ngb-pagination>
+    <ngb-pagination [collectionSize]="configPaginacion.colleccionSize" [(page)]="pagina" [pageSize]="configPaginacion.pageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [ellipses]="false" (pageChange)="cambiarPagina(pagina)"></ngb-pagination>
   </div>
 
 </div>
