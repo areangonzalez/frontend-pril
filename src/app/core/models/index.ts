@@ -11,3 +11,5 @@ export * from './user';
 export * from './loader';
 export * from './configurar-pagina';
 export * from './config-modal.model'
+export * from "./role.model";
+export * from "./user";

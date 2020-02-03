@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
-    selector: 'app-admin',
-    templateUrl: './admin.component.html',
+    selector: 'gu-tabla-component',
+    templateUrl: './gu-tabla.component.html',
 })
-export class AdminComponent implements OnInit {
+export class GuTablaComponent implements OnInit {
 
     constructor(
         private _router: Router,

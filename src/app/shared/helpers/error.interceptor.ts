@@ -35,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError(err => {
           // verifico si existe el acceso del usuario
           let accessUser: any = this._jwtService.getToken();
-          if (accessUser && accessUser.datosToken){
+          if (accessUser && accessUser.userpril){
             this.recibidos++;
           }
           // error de inahutorizado

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
-    selector: 'app-admin',
-    templateUrl: './admin.component.html',
+    selector: 'gestor-usuario-component',
+    templateUrl: './gestor-usuario.component.html',
 })
-export class AdminComponent implements OnInit {
+export class GestorUsuarioComponent implements OnInit {
 
     constructor(
         private _router: Router,

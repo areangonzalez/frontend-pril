@@ -4,7 +4,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 // datos JSON
 import * as data from '../../../assets/data/data.json';
-import { AmbienteTrabajo } from 'src/app/core/models/index.js';
+import { Role, User } from "../../core/models";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -122,7 +122,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
       // listados de datos agregados
-        let testUser = { id: 1, username: 'admin', password: 'admins', firstName: 'Admin', lastName: 'Super' };
+      const users = [
+        { username: 'soporte', password: "soportes", nombre: 'Soporte', role: ['Soporte'] },
+        { username: 'user', password: "users", nombre: 'Ususario', role:['Usuario'] },
+        { username: 'Admin', password: "admins", nombre: 'Ususario', role:['diosito'] },
+        { username: 'user', password: "users", nombre: 'Ususario', role:['Usuario'] },
+      ];
         let areasLista: any[] = JSON.parse(localStorage.getItem('areasLista')) || [];
         let ofertasAgregadas: any[] = JSON.parse(localStorage.getItem('ofertasAgregadas')) || [];
 
@@ -143,6 +148,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let tipoAmbienteTrabajoLista = (<any>data).tipoAmbienteTrabajos;
         let planes = (<any>data).planes;
         // datos adicionales
+
+        const authHeader = request.headers.get('Authorization');
+        const isLoggedIn = authHeader && authHeader.startsWith('Bearer fake-jwt-token');
+        const roleString = isLoggedIn && authHeader.split('.')[1];
+        const role = roleString ? Role[roleString] : null;
 
 
         /*** Funciones para el uso de datos ***/
@@ -252,9 +262,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
          * ************************************************************************ */
             // authenticate
             if (request.url.endsWith('/apimock/usuario/login') && request.method === 'POST') {
-                if (request.body.username === testUser.username && request.body.password_hash === testUser.password) {
+              console.log(request.body);
+              const user = users.find(x => x.username === request.body.username && x.password === request.body.password_hash);
+              console.log("usuario: ", user);
+                if (user) {
                     // if login details are valid return 200 OK with a fake jwt token
-                    return of(new HttpResponse({ status: 200, body: { access_token: 'fake-jwt-token' } }));
+                    let usuario = {username: user.username, nombre: user.nombre, role: user.role, access_token: 'fake-jwt-token'}
+
+                    return of(new HttpResponse({ status: 200, body: usuario }));
                 } else {
                     // else return 400 bad request
                     return throwError({ error: { message: 'Username or password is incorrect' } });
@@ -265,7 +280,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/apimock/users') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
                 // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
-                    return of(new HttpResponse({ status: 200, body: [testUser] }));
+                    return of(new HttpResponse({ status: 200, body: [users] }));
                 // } else {
                 //     // return 401 not authorised if token is null or invalid
                 //     return throwError({ error: { message: 'Unauthorised' } });

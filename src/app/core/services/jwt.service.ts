@@ -8,8 +8,8 @@ export class JwtService {
         return JSON.parse(localStorage.getItem('token-pril'));
     }
 
-    saveToken(datosToken: object) {
-        localStorage.setItem('token-pril', JSON.stringify({ datosToken }));
+    saveToken(userpril: object) {
+        localStorage.setItem('token-pril', JSON.stringify({ userpril }));
     }
 
     destroyToken() {

@@ -8,6 +8,7 @@ import {
 } from './vistas';
 import { AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar } from "./abm";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GestorUsuarioComponent, GuTablaComponent } from "./gestor-usuario";
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     declarations: [
       AdminComponent,
       VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent,
-      AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar
+      AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar,
+      GestorUsuarioComponent, GuTablaComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [AbmAgregarModalComponent, ModalContentAbmAgregar, AbmBorrarModalComponent, ModalContentAbmBorrar]
