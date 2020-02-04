@@ -1,0 +1,86 @@
+<div class="bg-white rounded p-2">
+  <!-- <div class="d-flex justify-content-between">
+    <div class="d-flex align-items-center p-2 font-weight-bold">
+      <span *ngIf="configPaginacion.totalRegistros > 0">{{nombreAbm}}: {{configPaginacion.cantRegistros}} - {{configPaginacion.totalRegistros}} de {{configPaginacion.colleccionSize}}</span>
+      <span *ngIf="configPaginacion.totalRegistros == 0">{{nombreAbm}}: {{configPaginacion.cantRegistros}}</span>
+    </div>
+    <div class="d-flex align-items-center">
+      <span class="font-weight-bold mr-3">Registos por pagina:</span>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <select id="inputState" class="form-control" [(ngModel)]="pageSize" (change)="cambiarCantRegistros($event)">
+            <option value="5" selected>5</option>
+            <option value="10" selected>10</option>
+            <option value="25" selected>25</option>
+            <option value="50" selected>50</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <table class="table table-sm table-hover">
+    <thead class="thead-dark rounded-top">
+      <tr>
+        <th scope="col">Apellido y Nombre</th>
+        <th scope="col">Contacto</th>
+        <th scope="col">Nombre Usuario</th>
+        <th scope="col">Rol</th>
+        <th class="text-right" scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let row of listadoRender"> -->
+      <tr> <!-- fila 1 -->
+        <td scope="col">Gonzalez, Arean Xavier</td>
+        <td scope="col">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary" tooltipClass="tooltip-inner" ngbTooltip="2920432342">
+              <span class="fas fa-mobile-alt" title="Celular" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" tooltipClass="tooltip-inner" ngbTooltip="areangonzalez@gmail.com">
+              <span class="fas fa fa-envelope" title="correo" aria-hidden="true"></span>
+            </button>
+          </div>
+        </td>
+        <td scope="col">gax31</td>
+        <td scope="col">Usuario</td>
+        <td class="text-right" scope="col">
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-user-edit"></i></button>
+            <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </td>
+      </tr>
+      <tr> <!-- fila 2 -->
+        <td scope="col">Peréz, Carlos Ezequiel</td>
+        <td scope="col">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary" tooltipClass="tooltip-inner" ngbTooltip="2920432342">
+              <span class="fas fa-mobile-alt" title="Celular" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" tooltipClass="tooltip-inner" ngbTooltip="cep11p@gmail.com">
+              <span class="fas fa fa-envelope" title="correo" aria-hidden="true"></span>
+            </button>
+          </div>
+        </td>
+        <td scope="col">cep28</td>
+        <td scope="col">Usuario</td>
+        <td class="text-right" scope="col">
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i></button>
+            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-user-edit"></i></button>
+            <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+            <!-- <abm-agregar-modal [titulo]="tituloEditar" [tipo]="'modificar'" [armarForm]="titulosArray" [importarDatos]="row" (obtenerDatos)="editar($event)"></abm-agregar-modal>
+            <abm-borrar-modal [nombreAbm]="nombreAbm" [importarId]="row['id']" (obtenerConfirmacion)="borrar($event)" ></abm-borrar-modal> -->
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <div class="d-flex justify-content-center">
+    <ngb-pagination [collectionSize]="configPaginacion.colleccionSize" [(page)]="pagina" [pageSize]="configPaginacion.pageSize" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" [ellipses]="false" (pageChange)="cambiarPagina(pagina)"></ngb-pagination>
+  </div> -->
+
+</div>
