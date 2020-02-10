@@ -1,5 +1,5 @@
 import { Component, Input, Injectable, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MensajesService } from '../../core/services';
 import { ConfigModal } from '../../core/models';
 
@@ -13,7 +13,8 @@ import { ConfigModal } from '../../core/models';
       </button>
     </div>
     <div class="modal-body">
-            Hola mundo!!
+      <gu-form-persona></gu-form-persona>
+      <gu-form-usuario></gu-form-usuario>
     </div>
   `
 })
@@ -59,7 +60,10 @@ export class GuAgregarUsuarioModalComponent {
   @Output("obtenerDatos") public obtenerDatos = new EventEmitter(); */
 
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, configModal: NgbModalConfig) {
+    configModal.backdrop = 'static';
+    configModal.keyboard = false;
+  }
 
   open() {
       const modalRef = this.modalService.open(ModalContentAgregarUsuario, { size: 'lg' });

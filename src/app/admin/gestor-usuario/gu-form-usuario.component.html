@@ -1,0 +1,27 @@
+<fieldset [formGroup]="usuario">
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label for="user_name">Nombre de usuario:</label>
+      <input type="text" id="user_name" placeholder="user_name" class="form-control" formControlName="user_name" [ngClass]="{'is-invalid': (usuario.get('user_name').invalid && submitted)}" >
+      <div *ngIf="(usuario.get('user_name').invalid && submitted)" class="text-danger">
+          <div *ngIf="usuario.get('user_name').hasError('required')">Este campo es requerido. </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" placeholder="*******" class="form-control" formControlName="password"  >
+      <div *ngIf="(usuario.get('password').invalid && submitted)" class="text-danger">
+          <div *ngIf="usuario.get('password').errors['required']">Este campo es requerido. </div>
+          <div *ngIf="usuario.get('password').errors['minLength']">La contraseña debe tener 6 caracteres como mínimo. </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="comf_password">Confirmar contraseña:</label>
+      <input type="password" id="comf_password" placeholder="*******" class="form-control" formControlName="comf_password"  >
+      <div *ngIf="usuario.get('comf_password').invalid && (usuario.get('comf_password').dirty || usuario.get('comf_password').touched)" class="text-danger">
+          <div *ngIf="usuario.get('comf_password').errors['required']">Este campo es requerido. </div>
+          <div *ngIf="usuario.get('comf_password').errors['compare']">Las contraseña no coinciden. </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
