@@ -10,7 +10,8 @@ import { compareValidator } from 'src/app/shared/helpers/compare-validator';
     selector: 'modal-content-abm-agregar',
     template: `
     <div class="modal-header">
-      <h4 class="modal-title">Agregar Usuario</h4>
+      <h4 *ngIf="(tipo == 'agregar')" class="modal-title">Agregar Usuario</h4>
+      <h4 *ngIf="(tipo == 'modificar')" class="modal-title">Editar Usuario</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.close('closed')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -72,14 +73,15 @@ export class ModalContentAgregarUsuario implements OnInit {
 @Component({
     selector: 'gu-agregar-usuario-modal',
     template: `
-      <button type="button" class="btn btn-outline-success " (click)="open()" ><i class="fas fa-user-plus"></i>&nbsp;Nuevo</button>
+      <button *ngIf="(tipo == 'agregar')" type="button" class="btn btn-outline-success" (click)="open()" ><i class="fas fa-user-plus"></i>&nbsp;Nuevo</button>
+      <button *ngIf="(tipo == 'modificar')" type="button" class="btn btn-outline-secondary btn-sm" (click)="open()"><i class="fas fa-user-edit"></i></button>
     `
 })
 @Injectable()
 export class GuAgregarUsuarioModalComponent {
+  @Input("tipo") public tipo: string; // tipo agregar/modificar
   @Output("obtenerDatos") obtenerDatos = new EventEmitter();
   /* @Input("titulo") public titulo: string;
-  @Input("tipo") public tipo: string; // tipo agregar/modificar
   @Input("importarDatos") public importarDatos: any;
   @Input("armarForm") public armarForm: any;
   @Output("obtenerDatos") public obtenerDatos = new EventEmitter(); */
@@ -92,8 +94,8 @@ export class GuAgregarUsuarioModalComponent {
 
   open() {
       const modalRef = this.modalService.open(ModalContentAgregarUsuario, { size: 'lg' });
-      /* modalRef.componentInstance.titulo = this.titulo;
       modalRef.componentInstance.tipo = this.tipo;
+      /* modalRef.componentInstance.titulo = this.titulo;
       modalRef.componentInstance.importarDatos = this.importarDatos;
       modalRef.componentInstance.armarForm = this.armarForm; */
       modalRef.result.then(

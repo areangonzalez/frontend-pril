@@ -14,4 +14,11 @@ export class GuTablaComponent implements OnInit {
 
     ngOnInit() {
     }
+
+    guardarUsuario(datos:any) {
+      if (datos != false){
+        // guardo los datos
+      }
+    }
+
 }

@@ -47,7 +47,7 @@
         <td class="text-right" scope="col">
           <div class="btn-group">
             <button type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i></button>
-            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-user-edit"></i></button>
+            <gu-agregar-usuario-modal [tipo]="'modificar'" (obtenerDatos)="guardarUsuario($event)" ></gu-agregar-usuario-modal>
             <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
           </div>
         </td>
@@ -69,10 +69,8 @@
         <td class="text-right" scope="col">
           <div class="btn-group">
             <button type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-key"></i></button>
-            <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fas fa-user-edit"></i></button>
+            <gu-agregar-usuario-modal [tipo]="'modificar'" (obtenerDatos)="guardarUsuario($event)" ></gu-agregar-usuario-modal>
             <button type="button" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-            <!-- <abm-agregar-modal [titulo]="tituloEditar" [tipo]="'modificar'" [armarForm]="titulosArray" [importarDatos]="row" (obtenerDatos)="editar($event)"></abm-agregar-modal>
-            <abm-borrar-modal [nombreAbm]="nombreAbm" [importarId]="row['id']" (obtenerConfirmacion)="borrar($event)" ></abm-borrar-modal> -->
           </div>
         </td>
       </tr>
