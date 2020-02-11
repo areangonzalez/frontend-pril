@@ -1,0 +1,25 @@
+<fieldset [formGroup]="agente">
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label for="nro_documento">Nro Documento:</label>
+      <input type="text" id="nro_documento" placeholder="nro documento" class="form-control" formControlName="nro_documento" [ngClass]="{'is-invalid': (agente.get('nro_documento').invalid && submitted)}" >
+      <div *ngIf="(agente.get('nro_documento').invalid && submitted)" class="text-danger">
+          <div *ngIf="agente.get('nro_documento').hasError('required')">Este campo es requerido. </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" placeholder="apellido" class="form-control" formControlName="apellido" [ngClass]="{'is-invalid': (agente.get('apellido').invalid && submitted)}" >
+      <div *ngIf="(agente.get('apellido').invalid && submitted)" class="text-danger">
+          <div *ngIf="agente.get('apellido').hasError('required')">Este campo es requerido. </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" placeholder="nombre" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': (agente.get('nombre').invalid && submitted)}" >
+      <div *ngIf="(agente.get('nombre').invalid && submitted)" class="text-danger">
+          <div *ngIf="agente.get('nombre').hasError('required')">Este campo es requerido. </div>
+      </div>
+    </div>
+  </div>
+</fieldset>

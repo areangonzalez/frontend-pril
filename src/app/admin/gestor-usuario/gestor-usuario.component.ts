@@ -14,4 +14,10 @@ export class GestorUsuarioComponent implements OnInit {
 
     ngOnInit() {
     }
+
+    guardarUsuario($event:any) {
+      if ($event !== false) {
+        // guardo ususario
+      }
+    }
 }

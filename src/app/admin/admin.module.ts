@@ -8,7 +8,7 @@ import {
 } from './vistas';
 import { AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar } from "./abm";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormPersonaComponent } from "./gestor-usuario";
+import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent } from "./gestor-usuario";
 
 @NgModule({
     imports: [
@@ -19,7 +19,7 @@ import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, G
       AdminComponent,
       VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent,
       AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar,
-      GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormPersonaComponent
+      GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [AbmAgregarModalComponent, ModalContentAbmAgregar, AbmBorrarModalComponent, ModalContentAbmBorrar, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent]
