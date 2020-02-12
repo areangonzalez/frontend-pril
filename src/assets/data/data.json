@@ -52,6 +52,17 @@
     { "id": 2, "nombre": "2000 / 15 horas" },
     { "id": 3, "nombre": "5000 / 20 horas" }
   ],
+  "rol": [
+    { "id": 1, "nombre": "Soporte" }, { "id": 2, "nombre": "Usuario" }, { "id": 3, "nombre": "Visitante" }
+  ],
+  "permiso": [
+    { "id": 1, "nombre": "Crear" },
+    { "id": 2, "nombre": "Editar" },
+    { "id": 3, "nombre": "Lectura" },
+    { "id": 4, "nombre": "Crear/editar Destinatarios" },
+    { "id": 5, "nombre": "Crear/editar Ambientes de trabajo" },
+    { "id": 6, "nombre": "Crear/editar Area de entrenamiento" }
+  ],
   "destinatarios": [{
     "id": 1,
     "banco_alias": "",

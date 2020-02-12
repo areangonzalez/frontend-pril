@@ -23,7 +23,9 @@ import {
   TipoAmbienteTrabajoService,
   UserService,
   TitleService,
-  LoaderService
+  LoaderService,
+  RolService,
+  PermisoService
 } from './services';
 
 @NgModule({
@@ -51,7 +53,9 @@ import {
     TipoAmbienteTrabajoService,
     UserService,
     TitleService,
-    LoaderService
+    LoaderService,
+    RolService,
+    PermisoService
   ],
   declarations: []
 })

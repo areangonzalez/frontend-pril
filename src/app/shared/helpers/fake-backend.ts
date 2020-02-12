@@ -147,6 +147,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         let nivelEducativo = (<any>data).nivelEducativos;
         let tipoAmbienteTrabajoLista = (<any>data).tipoAmbienteTrabajos;
         let planes = (<any>data).planes;
+        let roles = (<any>data).rol;
+        let permisos = (<any>data).permiso;
         // datos adicionales
 
         const authHeader = request.headers.get('Authorization');
@@ -1453,7 +1455,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               //     // return 401 not authorised if token is null or invalid
               //     return throwError({ error: { message: 'Unauthorised' } });
               // }
-          }
+            }
+
+            //Roles
+            if (request.url.endsWith('/apimock/rols') && request.method === 'GET') {
+              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+              // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  return of(new HttpResponse({ status: 200, body: roles }));
+              // } else {
+              //     // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
+            }
+            //Permisos
+            if (request.url.endsWith('/apimock/permisos') && request.method === 'GET') {
+              // check for fake auth token in header and return users if valid, this security is implemented server side in a real application
+              // if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                  return of(new HttpResponse({ status: 200, body: permisos }));
+              // } else {
+              //     // return 401 not authorised if token is null or invalid
+              //     return throwError({ error: { message: 'Unauthorised' } });
+              // }
+            }
 
             // pass through any requests not handled above
             return next.handle(request);

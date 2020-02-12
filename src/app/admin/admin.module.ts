@@ -8,7 +8,7 @@ import {
 } from './vistas';
 import { AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar } from "./abm";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent } from "./gestor-usuario";
+import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent, GuDarRolPermisoModalComponent, ModalContentGuDarRolPermiso } from "./gestor-usuario";
 
 @NgModule({
     imports: [
@@ -19,9 +19,9 @@ import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, G
       AdminComponent,
       VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent,
       AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar,
-      GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent
+      GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent, GuDarRolPermisoModalComponent, ModalContentGuDarRolPermiso
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    entryComponents: [AbmAgregarModalComponent, ModalContentAbmAgregar, AbmBorrarModalComponent, ModalContentAbmBorrar, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent]
+    entryComponents: [AbmAgregarModalComponent, ModalContentAbmAgregar, AbmBorrarModalComponent, ModalContentAbmBorrar, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuDarRolPermisoModalComponent, ModalContentGuDarRolPermiso]
 })
 export class AdminModule {}
