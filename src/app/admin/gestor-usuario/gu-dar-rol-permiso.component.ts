@@ -1,6 +1,6 @@
 import { Component, Input, Injectable, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal, NgbActiveModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { MensajesService } from '../../core/services';
+import { MensajesService, PermisoService, RolService } from '../../core/services';
 import { ConfigModal } from '../../core/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { compareValidator } from 'src/app/shared/helpers/compare-validator';
@@ -21,14 +21,16 @@ import { compareValidator } from 'src/app/shared/helpers/compare-validator';
           <label for="roles" class="prioridad">Rol (<span>*</span>):</label>
             <select class="form-control" id="roles" formControlName="rol" >
                 <option value="">Seleccione Rol</option>
-                <!-- <option *ngFor="let tipo of tipo_ambiente_trabajo_lista" value="{{tipo.id}}">{{tipo.nombre}}</option> -->
+                <option *ngFor="let rol of roles" value="{{rol.id}}">{{rol.nombre}}</option>
             </select>
             <!-- <div *ngIf="(ambiente.get('tipo_ambiente_trabajoid').invalid && submitted)"
                 class="text-danger"> [ngClass]="{'is-invalid': (ambiente.get('tipo_ambiente_trabajoid').invalid && submitted)}"
                 <div *ngIf="ambiente.get('tipo_ambiente_trabajoid').hasError('required')">Este campo es requerido. </div>
             </div> -->
           </div>
-          <div class="col-md-4"></div>
+          <div class="col-md-12">
+            <tag-component [listaTags]="permisos" [tituloComponente]="'Seleccionar Permiso/s'" [placeHolderComponente]="'Seleccione un Permiso'" [textMsjError]="'Este permiso ya fue seleccionado'" [setListaTags]="listadoPermisos" (obtenerTags)="getListaPermisos($event)"></tag-component>
+          </div>
         </div>
     </div>
     <div class="modal-footer">
@@ -40,12 +42,15 @@ import { compareValidator } from 'src/app/shared/helpers/compare-validator';
 @Injectable()
 export class ModalContentGuDarRolPermiso implements OnInit {
   @Input("tipo") public tipo: string; // tipo agregar/modificar
+  @Input("roles") public roles: string; // roles listado de roles
+  @Input("permisos") public permisos: string; // permisos listado de permisos
   @Output("guardarPermiso") guardarPermiso = new EventEmitter();
 
   public submitted: boolean = false;
   public rolPermisoForm: FormGroup;
+  public listadoPermisos: any = [];
 
-    constructor( private _mensajesService: MensajesService, public activeModal: NgbActiveModal, private _fb: FormBuilder) {
+    constructor( public activeModal: NgbActiveModal, private _fb: FormBuilder) {
       this.rolPermisoForm = _fb.group({
         rol: ['', Validators.required]
       });
@@ -71,6 +76,10 @@ export class ModalContentGuDarRolPermiso implements OnInit {
       this.activeModal.close(datos);
     }
 
+    getListaPermisos(listado: any) {
+      this.listadoPermisos = listado;
+    }
+
 }
 
 @Component({
@@ -80,25 +89,49 @@ export class ModalContentGuDarRolPermiso implements OnInit {
     `
 })
 @Injectable()
-export class GuDarRolPermisoModalComponent {
+export class GuDarRolPermisoModalComponent implements OnInit {
   @Input("tipo") public tipo: string; // tipo agregar/modificar
   @Output("obtenerDatos") obtenerDatos = new EventEmitter();
+  public listaPermisos: any = [];
+  public listaRoles: any = [];
+
   /* @Input("titulo") public titulo: string;
   @Input("importarDatos") public importarDatos: any;
   @Input("armarForm") public armarForm: any;
   @Output("obtenerDatos") public obtenerDatos = new EventEmitter(); */
 
 
-  constructor(private modalService: NgbModal, configModal: NgbModalConfig) {
+  constructor(private modalService: NgbModal, configModal: NgbModalConfig, private _permisoService: PermisoService, private _rolService: RolService, private _mensajesService: MensajesService) {
     configModal.backdrop = 'static';
     configModal.keyboard = false;
+  }
+
+  ngOnInit() {
+    this.roles();
+    this.permisos();
+  }
+
+  permisos() {
+    this._permisoService.listado().subscribe(
+      respuesta => {
+        this.listaPermisos = respuesta;
+      }, error => { this._mensajesService.cancelado(error, [{name:''}]); })
+  }
+
+  roles() {
+    this._rolService.listado().subscribe(
+      respuesta => {
+        this.listaRoles = respuesta;
+      }, error => { this._mensajesService.cancelado(error, [{name:''}]); })
   }
 
   open() {
       const modalRef = this.modalService.open(ModalContentGuDarRolPermiso, { size: 'lg' });
       modalRef.componentInstance.tipo = this.tipo;
+      modalRef.componentInstance.permisos = this.listaPermisos;
+      modalRef.componentInstance.roles = this.listaRoles;
+
       /* modalRef.componentInstance.titulo = this.titulo;
-      modalRef.componentInstance.importarDatos = this.importarDatos;
       modalRef.componentInstance.armarForm = this.armarForm; */
       modalRef.result.then(
         (result) => {
