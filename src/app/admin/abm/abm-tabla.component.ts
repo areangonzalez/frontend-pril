@@ -49,12 +49,10 @@ export class AbmTablaComponent implements OnInit {
       let datos = {pagesize: pagesize, page: pagina, total_filtrado: listadoArray.length};
       this.configPaginacion = this._configurarPagina.config(datos, pagina);
       this.listadoRender = this._configurarPagina.paginarListado(pagina, pagesize, listadoArray);
-      console.log(this.listadoRender)
     }
 
     cambiarCantRegistros(cant:any) {
       this.pageSize = cant.target.value;
-      console.log(this.listado);
       this.paginacion(this.listado, this.pagina, this.pageSize);
     }
 

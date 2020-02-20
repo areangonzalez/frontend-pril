@@ -9,7 +9,7 @@ import {
   VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent
 } from './vistas';
 import { AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar } from "./abm";
-import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent, GuDarRolPermisoModalComponent, ModalContentGuDarRolPermiso } from "./gestor-usuario";
+import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent,  ModalContentGuPermisos, GuPermisosModalComponent } from "./gestor-usuario";
 
 @NgModule({
     imports: [
@@ -20,9 +20,9 @@ import { GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, G
       AdminComponent,
       VistaOficioComponent, VistaPlanComponent, VistaProfesionComponent, VistaTipoAmbienteTrabajoComponent,
       AbmTablaComponent, AbmAgregarModalComponent, ModalContentAbmAgregar, AbmFormComponent, AbmBorrarModalComponent, ModalContentAbmBorrar,
-      GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent, GuDarRolPermisoModalComponent, ModalContentGuDarRolPermiso
+      GestorUsuarioComponent, GuTablaComponent, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuFormUsuarioComponent, GuFormAgenteComponent,  ModalContentGuPermisos, GuPermisosModalComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    entryComponents: [AbmAgregarModalComponent, ModalContentAbmAgregar, AbmBorrarModalComponent, ModalContentAbmBorrar, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, GuDarRolPermisoModalComponent, ModalContentGuDarRolPermiso]
+    entryComponents: [AbmAgregarModalComponent, ModalContentAbmAgregar, AbmBorrarModalComponent, ModalContentAbmBorrar, ModalContentAgregarUsuario, GuAgregarUsuarioModalComponent, ModalContentGuPermisos, GuPermisosModalComponent]
 })
 export class AdminModule {}

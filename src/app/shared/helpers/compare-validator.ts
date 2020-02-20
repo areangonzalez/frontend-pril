@@ -7,7 +7,6 @@ export function compareValidator(controlNameToCompare: string): ValidatorFn {
     if (c.value === null || c.value.length === 0) {
       return null;
     }
-    console.log(c.root);
     const controlToCompare = c.root.get(controlNameToCompare);
     if (controlToCompare) {
       const subscription : Subscription = controlToCompare.valueChanges.subscribe(() => {

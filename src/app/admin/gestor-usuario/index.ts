@@ -3,4 +3,4 @@ export * from "./gu-tabla.component";
 export * from "./gu-agregar-usuario-modal.component";
 export * from "./gu-form-usuario.component";
 export * from "./gu-form-agente.component";
-export * from "./gu-dar-rol-permiso.component";
+export * from "./gu-permisos-modal.component";

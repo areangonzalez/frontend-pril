@@ -16,8 +16,12 @@ export class GestorUsuarioComponent implements OnInit {
     }
 
     guardarUsuario(datos:any) {
-      if (datos !== false) {
-        // guardo ususario
-      }
+      // servicio para guardar usuario
+      console.log("guardo usuario: ",datos);
+    }
+
+    guardarRolUsuario(datos: any) {
+      // servicio para guardar rol de un usuario
+      console.log("guardo rol y permisos: ",datos);
     }
 }

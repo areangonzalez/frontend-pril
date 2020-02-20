@@ -1,7 +1,6 @@
 import { Component, Input, Injectable, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal, NgbActiveModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MensajesService } from '../../core/services';
-import { ConfigModal } from '../../core/models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { compareValidator } from 'src/app/shared/helpers/compare-validator';
 
@@ -29,7 +28,6 @@ import { compareValidator } from 'src/app/shared/helpers/compare-validator';
 @Injectable()
 export class ModalContentAgregarUsuario implements OnInit {
   @Input("tipo") public tipo: string; // tipo agregar/modificar
-  @Output("guardarUsuario") guardarUsuario = new EventEmitter();
 
   public submitted: boolean = false;
   public usuarioForm: FormGroup;
@@ -60,7 +58,7 @@ export class ModalContentAgregarUsuario implements OnInit {
         this._mensajesService.cancelado('Campos sin completar.', [{ name: '' }]);
         return;
       }else{
-        this.guardarUsuario.emit(this.usuarioForm);
+        this.activeModal.close(this.usuarioForm.value);
       }
     }
 
@@ -81,11 +79,6 @@ export class ModalContentAgregarUsuario implements OnInit {
 export class GuAgregarUsuarioModalComponent {
   @Input("tipo") public tipo: string; // tipo agregar/modificar
   @Output("obtenerDatos") obtenerDatos = new EventEmitter();
-  /* @Input("titulo") public titulo: string;
-  @Input("importarDatos") public importarDatos: any;
-  @Input("armarForm") public armarForm: any;
-  @Output("obtenerDatos") public obtenerDatos = new EventEmitter(); */
-
 
   constructor(private modalService: NgbModal, configModal: NgbModalConfig) {
     configModal.backdrop = 'static';
@@ -95,9 +88,6 @@ export class GuAgregarUsuarioModalComponent {
   open() {
       const modalRef = this.modalService.open(ModalContentAgregarUsuario, { size: 'lg' });
       modalRef.componentInstance.tipo = this.tipo;
-      /* modalRef.componentInstance.titulo = this.titulo;
-      modalRef.componentInstance.importarDatos = this.importarDatos;
-      modalRef.componentInstance.armarForm = this.armarForm; */
       modalRef.result.then(
         (result) => {
           if (result == 'closed') {
