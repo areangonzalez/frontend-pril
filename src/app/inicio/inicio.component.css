@@ -8,7 +8,7 @@
     margin-right: auto;
     cursor: pointer;
 }
-.border-info {
+.sombras-tarjeta {
     transform: translateY(-5px);
     box-shadow: 1px 8px 8px #ccc;
 }

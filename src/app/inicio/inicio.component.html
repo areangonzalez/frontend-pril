@@ -1,20 +1,97 @@
-<div class="row">
+<div class="row d-flex justify-content-center mt-auto">
 
-    <div class="col-md-4 d-flex justify-content-center">
-            <div class="card bg-light mb-3" style="max-width: 18rem;">
-                    <div class="card-header text-center">Destinarios</div>
-                    <div class="card-body">
-                        <p class="card-text text-center"><i class="fas fa-male" style="font-size: 72px;"></i></p>
-                        <p class="card-text text-center">241</p>
-                    </div>
-                  </div>
+    <div class="col-md-3 bg-white rounded sombras-tarjeta m-1 p-2 ">
+      <h3 class="d-flex justify-content-center">Destinatario/s</h3>
+      <hr class="mt-1">
+      <div class="row">
+        <!-- <div class="col-md-2 d-flex justify-content-end align-items-center">
+        </div> -->
+        <div class="col-md-12 d-flex justify-content-between align-items-center" style="max-width: 20rem;">
+          <i class="fas fa-male" style="font-size: 72px;margin-left:3.5rem;color:lightslategray;"></i>
+            <ul class="list-unstyled">
+              <li>En entrenamiento: 65</li>
+              <li>Pendientes: 30</li>
+              <li>Bajas: 5</li>
+              <li>Cantidad Total: 100</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-outline-info btn-block" [routerLink]="['destinatario']"><i class="far fa-list-alt"></i>&nbsp;lista</a>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-outline-success btn-block" [routerLink]="['destinatario', 'agregar']"><span class="oi oi-plus"></span>&nbsp;agregar</a>
+        </div>
+      </div>
     </div>
+    <div class="col-md-3 bg-white rounded sombras-tarjeta m-1 p-2">
+      <h3 class="d-flex justify-content-center">Ambiente/s de trabajo/s</h3>
+      <hr class="mt-1">
+      <div class="row">
+        <!-- <div class="col-md-3 d-flex justify-content-center align-items-center">
+        </div> -->
+        <div class="col-md-12 d-flex justify-content-between align-items-center" style="max-width: 20rem;">
+            <i class="far fa-building" style="font-size: 72px;margin-left:2rem;color:lightslategray;"></i>
+            <ul class="list-unstyled">
+              <li>En entrenamiento: 65</li>
+              <li>Pendientes: 30</li>
+              <li>Bajas: 5</li>
+              <li>Cantidad Total: 100</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-outline-info btn-block" [routerLink]="['ambiente']"><i class="far fa-list-alt"></i>&nbsp;lista</a>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-outline-success btn-block" [routerLink]="['ambiente', 'agregar']"><span class="oi oi-plus"></span>&nbsp;agregar</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 bg-white rounded sombras-tarjeta m-1 p-2">
+      <h3 class="d-flex justify-content-center">Área/s de entrenamiento</h3>
+      <hr class="mt-1">
+      <div class="row">
+        <!-- <div class="col-md-4 d-flex justify-content-center align-items-center">
+        </div> -->
+        <div class="col-md-12 d-flex justify-content-between align-items-center" style="max-width: 20rem;">
+          <i class="fas fa-people-carry" style="font-size: 72px;margin-left:1rem;color:lightslategray;"></i>
+            <ul class="list-unstyled">
+              <li>En entrenamiento: 65</li>
+              <li>Pendientes: 30</li>
+              <li>Bajas: 5</li>
+              <li>Cantidad Total: 100</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-outline-info btn-block" [routerLink]="['area-entrenamiento']"><i class="far fa-list-alt"></i>&nbsp;lista</a>
+        </div>
+        <div class="col-md-6">
+          <a class="btn btn-outline-success btn-block" [routerLink]="['area-entrenamiento', 'agregar']"><span class="oi oi-plus"></span>&nbsp;agregar</a>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-12 d-flex justify-content-center">
+      <div class="card border-none mb-3" style="max-width: 18rem;">
+        <div class="card-header border-none text-info" style="box-shadow: none;">Ambiente/s de trabajo/s</div>
+        <div class="card-body text-info">
+          <p class="card-text text-center"><i class="fas fa-male" style="font-size: 72px;"></i></p>
+          <p class="card-text text-center">241</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 d-flex justify-content-center">
 
-    <div class="col-md-4">
-        <!-- <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (mouseover)="hoverAt=true" (mouseleave)="hoverAt=false"
-            [ngClass]="{'bg-info':(!hoverAt), 'border-info':hoverAt}" (click)="irA('/ambiente')"> -->
+
+      <div class="card border-none mb-3" style="max-width: 18rem;">
+        <div class="card-header border-none text-info" style="box-shadow: none;"></div>
+        <div class="card-body text-info">
+          <p class="card-text text-center"><i class="fas fa-male" style="font-size: 72px;"></i></p>
+          <p class="card-text text-center">241</p>
+        </div>
+      </div>
+    </div> -->
+
+<!--     <div class="col-md-4">
         <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (click)="irA('/ambiente')">
-            <!-- <div class="card-body" [ngClass]="{'text-white':(!hoverAt), 'text-info':hoverAt}"> -->
             <div class="card-body text-white">
                 <h6 class="card-title">Ambiente/s de trabajo/s</h6>
                 <p class="card-text"><i class="far fa-building" style="font-size: 72px;"></i></p>
@@ -23,15 +100,12 @@
         </div>
     </div>
     <div class="col-md-4">
-        <!-- <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (mouseover)="hoverAe=true" (mouseleave)="hoverAe=false"
-          [ngClass]="{'bg-info':(!hoverAe), 'border-info':hoverAe}" (click)="irA('/area-entrenamiento')"> -->
         <div class="card text-center bg-info centrar-circulo" style="max-width: 12.5rem;" (click)="irA('/area-entrenamiento')">
-            <!-- <div class="card-body" [ngClass]="{'text-white':(!hoverAe), 'text-info':hoverAe}"> -->
             <div class="card-body text-white">
                 <h6 class="card-title">Área/s de entrenamiento</h6>
                 <p class="card-text"><i class="fas fa-people-carry" style="font-size: 72px;"></i></p>
                 <p class="card-text">12</p>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
